@@ -83,3 +83,5 @@ jungi_theme:
 ### Theme selector
 
 A theme selector behaves like a wrapper for a theme resolver. It takes the main role of theme selecting for a request.
+* when the **ignore_null_themes** option is set to false then a theme selector will not throw an exception with missing
+theme name. This situation may take place when a theme resolver will return null.
