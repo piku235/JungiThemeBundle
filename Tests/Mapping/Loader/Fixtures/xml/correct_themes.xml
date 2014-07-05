@@ -1,1 +1,70 @@
-<?xml version="1.0" encoding="utf-8" ?><theme-mapping xmlns="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping"               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"               xsi:schemaLocation="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping https://raw.githubusercontent.com/piku235/JungiThemeBundle/master/Mapping/Loader/schema/theme-1.0.xsd">    <theme name="foo_1" path="@JungiFooBundle/Resources/theme">        <tags>            <tag name="jungi.mobile_devices">                <argument type="collection">                    <argument>iOS</argument>                    <argument>AndroidOS</argument>                </argument>                <argument type="constant">jungi.mobile_devices::MOBILE</argument>            </tag>            <tag name="jungi.desktop_devices" />            <tag name="jungi.own">test</tag>        </tags>        <details>            <detail name="author.name">piku235</detail>            <detail name="author.email">piku235@gmail.com</detail>            <detail name="author.www">http://test.pl</detail>            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>            <detail name="version">1.0.0</detail>            <detail name="name">A fancy theme</detail>            <detail name="license">MIT</detail>        </details>    </theme>    <theme name="foo_2" path="@JungiFooBundle/Resources/theme">        <tags>            <tag name="jungi.own">                  <argument type="constant">Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL</argument>            </tag>        </tags>        <details>            <detail name="author.name">piku235</detail>            <detail name="author.email">piku235@gmail.com</detail>            <detail name="author.www">http://test.pl</detail>            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>            <detail name="version">1.0.0</detail>            <detail name="name">A fancy theme</detail>            <detail name="license">MIT</detail>        </details>    </theme>    <theme name="foo_3" path="@JungiFooBundle/Resources/theme">        <tags>            <tag name="jungi.own">                <argument type="constant">CONST_TEST</argument>            </tag>        </tags>        <details>            <detail name="author.name">piku235</detail>            <detail name="author.email">piku235@gmail.com</detail>            <detail name="author.www">http://test.pl</detail>            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>            <detail name="version">1.0.0</detail>            <detail name="name">A fancy theme</detail>            <detail name="license">MIT</detail>        </details>    </theme>    <theme name="foo_4" path="@JungiFooBundle/Resources/theme">        <details>            <detail name="version">1.0.0</detail>            <detail name="name">A fancy theme</detail>        </details>    </theme></theme-mapping>
+<?xml version="1.0" encoding="utf-8" ?>
+<theme-mapping xmlns="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping https://raw.githubusercontent.com/piku235/JungiThemeBundle/master/Mapping/Loader/schema/theme-1.0.xsd">
+
+    <theme name="foo_1" path="@JungiFooBundle/Resources/theme">
+        <tags>
+            <tag name="jungi.mobile_devices">
+                <argument type="collection">
+                    <argument>iOS</argument>
+                    <argument>AndroidOS</argument>
+                </argument>
+                <argument type="constant">jungi.mobile_devices::MOBILE</argument>
+            </tag>
+            <tag name="jungi.desktop_devices" />
+            <tag name="jungi.own">test</tag>
+        </tags>
+        <details>
+            <detail name="author.name">piku235</detail>
+            <detail name="author.email">piku235@gmail.com</detail>
+            <detail name="author.www">http://test.pl</detail>
+            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>
+            <detail name="version">1.0.0</detail>
+            <detail name="name">A fancy theme</detail>
+            <detail name="license">MIT</detail>
+        </details>
+    </theme>
+
+    <theme name="foo_2" path="@JungiFooBundle/Resources/theme">
+        <tags>
+            <tag name="jungi.own">
+                  <argument type="constant">Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL</argument>
+            </tag>
+        </tags>
+        <details>
+            <detail name="author.name">piku235</detail>
+            <detail name="author.email">piku235@gmail.com</detail>
+            <detail name="author.www">http://test.pl</detail>
+            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>
+            <detail name="version">1.0.0</detail>
+            <detail name="name">A fancy theme</detail>
+            <detail name="license">MIT</detail>
+        </details>
+    </theme>
+
+    <theme name="foo_3" path="@JungiFooBundle/Resources/theme">
+        <tags>
+            <tag name="jungi.own">
+                <argument type="constant">CONST_TEST</argument>
+            </tag>
+        </tags>
+        <details>
+            <detail name="author.name">piku235</detail>
+            <detail name="author.email">piku235@gmail.com</detail>
+            <detail name="author.www">http://test.pl</detail>
+            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>
+            <detail name="version">1.0.0</detail>
+            <detail name="name">A fancy theme</detail>
+            <detail name="license">MIT</detail>
+        </details>
+    </theme>
+
+    <theme name="foo_4" path="@JungiFooBundle/Resources/theme">
+        <details>
+            <detail name="version">1.0.0</detail>
+            <detail name="name">A fancy theme</detail>
+        </details>
+    </theme>
+
+</theme-mapping>

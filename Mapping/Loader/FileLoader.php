@@ -1,1 +1,75 @@
-<?php/* * This file is part of the JungiThemeBundle package. * * (c) Piotr Kugla <piku235@gmail.com> * * For the full copyright and license information, please view the LICENSE * file that was distributed with this source code. */namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;use Symfony\Component\Config\FileLocatorInterface;use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;/** * FileLoader is a common class for loading theme mapping files * to a ThemeManagerInterface instance * * @author Piotr Kugla <piku235@gmail.com> */abstract class FileLoader{    /**     * @var ThemeManagerInterface     */    protected $themeManager;    /**     * @var FileLocatorInterface     */    protected $locator;    /**     * @var TagFactoryInterface     */    protected $tagFactory;    /**     * Constructor     *     * @param ThemeManagerInterface $themeManager A theme manager     * @param FileLocatorInterface $locator A file locator     * @param TagFactoryInterface $factory A tag factory     */    public function __construct(ThemeManagerInterface $themeManager, FileLocatorInterface $locator, TagFactoryInterface $factory)    {        $this->locator = $locator;        $this->themeManager = $themeManager;        $this->tagFactory = $factory;    }    /**     * Loads themes from a given theme mapping file     * into the current ThemeManagerInterface instance     *     * @param string $file A file     *     * @return void     *     * @throws \DomainException When a file is not supported by FileLoader     */    abstract public function load($file);    /**     * Checks if FileLoader can handle a given file     *     * @param string $file A file     *     * @return bool     */    abstract public function supports($file);}
+<?php
+
+/*
+ * This file is part of the JungiThemeBundle package.
+ *
+ * (c) Piotr Kugla <piku235@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
+
+use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
+use Symfony\Component\Config\FileLocatorInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
+
+/**
+ * FileLoader is a common class for loading theme mapping files
+ * to a ThemeManagerInterface instance
+ *
+ * @author Piotr Kugla <piku235@gmail.com>
+ */
+abstract class FileLoader
+{
+    /**
+     * @var ThemeManagerInterface
+     */
+    protected $themeManager;
+
+    /**
+     * @var FileLocatorInterface
+     */
+    protected $locator;
+
+    /**
+     * @var TagFactoryInterface
+     */
+    protected $tagFactory;
+
+    /**
+     * Constructor
+     *
+     * @param ThemeManagerInterface $themeManager A theme manager
+     * @param FileLocatorInterface $locator A file locator
+     * @param TagFactoryInterface $factory A tag factory
+     */
+    public function __construct(ThemeManagerInterface $themeManager, FileLocatorInterface $locator, TagFactoryInterface $factory)
+    {
+        $this->locator = $locator;
+        $this->themeManager = $themeManager;
+        $this->tagFactory = $factory;
+    }
+
+    /**
+     * Loads themes from a given theme mapping file
+     * into the current ThemeManagerInterface instance
+     *
+     * @param string $file A file
+     *
+     * @return void
+     *
+     * @throws \DomainException When a file is not supported by FileLoader
+     */
+    abstract public function load($file);
+
+    /**
+     * Checks if FileLoader can handle a given file
+     *
+     * @param string $file A file
+     *
+     * @return bool
+     */
+    abstract public function supports($file);
+}

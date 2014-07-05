@@ -1,1 +1,40 @@
-<?php/* * This file is part of the JungiThemeBundle package. * * (c) Piotr Kugla <piku235@gmail.com> * * For the full copyright and license information, please view the LICENSE * file that was distributed with this source code. */namespace Jungi\Bundle\ThemeBundle\DependencyInjection\Compiler;use Symfony\Component\DependencyInjection\Reference;use Symfony\Component\DependencyInjection\ContainerBuilder;use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;/** * TagProviderPass * * @author Piotr Kugla <piku235@gmail.com> */class TagProviderPass implements CompilerPassInterface{    /**     * (non-PHPdoc)     * @see \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface::process()     */    public function process(ContainerBuilder $container)    {        if (!$container->hasDefinition('jungi.theme.tag.registry')) {            return;        }        $tagFactory = $container->getDefinition('jungi.theme.tag.registry');        foreach ($container->findTaggedServiceIds('jungi.tag_provider') as $id => $attrs) {            $tagFactory->addMethodCall('register', array(new Reference($id)));        }    }}
+<?php
+
+/*
+ * This file is part of the JungiThemeBundle package.
+ *
+ * (c) Piotr Kugla <piku235@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Jungi\Bundle\ThemeBundle\DependencyInjection\Compiler;
+
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+
+/**
+ * TagProviderPass
+ *
+ * @author Piotr Kugla <piku235@gmail.com>
+ */
+class TagProviderPass implements CompilerPassInterface
+{
+    /**
+     * (non-PHPdoc)
+     * @see \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface::process()
+     */
+    public function process(ContainerBuilder $container)
+    {
+        if (!$container->hasDefinition('jungi.theme.tag.registry')) {
+            return;
+        }
+
+        $tagFactory = $container->getDefinition('jungi.theme.tag.registry');
+        foreach ($container->findTaggedServiceIds('jungi.tag_provider') as $id => $attrs) {
+            $tagFactory->addMethodCall('register', array(new Reference($id)));
+        }
+    }
+}
