@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="jungi.theme.twig.extension.device.class">Jungi\Bundle\ThemeBundle\Twig\Extension\DeviceExtension</parameter>
+        <parameter key="jungi.theme.helper.device.class">Jungi\Bundle\ThemeBundle\Helper\DeviceHelper</parameter>
+    </parameters>
+
+    <services>
+        <service id="jungi.theme.helper.device" class="%jungi.theme.helper.device.class%">
+            <tag name="templating.helper" alias="device" />
+            <argument type="service" id="jungi.theme.mobile_detect" />
+        </service>
+        <service id="jungi.theme.twig.extension.device" class="%jungi.theme.twig.extension.device.class%" public="false">
+            <tag name="twig.extension" />
+            <argument type="service" id="service_container" />
+        </service>
+    </services>
+</container>
