@@ -82,33 +82,30 @@ jungi_theme:
 
 ### Theme selector
 
-A theme selector takes the main role of selecting theme for a request. It has support of a primary and a fallback theme
+A theme selector takes the main role of selecting a theme for a request. It has support of a primary and a fallback theme
 resolver where the fallback theme resolver can be unset. The fallback theme resolver will be only used when the primary
 theme resolver will don't match any theme for a dispatched request. The fallback theme resolver should always return some
 theme name. Also the theme selector provides events to which you can attach your own event listeners.
 
-Explain of the configuration options:
+#### Configuration options
 
 * when the `ignore_null_themes` option is set to false then a theme selector will not throw an exception with missing
 theme name. This situation may take place when a theme resolver don't match any theme for a request.
 * the `validation_listener` option says whether a theme selector should validate themes resolved from theme resolvers.
-Thanks to the `use_investigator` option we can choose for which theme resolvers the validation will be executed. About
-a theme resolver investigator I will talk in the **Theme resolver** section.
-
-**NOTICE**
-
-> In describing of this section I've used the `Jungi\Bundle\ThemeBundle\Selector\StandardThemeSelector` class.
+Thanks to the `use_investigator` option we can choose for which theme resolvers the validation should be executed. About
+a theme resolver investigator you can read [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/configuration.md#investigator).
 
 ### Theme resolver
 
-We can say that a theme resolver is a heart and a theme selector is a brain of selecting theme for a request. The theme
+We can say that a theme resolver is a heart and a theme selector is a brain of selecting a theme for a request. The theme
 resolver returns only a theme name for a dispatched request or nothing (null) if there wasn't any match for the request.
 
 #### Primary and fallback
 
 We distinguish two kinds of theme resolvers: primary and fallback where they are almost the same. Only the fallback theme
 resolver provides the `enabled` option which says whether the fallback theme resolver should be used. You can use one
-of three built-in theme resolvers or use your own theme resolver by specifying the `id` option.
+of three built-in theme resolvers or use your own theme resolver by defining the `id` option which refers to a symfony
+service.
 
 ##### Service
 
