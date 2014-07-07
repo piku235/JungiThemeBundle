@@ -28,7 +28,7 @@ class DeviceThemeSwitch implements EventSubscriberInterface
     /**
      * @var MobileDetect
      */
-    private $detect;
+    private $mobileDetect;
 
     /**
      * Constructor
@@ -37,7 +37,7 @@ class DeviceThemeSwitch implements EventSubscriberInterface
      */
     public function __construct(MobileDetect $mobileDetect)
     {
-        $this->detect = $mobileDetect;
+        $this->mobileDetect = $mobileDetect;
     }
 
     /**
@@ -60,13 +60,13 @@ class DeviceThemeSwitch implements EventSubscriberInterface
         }
 
         // Handle a request from the event
-        $this->detect->handleRequest($event->getRequest());
+        $this->mobileDetect->handleRequest($event->getRequest());
 
         // If none of devices had not match, stop
-        if ($this->detect->isMobile()) { // Is a mobile or tablet device?
+        if ($this->mobileDetect->isMobile()) { // Is a mobile or a tablet device?
             $tag = new Tag\MobileDevices(
-                $this->detect->detectOS(),
-                $this->detect->isTablet() ? Tag\MobileDevices::TABLET : Tag\MobileDevices::MOBILE
+                $this->mobileDetect->detectOS(),
+                $this->mobileDetect->isTablet() ? Tag\MobileDevices::TABLET : Tag\MobileDevices::MOBILE
             );
         } else {
             $tag = new Tag\DesktopDevices();

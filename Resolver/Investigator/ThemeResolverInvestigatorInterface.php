@@ -14,8 +14,8 @@ namespace Jungi\Bundle\ThemeBundle\Resolver\Investigator;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 
 /**
- * ThemeResolverInvestigatorInterface allows to check if a given theme resolver
- * is suspected and something should be done with it
+ * Classes which implements this interface allows to check if a given theme resolver
+ * is suspected and something special should be done with it
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

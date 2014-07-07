@@ -33,8 +33,8 @@ class MobileDetect extends \Mobile_Detect
      */
     public function __construct(RequestStack $requestStack = null)
     {
-        if (null !== $requestStack && null !== $requestStack->getCurrentRequest()) {
-            $this->handleRequest($requestStack->getCurrentRequest());
+        if (null !== $requestStack && null !== $request = $requestStack->getCurrentRequest()) {
+            $this->handleRequest($request);
         }
     }
 

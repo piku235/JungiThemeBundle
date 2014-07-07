@@ -23,7 +23,7 @@ class ThemeResolverInvestigator implements ThemeResolverInvestigatorInterface
     /**
      * @var array
      */
-    protected $suspects;
+    private $suspects;
 
     /**
      * Constructor

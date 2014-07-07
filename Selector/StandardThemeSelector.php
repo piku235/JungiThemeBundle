@@ -37,6 +37,16 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class StandardThemeSelector implements ThemeSelectorInterface
 {
     /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+
+    /**
+     * @var ThemeHolderInterface
+     */
+    private $holder;
+
+    /**
      * @var array
      */
     protected $options;
@@ -47,11 +57,6 @@ class StandardThemeSelector implements ThemeSelectorInterface
     protected $manager;
 
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $dispatcher;
-
-    /**
      * @var ThemeResolverInterface
      */
     protected $fallback;
@@ -60,11 +65,6 @@ class StandardThemeSelector implements ThemeSelectorInterface
      * @var ThemeResolverInterface
      */
     protected $resolver;
-
-    /**
-     * @var ThemeHolderInterface
-     */
-    protected $holder;
 
     /**
      * Constructor
