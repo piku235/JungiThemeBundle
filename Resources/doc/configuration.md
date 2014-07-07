@@ -86,6 +86,9 @@ A theme selector takes the main role of selecting theme for a request. It has su
 resolver where the fallback theme resolver can be unset. The fallback theme resolver will be only used when the primary
 theme resolver will don't match any theme for a dispatched request. The fallback theme resolver should always return some
 theme name. Also the theme selector provides events to which you can attach your own event listeners.
+
+Explain of the configuration options:
+
 * when the `ignore_null_themes` option is set to false then a theme selector will not throw an exception with missing
 theme name. This situation may take place when a theme resolver don't match any theme for a request.
 * the `validation_listener` option says whether a theme selector should validate themes resolved from theme resolvers.
@@ -94,12 +97,12 @@ a theme resolver investigator I will talk in the **Theme resolver** section.
 
 **NOTICE**
 
-> In describing of this section I've used the **StandardThemeSelector** class.
+> In describing of this section I've used the `Jungi\Bundle\ThemeBundle\Selector\StandardThemeSelector` class.
 
 ### Theme resolver
 
-We can say that a theme resolver is a heart and a theme selector is a brain of selecting theme. The theme resolver returns
-only a theme name for a dispatched request or nothing (null) if there wasn't any match for the request.
+We can say that a theme resolver is a heart and a theme selector is a brain of selecting theme for a request. The theme
+resolver returns only a theme name for a dispatched request or nothing (null) if there wasn't any match for the request.
 
 #### Primary and fallback
 
@@ -107,7 +110,7 @@ We distinguish two kinds of theme resolvers: primary and fallback where they are
 resolver provides the `enabled` option which says whether the fallback theme resolver should be used. You can use one
 of three built-in theme resolvers or use your own theme resolver by specifying the `id` option.
 
-##### Theme resolver service
+##### Service
 
 ```yaml
 jungi_theme:
@@ -116,7 +119,7 @@ jungi_theme:
             id: # your theme resolver service
 ```
 
-##### Cookie theme resolver
+##### Cookie
 
 Cookie theme resolver accepts only one argument which is of an array type and it's responsible for cookie options.
 
@@ -133,7 +136,7 @@ jungi_theme:
                   httpOnly: true
 ```
 
-##### InMemory theme resolver
+##### InMemory
 
 InMemory theme resolver accepts two arguments where the first one takes a theme name and a second one decides whether
 the theme name can be changed or not. The second argument was only introduced for tests benefits.
@@ -146,7 +149,7 @@ jungi_theme:
             arguments: foo_theme # a theme name
 ```
 
-##### Session theme resolver
+##### Session
 
 Session theme resolver doesn't has any arguments, so the `arguments` option don't must be provided.
 
@@ -157,7 +160,7 @@ jungi_theme:
             type: session
 ```
 
-#### Theme resolver investigator
+#### Investigator
 
 A theme resolver investigator is simply used by the `Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener`
 and its job is mainly identify the dangerous theme resolvers like for eg **CookieThemeResolver** where cookie value
