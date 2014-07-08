@@ -1,23 +1,23 @@
 Theme tags
 ==========
 
-The goal of the JungiThemeBundle are the mostly tags. They takes the information role and can be used for searching and
-grouping themes. I guess that you're thinking now: "Why they're so significant and why I should use them?" In this chapter
-I'll try to answer to these questions.
+The goal of the JungiThemeBundle are the mostly tags. They takes the information role and can be used for searching
+and grouping themes. I guess that you're thinking now: "Why they're so significant and why I should use them?" In this
+chapter I'll try to answer to these questions.
 
 Built-in tags
 -------------
 
-The JungiThemeBundle comes with three builtin tags: **MobileDevices**, **DesktopDevices** and **Link**. All tags are
-located in the `Jungi\Bundle\ThemeBundle\Tag` namespace.
+The JungiThemeBundle comes with three built-in tags: **MobileDevices**, **DesktopDevices** and **Link**. All theme tags
+are located in the `Jungi\Bundle\ThemeBundle\Tag` namespace.
 
 ### MobileDevices
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/MobileDevices.php)
 
 The MobileDevices tag allows you to define mobile operating systems and a device type which will be supported by theme.
-So e.g. there can be a theme which was designed only for AndroidOS, iOS or for all mobile systems. You can even
-specify the device type (tablet, mobile).
+So e.g. there can be a theme which was designed only for AndroidOS, iOS or for all mobile systems. You can even specify
+the device type (tablet, mobile).
 
 #### The snippet of the constructor:
 
@@ -35,8 +35,8 @@ public function __construct($systems = array(), $deviceType = self::ALL_DEVICES)
 }
 ```
 
-For the `$systems` argument you can provide e.g. iOS, AndroidOS, WindowsPhoneOS, etc. or leave it empty which means
-that all operating systems will be matched. The full list of supported operating systems you can find
+For the `$systems` argument you can provide e.g. iOS, AndroidOS, WindowsPhoneOS, etc. or leave it empty which means that
+all operating systems will be matched. The full list of supported operating systems you can find
 [here](https://github.com/serbanghita/Mobile-Detect/blob/master/Mobile_Detect.json) under "os" entry.
 
 For the `$deviceType` argument you have three constants:
@@ -90,27 +90,27 @@ again if you haven't seen them yet:
 * [JungiSimpleEnvironmentBundle](https://github.com/piku235/JungiSimpleEnvironmentBundle) - this bundle defines own
 environment system where each environment may use different themes. So e.g. admin environment may has a theme "foo_admin"
 and default environment may has a theme "foo_default".
-* [JungiSimpleThemeBundle](https://github.com/piku235/JungiSimpleThemeBundle) - this bundle has the definition of a single
-theme which uses the Environment tag located in the JungiSimpleEnvironmentBundle.
+* [JungiSimpleThemeBundle](https://github.com/piku235/JungiSimpleThemeBundle) - this bundle has the definition of two themes
+which uses the Environment tag located in the JungiSimpleEnvironmentBundle.
 
-Creating own tag
-----------------
+Creating a tag
+--------------
 
 [Show the TagInterface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/TagInterface.php)
 
-Tags are pretty straightforward so there is no problem with creating them. The tag class must implement `Jungi\Bundle\ThemeBundle\Tag\TagInterface`
-and its two methods:
+Tags are pretty straightforward so there is no problem with creating them. The tag class must implement
+`Jungi\Bundle\ThemeBundle\Tag\TagInterface` and its two methods:
 
 * **isEqual** - This is the crucial method which decides about matching tags
-* **getName** - Returns the unique tag name in the following format "vendor.tag_name" e.g. "jungi.mobile_devices".
+* **getName** - Returns the unique tag name in the following format **vendor.tag_name** e.g. **jungi.mobile_devices**.
 Thereby tags created by different vendors will not override each other.
 
-### Register a tag
+### Register a created tag
 
-After you created your tag you will have to register it to use it e.g. in theme mappings. To do this follow the
-instructions located in the "Tag Registry" section.
+After you created a tag you will have to register it to use it e.g. in theme mappings. To do this follow the
+instructions located in the **Tag Registry** section.
 
-Tag Registry
+Tag registry
 ------------
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/Registry/TagRegistryInterface.php)
@@ -121,7 +121,7 @@ built-in tags, but additionally to use the tags created e.g. by you (:
 
 ### How to register a new tag?
 
-The registration can be done from the symfony services which is very comfortable way. The only thing you have to do is to
+The registration can be done from the symfony services which is very comfortable. The only thing you have to do is to
 define a service with the tag `jungi.tag_provider`. As a service class you will use the parameter `jungi.theme.tag.registry.provider.class`
 which by default points to the class `Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider`. The tag provider only provides
 tags to a tag registry and nothing more.

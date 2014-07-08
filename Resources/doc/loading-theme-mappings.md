@@ -1,7 +1,7 @@
 Loading theme mapping files
 ===========================
 
-If you got your theme mapping file or files you can finally load them to a theme manager. To achieve this goal you have
+After you created your theme mapping file you can finally load it to a theme manager. To achieve this goal you have
 for use theme mapping loaders.
 
 **NOTE**
@@ -30,7 +30,7 @@ easily.
 
 Each of the theme mapping loader service has reference to the `jungi.theme.manager` service so all load operations will
 be using this theme manager service. To accomplish the loading you've got available the **load** method. This method
-has only one argument responsible for the path to a theme mapping file.
+has only the one argument responsible for the path to a theme mapping file.
 
 ### XML Mapping Loader
 
@@ -112,5 +112,5 @@ Summary
 
 And that's it (:
 
-If you have enabled your bundle in the **AppKernel** the theme\themes from the mapping file should be now loaded. You can
+If your bundle is enabled in the **AppKernel** the theme\themes from the mapping file should be now loaded. You can
 check it by accessing the theme manager.

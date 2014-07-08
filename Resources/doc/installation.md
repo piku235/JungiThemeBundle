@@ -31,7 +31,6 @@ Enable the bundle in the kernel:
 ```php
 <?php
 // app/AppKernel.php
-
 public function registerBundles()
 {
     $bundles = array(
@@ -61,6 +60,7 @@ session | SessionThemeResolver
 Cookie theme resolver takes only one argument which is of an array type and it's responsible for cookie options.
 
 ```yaml
+# app/config/config.yml
 jungi_theme:
     resolver:
         primary:
@@ -75,10 +75,11 @@ jungi_theme:
 
 ##### InMemory
 
-InMemory theme resolver accepts two arguments where the first one takes a theme name and a second one decides whether
+InMemory theme resolver accepts two arguments where the first one takes a theme name and the second one decides whether
 the theme name can be changed or not. The second argument was only introduced for tests benefits.
 
 ```yaml
+# app/config/config.yml
 jungi_theme:
     resolver:
         primary:
@@ -91,6 +92,7 @@ jungi_theme:
 Session theme resolver doesn't has any arguments, so the `arguments` option don't must be provided.
 
 ```yaml
+# app/config/config.yml
 jungi_theme:
     resolver:
         primary:
@@ -103,7 +105,6 @@ To register a theme resolver service you have to define the configuration like b
 
 ```yml
 # app/config/config.yml
-
 jungi_theme:
     resolver:
         primary:
@@ -114,7 +115,6 @@ Or the shorthand version:
 
 ```yml
 # app/config/config.yml
-
 jungi_theme:
     resolver:
         primary: # a theme resolver service id

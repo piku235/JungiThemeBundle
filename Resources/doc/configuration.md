@@ -68,6 +68,7 @@ A theme holder is responsible for holding a current theme instance obtained from
 your own theme holder service or leave it empty which by defaults points to the `jungi.theme.holder.default` service.
 
 ```yaml
+# app/config/config.yml
 jungi_theme:
    holder: # your service id
 ```
@@ -75,6 +76,7 @@ jungi_theme:
 or
 
 ```yaml
+# app/config/config.yml
 jungi_theme:
     holder:
         id: # your service id
@@ -98,6 +100,7 @@ choose for which theme resolvers the validation should be executed. About a them
 which has sent a request. Thanks to this listener adaptive themes can work.
 
 ```yaml
+# app/config/config.yml
 jungi_theme:
     selector:
         ignore_null_themes: # true or false
@@ -131,6 +134,7 @@ investigator is enabled and has the **CookieThemeResolver** as the suspect. Of c
 changing the `suspects` option.
 
 ```yaml
+# app/config/config.yml
 jungi_theme:
     resolver:
         investigator:
