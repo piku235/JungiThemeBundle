@@ -43,10 +43,12 @@ public function registerBundles()
 
 ### Step 3: Configuration
 
-Finally you have to choose the theme resolver that the JungiThemeBundle will use. The bundle comes with the default set
-of theme resolvers. You can use one of these theme resolvers or use a own theme resolver by setting a symfony service.
+Finally you have to choose a theme resolver that the JungiThemeBundle will use. The bundle comes with the default set
+of theme resolvers. You can use one of these theme resolvers or use your own theme resolver by setting a symfony service.
 
 #### Setup a built-in theme resolver
+
+The bundle contains the following theme resolvers:
 
 Type | Class
 ---- | -----
@@ -54,16 +56,45 @@ cookie | CookieThemeResolver
 in_memory | InMemoryThemeResolver
 session | SessionThemeResolver
 
-If you have chosen one of the above theme resolvers then define the configuration like below:
+##### Cookie
 
-```yml
-# app/config/config.yml
+Cookie theme resolver takes only one argument which is of an array type and it's responsible for cookie options.
 
+```yaml
 jungi_theme:
     resolver:
         primary:
-            type: # a theme resolver type
-            arguments: # arguments which will be passed to a theme resolver, optional
+            type: cookie
+            arguments:
+                - lifetime: 3600 # time in sec
+                  path: /
+                  domain: ~
+                  secure: false
+                  httpOnly: true
+```
+
+##### InMemory
+
+InMemory theme resolver accepts two arguments where the first one takes a theme name and a second one decides whether
+the theme name can be changed or not. The second argument was only introduced for tests benefits.
+
+```yaml
+jungi_theme:
+    resolver:
+        primary:
+            type: in_memory
+            arguments: foo_theme # a theme name
+```
+
+##### Session
+
+Session theme resolver doesn't has any arguments, so the `arguments` option don't must be provided.
+
+```yaml
+jungi_theme:
+    resolver:
+        primary:
+            type: session
 ```
 
 #### Setup a theme resolver service

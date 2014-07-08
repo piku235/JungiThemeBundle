@@ -128,7 +128,7 @@ class StandardThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests the behaviour in situations when a theme has been invalidated for e.g. by validation process
+     * Tests the behaviour in situations when a theme has been invalidated e.g. by validation process
      *
      * @expectedException \Jungi\Bundle\ThemeBundle\Exception\InvalidatedThemeException
      */

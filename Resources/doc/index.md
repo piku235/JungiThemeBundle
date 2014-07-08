@@ -23,30 +23,30 @@ Here you will learn how to create and load themes and also you will know about t
 
 ### What exactly is a theme?
 
-The theme is an ordinary object which implements `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Themes resides in a bundle and
-you can have in your bundle one or multiple themes.
+The theme is an ordinary object which implements `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. A theme lives in a bundle
+and you can have as many themes as you want in the bundle.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-overview.md) to know more.
 
 ### When to use multiple themes in a bundle?
 
-I recommend to use multiple themes in a bundle in the certain circumstances for e.g. when you have a theme for the desktop
-devices and a second theme for the mobile devices, when these themes have the same part in a some point.
+I recommend to use multiple themes in a bundle in the certain circumstances e.g. when you have a theme for the desktop
+devices and the second theme for the mobile devices, when these themes shares the same thing.
 
 ### Theme mappings
 
-To create your own theme or themes you have for use these below theme mappings:
+To start your adventure and create your first theme you will have to use one of the following theme mappings:
 
 * [XML](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/xml-theme-mapping.md)
 * [YAML](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/yaml-theme-mapping.md)
 * [PHP](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/php-theme-mapping.md)
 
-To see how to load your theme mapping file [go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mappings.md).
+How to load a theme mapping file, you will learn from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mappings.md).
 
 ### Theme tags
 
-Tags are the main goal of themes. They takes the information role and can be used for searching and grouping themes. Also
-you will learn here how to register new tags.
+Theme tags are the main goal of the JungiThemeBundle. They takes the information role and can be used for searching and
+grouping themes. In this chapter you will also learn how to register new tags.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-tags.md)
 
@@ -67,9 +67,9 @@ a mobile device display gives us the reduction of a bandwidth and a faster page 
 
 ### AWD (Adaptive Web Design)
 
-Sometimes you can come to conclusion that you need a separate theme for desktop and mobile devices. For this you can use
-the Adaptive Web Design approach. The AWD is maybe not so frequent used like RWD but this approach has own advantages where
-you can read about them in this great [article](http://www.lukew.com/ff/entry.asp?1562) written by Luke Wroblewski.
+Sometimes you can come to conclusion that you need a separate themes for desktop and mobile devices. For this case you can
+use the Adaptive Web Design approach. The AWD is maybe not so frequent used like RWD but this approach has own advantages
+where you can read about them in this great [article](http://www.lukew.com/ff/entry.asp?1562) written by Luke Wroblewski.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md)
 

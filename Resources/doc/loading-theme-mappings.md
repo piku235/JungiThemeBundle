@@ -22,7 +22,7 @@ php | Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader | jungi.theme.mappin
 Loading from a bundle
 ---------------------
 
-First open the file where is located your bundle class for e.g. *src/Foo/FooBundle/BooFooBundle.php*. After that define
+First open the file where is located your bundle class e.g. *src/Foo/FooBundle/BooFooBundle.php*. After that define
 the **boot** method in the bundle if you don't have it actually. Thanks to that method we're able to load themes very
 easily.
 

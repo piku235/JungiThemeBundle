@@ -53,7 +53,7 @@ interface ThemeInterface
 * **getName** - Returns a unique name of the theme. Themes with the same name cannot exist together.
 * **getTags** - Must return a `Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection` object even if the theme hasn't got any tags.
 In this case the tag collection can be empty. If you wish to know more about theme tags [click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-tags.md).
-* **getPath** - Returns an absolute path to the theme resources. Generally this path points to a bundle resources for e.g.
+* **getPath** - Returns an absolute path to the theme resources. Generally this path points to a bundle resources e.g.
 /absolute/path/to/src/Boo/FooBundle/Resources/theme.
 * **getDetails** - Returns a `Jungi\Bundle\ThemeBundle\Core\DetailsInterface` instance. The details are explained in the next
 [section](#details).
@@ -64,12 +64,12 @@ In this case the tag collection can be empty. If you wish to know more about the
 
 The `Jungi\Bundle\ThemeBundle\Core\Theme` is a good example of the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface` implementation.
 Properties of an object can be only set by the constructor due to the encapsulation benefits. I guess that no one wants
-to change property of a theme after it has been created. The class is used by for e.g. XmlFileLoader, YamlFileLoader.
+to change property of a theme after it has been created. The class is used by e.g. XmlFileLoader, YamlFileLoader.
 
 Details
 -------
 
-The purpose of details in a theme is mainly to provide some useful information for a user. Here you can set for e.g.
+The purpose of details in a theme is mainly to provide some useful information for a user. Here you can set e.g.
 a display name of the theme.
 
 ```php

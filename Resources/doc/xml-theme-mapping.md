@@ -192,7 +192,7 @@ collection | A collection of argument
 **NOTICE**
 
 > If you not define the **type** attribute for an argument, the XmlFileLoader will try evaluate the value of this argument
-> to the php value, so for e.g. true will be evaluated to the boolean type and not as string containing the "true". You
+> to the php value, so e.g. true will be evaluated to the boolean type and not as string containing the "true". You
 > can always cancel this behaviour by defining the attribute **type** with the value **string**.
 
 And here is an example of each argument:
@@ -208,8 +208,8 @@ And here is an example of each argument:
 ```
 
 As mentioned in the table the **constant** type of an argument accepts a shortcut or a full qualified constant name. As
-the shortcut I mean the notation "tag_type::constant" for eg. "jungi.mobile_devices::MOBILE". This notation refers to a
-constant located in the tag. Naturally you can refer to a global constants for eg. "SOME_CONSTANT" and to constants located
+the shortcut I mean the notation "tag_type::constant" e.g. "jungi.mobile_devices::MOBILE". This notation refers to a
+constant located in the tag. Naturally you can refer to a global constants e.g. "SOME_CONSTANT" and to constants located
 in classes like in the example above.
 
 Also you can define a scalar value for a `<tag />` element as shown on the example below:

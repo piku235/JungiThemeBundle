@@ -16,7 +16,7 @@ located in the `Jungi\Bundle\ThemeBundle\Tag` namespace.
 [Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/MobileDevices.php)
 
 The MobileDevices tag allows you to define mobile operating systems and a device type which will be supported by theme.
-So for e.g. there can be a theme which was designed only for AndroidOS, iOS or for all mobile systems. You can even
+So e.g. there can be a theme which was designed only for AndroidOS, iOS or for all mobile systems. You can even
 specify the device type (tablet, mobile).
 
 #### The snippet of the constructor:
@@ -35,7 +35,7 @@ public function __construct($systems = array(), $deviceType = self::ALL_DEVICES)
 }
 ```
 
-For the `$systems` argument you can provide for e.g. iOS, AndroidOS, WindowsPhoneOS, etc. or leave it empty which means
+For the `$systems` argument you can provide e.g. iOS, AndroidOS, WindowsPhoneOS, etc. or leave it empty which means
 that all operating systems will be matched. The full list of supported operating systems you can find
 [here](https://github.com/serbanghita/Mobile-Detect/blob/master/Mobile_Detect.json) under "os" entry.
 
@@ -88,7 +88,7 @@ Also you have two example bundles which I mentioned in the **README.md** of the 
 again if you haven't seen them yet:
 
 * [JungiSimpleEnvironmentBundle](https://github.com/piku235/JungiSimpleEnvironmentBundle) - this bundle defines own
-environment system where each environment may use different themes. So for eg. admin environment may has a theme "foo_admin"
+environment system where each environment may use different themes. So e.g. admin environment may has a theme "foo_admin"
 and default environment may has a theme "foo_default".
 * [JungiSimpleThemeBundle](https://github.com/piku235/JungiSimpleThemeBundle) - this bundle has the definition of a single
 theme which uses the Environment tag located in the JungiSimpleEnvironmentBundle.
@@ -102,12 +102,12 @@ Tags are pretty straightforward so there is no problem with creating them. The t
 and its two methods:
 
 * **isEqual** - This is the crucial method which decides about matching tags
-* **getName** - Returns the unique tag name in the following format "vendor.tag_name" for eg. "jungi.mobile_devices".
+* **getName** - Returns the unique tag name in the following format "vendor.tag_name" e.g. "jungi.mobile_devices".
 Thereby tags created by different vendors will not override each other.
 
 ### Register a tag
 
-After you created your tag you will have to register it to use it for eg. in theme mappings. To do this follow the
+After you created your tag you will have to register it to use it e.g. in theme mappings. To do this follow the
 instructions located in the "Tag Registry" section.
 
 Tag Registry
@@ -117,7 +117,7 @@ Tag Registry
 
 The tag registry is a place where you can obtain a path to the class of a tag by passing tag name. The main goal of the
 tag registry is an ability about registering new tags. Thanks to that theme mapping loaders are able to not only use the
-built-in tags, but additionally to use the tags created for eg. by you (:
+built-in tags, but additionally to use the tags created e.g. by you (:
 
 ### How to register a new tag?
 

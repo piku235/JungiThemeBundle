@@ -1,17 +1,17 @@
 Adaptive Web Design (AWD)
 =========================
 
-The AWD is right for you when you need a separate theme for different devices for e.g. a one theme for desktop devices
-and a second one for mobile devices. Thanks to the JungiThemeBundle instead of doing many things to get this properly
-working you just need a few simple steps. You can have as much separate themes as you wish for e.g. a first theme designed
+The AWD is right for you when you need a separate themes for different devices e.g. the first one for desktop devices
+and the second one for mobile devices. Thanks to the JungiThemeBundle instead of doing many things to get this properly
+working you just need a few simple steps. You can have as much separate themes as you wish e.g. a first theme designed
 for desktop devices, a second theme designed for mobile devices (excl. tablet devices) and a third theme designed for
 tablet devices.
 
 Explanation
 -----------
 
-Each of separate themes should have a tag which describes this theme for e.g. a first theme will has the **DesktopDevices**
-tag and a second theme will has the **MobileDevices** tag. Almost all of separate themes must implement the **Link** tag
+Each of separate themes should have a tag which describes this theme e.g. a first theme will has the **DesktopDevices**
+tag and a second theme will has the **MobileDevices** tag. Almost all of these themes must implement the **Link** tag
 to create a connection between them, expect one theme which don't have to implement the **Link** tag. This theme behaves
 like a representative of all connected themes, like the main theme. Which of these themes will be the representative theme
 depends only on you.
@@ -134,5 +134,5 @@ $manager->addTheme(new Theme(
 Summary
 -------
 
-Thanks to the built-in utilities creating an adaptive theme is very convenient and fast. Finally you must set a theme
+Thanks to the built-in utilities creating an adaptive themes is very convenient and fast. Finally you must set a theme
 name (the representative theme) to a theme resolver and load the theme mapping file to see how it works.

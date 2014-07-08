@@ -30,7 +30,7 @@ interface TagInterface
      * Gets the tag name
      *
      * The returned value should be in the following format: "vendor.tag_type"
-     * for eg. "jungi.mobile_devices". This format prevents from replacing
+     * e.g. "jungi.mobile_devices". This format prevents from replacing
      * tags by different vendors
      *
      * @return string

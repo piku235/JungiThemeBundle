@@ -178,15 +178,15 @@ parameters:
 
 Parameters facilitates providing arguments to a chosen tag. They have a local scope, so parameters defined in the document
 will be only available in this document. To use a parameter as the tag argument you must surround the parameter with
-percent sings "%" for e.g. *%footheme.mobile.systems%*, just like in symfony yaml services. YamlFileLoader automatically
+percent sings "%" e.g. *%footheme.mobile.systems%*, just like in symfony yaml services. YamlFileLoader automatically
 will look for values of these parameters.
 
 ##### Constants
 
 Additionally I've provided support of constants. Like in the example above to call a constant you must only prepend it
 with the "const@". You can use a shortcut or a full qualified constant name as the constant value. As the shortcut I mean
-the notation "tag_type::constant" for eg. "jungi.mobile_devices::MOBILE". This notation refers to a constant located in
-the tag. Naturally you can refer to a global constants for eg. "SOME_CONSTANT" and to constants located in classes like
+the notation "tag_type::constant" e.g. "jungi.mobile_devices::MOBILE". This notation refers to a constant located in
+the tag. Naturally you can refer to a global constants e.g. "SOME_CONSTANT" and to constants located in classes like
 in the example above.
 
 Final

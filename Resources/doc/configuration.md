@@ -89,16 +89,28 @@ theme name. Also the theme selector provides events to which you can attach your
 
 #### Configuration options
 
-* when the `ignore_null_themes` option is set to false then a theme selector will not throw an exception with missing
-theme name. This situation may take place when a theme resolver don't match any theme for a request.
+* when the `ignore_null_themes` option is set to false then a theme selector will not throw an exception with a missing
+theme name. This situation may take place when a theme resolver don't match any theme for a dispatched request.
 * the `validation_listener` option says whether a theme selector should validate themes resolved from theme resolvers.
-Thanks to the `use_investigator` option we can choose for which theme resolvers the validation should be executed. About
-a theme resolver investigator you can read [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/configuration.md#investigator).
+The `use_investigator` option only says whether to use a theme resolver investigator. Thanks to this investigator we can
+choose for which theme resolvers the validation should be executed. About a theme resolver investigator you can read [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/configuration.md#investigator).
+* the `device_switch` is responsible for the use of the DeviceThemeSwitch listener, which its job is detecting the device
+which has sent a request. Thanks to this listener adaptive themes can work.
+
+```yaml
+jungi_theme:
+    selector:
+        ignore_null_themes: # true or false
+        validation_listener:
+            enabled: # true or false
+            use_investigator: # true or false
+        device_switch: # true or false
+```
 
 ### Theme resolver
 
-We can say that a theme resolver is a heart and a theme selector is a brain of selecting a theme for a request. The theme
-resolver returns only a theme name for a dispatched request or nothing (null) if there wasn't any match for the request.
+We can say that a theme resolver is the heart and a theme selector is the brain of selecting a theme for a request. The
+theme resolver returns only a theme name for a dispatched request or nothing (null) if there wasn't any match for the request.
 
 #### Primary and fallback
 
@@ -107,60 +119,13 @@ resolver provides the `enabled` option which says whether the fallback theme res
 of three built-in theme resolvers or use your own theme resolver by defining the `id` option which refers to a symfony
 service.
 
-##### Service
-
-```yaml
-jungi_theme:
-    resolver:
-        primary:
-            id: # your theme resolver service
-```
-
-##### Cookie
-
-Cookie theme resolver accepts only one argument which is of an array type and it's responsible for cookie options.
-
-```yaml
-jungi_theme:
-    resolver:
-        primary:
-            type: cookie
-            arguments:
-                - lifetime: 3600 # time in sec
-                  path: /
-                  domain: ~
-                  secure: false
-                  httpOnly: true
-```
-
-##### InMemory
-
-InMemory theme resolver accepts two arguments where the first one takes a theme name and a second one decides whether
-the theme name can be changed or not. The second argument was only introduced for tests benefits.
-
-```yaml
-jungi_theme:
-    resolver:
-        primary:
-            type: in_memory
-            arguments: foo_theme # a theme name
-```
-
-##### Session
-
-Session theme resolver doesn't has any arguments, so the `arguments` option don't must be provided.
-
-```yaml
-jungi_theme:
-    resolver:
-        primary:
-            type: session
-```
+The kinds of theme resolvers and how to configure them were mentioned in the [Installation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/installation.md#setup-a-built-in-theme-resolver)
+chapter.
 
 #### Investigator
 
 A theme resolver investigator is simply used by the `Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener`
-and its job is mainly identify the dangerous theme resolvers like for eg **CookieThemeResolver** where cookie value
+and its job is mainly identify the dangerous theme resolvers like e.g. **CookieThemeResolver** where cookie value
 can be easily changed and we don't know if the theme name located in this cookie is correct or not. By default the theme
 investigator is enabled and has the **CookieThemeResolver** as the suspect. Of course you can define own suspects by
 changing the `suspects` option.
