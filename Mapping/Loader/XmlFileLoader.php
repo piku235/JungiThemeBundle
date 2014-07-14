@@ -122,8 +122,8 @@ class XmlFileLoader extends FileLoader
         $elm->registerXPathNamespace('mapping', 'http://piku235.github.io/JungiThemeBundle/schema/theme-mapping');
 
         return new Theme(
-            (string)$elm['name'],
-            $this->locator->locate((string)$elm['path']),
+            (string) $elm['name'],
+            $this->locator->locate((string) $elm['path']),
             $this->parseDetails($elm),
             $this->parseTags($elm)
         );
@@ -147,11 +147,11 @@ class XmlFileLoader extends FileLoader
                 throw new \InvalidArgumentException('The detail node has not defined attribute "name". Have you forgot about that?');
             }
 
-            $collection[(string)$detail['name']] = (string)$detail;
+            $collection[(string) $detail['name']] = (string) $detail;
         }
 
         try {
-            return $this->helper->createDetails($collection);
+            return new Details($collection);
         } catch (\LogicException $e) {
             throw new \RuntimeException('An exception has occurred while parsing the details node, see the previous exception', null, $e);
         }
@@ -190,7 +190,7 @@ class XmlFileLoader extends FileLoader
             throw new \InvalidArgumentException('The tag node has not defined attribute "name". Have you forgot about that?');
         }
 
-        return $this->tagFactory->create((string)$tag['name'], count($tag->children()) ? $this->getArgumentsAsPhp($tag) : (string)$tag);
+        return $this->tagFactory->create((string) $tag['name'], count($tag->children()) ? $this->getArgumentsAsPhp($tag) : (string) $tag);
     }
 
     /**

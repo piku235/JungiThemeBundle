@@ -1,7 +1,7 @@
 Documentation
 =============
 
-The documentation describes everything what is located in the JungiThemeBundle.
+This documentation was created for the master version of the bundle.
 
 Getting Started
 ---------------
@@ -19,19 +19,15 @@ To set up the bundle just like you want [go here](https://github.com/piku235/Jun
 Basics
 ------
 
-Here you will learn how to create and load themes and also you will know about them everything what you need.
-
 ### What exactly is a theme?
 
 The theme is an ordinary object which implements `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. A theme lives in a bundle
 and you can have as many themes as you want in the bundle.
 
-[Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-overview.md) to know more.
+### Themes overview
 
-### When to use multiple themes in a bundle?
-
-I recommend to use multiple themes in a bundle in the certain circumstances e.g. when you have a theme for the desktop
-devices and the second theme for the mobile devices, when these themes shares the same thing.
+I have explained here many important details about themes e.g. template locations, a details class of the theme and so on.
+If your are interested [click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-overview.md).
 
 ### Theme mappings
 
@@ -60,7 +56,7 @@ I wanna show you how to use each of these approaches in the JungiThemeBundle.
 
 As you see in the title the RESS is nothing else than the RWD. The RESS additionally provides server components to
 facilitate many things which occurs at the frontend side. For example generating an image which will fit dimensions of
-a mobile device display gives us the reduction of a bandwidth and a faster page execution. You can learn more from this
+a mobile device display gives us the reduction of bandwidth and faster page execution. You can learn more from this
 [article](http://www.lukew.com/ff/entry.asp?1392) written by Luke Wroblewski.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/ress.md)

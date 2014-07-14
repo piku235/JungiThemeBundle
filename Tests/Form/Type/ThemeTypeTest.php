@@ -26,8 +26,14 @@ class ThemeTypeTest extends TypeTestCase
 {
     public function testSubmitValid()
     {
-        $first = new Theme('footheme', 'path', new Details('foo super theme', '1.0.0'));
-        $second = new Theme('bootheme', 'path', new Details('boo hio theme', '1.0.0'));
+        $first = new Theme('footheme', 'path', new Details(array(
+            'name' => 'foo super theme',
+            'version' => '1.0.0'
+        )));
+        $second = new Theme('bootheme', 'path', new Details(array(
+            'name' => 'boo hio theme',
+            'version' => '1.0.0'
+        )));
         $manager = new ThemeManager(array(
             $first, $second
         ));

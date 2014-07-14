@@ -115,7 +115,7 @@ Tag registry
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/Registry/TagRegistryInterface.php)
 
-The tag registry is a place where you can obtain a path to the class of a tag by passing tag name. The main goal of the
+The tag registry is a place where you can obtain a path to the class of tag by passing tag name. The main goal of the
 tag registry is an ability about registering new tags. Thanks to that theme mapping loaders are able to not only use the
 built-in tags, but additionally to use the tags created e.g. by you (:
 
@@ -153,7 +153,7 @@ parameters:
 
 services:
     foo.theme.tag.provider:
-        class: %jungi.theme.tag.registry.provider.class%"
+        class: "%jungi.theme.tag.registry.provider.class%"
         tags:
             -  { name: jungi.tag_provider }
         arguments: ["%foo.theme.tag.class%"]

@@ -16,7 +16,7 @@ themes:
             author:
                 name: piku235
                 email: piku235@gmail.com
-                www: http://test.pl
+                site: http://test.pl
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>
@@ -31,7 +31,7 @@ themes:
             author:
                 name: piku235
                 email: piku235@gmail.com
-                www: http://test.pl
+                site: http://test.pl
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>
@@ -46,7 +46,7 @@ themes:
             author:
                 name: piku235
                 email: piku235@gmail.com
-                www: http://test.pl
+                site: http://test.pl
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>

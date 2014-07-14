@@ -38,7 +38,7 @@ designed for mobile devices (incl. tablet devices).
         <details>
             <detail name="author.name">piku235</detail>
             <detail name="author.email">piku235@gmail.com</detail>
-            <detail name="author.www">http://test.pl</detail>
+            <detail name="author.site">http://test.pl</detail>
             <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>
             <detail name="version">1.0.0</detail>
             <detail name="name">A fancy theme</detail>
@@ -53,7 +53,7 @@ designed for mobile devices (incl. tablet devices).
         <details>
             <detail name="author.name">piku235</detail>
             <detail name="author.email">piku235@gmail.com</detail>
-            <detail name="author.www">http://test.pl</detail>
+            <detail name="author.site">http://test.pl</detail>
             <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>
             <detail name="version">1.0.0</detail>
             <detail name="name">A fancy theme</detail>

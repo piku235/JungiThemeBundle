@@ -32,21 +32,21 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->arrayNode('holder')
-            ->addDefaultsIfNotSet()
-            ->info('theme holder configuration')
-            ->children()
-            ->scalarNode('id')->defaultValue('jungi.theme.holder.default')->end()
-            ->end()
-            ->beforeNormalization()
-            ->ifString()
-            ->then(function ($v) {
-                return array('id' => $v);
-            })
-            ->end()
-            ->end()
-            ->append($this->addThemeSelectorNode())
-            ->append($this->addThemeResolverNode())
+                ->arrayNode('holder')
+                    ->addDefaultsIfNotSet()
+                    ->info('theme holder configuration')
+                    ->children()
+                        ->scalarNode('id')->defaultValue('jungi.theme.holder.default')->end()
+                    ->end()
+                    ->beforeNormalization()
+                        ->ifString()
+                        ->then(function ($v) {
+                            return array('id' => $v);
+                        })
+                    ->end()
+                ->end()
+                ->append($this->addThemeSelectorNode())
+                ->append($this->addThemeResolverNode())
             ->end();
 
         return $treeBuilder;
@@ -61,23 +61,23 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->info('theme selector configuration')
             ->children()
-            ->booleanNode('ignore_null_themes')
-            ->info('whether to ignore null theme names, when a theme resolver does not return any theme name.')
-            ->defaultTrue()
-            ->end()
-            ->arrayNode('validation_listener')
-            ->info('theme validation listener configuration')
-            ->addDefaultsIfNotSet()
-            ->canBeDisabled()
-            ->children()
-            ->booleanNode('use_investigator')->defaultTrue()->end()
-            ->end()
-            ->end()
-            ->arrayNode('device_switch')
-            ->info('device theme switch configuration')
-            ->addDefaultsIfNotSet()
-            ->canBeDisabled()
-            ->end()
+                ->booleanNode('ignore_null_themes')
+                    ->info('whether to ignore null theme names, when a theme resolver does not return any theme name.')
+                    ->defaultTrue()
+                ->end()
+                ->arrayNode('validation_listener')
+                    ->info('theme validation listener configuration')
+                    ->addDefaultsIfNotSet()
+                    ->canBeDisabled()
+                    ->children()
+                        ->booleanNode('use_investigator')->defaultTrue()->end()
+                    ->end()
+                ->end()
+                ->arrayNode('device_switch')
+                    ->info('device theme switch configuration')
+                    ->addDefaultsIfNotSet()
+                    ->canBeDisabled()
+                ->end()
             ->end();
 
         return $rootNode;
@@ -110,23 +110,23 @@ class Configuration implements ConfigurationInterface
             ->isRequired()
             ->info('general theme resolver configuration')
             ->children()
-            ->append($this->addFallbackThemeResolverNode())
-            ->append($this->addPrimaryThemeResolverNode())
-            ->arrayNode('investigator')
-            ->info('theme resolver investigator configuration')
-            ->canBeDisabled()
-            ->fixXmlConfig('suspect')
-            ->children()
-            ->arrayNode('suspects')
-            ->defaultValue(array('Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver'))
-            ->prototype('scalar')->cannotBeEmpty()->end()
-            ->end()
-            ->end()
-            ->beforeNormalization()
-            ->always()
-            ->then($investigatorNorm)
-            ->end()
-            ->end()
+                ->append($this->addFallbackThemeResolverNode())
+                ->append($this->addPrimaryThemeResolverNode())
+                ->arrayNode('investigator')
+                    ->info('theme resolver investigator configuration')
+                    ->canBeDisabled()
+                    ->fixXmlConfig('suspect')
+                    ->children()
+                        ->arrayNode('suspects')
+                            ->defaultValue(array('Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver'))
+                            ->prototype('scalar')->cannotBeEmpty()->end()
+                        ->end()
+                    ->end()
+                    ->beforeNormalization()
+                        ->always()
+                        ->then($investigatorNorm)
+                    ->end()
+                ->end()
             ->end();
 
         return $rootNode;
@@ -165,50 +165,50 @@ class Configuration implements ConfigurationInterface
         $node
             ->fixXmlConfig('argument')
             ->children()
-            ->scalarNode('id')->cannotBeEmpty()->end()
-            ->enumNode('type')
-            ->values(array('in_memory', 'cookie', 'service', 'session'))
-            ->info('a type of theme resolver')
-            ->end()
-            ->arrayNode('arguments')
-            ->info('arguments to be passed to the theme resolver')
-            ->cannotBeEmpty()
-            ->prototype('variable')->end()
-            ->beforeNormalization()
-            ->ifString()
-            ->then(function ($v) {
-                return array($v);
-            })
-            ->end()
-            ->end()
-            ->end()
-            ->beforeNormalization()
-            ->ifString()
-            ->then(function ($v) {
-                return array('id' => $v);
-            })
+                ->scalarNode('id')->cannotBeEmpty()->end()
+                ->enumNode('type')
+                    ->values(array('in_memory', 'cookie', 'service', 'session'))
+                    ->info('a type of theme resolver')
+                ->end()
+                ->arrayNode('arguments')
+                    ->info('arguments to be passed to the theme resolver')
+                    ->cannotBeEmpty()
+                    ->prototype('variable')->end()
+                    ->beforeNormalization()
+                        ->ifString()
+                        ->then(function ($v) {
+                            return array($v);
+                        })
+                    ->end()
+                ->end()
             ->end()
             ->beforeNormalization()
-            ->ifTrue(function ($v) {
-                return isset($v['id']) && !isset($v['type']);
-            })
-            ->then(function ($v) {
-                $v['type'] = 'service';
+                ->ifString()
+                ->then(function ($v) {
+                    return array('id' => $v);
+                })
+            ->end()
+            ->beforeNormalization()
+                ->ifTrue(function ($v) {
+                    return isset($v['id']) && !isset($v['type']);
+                })
+                ->then(function ($v) {
+                    $v['type'] = 'service';
 
-                return $v;
-            })
+                    return $v;
+                })
             ->end()
             ->validate()
-            ->ifTrue(function ($v) use ($enabledCheck) {
-                return (!$enabledCheck || isset($v['enabled'])) && !isset($v['id']) && !isset($v['type']);
-            })
-            ->thenInvalid('At least you must specify "id" or "type" attribute.')
+                ->ifTrue(function ($v) use ($enabledCheck) {
+                    return (!$enabledCheck || isset($v['enabled'])) && !isset($v['id']) && !isset($v['type']);
+                })
+                ->thenInvalid('At least you must specify "id" or "type" attribute.')
             ->end()
             ->validate()
-            ->ifTrue(function ($v) use ($enabledCheck) {
-                return (!$enabledCheck || isset($v['enabled'])) && isset($v['id']) && isset($v['type']) && $v['type'] != 'service';
-            })
-            ->thenInvalid('For the "id" attribute the only acceptable value for the "type" attribute is "service" and this value is not required.')
+                ->ifTrue(function ($v) use ($enabledCheck) {
+                    return (!$enabledCheck || isset($v['enabled'])) && isset($v['id']) && isset($v['type']) && $v['type'] != 'service';
+                })
+                ->thenInvalid('For the "id" attribute the only acceptable value for the "type" attribute is "service" and this value is not required.')
             ->end();
     }
 }

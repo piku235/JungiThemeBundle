@@ -14,7 +14,7 @@ to understand the further things located here.
 Structure
 ---------
 
-The definition of a document looks like following:
+The definition of document looks like following:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -56,7 +56,7 @@ Here is a simple document which defines the single theme with basic elements:
             <detail name="version">1.0.0</detail>
             <detail name="author.name">Piotr Kugla</detail>
             <detail name="author.email">piku235@gmail.com</detail>
-            <detail name="author.www">http://foo.com</detail>
+            <detail name="author.site">http://foo.com</detail>
             <detail name="description">description</detail>
             <detail name="license">MIT</detail>
         </details>
@@ -89,7 +89,7 @@ definition and each theme definition must have these attributes:
 
 Attribute | Description | Required
 --------- | ----------- | --------
-name | An unique name of a theme | true
+name | An unique name of theme | true
 path | An absolute path to a theme resources. The path to a bundle resource is also allowed | true
 
 **NOTICE**
@@ -118,7 +118,7 @@ Inside the theme definition can be only defined:
     <detail name="version">1.0.0</detail>
     <detail name="author.name">Piotr Kugla</detail>
     <detail name="author.email">piku235@gmail.com</detail>
-    <detail name="author.www">http://foo.com</detail>
+    <detail name="author.site">http://foo.com</detail>
     <detail name="description">description</detail>
     <detail name="license">MIT</detail>
 </details>
@@ -140,7 +140,7 @@ description | false
 license | false
 author.name | false
 author.email | false
-author.www | false
+author.site | false
 
 ### Tags
 
@@ -207,10 +207,10 @@ And here is an example of each argument:
 </tag>
 ```
 
-As mentioned in the table the **constant** type of an argument accepts a shortcut or a full qualified constant name. As
-the shortcut I mean the notation "tag_type::constant" e.g. "jungi.mobile_devices::MOBILE". This notation refers to a
-constant located in the tag. Naturally you can refer to a global constants e.g. "SOME_CONSTANT" and to constants located
-in classes like in the example above.
+As mentioned in the table the **constant** type of argument accepts a shortcut or a full qualified constant name. As the
+shortcut I mean the notation "tag_type::constant" e.g. "jungi.mobile_devices::MOBILE". This notation refers to a constant
+located in the tag. Naturally you can refer to a global constants e.g. "SOME_CONSTANT" and to constants located in classes
+like in the example above.
 
 Also you can define a scalar value for a `<tag />` element as shown on the example below:
 

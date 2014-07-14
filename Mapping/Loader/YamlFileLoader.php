@@ -200,7 +200,7 @@ class YamlFileLoader extends FileLoader
         }
 
         try {
-            return $this->helper->createDetails($collection);
+            return new Details($collection);
         } catch (\LogicException $e) {
             throw new \RuntimeException('An exception has occurred while parsing the details node, see the previous exception', null, $e);
         }

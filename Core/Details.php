@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Core;
 /**
  * Details is a simple implementation of the DetailsInterface
  *
- * All properties can be only set by the constructor
+ * All properties can be only set by constructor
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -28,7 +28,7 @@ class Details implements DetailsInterface
     /**
      * @var string
      */
-    protected $authorMail;
+    protected $authorEmail;
 
     /**
      * @var string
@@ -56,25 +56,57 @@ class Details implements DetailsInterface
     protected $license;
 
     /**
+     * @var string
+     */
+    protected $thumbnail;
+
+    /**
      * Constructor
      *
-     * @param string $name A friendly theme name
-     * @param string $version A version
-     * @param string $description A description
-     * @param string $license A license type
-     * @param string $author An author name
-     * @param string $authorMail An author mail
-     * @param string $authorSite An author site (optional)
+     * @param array $params Parameters
+     *  The acceptable parameters:
+     *  array(
+     *      'name' => value,
+     *      'version' => value,
+     *      'description' => value,
+     *      'license' => value,
+     *      'thumbnail' => value,
+     *      'author.name' => value,
+     *      'author.site' => value,
+     *      'author.email' => value,
+     *  )
+     * @throws \InvalidArgumentException When some of given parameters can not be handled
+     * @throws \InvalidArgumentException If one of required parameters was not passed
      */
-    public function __construct($name, $version, $description = null, $license = null, $author = null, $authorMail = null, $authorSite = null)
+    public function __construct(array $parameters)
     {
-        $this->name = $name;
-        $this->version = $version;
-        $this->description = $description;
-        $this->license = $license;
-        $this->author = $author;
-        $this->authorMail = $authorMail;
-        $this->authorSite = $authorSite;
+        $validKeys = array(
+            'name',
+            'description',
+            'version',
+            'license',
+            'thumbnail',
+            'author.name',
+            'author.site',
+            'author.email'
+        );
+        $property = function ($name) use ($parameters) {
+            return isset($parameters[$name]) ? $parameters[$name] : null;
+        };
+        if ($wrong = array_diff(array_keys($parameters), $validKeys)) {
+            throw new \InvalidArgumentException(sprintf('The given parameters "%s" can not be handled.', implode(', ', $wrong)));
+        } else if (!$property('name') || !$property('version')) {
+            throw new \InvalidArgumentException('You must provide "name" and "version" argument.');
+        }
+
+        $this->name = $property('name');
+        $this->version = $property('version');
+        $this->description = $property('description');
+        $this->license = $property('license');
+        $this->thumbnail = $property('thumbnail');
+        $this->author = $property('author.name');
+        $this->authorEmail = $property('author.email');
+        $this->authorSite = $property('author.site');
     }
 
     /**
@@ -98,13 +130,13 @@ class Details implements DetailsInterface
     }
 
     /**
-     * Returns the author mail
+     * Returns the author email address
      *
      * @return string
      */
-    public function getAuthorMail()
+    public function getAuthorEmail()
     {
-        return $this->authorMail;
+        return $this->authorEmail;
     }
 
     /**
@@ -148,12 +180,22 @@ class Details implements DetailsInterface
     }
 
     /**
+     * Returns the location of a thumbnail
+     *
+     * @return string|null
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
      * Represents the details object
      *
      * @return string
      */
     public function __toString()
     {
-        return sprintf('%s, %s (%s)', $this->name, $this->author ? $this->author : 'missing', $this->authorMail ? $this->authorMail : 'missing');
+        return sprintf('%s, %s (%s)', $this->name, $this->author ? $this->author : 'missing', $this->authorEmail ? $this->authorEmail : 'missing');
     }
 }

@@ -57,7 +57,7 @@ session | SessionThemeResolver
 
 ##### Cookie
 
-Cookie theme resolver takes only one argument which is of an array type and it's responsible for cookie options.
+Cookie theme resolver takes only one argument which is of array type and it's responsible for cookie options.
 
 ```yaml
 # app/config/config.yml

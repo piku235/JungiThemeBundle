@@ -55,7 +55,7 @@ class Theme implements ThemeInterface
         $this->name = $name;
         $this->path = $path;
         $this->details = $details;
-        $this->tags = $tags ? : new TagCollection();
+        $this->tags = $tags ?: new TagCollection();
     }
 
     /**

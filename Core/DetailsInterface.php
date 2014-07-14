@@ -33,14 +33,14 @@ interface DetailsInterface
     public function getAuthor();
 
     /**
-     * Returns the author mail
+     * Returns the author email address
      *
      * @return string|null
      */
-    public function getAuthorMail();
+    public function getAuthorEmail();
 
     /**
-     * Returns the author site
+     * Returns the author website
      *
      * @return string|null
      */
@@ -61,9 +61,16 @@ interface DetailsInterface
     public function getDescription();
 
     /**
-     * Returns the type of license
+     * Returns the type of a license
      *
      * @return string|null
      */
     public function getLicense();
+
+    /**
+     * Returns the location of a thumbnail
+     *
+     * @return string|null
+     */
+    public function getThumbnail();
 }

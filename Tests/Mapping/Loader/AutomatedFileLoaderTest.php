@@ -44,7 +44,15 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
     {
         $this->loadFile('correct_themes');
 
-        $details = new Details('A fancy theme', '1.0.0', '<i>foo desc</i>', 'MIT', 'piku235', 'piku235@gmail.com', 'http://test.pl');
+        $details = new Details(array(
+            'name' => 'A fancy theme',
+            'version' => '1.0.0',
+            'description' => '<i>foo desc</i>',
+            'license' => 'MIT',
+            'author.name' => 'piku235',
+            'author.email' => 'piku235@gmail.com',
+            'author.site' => 'http://test.pl'
+        ));
         $themes = array(
             new Theme('foo_1', __DIR__ . '/Fixtures/fake_bundle', $details, new TagCollection(array(
                 new Tag\DesktopDevices(),
@@ -57,7 +65,10 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             new Theme('foo_3', __DIR__ . '/Fixtures/fake_bundle', $details, new TagCollection(array(
                 new Own(CONST_TEST)
             ))),
-            new Theme('foo_4', __DIR__ . '/Fixtures/fake_bundle', new Details('A fancy theme', '1.0.0'))
+            new Theme('foo_4', __DIR__ . '/Fixtures/fake_bundle', new Details(array(
+                'name' => 'A fancy theme',
+                'version' => '1.0.0'
+            )))
         );
 
         foreach ($themes as $theme) {
