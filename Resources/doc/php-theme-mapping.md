@@ -7,7 +7,7 @@ located [here](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/L
 Prerequisites
 -------------
 
-Before you start I recommend to get familiar with the chapter [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-overview.md)
+Before you start I recommend to get familiar with the chapter [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
 to know what exactly to use.
 
 Quick example
@@ -46,7 +46,7 @@ $tagFactory | Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory
 As you see to add your theme instance you'll use the `$manager` variable and the method `addTheme`. You can add as many
 theme objects as you want. Thanks to the `$locator` you can use paths to a bundle. The `$tagFactory` allows you to create
 tags only by passing tag name and arguments for this tag. The simplest theme implementation which you can use is the
-`Theme` class which is described in the [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-overview.md)
+`Theme` class which is described in the [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
 chapter.
 
 Final

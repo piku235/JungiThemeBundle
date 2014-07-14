@@ -8,7 +8,7 @@ the `Jungi\Bundle\ThemeBundle\Core\Theme` class for creating theme instances.
 Prerequisites
 -------------
 
-Before you start I recommend to get familiar with the chapter [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-overview.md)
+Before you start I recommend to get familiar with the chapter [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
 to understand the further things located here.
 
 Structure
