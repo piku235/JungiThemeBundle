@@ -51,15 +51,15 @@ $manager | Jungi\Bundle\ThemeBundle\Core\ThemeManager
 $locator | Symfony\Component\HttpKernel\Config\FileLocator
 $tagFactory | Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory
 
-As you see to add your theme instance you'll use the `$manager` variable and the method `addTheme`. You can add as many
-theme objects as you want. Thanks to the `$locator` you can use paths to a bundle. The `$tagFactory` allows you to create
+As you see to add your theme instance you'll use the method `addTheme` of the `$manager` variable. You can add as many
+theme instances as you want. Thanks to the `$locator` you can use paths to a bundle. The `$tagFactory` allows you to create
 tags only by passing tag name and arguments for this tag. The simplest theme implementation which you can use is the
-`Theme` class which is described in the [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
+`Jungi\Bundle\ThemeBundle\Core\Theme` class which is described in the [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
 chapter.
 
 Final
 -----
 
-Now if you have properly created your theme mapping file you can finally load it to the theme manager.
+Now if you have properly created your theme mapping file you can finally load it.
 
 [Go to the final step](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mappings.md)

@@ -1,11 +1,8 @@
 Themes overview
 ===============
 
-Here I will concentrate on answering on typical questions:
-
-* How looks loading of theme resources,
-* How to override bundle templates
-* e.t.c.
+Here I have described each worthy thing that can interest you. Generally this chapter speaks about internal things located
+in the JungiThemeBundle like e.g. template locations.
 
 Theme locations
 ---------------
@@ -42,8 +39,8 @@ Suppose that we want to render e.g **FooBundle:Default:index.html.twig**:
 
 1. The template name will be searched in current theme resources and if the given template name exists then this found
 template resource will be used.
-2. If the given template name can not be found in current theme resources then the default search process just like the
-symfony does will be performed, so finally a template resource from the **FooBundle** will be used.
+2. If the given template name can not be found in current theme resources then the default search process (just like the
+symfony does) will be performed, so finally a template resource from the **FooBundle** will be used.
 
 ### Template syntax
 
@@ -82,16 +79,16 @@ FooThemeBundle/
 ```
 
 In this example the **FooThemeBundle** has overwritten the `layout.html.twig` of the **BooBundle**. When the **index.html.twig**
-is rendered then the template `layout.html.twig` of the **FooThemeBundle** will be included instead of the `layout.html.twig`
-from the **BooBundle**.
+is rendered the template `layout.html.twig` of the **FooThemeBundle** is included instead of the `layout.html.twig` from
+the **BooBundle**.
 
 Theme
 -----
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/blob/master/Core/ThemeInterface.php)
 
-Each theme is an instance of the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this we can easily manipulate
-themes and obtain important for us information.
+Each theme is an instance of the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily
+manipulate themes and obtain important for us information.
 
 ### Default implementation
 
@@ -127,16 +124,17 @@ a little bit more about a theme.
 
 **NOTICE**
 
-> As you have noticed two methods: **getName**, **getVersion** of the details interface should at least return a value.
+> As you have noticed two methods: **getName**, **getVersion** of the details interface should always return a value, so
+> that means they're required.
 
 ### Default implementation
 
-The Jungi\Bundle\ThemeBundle\Core\Details` is a default details implementation and it only defines basic methods contained
-in the interface. In comparison with the default theme implementation it don't use a constructor like in the default
-theme implementation, because it would bring a mess in the constructor signature.
+The `Jungi\Bundle\ThemeBundle\Core\Details` class is a default details implementation and it only defines basic methods
+contained in the interface. In comparison with the default theme implementation it don't use a constructor like in the
+default theme implementation, because it would bring a mess in the constructor signature.
 
-The default implementations in the constructor takes only one argument `$parameters` which is of array type. This array
-should consist of keys from the table below.
+The constructor of class takes only one argument `$parameters` which is of array type. This array should consist of keys
+from the table below.
 
 Key | Required
 --- | --------

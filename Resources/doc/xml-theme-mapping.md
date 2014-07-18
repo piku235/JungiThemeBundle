@@ -124,13 +124,8 @@ Inside the theme definition can be only defined:
 </details>
 ```
 
-The `<details />` element has only children `<detail />` which have only one required attribute **name**.
-
-**INFO**
-
-> The `<details />` element is required due to his two required children which are listed in the table
-
-The attribute **name** has the same values as the keys of the default details implementation described in the **Theme Overview**
+The `<details />` element has only children `<detail />` which have one required attribute **name**. Values of the
+attribute **name** are just the same as the keys of the default details implementation described in the **Theme Overview**
 chapter, and so the table below is just the same as in that chapter.
 
 Name | Required
@@ -143,6 +138,11 @@ thumbnail | false
 author.name | false
 author.email | false
 author.site | false
+
+**INFO**
+
+> The `<details />` element is required due to his two required children which are listed in the table
+
 
 ### Tags
 
