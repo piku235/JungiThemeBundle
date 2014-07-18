@@ -12,14 +12,14 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * The basic interface which themes must implement
+ * The basic interface where every theme must implement
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface ThemeInterface
 {
     /**
-     * Returns the theme name
+     * Returns the unique theme name
      *
      * @return string
      */
@@ -33,7 +33,7 @@ interface ThemeInterface
     public function getTags();
 
     /**
-     * Returns the absolute path to a theme
+     * Returns the absolute path to theme resources
      *
      * @return string
      */

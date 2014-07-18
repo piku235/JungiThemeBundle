@@ -26,6 +26,13 @@ interface DetailsInterface
     public function getName();
 
     /**
+     * Returns the version
+     *
+     * @return string
+     */
+    public function getVersion();
+
+    /**
      * Returns the author
      *
      * @return string|null
@@ -45,13 +52,6 @@ interface DetailsInterface
      * @return string|null
      */
     public function getAuthorSite();
-
-    /**
-     * Returns the version
-     *
-     * @return string
-     */
-    public function getVersion();
 
     /**
      * Returns the description

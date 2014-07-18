@@ -103,6 +103,7 @@ name | - | true
 version | - | true
 description | - | false
 license | - | false
+thumbnail | - | false
 author | name | false
 author | email | false
 author | www | false

@@ -26,8 +26,8 @@ and you can have as many themes as you want in the bundle.
 
 ### Themes overview
 
-I have explained here many important details about themes e.g. template locations, a details class of the theme and so on.
-If your are interested [click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md).
+I have explained here many important details about themes e.g. template locations, overriding bundle templates. If you're
+interested [click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md).
 
 ### Theme mappings
 

@@ -130,7 +130,8 @@ The `<details />` element has only children `<detail />` which have only one req
 
 > The `<details />` element is required due to his two required children which are listed in the table
 
-The attribute **name** takes the following values:
+The attribute **name** has the same values as the keys of the default details implementation described in the **Theme Overview**
+chapter, and so the table below is just the same as in that chapter.
 
 Name | Required
 ---- | --------
@@ -138,6 +139,7 @@ name | true
 version | true
 description | false
 license | false
+thumbnail | false
 author.name | false
 author.email | false
 author.site | false

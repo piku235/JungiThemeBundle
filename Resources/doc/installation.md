@@ -43,7 +43,7 @@ public function registerBundles()
 ### Step 3: Configuration
 
 Finally you have to choose a theme resolver that the JungiThemeBundle will use. The bundle comes with the default set
-of theme resolvers. You can use one of these theme resolvers or use your own theme resolver by setting a symfony service.
+of theme resolvers. You can use one of these theme resolvers or use your own theme resolver by setting symfony service.
 
 #### Setup a built-in theme resolver
 

@@ -94,7 +94,7 @@ themes:
             author:
                 name: piku235
                 email: piku235@gmail.com
-                www: http://test.pl
+                site: http://test.pl
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>
@@ -115,7 +115,15 @@ use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
 $manager->addTheme(new Theme(
     'foo_main',
     $locator->locate('@JungiFooBundle/Resources/theme/desktop'),
-    new Details('A fancy theme', '1.0.0', '<i>foo desc</i>', 'MIT', 'piku235', 'piku235@gmail.com', 'http://test.pl'),
+    new Details(array(
+        'name' => 'A fancy desktop theme',
+        'version' => '1.0.0',
+        'description' => '<i>foo desc</i>',
+        'license' => 'MIT',
+        'author.name' => 'piku235',
+        'author.email' => 'piku235@gmail.com',
+        'author.site' => 'http://test.pl'
+    )),
     new TagCollection(array(
         new Tag\DesktopDevices(),
     ))
@@ -123,7 +131,15 @@ $manager->addTheme(new Theme(
 $manager->addTheme(new Theme(
     'foo_mobile',
     $locator->locate('@JungiFooBundle/Resources/theme/mobile'),
-    new Details('A fancy theme', '1.0.0', '<i>foo desc</i>', 'MIT', 'piku235', 'piku235@gmail.com', 'http://test.pl'),
+    new Details(array(
+        'name' => 'A fancy mobile theme',
+        'version' => '1.0.0',
+        'description' => '<i>foo desc</i>',
+        'license' => 'MIT',
+        'author.name' => 'piku235',
+        'author.email' => 'piku235@gmail.com',
+        'author.site' => 'http://test.pl'
+    )),
     new TagCollection(array(
         new Tag\Link('foo_main'),
         new Tag\MobileDevices()

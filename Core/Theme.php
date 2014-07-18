@@ -45,8 +45,8 @@ class Theme implements ThemeInterface
     /**
      * Constructor
      *
-     * @param string $name A name
-     * @param string $path A path
+     * @param string $name An unique theme name
+     * @param string $path A path to theme resources
      * @param DetailsInterface $details A details
      * @param TagCollection $tags A tag collection (optional)
      */

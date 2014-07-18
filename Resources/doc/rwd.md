@@ -74,7 +74,7 @@ themes:
             author:
                 name: piku235
                 email: piku235@gmail.com
-                www: http://test.pl
+                site: http://test.pl
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>
@@ -95,7 +95,15 @@ use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
 $manager->addTheme(new Theme(
     'foo',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    new Details('A fancy theme', '1.0.0', '<i>foo desc</i>', 'MIT', 'piku235', 'piku235@gmail.com', 'http://test.pl'),
+    new Details(array(
+        'name' => 'A fancy theme',
+        'version' => '1.0.0',
+        'description' => '<i>foo desc</i>',
+        'license' => 'MIT',
+        'author.name' => 'piku235',
+        'author.email' => 'piku235@gmail.com',
+        'author.site' => 'http://test.pl'
+    )),
     new TagCollection(array(
         new Tag\DesktopDevices(),
         new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)

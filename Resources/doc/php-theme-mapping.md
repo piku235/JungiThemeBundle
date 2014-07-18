@@ -26,7 +26,15 @@ use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
 $theme = new Theme(
     'footheme',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    new Details('Foo theme', '1.0.0', 'description', 'license', 'author_name', 'author_email', 'author_www'),
+    new Details(array(
+        'name' => 'A fancy theme',
+        'version' => '1.0.0',
+        'description' => '<i>foo desc</i>',
+        'license' => 'MIT',
+        'author.name' => 'piku235',
+        'author.email' => 'piku235@gmail.com',
+        'author.site' => 'http://test.pl'
+    )),
     new TagCollection(array(
         new Tag\DesktopDevices(),
         $tagFactory->create('jungi.mobile_devices', array(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE))
