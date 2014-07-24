@@ -12,10 +12,10 @@
 namespace Jungi\Bundle\ThemeBundle\Resolver;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
- * The implemented classes returns an appropriate theme name based on a given Request instance
+ * The implemented classes are responsible for determining the theme name from a request.
+ * They also allows for changing the stored theme name for a given request.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

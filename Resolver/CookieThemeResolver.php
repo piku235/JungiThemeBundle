@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
 
 /**
- * The CookieThemeResolver handles reading/writing theme names using the cookies
+ * The CookieThemeResolver uses cookies for storing the theme name.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -77,7 +77,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     }
 
     /**
-     * Writes the theme changes from a given request to a given response
+     * Writes theme changes done in a given request to a given response
      *
      * @param Request $request A request instance
      * @param Response $response A response instance

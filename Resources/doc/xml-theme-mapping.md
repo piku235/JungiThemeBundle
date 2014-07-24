@@ -1,14 +1,15 @@
-XML Mapping
-===========
+XML Theme Mapping
+=================
 
-The theme mapping allows you to easily create new themes. XML mapping documents are handled by the XmlFileLoader which is
-located [here](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/XmlFileLoader.php). This loader uses
-the `Jungi\Bundle\ThemeBundle\Core\Theme` class for creating theme instances.
+[Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/XmlFileLoader.php)
+
+Documents of this theme mapping are handled by the `Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlFileLoader`. By default
+the loader uses the `Jungi\Bundle\ThemeBundle\Core\Theme` for creating theme instances.
 
 Prerequisites
 -------------
 
-Before you start I recommend to get familiar with the chapter [**Theme Overview**](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
+Before you start I recommend to get familiar with the chapter [Theme Overview](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
 to understand the further things located here.
 
 Structure
@@ -29,7 +30,7 @@ The definition of document looks like following:
 Quick example
 -------------
 
-Here is a simple document which defines the single theme with basic elements:
+Here is the simple document which defines the single theme with basic elements:
 
 ```xml
 <!-- FooBundle/Resources/config/theme.xml -->
@@ -84,7 +85,7 @@ So let's start explaining from the theme definition:
 </theme-mapping>
 ```
 
-Each of XML Mapping File can contain one or multiple theme definitions. The `<theme />` element takes the role of theme
+Each of theme mapping file can contain one or multiple theme definitions. The `<theme />` element takes the role of theme
 definition and each theme definition must have these attributes:
 
 Attribute | Description | Required
@@ -92,10 +93,10 @@ Attribute | Description | Required
 name | An unique name of theme | true
 path | An absolute path to a theme resources. The path to a bundle resource is also allowed | true
 
-**NOTICE**
+**NOTE**
 
-> As show on the example above the path can be a bundle resource `@JungiFooBundle/Resources/theme`. This is possible thanks
-> to using the `Symfony\Component\HttpKernel\Config\FileLocator` by the **XmlFileLoader**
+> As show on the example above the **path** attribute can be a bundle resource e.g. `@JungiFooBundle/Resources/theme`.
+> This is possible thanks to using the `Symfony\Component\HttpKernel\Config\FileLocator` by the **XmlFileLoader**
 
 Inside the theme definition can be only defined:
 
@@ -124,9 +125,8 @@ Inside the theme definition can be only defined:
 </details>
 ```
 
-The `<details />` element has only children `<detail />` which have one required attribute **name**. Values of the
-attribute **name** are just the same as the keys of the default details implementation described in the **Theme Overview**
-chapter, and so the table below is just the same as in that chapter.
+The `<details />` element has only children `<detail />` which have one required attribute **name**. Values of this attribute
+are just the same as keys of the default details implementation described in the **Theme Overview** chapter.
 
 Name | Required
 ---- | --------
@@ -146,7 +146,8 @@ author.site | false
 
 ### Tags
 
-[Click here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md) to know more about the tags
+[Click here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md) to know more about the
+tags.
 
 ```xml
 <tags>
@@ -156,32 +157,22 @@ author.site | false
 </tags>
 ```
 
-The `<tags />` element has only children `<tag />` which have following attributes:
+The `<tags />` element has only children `<tag />` which have one required attribute **name**. This attribute takes as
+value a unique tag name by whose we don't have to provide a full class name. You can use one of the following built-in tags.
 
-Attribute | Description | Required
---------- | ----------- | --------
-type | A tag name | true
+Name | Class
+---- | -----
+jungi.mobile_devices | Jungi\Bundle\ThemeBundle\Tag\MobileDevices
+jungi.desktop_devices | Jungi\Bundle\ThemeBundle\Tag\DesktopDevices
+jungi.link | Jungi\Bundle\ThemeBundle\Tag\Link
 
-Here is a list of included tags in the bundle:
-
-Class | Name
------ | ----
-Jungi\Bundle\ThemeBundle\Tag\MobileDevices | jungi.mobile_devices
-Jungi\Bundle\ThemeBundle\Tag\DesktopDevices | jungi.desktop_devices
-Jungi\Bundle\ThemeBundle\Tag\Link | jungi.link
-
-**INFO**
-
-> The tag names are taken from the TagRegistry instance. TagRegistry allows for dynamically registering new tags in much
-> convenient way
-
-Now is the right time to talk about arguments for a tag.
+Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
+allows for dynamically registering tags in much convenient way. You can read about a tag registry [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
 
 #### Arguments
 
 To facilitate creating tags you have the almost the same formula like in the symfony xml services. Inside each `<tag />`
-element you can define `<argument />` children. These children has only the attribute **type** which have some special
-meaning for the XmlFileLoader.
+element you can define the `<argument />` children which have only the **type** attribute.
 
 The attribute **type** has the following values:
 
@@ -191,13 +182,13 @@ string | A string value
 constant | A constant value, a shortcut or a full qualified constant name
 collection | A collection of argument
 
-**NOTICE**
+**NOTE**
 
 > If you not define the **type** attribute for an argument, the XmlFileLoader will try evaluate the value of this argument
-> to the php value, so e.g. true will be evaluated to the boolean type and not as string containing the "true". You
-> can always cancel this behaviour by defining the attribute **type** with the value **string**.
+> to a php value, so e.g. true will be evaluated as the boolean type and not as string containing the "true". You
+> can always cancel this behaviour by defining this attribute with the value **string**.
 
-And here is an example of each argument:
+And here is the example of each argument:
 
 ```xml
 <tag class="FooTag">
@@ -209,9 +200,9 @@ And here is an example of each argument:
 </tag>
 ```
 
-As mentioned in the table the **constant** type of argument accepts a shortcut or a full qualified constant name. As the
-shortcut I mean the notation "tag_type::constant" e.g. "jungi.mobile_devices::MOBILE". This notation refers to a constant
-located in the tag. Naturally you can refer to a global constants e.g. "SOME_CONSTANT" and to constants located in classes
+As mentioned in the table the **constant** type of argument accepts a shortcut or a full qualified constant name. By
+a shortcut I mean the notation `tag_name::constant` e.g. `jungi.mobile_devices::MOBILE`. This notation refers to a constant
+located in a tag. Naturally you can refer to global constants e.g. **SOME_CONSTANT** and to constants located in classes
 like in the example above.
 
 Also you can define a scalar value for a `<tag />` element as shown on the example below:
@@ -222,7 +213,7 @@ Also you can define a scalar value for a `<tag />` element as shown on the examp
 </tags>
 ```
 
-This scalar value behaves like a following argument:
+This scalar value behaves like the following argument:
 
 ```xml
 <tags>
@@ -232,12 +223,12 @@ This scalar value behaves like a following argument:
 </tags>
 ```
 
-I assume that you're familiar with the **collection** and the **string** type from the symfony services (:
+I assume that you're familiar with the **collection** and the **string** type from the symfony services :)
 
 Final
 -----
 
 Now if you have properly created your theme mapping document you can finally load it. This is very easy and short task so
-don't panic.
+don't be impatient.
 
 [Go to the final step](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mappings.md)

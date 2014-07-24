@@ -1,15 +1,15 @@
-Theme tags
+Theme Tags
 ==========
 
-The goal of the JungiThemeBundle are the mostly tags. They takes the information role and can be used for searching
-and grouping themes. I guess that you're thinking now: "Why they're so significant and why I should use them?" In this
-chapter I'll try to answer to these questions.
+The goal of the JungiThemeBundle are the mostly tags. They takes the information role and can be used for searching and
+grouping themes. They are mandatory for adaptive themes ([Adaptive Web Design](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md))
+and they should be used in each theme but they are not required.
 
 Built-in tags
 -------------
 
-The JungiThemeBundle comes with three built-in tags: **MobileDevices**, **DesktopDevices** and **Link**. All theme tags
-are located in the `Jungi\Bundle\ThemeBundle\Tag` namespace.
+The bundle comes with three built-in tags: **MobileDevices**, **DesktopDevices** and **Link**. All tags are located in
+the `Jungi\Bundle\ThemeBundle\Tag` namespace.
 
 ### MobileDevices
 
@@ -51,7 +51,7 @@ MobileDevices::ALL | all
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/DesktopDevices.php)
 
-The DesktopDevices is a very basic tag (empty) and it doesn't implement any additional methods. Each theme designed for
+The DesktopDevices is a very basic tag and it implements methods contained in the interface. Each theme designed for
 desktop devices (the most likely scenario) should have this tag.
 
 ### Link
@@ -70,13 +70,8 @@ mainly used in situations such as when you have two separate themes where each o
  *
  * @param string $theme A pointed theme name
  */
-public function __construct($theme)
-{
-    // code
-}
+public function __construct($theme);
 ```
-
-As you see the constructor takes only one argument `$theme` which has a theme name.
 
 Usage examples
 --------------
@@ -84,13 +79,13 @@ Usage examples
 How tags works you can see by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/EventListener/DeviceThemeSwitchTest.php)
 and [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/StandardThemeSelectorTest.php).
 
-Also you have two example bundles which I mentioned in the **README.md** of the root directory, but I will mention them
+Also there are two example bundles which I mentioned in the **README.md** of the root directory, but I will mention them
 again if you haven't seen them yet:
 
 * [JungiSimpleEnvironmentBundle](https://github.com/piku235/JungiSimpleEnvironmentBundle) - this bundle defines own
-environment system where each environment may use different themes. So e.g. admin environment may has a theme "foo_admin"
-and default environment may has a theme "foo_default".
-* [JungiSimpleThemeBundle](https://github.com/piku235/JungiSimpleThemeBundle) - this bundle has the definition of two themes
+environment system where each environment may use different themes. So e.g. admin environment may has a theme **foo_admin**
+and default environment may has a theme **foo_default**.
+* [JungiSimpleThemeBundle](https://github.com/piku235/JungiSimpleThemeBundle) - this bundle has a definition of two themes
 which uses the Environment tag located in the JungiSimpleEnvironmentBundle.
 
 Creating a tag
@@ -98,16 +93,16 @@ Creating a tag
 
 [Show the TagInterface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/TagInterface.php)
 
-Tags are pretty straightforward so there is no problem with creating them. The tag class must implement
-`Jungi\Bundle\ThemeBundle\Tag\TagInterface` and its two methods:
+Tags are pretty straightforward due to the lightweight API. A new tag class must implement `Jungi\Bundle\ThemeBundle\Tag\TagInterface`
+and its two methods:
 
 * **isEqual** - This is the crucial method which decides about matching tags
-* **getName** - Returns the unique tag name in the following format **vendor.tag_name** e.g. **jungi.mobile_devices**.
+* **getName** - Returns the unique tag name in the following format `vendor.tag_name` e.g. `jungi.mobile_devices`.
 Thereby tags created by different vendors will not override each other.
 
 ### Register a created tag
 
-After you created a tag you will have to register it to use it e.g. in theme mappings. To do this follow the
+After you created a tag you will have to register it to use it e.g. in a theme mapping document. To do this follow the
 instructions located in the **Tag Registry** section.
 
 Tag registry
@@ -115,20 +110,18 @@ Tag registry
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/Registry/TagRegistryInterface.php)
 
-The tag registry is a place where you can obtain a path to the class of tag by passing tag name. The main goal of the
+A tag registry is a place where you can obtain the path to the class of tag by passing tag name. The main goal of a
 tag registry is an ability about registering new tags. Thanks to that theme mapping loaders are able to not only use the
-built-in tags, but additionally to use the tags created e.g. by you (:
+built-in tags, but additionally to use tags created e.g. by you :)
 
 ### How to register a new tag?
 
 The registration can be done from the symfony services which is very comfortable. The only thing you have to do is to
-define a service with the tag `jungi.tag_provider`. As a service class you will use the parameter `jungi.theme.tag.registry.provider.class`
-which by default points to the class `Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider`. The tag provider only provides
-tags to a tag registry and nothing more.
+define a service with the tag `jungi.tag_provider`. As a service class you can use the parameter `jungi.theme.tag.registry.provider.class`
+which by default points to the `Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider`. A tag provider only provides tags to
+a tag registry and nothing more.
 
-#### Example
-
-##### XML
+#### XML Service
 
 ```xml
 <parameters>
@@ -145,7 +138,7 @@ tags to a tag registry and nothing more.
 </services>
 ```
 
-##### YAML
+#### YAML Service
 
 ```yml
 parameters:

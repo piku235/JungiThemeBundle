@@ -16,7 +16,7 @@ namespace Jungi\Bundle\ThemeBundle\Selector;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeSelectorEvents
+final class ThemeSelectorEvents
 {
     /**
      * @var string

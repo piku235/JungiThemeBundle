@@ -21,8 +21,9 @@ Basics
 
 ### What exactly is a theme?
 
-The theme is an ordinary object which implements `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. A theme lives in a bundle
-and you can have as many themes as you want in the bundle.
+A theme is an ordinary object which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Basically themes lives
+in bundles and you can have in a single bundle one or multiple themes. When to use multiple themes in a single bundle
+you can read in the chapter **Themes overview**.
 
 ### Themes overview
 
@@ -55,7 +56,7 @@ I wanna show you how to use each of these approaches in the JungiThemeBundle.
 ### RESS (Responsive + Server-Side)
 
 As you see in the title the RESS is nothing else than the RWD. The RESS additionally provides server components to
-facilitate many things which occurs at the frontend side. For example generating an image which will fit dimensions of
+facilitate many things which occurs at a frontend side. For example generating an image which will fit dimensions of
 a mobile device display gives us the reduction of bandwidth and faster page execution. You can learn more from this
 [article](http://www.lukew.com/ff/entry.asp?1392) written by Luke Wroblewski.
 

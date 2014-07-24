@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * ThemeHolderInterface instances holds the current theme for a request scope
+ * ThemeHolderInterface instances are used only for holding the current theme instance.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

@@ -14,9 +14,9 @@ namespace Jungi\Bundle\ThemeBundle\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * The class is good for tests purposes and for simple uses
+ * The class can be used as the default theme resolver
  *
- * As the class name says a theme name is allocated in memory space shared by variable
+ * As the class name says the theme name is stored in a memory space shared by variable
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

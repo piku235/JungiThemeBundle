@@ -1,9 +1,9 @@
 Responsive + Server-Side (RESS)
 -------------------------------
 
-Just like I said in the main documentation the RESS is nothing else than RWD. So to create a RESS theme you must follow
-steps that I have described in the [RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md)
-chapter. In this chapter I will show the tools which are the main goal of the RESS.
+Just like I said in the main documentation the RESS is nothing else than RWD. So to create a theme you must follow the
+same steps like in the [RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md) chapter. In
+this chapter I will show the tools which are the main goal of the RESS.
 
 DeviceHelper
 ------------
@@ -12,7 +12,7 @@ DeviceHelper
 
 The DeviceHelper is a simple class with the friendly API which is designed for PHP templates. The class provides the following
 methods: **isDesktop**, **isMobile**, **isTablet** and **isDevice**. Only the **isDevice** method takes one argument to
-which you must pass a value according to the accepted standards by the method **is** of the MobileDetect class.
+which you must pass a value according to the accepted values by the method **is** of the MobileDetect class.
 
 ### Example
 

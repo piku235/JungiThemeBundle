@@ -15,15 +15,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * The theme resolvers which implements this interface will be able to writes theme changes
- * from a Request to a Response
+ * Theme resolvers which implements this interface will be able to write theme changes done
+ * in a request to a response
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface ResponseWriterInterface
 {
     /**
-     * Writes the theme changes from a given request to a given response
+     * Writes theme changes done in a given request to a given response
      *
      * @param Request $request A request instance
      * @param Response $response A response instance

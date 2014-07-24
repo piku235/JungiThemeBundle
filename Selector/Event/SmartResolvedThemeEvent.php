@@ -20,7 +20,7 @@ class SmartResolvedThemeEvent extends ResolvedThemeEvent
 {
     /**
      * Clears the current theme and stops the execution of rest listeners
-     * Is also tantamount to invalidate the theme
+     * Is also equivalent to invalidate the theme
      *
      * It can be useful when the theme did not passed some conditions
      *

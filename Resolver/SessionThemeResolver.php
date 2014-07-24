@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * The class handles reading/writing theme names using php sessions
+ * The SessionThemeResolver uses session mechanism for storing the theme name
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

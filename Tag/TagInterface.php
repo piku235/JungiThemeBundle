@@ -22,16 +22,15 @@ interface TagInterface
      * Checks if a given tag is equal
      *
      * @param  TagInterface $tag A tag
-     * @return bool
+     * @return boolean
      */
     public function isEqual(TagInterface $tag);
 
     /**
      * Gets the tag name
      *
-     * The returned value should be in the following format: "vendor.tag_type"
-     * e.g. "jungi.mobile_devices". This format prevents from replacing
-     * tags by different vendors
+     * The returned name should be in the following notation: "vendor.tag_type" e.g. "jungi.mobile_devices".
+     * This notation prevents from replacing tags by different vendors
      *
      * @return string
      */

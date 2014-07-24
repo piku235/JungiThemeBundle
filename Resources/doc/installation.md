@@ -26,7 +26,7 @@ $ php composer.phar require jungi/theme-bundle "dev-master"
 
 ### Step 2: Enable the bundle
 
-Enable the bundle in the kernel:
+Enable the bundle in the AppKernel:
 
 ```php
 <?php
@@ -45,7 +45,7 @@ public function registerBundles()
 Finally you have to choose a theme resolver that the JungiThemeBundle will use. The bundle comes with the default set
 of theme resolvers. You can use one of these theme resolvers or use your own theme resolver by setting symfony service.
 
-#### Setup a built-in theme resolver
+#### Setup built-in theme resolver
 
 The bundle contains the following theme resolvers:
 
@@ -55,9 +55,10 @@ cookie | CookieThemeResolver
 in_memory | InMemoryThemeResolver
 session | SessionThemeResolver
 
-##### Cookie
+##### CookieThemeResolver
 
-Cookie theme resolver takes only one argument which is of array type and it's responsible for cookie options.
+The CookieThemeResolver uses cookies for holding the theme name. It takes only one argument which is of array type and
+it's responsible for standard cookie options.
 
 ```yaml
 # app/config/config.yml
@@ -73,10 +74,12 @@ jungi_theme:
                   httpOnly: true
 ```
 
-##### InMemory
+##### InMemoryThemeResolver
 
-InMemory theme resolver accepts two arguments where the first one takes a theme name and the second one decides whether
-the theme name can be changed or not. The second argument was only introduced for tests benefits.
+The InMemoryThemeResolver is a very simple theme resolver, it holds the theme name in the class variable. It accepts two
+arguments where the first one takes a theme name and the second one decides whether the stored theme name can be changed
+or not. The second argument was only introduced for tests benefits. This theme resolver can be used as the default theme
+resolver.
 
 ```yaml
 # app/config/config.yml
@@ -87,9 +90,10 @@ jungi_theme:
             arguments: foo_theme # a theme name
 ```
 
-##### Session
+##### SessionThemeResolver
 
-Session theme resolver doesn't has any arguments, so the `arguments` option don't must be provided.
+The SessionThemeResolver uses the session mechanism for holding the theme name. It doesn't take any arguments, so the
+`arguments` option doesn't must be provided.
 
 ```yaml
 # app/config/config.yml
@@ -99,7 +103,7 @@ jungi_theme:
             type: session
 ```
 
-#### Setup a theme resolver service
+#### Setup theme resolver service
 
 To register a theme resolver service you have to define the configuration like below:
 
@@ -129,6 +133,6 @@ Final
 -----
 
 So if you completed the installation you can from now on start using the bundle and learn super things which I have described
-in the documentation (:
+in the documentation :)
 
 [Back to index](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md)

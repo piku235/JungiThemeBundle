@@ -1,36 +1,31 @@
 Loading theme mapping files
 ===========================
 
-After you created your theme mapping file you can finally load it to a theme manager. To achieve this goal you have
-for use theme mapping loaders.
+After you have completed creating your theme mapping file you can finally load it to a theme manager. To achieve this goal
+you have for use the following theme mapping loaders.
 
-**NOTE**
-
-> The load operations are done from a bundle level.
-
-Theme mapping loaders
----------------------
-
-In the table below you will find all theme mapping loaders:
-
-Name | Class (default) | Service
+Format | Class (default) | Service
 ---- | --------------- | -------
 xml | Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlFileLoader | jungi.theme.mapping.loader.xml
 yaml | Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader | jungi.theme.mapping.loader.yml
 php | Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader | jungi.theme.mapping.loader.php
 
+**NOTE**
+
+> The load operations are done from a bundle class.
+
 Loading from a bundle
 ---------------------
 
-First open the file where is located your bundle class e.g. *src/Foo/FooBundle/BooFooBundle.php*. After that define
+First open the file where is located your bundle class e.g. `src/Foo/FooBundle/BooFooBundle.php`. After that define
 the **boot** method in the bundle if you don't have it actually. Thanks to that method we're able to load themes very
 easily.
 
 ### Overview
 
-Each of the theme mapping loader service has reference to the `jungi.theme.manager` service so all load operations will
-be using this theme manager service. To accomplish the loading you've got available the **load** method. This method
-has only the one argument responsible for the path to a theme mapping file.
+Each of theme mapping loader service has reference to the `jungi.theme.manager` service so all load operations will
+use this theme manager service. To accomplish the loading you've got available the **load** method. This method has only
+one argument responsible for the path to a theme mapping file.
 
 ### XML Mapping Loader
 
@@ -110,7 +105,7 @@ class BooFooBundle extends Bundle
 Summary
 -------
 
-And that's it (:
+And that's all :)
 
-If your bundle is enabled in the **AppKernel** the theme\themes from the mapping file should be now loaded. You can
-check it by accessing the theme manager.
+If your bundle is enabled in the **AppKernel** the theme\themes from the mapping file should be now loaded. You can check
+it by accessing a theme manager.

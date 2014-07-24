@@ -2,15 +2,15 @@ Responsive Web Design (RWD)
 ===========================
 
 To create a responsive theme you have only to choose the appropriate theme mapping and define inside this theme mapping
-file a theme with two tags below:
+document a theme with two tags below:
 
-* [**MobileDevices**](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#mobiledevices)
-* [**DesktopDevices**](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#desktopdevices)
+* [MobileDevices](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#mobiledevices)
+* [DesktopDevices](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#desktopdevices)
 
-And that's all, thanks to these tags the JungiThemeBundle will notice that this theme will be used for mobile devices and
+And that's all, thanks to these tags the JungiThemeBundle will notice that the theme will be used for mobile devices and
 desktop devices. Additionally you can use this advantage for searching and obtaining an information about a theme.
 
-**NOTICE**
+**INFO**
 
 > Even a theme without any tags can be selected for a dispatched request if there wasn't any previous theme match
 
@@ -115,4 +115,4 @@ $manager->addTheme(new Theme(
 Summary
 -------
 
-To see how your responsive theme works, load the theme mapping file and set the theme name to a theme resolver.
+To see how your responsive theme works, load the created theme mapping file and set the theme name to a theme resolver.
