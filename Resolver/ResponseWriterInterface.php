@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Theme resolvers which implements this interface will be able to write theme changes done
- * in a request to a response
+ * in the request to the response
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

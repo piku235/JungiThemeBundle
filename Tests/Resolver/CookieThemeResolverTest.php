@@ -72,7 +72,7 @@ class CookieThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests writes to a response when they were theme changes
+     * Tests writes to the response when they were theme changes
      */
     public function testWriteResponseOnChanges()
     {
@@ -94,7 +94,7 @@ class CookieThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests writes to a response when they were not any theme changes
+     * Tests writes to the response when they were not any theme changes
      */
     public function testWriteResponseOnNoChanges()
     {

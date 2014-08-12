@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * StandardThemeSelector generally uses a theme resolver to obtain an appropriate theme for a request
+ * StandardThemeSelector generally uses a theme resolver to obtain an appropriate theme for the request
  *
  * But not only theme resolvers decides which theme will be used, a resolved theme can be easily changed
  * in the ResolvedThemeEvent. If there will be problem with a theme resolved from the main theme resolver

@@ -23,7 +23,7 @@ Basics
 
 A theme is an ordinary object which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Basically themes lives
 in bundles and you can have in a single bundle one or multiple themes. When to use multiple themes in a single bundle
-you can read in the chapter **Themes overview**.
+you can read in the **Themes overview** chapter.
 
 ### Themes overview
 

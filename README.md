@@ -11,9 +11,9 @@ Design). Of course the functionality of the bundle not ends here. Read the docum
 
 **The most useful features:**
 
-* Themes with the support of tags
+* Themes with tags support
 * The possibility of change the current theme
-* Smart theme selecting for a http request
+* Smart theme resolving for a http request
 * Support of Responsive Web Design, Adaptive Web Design and Responsive + Server-Side
 * Various theme mappings (xml, php, yaml)
 * Themes validation

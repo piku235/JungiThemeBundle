@@ -76,7 +76,7 @@ jungi_theme:
 
 ##### InMemoryThemeResolver
 
-The InMemoryThemeResolver is a very simple theme resolver, it holds the theme name in the class variable. It accepts two
+The InMemoryThemeResolver is a very simple theme resolver which holds the theme name in the class variable. It accepts two
 arguments where the first one takes a theme name and the second one decides whether the stored theme name can be changed
 or not. The second argument was only introduced for tests benefits. This theme resolver can be used as the default theme
 resolver.

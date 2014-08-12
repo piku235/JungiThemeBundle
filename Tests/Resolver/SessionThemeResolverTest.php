@@ -69,7 +69,7 @@ class SessionThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests when a request does not have a session
+     * Tests when the request does not have a session
      */
     public function testWhenThereIsNoSession()
     {

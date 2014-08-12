@@ -39,7 +39,7 @@ class ThemeSelectorListener implements EventSubscriberInterface
     }
 
     /**
-     * Applies theme from a request
+     * Applies theme from the request
      *
      * @param FilterControllerEvent $event
      *

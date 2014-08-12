@@ -59,7 +59,7 @@ class DeviceThemeSwitch implements EventSubscriberInterface
             return;
         }
 
-        // Handle a request from the event
+        // Handle the request from the event
         $this->mobileDetect->handleRequest($event->getRequest());
 
         // If none of devices had not match, stop

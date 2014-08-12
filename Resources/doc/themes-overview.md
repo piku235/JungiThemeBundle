@@ -12,7 +12,7 @@ multiple themes in a single bundle and when to decouple these themes to separate
 
 Consider the situation when you have three themes, where only two of them are related in some way and the third one is
 whole different (different logic or maybe different graphics). You can create a first bundle e.g. **FooBundle** for these
-two related themes and for the third one create another bundle e.g. **BooBundle**.
+two related themes and create a second bundle e.g. **BooBundle** for the third theme.
 
 The directory structure could looks like below:
 
@@ -53,8 +53,8 @@ FooBundle::layout.html.twig | /path/to/themebundle/Resources/themes/foo/FooBundl
 Overriding bundle templates
 ---------------------------
 
-You can override every bundle template that you wish in your theme, that's the main goal of a theme. Suppose that e.g.
-**FooThemeBundle** is the current theme for a sent request, and the **Default** controller with the **index** action
+You can override every bundle template that you wish in your theme, that's the main goal of themes. Suppose that e.g.
+**FooThemeBundle** is the current theme for the request, and the **Default** controller with the **index** action
 from the **BooBundle** will be performed.
 
 The BooBundle:
@@ -119,18 +119,18 @@ Details
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/blob/master/Core/DetailsInterface.php)
 
-Each theme must contain an instance of the `Jungi\Bundle\ThemeBundle\Core\DetailsInterface`. That allows us to find out
-a little bit more about a theme.
+Each theme must contain an instance of the `Jungi\Bundle\ThemeBundle\Core\DetailsInterface`. It give us useful information
+about a theme.
 
 **NOTE**
 
-> As you have noticed two methods: **getName**, **getVersion** of the details interface should always return a value, so
-> that means they're required.
+> As you have noticed the two methods: **getName**, **getVersion** of the details interface should always return a value,
+> so that means they're required.
 
 ### Default implementation
 
 The `Jungi\Bundle\ThemeBundle\Core\Details` is the default details implementation. In comparison with the default theme
-implementation it don't use the constructor like in the default theme implementation, because it would bring a mess in its
+implementation it doesn't use the constructor like in the default theme implementation, because it would bring a mess in its
 constructor signature.
 
 The constructor of class takes only one argument `$parameters` which is of array type. This array should consist of keys

@@ -95,10 +95,10 @@ path | An absolute path to a theme resources. The path to a bundle resource is a
 
 **NOTE**
 
-> As show on the example above the **path** attribute can be a bundle resource e.g. `@JungiFooBundle/Resources/theme`.
+> As show on the example above a value of the **path** attribute can be a bundle resource e.g. `@JungiFooBundle/Resources/theme`.
 > This is possible thanks to using the `Symfony\Component\HttpKernel\Config\FileLocator` by the **XmlFileLoader**
 
-Inside the theme definition can be only defined:
+Inside a theme definition can be only defined:
 
 ```xml
 <!-- tags are optional -->
