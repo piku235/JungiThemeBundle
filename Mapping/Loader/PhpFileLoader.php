@@ -12,15 +12,14 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
 /**
- * PhpFileLoader
+ * PhpFileLoader is responsible for creating theme instances from a php mapping file
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class PhpFileLoader extends FileLoader
 {
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Mapping\Loader\FileLoader::supports()
+     * {@inheritdoc}
      */
     public function supports($file)
     {
@@ -28,11 +27,10 @@ class PhpFileLoader extends FileLoader
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Mapping\Loader\FileLoader::load()
+     * {@inheritdoc}
      *
-     * @throws \RuntimeException If a file is not local
-     * @throws \DomainException If a file is not supported
+     * @throws \RuntimeException If the file is not local
+     * @throws \DomainException  If the file is not supported
      */
     public function load($file)
     {
@@ -40,7 +38,7 @@ class PhpFileLoader extends FileLoader
 
         if (!stream_is_local($file)) {
             throw new \RuntimeException(sprintf('The "%s" file is not local.', $file));
-        } else if (!$this->supports($file)) {
+        } elseif (!$this->supports($file)) {
             throw new \DomainException(sprintf('The given file "%s" is not supported.', $file));
         }
 

@@ -21,10 +21,10 @@ final class ThemeChangerEvents
     /**
      * @var string
      */
-    const PRE_SET = 'jungi_changer.pre_set';
+    const PRE_SET = 'jungi_theme_changer.pre_set';
 
     /**
      * @var string
      */
-    const POST_SET = 'jungi_changer.post_set';
+    const POST_SET = 'jungi_theme_changer.post_set';
 }

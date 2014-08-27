@@ -68,8 +68,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Creates the theme mock with a given name
      *
-     * @param  string $name A theme name
-     * @param  string $path A theme resource dir (optional)
+     * @param  string         $name A theme name
+     * @param  string         $path A theme resource dir (optional)
      * @return ThemeInterface
      */
     protected function createThemeMock($name, $path = null)
@@ -78,7 +78,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $theme
             ->expects($this->any())
             ->method('getPath')
-            ->will($this->returnValue($path ? : __DIR__));
+            ->will($this->returnValue($path ?: __DIR__));
         $theme
             ->expects($this->any())
             ->method('getName')

@@ -12,7 +12,9 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * Link tag takes the role of a pointer to another theme
+ * Link tag takes the role of a pointer to another theme.
+ *
+ * Generally the tag is used by AWD (Adaptive Web Design)
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -21,7 +23,7 @@ class Link implements TagInterface
     /**
      * @var string
      */
-    protected $themeName;
+    protected $theme;
 
     /**
      * Constructor
@@ -30,7 +32,7 @@ class Link implements TagInterface
      */
     public function __construct($theme)
     {
-        $this->themeName = $theme;
+        $this->theme = $theme;
     }
 
     /**
@@ -38,14 +40,13 @@ class Link implements TagInterface
      *
      * @return string
      */
-    public function getThemeName()
+    public function getTheme()
     {
-        return $this->themeName;
+        return $this->theme;
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Tag\TagInterface::isEqual()
+     * {@inheritdoc}
      */
     public function isEqual(TagInterface $tag)
     {
@@ -53,8 +54,7 @@ class Link implements TagInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Tag\TagInterface::getName()
+     * {@inheritdoc}
      */
     public static function getName()
     {

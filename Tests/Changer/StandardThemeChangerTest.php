@@ -15,7 +15,6 @@ use Jungi\Bundle\ThemeBundle\Changer\StandardThemeChanger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
-use Symfony\Component\Validator\Validator;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\FakeThemeResolver;
 
 /**

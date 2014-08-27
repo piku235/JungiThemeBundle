@@ -40,7 +40,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     /**
      * Constructor
      *
-     * @param array $options Options for storing the cookie (optional)
+     * @param array $options Options about storing the cookie (optional)
      */
     public function __construct(array $options = array())
     {
@@ -58,8 +58,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface::resolve()
+     * {@inheritdoc}
      */
     public function resolveThemeName(Request $request)
     {
@@ -67,8 +66,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface::setTheme()
+     * {@inheritdoc}
      */
     public function setThemeName($themeName, Request $request)
     {
@@ -77,12 +75,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     }
 
     /**
-     * Writes theme changes done in a given request to a given response
-     *
-     * @param Request $request A request instance
-     * @param Response $response A response instance
-     *
-     * @return void
+     * {@inheritdoc}
      */
     public function writeResponse(Request $request, Response $response)
     {

@@ -24,7 +24,7 @@ class ValidationUtils
     /**
      * Returns the well formatted ThemeValidationException
      *
-     * @param string $message A message
+     * @param string                           $message    A message
      * @param ConstraintViolationListInterface $violations Violations
      *
      * @return ThemeValidationException
@@ -37,7 +37,7 @@ class ValidationUtils
     /**
      * Returns the well formatted validation message
      *
-     * @param string $message A message
+     * @param string                           $message    A message
      * @param ConstraintViolationListInterface $violations Violations
      *
      * @return string

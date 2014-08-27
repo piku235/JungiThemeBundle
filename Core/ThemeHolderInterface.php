@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * ThemeHolderInterface instances are used only for holding the current theme instance.
+ * ThemeHolderInterface implementations are used only for holding the current theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -28,7 +28,8 @@ interface ThemeHolderInterface
     /**
      * Sets the current theme
      *
-     * @param  ThemeInterface $theme A theme
+     * @param ThemeInterface $theme A theme
+     *
      * @return void
      */
     public function setTheme(ThemeInterface $theme);

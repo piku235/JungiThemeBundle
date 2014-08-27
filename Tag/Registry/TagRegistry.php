@@ -26,15 +26,15 @@ class TagRegistry implements TagRegistryInterface
     protected $classes = array();
 
     /**
-     * Registers a given tag class or tag classes
+     * Registers a tag class or tag classes
      *
-     * @param string|TagProvider|array $class TagProvider instance, collection or a single fully
+     * @param string|TagProvider|array $class a TagProvider instance, a collection or a single fully
      *                                        qualified class name
      *
      * @return TagInterface
      *
-     * @throws \RuntimeException When a tag class is not exist
-     * @throws \InvalidArgumentException When a given tag class does not implement the TagInterface
+     * @throws \RuntimeException         When the tag class is not exist
+     * @throws \InvalidArgumentException When the given tag class does not implement the TagInterface
      */
     public function register($class)
     {
@@ -42,7 +42,7 @@ class TagRegistry implements TagRegistryInterface
             $class = $class->dump();
         }
 
-        foreach ((array)$class as $child) {
+        foreach ((array) $class as $child) {
             $child = '\\' . ltrim($child, '\\');
             if (!class_exists($child)) {
                 throw new \RuntimeException(sprintf('The tag with the class "%s" is not exist.', $child));
@@ -60,7 +60,7 @@ class TagRegistry implements TagRegistryInterface
     }
 
     /**
-     * Checks if a given tag name has a registered class
+     * Checks if a given tag name has the registered class
      *
      * @param string $name A tag name
      *

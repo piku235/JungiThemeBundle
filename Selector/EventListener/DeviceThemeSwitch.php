@@ -18,8 +18,7 @@ use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * The class is designed for matching themes for an appropriate device
- * that invoked the request
+ * The main goal of the class is the best theme match for a device that sent the request
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -41,7 +40,7 @@ class DeviceThemeSwitch implements EventSubscriberInterface
     }
 
     /**
-     * Handles the ResolvedThemeEvent event
+     * Handles a ResolvedThemeEvent event
      *
      * @param ResolvedThemeEvent $event An event
      *
@@ -90,8 +89,7 @@ class DeviceThemeSwitch implements EventSubscriberInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\EventDispatcher\EventSubscriberInterface::getSubscribedEvents()
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {

@@ -39,8 +39,7 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface::addTheme()
+     * {@inheritdoc}
      */
     public function addTheme(ThemeInterface $theme)
     {
@@ -48,8 +47,7 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface::hasTheme()
+     * {@inheritdoc}
      */
     public function hasTheme($name)
     {
@@ -63,8 +61,7 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface::getTheme()
+     * {@inheritdoc}
      */
     public function getTheme($name)
     {
@@ -78,8 +75,7 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface::getTheme()
+     * {@inheritdoc}
      */
     public function getThemeWithTags($tags)
     {
@@ -93,8 +89,7 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface::getTheme()
+     * {@inheritdoc}
      */
     public function getThemesWithTags($tags)
     {
@@ -109,8 +104,7 @@ class ThemeManager implements ThemeManagerInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface::getThemes()
+     * {@inheritdoc}
      */
     public function getThemes()
     {

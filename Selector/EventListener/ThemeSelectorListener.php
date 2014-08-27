@@ -39,9 +39,9 @@ class ThemeSelectorListener implements EventSubscriberInterface
     }
 
     /**
-     * Applies theme from the request
+     * Handles the request in aim to get a theme for this request
      *
-     * @param FilterControllerEvent $event
+     * @param FilterControllerEvent $event An event
      *
      * @return void
      */
@@ -55,8 +55,7 @@ class ThemeSelectorListener implements EventSubscriberInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\EventDispatcher\EventSubscriberInterface::getSubscribedEvents()
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {

@@ -23,4 +23,4 @@ class FakeThemeHolder implements ThemeHolderInterface
     {
         return $this->theme;
     }
-} 
+}

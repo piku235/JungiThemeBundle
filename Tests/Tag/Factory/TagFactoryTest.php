@@ -70,4 +70,4 @@ class TagFactoryTest extends TestCase
             array('jungi.link', 'footheme', new Tag\Link('footheme')),
         );
     }
-} 
+}

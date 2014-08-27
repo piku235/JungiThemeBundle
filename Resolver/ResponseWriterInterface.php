@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 interface ResponseWriterInterface
 {
     /**
-     * Writes theme changes done in a given request to a given response
+     * Writes theme changes done in a given Request to a given Response
      *
-     * @param Request $request A request instance
-     * @param Response $response A response instance
+     * @param Request  $request  A Request instance
+     * @param Response $response A Response instance
      *
      * @return void
      */

@@ -30,7 +30,7 @@ final class TagProvider
      */
     public function __construct($class)
     {
-        $this->classes = (array)$class;
+        $this->classes = (array) $class;
     }
 
     /**

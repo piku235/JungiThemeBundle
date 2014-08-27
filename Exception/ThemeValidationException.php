@@ -28,10 +28,10 @@ class ThemeValidationException extends \LogicException
     /**
      * Constructor
      *
-     * @param string $message A message
+     * @param string                           $message    A message
      * @param ConstraintViolationListInterface $violations Violations
-     * @param int $code A code (optional)
-     * @param \Exception $previous A previous exception (optional)
+     * @param int                              $code       A code (optional)
+     * @param \Exception                       $previous   A previous exception (optional)
      */
     public function __construct($message, ConstraintViolationListInterface $violations, $code = null, \Exception $previous = null)
     {

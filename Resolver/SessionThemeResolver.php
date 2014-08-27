@@ -12,7 +12,6 @@
 namespace Jungi\Bundle\ThemeBundle\Resolver;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * The SessionThemeResolver uses session mechanism for storing the theme name
@@ -27,8 +26,7 @@ class SessionThemeResolver implements ThemeResolverInterface
     const SESSION_NAME = '_jungi_theme';
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface::resolve()
+     * {@inheritdoc}
      */
     public function resolveThemeName(Request $request)
     {
@@ -40,8 +38,7 @@ class SessionThemeResolver implements ThemeResolverInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface::setTheme()
+     * {@inheritdoc}
      */
     public function setThemeName($themeName, Request $request)
     {

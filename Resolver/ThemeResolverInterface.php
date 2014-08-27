@@ -31,10 +31,10 @@ interface ThemeResolverInterface
     public function resolveThemeName(Request $request);
 
     /**
-     * Sets a theme for a given request
+     * Sets the theme for a given request
      *
-     * @param string $themeName A theme name
-     * @param Request $request A request instance
+     * @param string  $themeName The theme name
+     * @param Request $request   A request instance
      *
      * @return void
      */

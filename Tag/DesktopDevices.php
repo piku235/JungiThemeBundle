@@ -12,15 +12,14 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * DesktopDevices is a standard tag which identifies themes for desktop devices
+ * DesktopDevices identifies themes designed for desktop devices
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class DesktopDevices implements TagInterface
 {
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Tag\TagInterface::isEqual()
+     * {@inheritdoc}
      */
     public function isEqual(TagInterface $tag)
     {
@@ -28,8 +27,7 @@ class DesktopDevices implements TagInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Tag\TagInterface::getName()
+     * {@inheritdoc}
      */
     public static function getName()
     {

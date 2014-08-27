@@ -27,13 +27,13 @@ class ThemeNameParser extends TemplateNameParser
     /**
      * @var ThemeHolderInterface
      */
-    protected $holder;
+    private $holder;
 
     /**
-     * Constructor.
+     * Constructor
      *
      * @param ThemeHolderInterface $holder A theme holder
-     * @param KernelInterface $kernel A KernelInterface instance
+     * @param KernelInterface      $kernel A KernelInterface instance
      */
     public function __construct(ThemeHolderInterface $holder, KernelInterface $kernel)
     {
@@ -45,7 +45,7 @@ class ThemeNameParser extends TemplateNameParser
     /**
      * Parses a template name to a theme reference
      *
-     * @param  TemplateReferenceInterface|string $name A template name
+     * @param TemplateReferenceInterface|string $name A template name
      *
      * @return ThemeReference|TemplateReference
      */
@@ -62,7 +62,7 @@ class ThemeNameParser extends TemplateNameParser
         if ($name instanceof TemplateReferenceInterface) {
             $reference = $name;
             $name = $reference->getLogicalName();
-        } else if (isset($this->cache[$name])) {
+        } elseif (isset($this->cache[$name])) {
             return $this->cache[$name];
         } else {
             $reference = parent::parse($name);

@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Loader;
 
-use Jungi\Bundle\ThemeBundle\Loader\ThemeLocator;
+use Jungi\Bundle\ThemeBundle\Core\Loader\ThemeLocator;
 use Jungi\Bundle\ThemeBundle\Core\ThemeReference;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;

@@ -15,8 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * MobileDetect only extends the Mobile_Detect class
- * and fits it for the symfony
+ * MobileDetect only extends the Mobile_Detect class and fits it for the symfony environment
  *
  * @author      Current authors: Serban Ghita <serbanghita@gmail.com>, Nick Ilyin <nick.ilyin@gmail.com>
  *              Original author: Victor Stanciu <vic.stanciu@gmail.com>
@@ -29,7 +28,7 @@ class MobileDetect extends \Mobile_Detect
     /**
      * Constructor
      *
-     * @param RequestStack $requestStack A request stack (optional)
+     * @param RequestStack $requestStack A RequestStack (optional)
      */
     public function __construct(RequestStack $requestStack = null)
     {
@@ -39,23 +38,23 @@ class MobileDetect extends \Mobile_Detect
     }
 
     /**
-     * Method is useless for the symfony
+     * Useless for the symfony
      *
      * @deprecated
      */
     public function setHttpHeaders($httpHeaders = null)
     {
-        throw new \BadMethodCallException('Rather use a handleRequest method with a Request instance.');
+        throw new \BadMethodCallException('Rather use a "handleRequest" method with a Request instance.');
     }
 
     /**
-     * Method is useless for the symfony
+     * Useless for the symfony
      *
      * @deprecated
      */
     public function setUserAgent($userAgent = null)
     {
-        throw new \BadMethodCallException('Rather use a handleRequest method with a Request instance.');
+        throw new \BadMethodCallException('Rather use a "handleRequest" method with a Request instance.');
     }
 
     /**
@@ -73,7 +72,7 @@ class MobileDetect extends \Mobile_Detect
             $this->httpHeaders['HTTP_' . strtr(strtoupper($key), '-', '_')] = $val[0];
         }
 
-        // Automatically detect the UA from set HTTP headers
+        // Automatically detect the UA from the set HTTP headers
         parent::setUserAgent(null);
     }
 

@@ -24,29 +24,29 @@ interface ThemeManagerInterface
     /**
      * Adds a new theme
      *
-     * @param  ThemeInterface $theme A theme
+     * @param ThemeInterface $theme A theme
      *
      * @return void
      */
     public function addTheme(ThemeInterface $theme);
 
     /**
-     * Checks if a given theme name exists
+     * Checks if a given theme exists
      *
-     * @param  string $name A theme name
+     * @param string $name A theme name
      *
      * @return bool
      */
     public function hasTheme($name);
 
     /**
-     * Returns a theme by the name
+     * Returns the theme by name
      *
-     * @param  string $name A theme name
+     * @param string $name A theme name
      *
      * @return ThemeInterface
      *
-     * @throws ThemeNotFoundException
+     * @throws ThemeNotFoundException If the theme can not be found
      */
     public function getTheme($name);
 
@@ -58,18 +58,18 @@ interface ThemeManagerInterface
     public function getThemes();
 
     /**
-     * Returns a theme which have the given tags
+     * Returns the theme which have given tags
      *
-     * @param  TagInterface[]|TagInterface $tags A one tag or tags
+     * @param TagInterface[]|TagInterface $tags A one tag or tags
      *
      * @return ThemeInterface|null Null if the theme can not be found
      */
     public function getThemeWithTags($tags);
 
     /**
-     * Returns all themes which have the given tags
+     * Returns all themes which have given tags
      *
-     * @param  TagInterface[]|TagInterface $tags A one tag or tags
+     * @param TagInterface[]|TagInterface $tags A one tag or tags
      *
      * @return ThemeInterface[]
      */

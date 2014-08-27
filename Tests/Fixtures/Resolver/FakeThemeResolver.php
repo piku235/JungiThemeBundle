@@ -26,7 +26,7 @@ class FakeThemeResolver extends InMemoryThemeResolver implements ResponseWriterI
     /**
      * Writes the theme changes from a given request to a given response
      *
-     * @param Request $request A request instance
+     * @param Request  $request  A request instance
      * @param Response $response A response instance
      *
      * @return void

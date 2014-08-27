@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Selector;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * ThemeSelectorInterface determines which theme will be used for a given request
+ * ThemeSelectorInterface determines which theme will be used for a given Request
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

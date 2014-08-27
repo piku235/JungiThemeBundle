@@ -12,7 +12,8 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * DetailsInterface
+ * DetailsInterface implementations are used by ThemeInterface instances in order to share
+ * some important information about a theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -61,7 +62,7 @@ interface DetailsInterface
     public function getDescription();
 
     /**
-     * Returns the type of a license
+     * Returns the license type
      *
      * @return string|null
      */

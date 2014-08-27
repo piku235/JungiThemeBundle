@@ -16,8 +16,7 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 
 /**
- * FileLoader is a common class for loading theme mapping files
- * to a ThemeManagerInterface instance
+ * FileLoader is a basic class for loading themes from mapping documents to a ThemeManagerInterface instance
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -42,8 +41,8 @@ abstract class FileLoader
      * Constructor
      *
      * @param ThemeManagerInterface $themeManager A theme manager
-     * @param FileLocatorInterface $locator A file locator
-     * @param TagFactoryInterface $factory A tag factory
+     * @param FileLocatorInterface  $locator      A file locator
+     * @param TagFactoryInterface   $factory      A tag factory
      */
     public function __construct(ThemeManagerInterface $themeManager, FileLocatorInterface $locator, TagFactoryInterface $factory)
     {
@@ -54,18 +53,17 @@ abstract class FileLoader
 
     /**
      * Loads themes from a given theme mapping file
-     * into the current ThemeManagerInterface instance
      *
      * @param string $file A file
      *
      * @return void
      *
-     * @throws \DomainException When a file is not supported by FileLoader
+     * @throws \DomainException When the file is not supported by FileLoader
      */
     abstract public function load($file);
 
     /**
-     * Checks if FileLoader can handle a given file
+     * Checks if the this loader can handle a given file
      *
      * @param string $file A file
      *

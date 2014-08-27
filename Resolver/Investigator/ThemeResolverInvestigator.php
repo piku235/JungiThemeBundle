@@ -41,7 +41,7 @@ class ThemeResolverInvestigator implements ThemeResolverInvestigatorInterface
     /**
      * Adds a suspect theme resolver
      *
-     * @param ThemeResolverInterface|string $class An object or name of a class
+     * @param ThemeResolverInterface|string $class An object or a class name
      *
      * @return void
      *
@@ -51,7 +51,7 @@ class ThemeResolverInvestigator implements ThemeResolverInvestigatorInterface
     {
         if ($class instanceof ThemeResolverInterface) {
             $class = get_class($class);
-        } else if (is_string($class)) {
+        } elseif (is_string($class)) {
             $ref = new \ReflectionClass($class);
             if (!$ref->implementsInterface('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface')) {
                 throw new \InvalidArgumentException(sprintf('The given class "%s" must implement the ThemeResolverInterface.', $class));
@@ -74,11 +74,7 @@ class ThemeResolverInvestigator implements ThemeResolverInvestigatorInterface
     }
 
     /**
-     * Checks if a given theme resolver is suspect
-     *
-     * @param ThemeResolverInterface $resolver A theme resolver
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isSuspect(ThemeResolverInterface $resolver)
     {

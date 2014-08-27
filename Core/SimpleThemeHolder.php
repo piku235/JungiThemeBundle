@@ -11,8 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
-
 /**
  * SimpleThemeHolder is a default theme holder
  *
@@ -26,8 +24,7 @@ class SimpleThemeHolder implements ThemeHolderInterface
     protected $theme;
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface::getTheme()
+     * {@inheritdoc}
      */
     public function getTheme()
     {
@@ -35,8 +32,7 @@ class SimpleThemeHolder implements ThemeHolderInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface::setTheme()
+     * {@inheritdoc}
      */
     public function setTheme(ThemeInterface $theme)
     {

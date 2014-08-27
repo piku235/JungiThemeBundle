@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Core;
 /**
  * Details is a simple implementation of the DetailsInterface
  *
- * All properties can be only set by constructor
+ * All properties of the class can be only set by constructor
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -64,7 +64,7 @@ class Details implements DetailsInterface
      * Constructor
      *
      * @param array $params Parameters
-     *  The acceptable parameters:
+     *  The valid parameters:
      *  array(
      *      'name' => value,
      *      'version' => value,

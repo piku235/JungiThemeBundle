@@ -47,10 +47,10 @@ class ThemeEvent extends Event
     /**
      * Constructor
      *
-     * @param ThemeInterface $theme A theme
-     * @param ThemeManagerInterface $manager A theme manager
+     * @param ThemeInterface         $theme    A theme
+     * @param ThemeManagerInterface  $manager  A theme manager
      * @param ThemeResolverInterface $resolver A theme resolver
-     * @param Request $request A request object
+     * @param Request                $request  A request object
      */
     public function __construct(ThemeInterface $theme, ThemeManagerInterface $manager, ThemeResolverInterface $resolver, Request $request)
     {

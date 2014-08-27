@@ -26,9 +26,9 @@ class ThemeNotFoundException extends \RuntimeException
     /**
      * Constructor
      *
-     * @param string $theme The not found theme name
-     * @param string $message A message (optional)
-     * @param int $code A code (optional)
+     * @param string     $theme    The not found theme name
+     * @param string     $message  A message (optional)
+     * @param int        $code     A code (optional)
      * @param \Exception $previous The previous exception (optional)
      */
     public function __construct($theme, $message = null, $code = 0, \Exception $previous = null)

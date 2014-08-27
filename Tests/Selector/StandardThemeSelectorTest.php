@@ -19,7 +19,7 @@ use Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch;
 use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
-use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
 use Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver;
@@ -30,7 +30,6 @@ use Symfony\Component\Validator\DefaultTranslator;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-
 
 /**
  * StandardThemeSelector Test Case

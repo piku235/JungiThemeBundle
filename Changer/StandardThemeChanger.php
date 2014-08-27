@@ -20,7 +20,8 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
 
 /**
- * StandardThemeChanger
+ * StandardThemeChanger is a simple implementation of the ThemeChangerInterface.
+ * It uses a ThemeResolverInterface instance for changing the current theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -49,9 +50,9 @@ class StandardThemeChanger implements ThemeChangerInterface
     /**
      * Constructor
      *
-     * @param ThemeManagerInterface $manager A theme manager
-     * @param ThemeHolderInterface $holder A theme holder
-     * @param ThemeResolverInterface $resolver A theme resolver
+     * @param ThemeManagerInterface    $manager    A theme manager
+     * @param ThemeHolderInterface     $holder     A theme holder
+     * @param ThemeResolverInterface   $resolver   A theme resolver
      * @param EventDispatcherInterface $dispatcher An event dispatcher
      */
     public function __construct(ThemeManagerInterface $manager, ThemeHolderInterface $holder, ThemeResolverInterface $resolver, EventDispatcherInterface $dispatcher)
@@ -63,8 +64,7 @@ class StandardThemeChanger implements ThemeChangerInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeChangerInterface::change()
+     * {@inheritdoc}
      */
     public function change($theme, Request $request)
     {

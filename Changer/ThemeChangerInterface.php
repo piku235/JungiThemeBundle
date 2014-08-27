@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * ThemeChangerInterface allows to change the theme for a given request
+ * ThemeChangerInterface gives the possibility of change the current theme located in a given Request instance.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,8 +24,8 @@ interface ThemeChangerInterface
     /**
      * Changes the current theme with a new one
      *
-     * @param string|ThemeInterface $theme A theme instance or a theme name
-     * @param Request $request A request instance
+     * @param string|ThemeInterface $theme   A theme name or a ThemeInterface instance
+     * @param Request               $request A Request instance
      *
      * @return void
      */

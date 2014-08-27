@@ -16,7 +16,7 @@ use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own;
 use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
 /**
@@ -81,4 +81,4 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
             ))
         ), $this->manager->getTheme('foo_1'));
     }
-} 
+}

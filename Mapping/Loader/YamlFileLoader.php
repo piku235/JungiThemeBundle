@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Core\Details;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 use Symfony\Component\Config\FileLocatorInterface;
@@ -41,9 +41,9 @@ class YamlFileLoader extends FileLoader
      * Constructor
      *
      * @param ThemeManagerInterface $themeManager A theme manager
-     * @param FileLocatorInterface $locator A file locator
-     * @param TagFactoryInterface $factory A tag factory
-     * @param LoaderHelper $helper A loader helper
+     * @param FileLocatorInterface  $locator      A file locator
+     * @param TagFactoryInterface   $factory      A tag factory
+     * @param LoaderHelper          $helper       A loader helper
      */
     public function __construct(ThemeManagerInterface $themeManager, FileLocatorInterface $locator, TagFactoryInterface $factory, LoaderHelper $helper)
     {
@@ -54,8 +54,7 @@ class YamlFileLoader extends FileLoader
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Mapping\Loader\FileLoader::supports()
+     * {@inheritdoc}
      */
     public function supports($file)
     {
@@ -65,12 +64,12 @@ class YamlFileLoader extends FileLoader
     /**
      * Loads a yml theme mapping file
      *
-     * @param  string $file A file
+     * @param string $file A file
      *
      * @return void
      *
      * @throws \RuntimeException If a file is not local
-     * @throws \DomainException If a file is not supported
+     * @throws \DomainException  If a file is not supported
      */
     public function load($file)
     {
@@ -78,12 +77,13 @@ class YamlFileLoader extends FileLoader
 
         if (!stream_is_local($path)) {
             throw new \RuntimeException(sprintf('The "%s" file is not local.', $path));
-        } else if (!$this->supports($path)) {
+        } elseif (!$this->supports($path)) {
             throw new \DomainException(sprintf('The given file "%s" is not supported.', $path));
         }
 
         $content = Yaml::parse($path, true);
         if (null === $content) { // If is an empty file
+
             return;
         }
 
@@ -139,8 +139,8 @@ class YamlFileLoader extends FileLoader
     /**
      * Validates an entire mapping file
      *
-     * @param array $content YAML file content
-     * @param string $file A mapping file
+     * @param array  $content YAML file content
+     * @param string $file    A mapping file
      *
      * @return void
      *
@@ -159,7 +159,7 @@ class YamlFileLoader extends FileLoader
     /**
      * Validates a theme specification
      *
-     * @param  array $specification A specification
+     * @param array $specification A specification
      *
      * @return void
      *
@@ -178,7 +178,7 @@ class YamlFileLoader extends FileLoader
     /**
      * Parses details specification
      *
-     * @param  array $specification A specification
+     * @param array $specification A specification
      *
      * @return Details
      *
@@ -209,7 +209,7 @@ class YamlFileLoader extends FileLoader
     /**
      * Parses tags specification
      *
-     * @param  array $specification A specification
+     * @param array $specification A specification
      *
      * @return TagCollection
      */
@@ -233,7 +233,7 @@ class YamlFileLoader extends FileLoader
      * @return TagInterface
      *
      * @throws \InvalidArgumentException If tag definition is wrong
-     * @throws \RuntimeException When tag is not exist
+     * @throws \RuntimeException         When tag is not exist
      */
     private function parseTag(array $tag)
     {
@@ -285,8 +285,8 @@ class YamlFileLoader extends FileLoader
     /**
      * Parses a theme
      *
-     * @param string $themeName A theme name
-     * @param array $specification A theme specification
+     * @param string $themeName     A theme name
+     * @param array  $specification A theme specification
      *
      * @return Theme
      */

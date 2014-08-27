@@ -27,7 +27,7 @@ class ThemeType extends AbstractType
     /**
      * @var ThemeManagerInterface
      */
-    protected $manager;
+    private $manager;
 
     /**
      * Constructor
@@ -40,13 +40,15 @@ class ThemeType extends AbstractType
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\Form\AbstractType::setDefaultOptions()
+     * {@inheritdoc}
+     *
+     * Additional options:
+     *  - 'theme_manager' used to create the list of themes
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $choiceList = function (Options $options) {
-            /** @var \Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface $manager * */
+            /* @var \Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface $manager */
             $manager = $options['theme_manager'];
 
             $choices = empty($options['choices'])
@@ -66,15 +68,13 @@ class ThemeType extends AbstractType
             'theme_manager' => $this->manager,
             'choice_list' => $choiceList
         ));
-
         $resolver->setAllowedTypes(array(
             'theme_manager' => 'Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface'
         ));
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\Form\AbstractType::getParent()
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -82,8 +82,7 @@ class ThemeType extends AbstractType
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\Form\FormTypeInterface::getName()
+     * {@inheritdoc}
      */
     public function getName()
     {

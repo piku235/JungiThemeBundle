@@ -18,7 +18,7 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeReference;
 use Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser;
 
 /**
- * ThemeFinder
+ * ThemeFinder looks for all template paths in each theme
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -27,18 +27,18 @@ class ThemeFinder implements TemplateFinderInterface
     /**
      * @var ThemeManagerInterface
      */
-    protected $manager;
+    private $manager;
 
     /**
      * @var ThemeFilenameParser
      */
-    protected $parser;
+    private $parser;
 
     /**
      * Constructor
      *
      * @param ThemeManagerInterface $manager A theme manager
-     * @param ThemeFilenameParser $parser A template name parser
+     * @param ThemeFilenameParser   $parser  A template name parser
      */
     public function __construct(ThemeManagerInterface $manager, ThemeFilenameParser $parser)
     {
@@ -47,7 +47,7 @@ class ThemeFinder implements TemplateFinderInterface
     }
 
     /**
-     * Looks for all the templates in each theme
+     * Looks for all templates in each theme
      *
      * @return array
      */
@@ -60,7 +60,8 @@ class ThemeFinder implements TemplateFinderInterface
                 ->files()
                 ->followLinks()
                 ->depth('< 3')
-                ->in($theme->getPath());
+                ->in($theme->getPath())
+            ;
             foreach ($f as $file) {
                 $reference = $this->parser->parse($file->getRelativePathname());
                 if (false !== $reference) {

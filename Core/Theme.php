@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
-use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
  * Theme is a simple implementation of the ThemeInterface
@@ -45,10 +45,10 @@ class Theme implements ThemeInterface
     /**
      * Constructor
      *
-     * @param string $name An unique theme name
-     * @param string $path A path to theme resources
+     * @param string           $name    An unique theme name
+     * @param string           $path    A path to theme resources
      * @param DetailsInterface $details A details
-     * @param TagCollection $tags A tag collection (optional)
+     * @param TagCollection    $tags    A tag collection (optional)
      */
     public function __construct($name, $path, DetailsInterface $details, TagCollection $tags = null)
     {
@@ -59,8 +59,7 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeInterface::getDetails()
+     * {@inheritdoc}
      */
     public function getDetails()
     {
@@ -68,8 +67,7 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeInterface::getName()
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -77,8 +75,7 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeInterface::getPath()
+     * {@inheritdoc}
      */
     public function getPath()
     {
@@ -86,8 +83,7 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Core\ThemeInterface::getTags()
+     * {@inheritdoc}
      */
     public function getTags()
     {

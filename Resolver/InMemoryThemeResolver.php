@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * The class can be used as the default theme resolver
+ * This class can be used as the default theme resolver
  *
  * As the class name says the theme name is stored in a memory space shared by variable
  *
@@ -36,14 +36,14 @@ class InMemoryThemeResolver implements ThemeResolverInterface
      * Constructor
      *
      * @param string $theme A theme name (optional if $fixed var is true)
-     * @param bool $fixed Is a fixed? (optional)
+     * @param bool   $fixed Is a fixed? (optional)
      *
-     * @throws \LogicException
+     * @throws \LogicException If the theme name is not passed when the $fixed is false
      */
     public function __construct($theme = null, $fixed = true)
     {
         if (!$fixed && null === $theme) {
-            throw new \LogicException('You must provide a theme name if you are not using fixed state.');
+            throw new \LogicException('You must provide the theme name if you are not using fixed state.');
         }
 
         $this->theme = $theme;
@@ -51,8 +51,7 @@ class InMemoryThemeResolver implements ThemeResolverInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface::resolve()
+     * {@inheritdoc}
      */
     public function resolveThemeName(Request $request)
     {
@@ -60,8 +59,9 @@ class InMemoryThemeResolver implements ThemeResolverInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface::setThemeName()
+     * {@inheritdoc}
+     *
+     * @throws \BadMethodCallException When the fixed state is switched on
      */
     public function setThemeName($themeName, Request $request)
     {

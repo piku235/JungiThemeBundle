@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
-use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Core\Details;
@@ -36,9 +36,9 @@ class XmlFileLoader extends FileLoader
      * Constructor
      *
      * @param ThemeManagerInterface $themeManager A theme manager
-     * @param FileLocatorInterface $locator A file locator
-     * @param TagFactoryInterface $factory A tag factory
-     * @param LoaderHelper $helper A loader helper
+     * @param FileLocatorInterface  $locator      A file locator
+     * @param TagFactoryInterface   $factory      A tag factory
+     * @param LoaderHelper          $helper       A loader helper
      */
     public function __construct(ThemeManagerInterface $themeManager, FileLocatorInterface $locator, TagFactoryInterface $factory, LoaderHelper $helper)
     {
@@ -48,9 +48,7 @@ class XmlFileLoader extends FileLoader
     }
 
     /**
-     * (non-PHPdoc)
-     *
-     * @see \Jungi\Bundle\ThemeBundle\Mapping\Loader\FileLoader::supports()
+     * {@inheritdoc}
      */
     public function supports($file)
     {
@@ -90,10 +88,10 @@ class XmlFileLoader extends FileLoader
                     $arguments[] = $this->getArgumentsAsPhp($arg);
                     break;
                 case 'string':
-                    $arguments[] = (string)$arg;
+                    $arguments[] = (string) $arg;
                     break;
                 case 'constant':
-                    $arguments[] = $this->helper->resolveConstant((string)$arg);
+                    $arguments[] = $this->helper->resolveConstant((string) $arg);
                     break;
                 default:
                     $arguments[] = XmlUtils::phpize($arg);
@@ -137,7 +135,7 @@ class XmlFileLoader extends FileLoader
      * @return Details
      *
      * @throws \InvalidArgumentException If a detail node has not defined attr "name"
-     * @throws \RuntimeException When something goes wrong while parsing details node
+     * @throws \RuntimeException         When something goes wrong while parsing details node
      */
     private function parseDetails(\SimpleXMLElement $elm)
     {
@@ -182,7 +180,7 @@ class XmlFileLoader extends FileLoader
      * @return TagInterface
      *
      * @throws \InvalidArgumentException If a tag node has not defined attr "type"
-     * @throws \RuntimeException If a tag is not exist
+     * @throws \RuntimeException         If a tag is not exist
      */
     private function parseTag(\SimpleXMLElement $tag)
     {
@@ -202,13 +200,13 @@ class XmlFileLoader extends FileLoader
      *
      * @throws \RuntimeException When the some problem will occur while parsing a mapping file
      * @throws \RuntimeException If a file is not local
-     * @throws \DomainException If a given file is not supported
+     * @throws \DomainException  If a given file is not supported
      */
     protected function loadFile($file)
     {
         if (!stream_is_local($file)) {
             throw new \RuntimeException(sprintf('The "%s" file is not local.', $file));
-        } else if (!$this->supports($file)) {
+        } elseif (!$this->supports($file)) {
             throw new \DomainException(sprintf('The given file "%s" is not supported.', $file));
         }
 

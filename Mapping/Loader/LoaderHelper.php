@@ -11,7 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Core\Details;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistryInterface;
 
 /**
@@ -39,7 +38,7 @@ class LoaderHelper
     /**
      * Resolves the value of a given constant
      *
-     * @param string $value A value with a constant reference
+     * @param string $value A value with the constant reference
      *
      * @return mixed
      *

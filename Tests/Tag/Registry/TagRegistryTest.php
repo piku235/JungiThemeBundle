@@ -75,4 +75,4 @@ class TagRegistryTest extends TestCase
         $registry = new TagRegistry();
         $registry->register('Jungi\Bundle\ThemeBundle\Core\Theme');
     }
-} 
+}

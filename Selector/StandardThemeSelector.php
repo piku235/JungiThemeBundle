@@ -27,7 +27,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * StandardThemeSelector generally uses a theme resolver to obtain an appropriate theme for the request
  *
- * But not only theme resolvers decides which theme will be used, a resolved theme can be easily changed
+ * But not only the theme resolver decides which theme will be used, a resolved theme can be easily changed
  * in the ResolvedThemeEvent. If there will be problem with a theme resolved from the main theme resolver
  * then the fallback theme resolver (if set) will look for a theme. Otherwise the StandardThemeSelector will
  * end by throwing an exception.
@@ -69,12 +69,12 @@ class StandardThemeSelector implements ThemeSelectorInterface
     /**
      * Constructor
      *
-     * @param ThemeManagerInterface $manager A theme manager
-     * @param ThemeHolderInterface $holder A theme holder
+     * @param ThemeManagerInterface    $manager    A theme manager
+     * @param ThemeHolderInterface     $holder     A theme holder
      * @param EventDispatcherInterface $dispatcher An event dispatcher
-     * @param ThemeResolverInterface $resolver A theme resolver
-     * @param array $options Options (optional)
-     * @param ThemeResolverInterface $fallback A fallback theme resolver (optional)
+     * @param ThemeResolverInterface   $resolver   A theme resolver
+     * @param array                    $options    Options (optional)
+     * @param ThemeResolverInterface   $fallback   A fallback theme resolver (optional)
      */
     public function __construct(ThemeManagerInterface $manager, ThemeHolderInterface $holder, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, array $options = array(), ThemeResolverInterface $fallback = null)
     {
@@ -84,8 +84,8 @@ class StandardThemeSelector implements ThemeSelectorInterface
         $this->holder = $holder;
         $this->fallback = $fallback;
         $this->options = $options + array(
-                'ignore_null_themes' => false
-            );
+            'ignore_null_themes' => false
+        );
     }
 
     /**
@@ -103,8 +103,8 @@ class StandardThemeSelector implements ThemeSelectorInterface
     /**
      * Sets an option
      *
-     * @param string $name An option name
-     * @param mixed $value A value
+     * @param string $name  An option name
+     * @param mixed  $value A value
      *
      * @return void
      */
@@ -116,8 +116,9 @@ class StandardThemeSelector implements ThemeSelectorInterface
     /**
      * Returns the option value
      *
-     * @param string $name An option name
-     * @return mixed Null if the option is not exist
+     * @param  string $name An option name
+     *
+     * @return mixed  Null if the option is not exist
      */
     public function getOption($name)
     {
@@ -125,11 +126,9 @@ class StandardThemeSelector implements ThemeSelectorInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface::select()
+     * {@inheritdoc}
      *
-     * @throws \Exception If something goes wrong
-     * @throws NullThemeException If a given theme name is blank and ignore_null_themes is false
+     * @throws NullThemeException If the given theme name is blank and ignore_null_themes is false
      */
     public function select(Request $request)
     {
@@ -165,10 +164,8 @@ class StandardThemeSelector implements ThemeSelectorInterface
      * @param Request $request A request
      *
      * @return ThemeInterface
-     *
-     * @throws \Exception If something goes wrong
      */
-    protected function matchTheme(Request $request)
+    private function matchTheme(Request $request)
     {
         try {
             $theme = $this->getPrimaryTheme($request);
@@ -192,8 +189,8 @@ class StandardThemeSelector implements ThemeSelectorInterface
      *
      * @return ThemeInterface
      *
-     * @throws ThemeValidationException When the validation will fail
-     * @throws NullThemeException When a theme resolver returns null
+     * @throws ThemeValidationException  When the validation will fail
+     * @throws NullThemeException        When a theme resolver returns null
      * @throws InvalidatedThemeException If the NullResolvedThemeEvent will invalidate a theme
      */
     protected function getPrimaryTheme(Request $request)
@@ -224,14 +221,14 @@ class StandardThemeSelector implements ThemeSelectorInterface
      *
      * @return ThemeInterface
      *
-     * @throws \RuntimeException If a fallback theme resolver was not set
-     * @throws NullThemeException
+     * @throws \RuntimeException  If a fallback theme resolver was not set
+     * @throws NullThemeException When a theme resolver returns null
      */
     protected function getFallbackTheme(Request $request)
     {
         if (null === $this->fallback) {
             throw new \RuntimeException('The fallback theme resolver was not set.');
-        } else if (null === $themeName = $this->fallback->resolveThemeName($request)) {
+        } elseif (null === $themeName = $this->fallback->resolveThemeName($request)) {
             throw new NullThemeException(sprintf('The fallback theme for the request "%s" can not be found.', $request->getPathInfo()));
         }
 

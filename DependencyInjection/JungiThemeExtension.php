@@ -58,7 +58,7 @@ class JungiThemeExtension extends Extension
         // Validation listener
         if (!$config['selector']['validation_listener']['enabled']) {
             $container->removeDefinition('jungi.theme.selector.listener.validation');
-        } else if ($config['selector']['validation_listener']['use_investigator']) {
+        } elseif ($config['selector']['validation_listener']['use_investigator']) {
             $listener = $container->getDefinition('jungi.theme.selector.listener.validation');
             $listener->addArgument(new Reference('jungi.theme.resolver.investigator', ContainerInterface::NULL_ON_INVALID_REFERENCE));
         }
@@ -89,7 +89,7 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Form\Type\ThemeType',
             'Jungi\Bundle\ThemeBundle\Changer\StandardThemeChanger',
             'Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents',
-            'Jungi\Bundle\ThemeBundle\Loader\ThemeLocator',
+            'Jungi\Bundle\ThemeBundle\Core\Loader\ThemeLocator',
             'Jungi\Bundle\ThemeBundle\Event\ThemeEvent',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\FileLoader',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader',
@@ -110,7 +110,7 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
             'Jungi\Bundle\ThemeBundle\Tag\Link',
-            'Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection',
+            'Jungi\Bundle\ThemeBundle\Tag\TagCollection',
             'Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory',
             'Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry',
             'Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider',
@@ -123,7 +123,7 @@ class JungiThemeExtension extends Extension
     {
         $resolver = $config['resolver'][$for];
         if ($resolver['type'] != 'service') {
-            $arguments = $resolver['arguments'] ? (array)$resolver['arguments'] : array();
+            $arguments = $resolver['arguments'] ? (array) $resolver['arguments'] : array();
             switch ($resolver['type']) {
                 case 'in_memory':
                     $class = 'InMemoryThemeResolver';

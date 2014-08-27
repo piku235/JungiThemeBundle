@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Tag\Core;
+namespace Jungi\Bundle\ThemeBundle\Tag;
 
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
 /**
- * TagCollection provides extra functions for flexible operations on tags
+ * TagCollection provides extra features for flexible operations on theme tags
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -55,8 +55,7 @@ class TagCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Countable::count()
+     * {@inheritdoc}
      */
     public function count()
     {
@@ -64,9 +63,9 @@ class TagCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Returns a tag by given tag name
+     * Returns a tag by tag name
      *
-     * @param string $name A name
+     * @param string $name A tag name
      *
      * @return TagInterface
      *
@@ -82,7 +81,7 @@ class TagCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Checks if a given tag name exists
+     * Checks if a given tag name or names exists
      *
      * Be careful, because this method ONLY looks for a given tag name
      * and it does not check if the tag is EQUAL to a found tag
@@ -93,7 +92,7 @@ class TagCollection implements \IteratorAggregate, \Countable
      */
     public function has($names)
     {
-        foreach ((array)$names as $name) {
+        foreach ((array) $names as $name) {
             if (!isset($this->tags[$name])) {
                 return false;
             }
@@ -104,13 +103,13 @@ class TagCollection implements \IteratorAggregate, \Countable
 
     /**
      * Checks if a given tag or collection of tags exists
-     * and if they are EQUAL to the found tag\tags
+     * and if they are EQUAL to the found tags
      *
      * @param TagInterface|TagInterface[] $tags A single tag or a collection of tags
      *
      * @return bool
      *
-     * @throws \InvalidArgumentException If a given tag\tags has bad type
+     * @throws \InvalidArgumentException If the given tag or tags has bad type
      */
     public function contains($tags)
     {

@@ -23,7 +23,7 @@ class ThemeReference extends TemplateReference
     /**
      * @var string
      */
-    const DELIMETER = '#';
+    const DELIMITER = '#';
 
     /**
      * @var TemplateReference
@@ -34,7 +34,7 @@ class ThemeReference extends TemplateReference
      * Constructor
      *
      * @param TemplateReference $template A template reference
-     * @param string $theme A theme
+     * @param string            $theme    A theme name
      */
     public function __construct(TemplateReference $template, $theme)
     {
@@ -80,7 +80,7 @@ class ThemeReference extends TemplateReference
     {
         return sprintf('%s%s%s:%s:%s.%s.%s',
             $this->parameters['theme'],
-            self::DELIMETER,
+            self::DELIMITER,
             $this->parameters['bundle'],
             $this->parameters['controller'],
             $this->parameters['name'],

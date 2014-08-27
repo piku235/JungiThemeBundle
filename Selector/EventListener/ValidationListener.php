@@ -45,9 +45,9 @@ class ValidationListener implements EventSubscriberInterface
     /**
      * Constructor
      *
-     * @param ValidatorInterface $validator A validator
+     * @param ValidatorInterface                 $validator    A validator
      * @param ThemeResolverInvestigatorInterface $investigator An untrusted resolvers checker (optional)
-     * @param LoggerInterface $logger A logger (optional)
+     * @param LoggerInterface                    $logger       A logger (optional)
      */
     public function __construct(ValidatorInterface $validator, ThemeResolverInvestigatorInterface $investigator = null, LoggerInterface $logger = null)
     {
@@ -59,7 +59,7 @@ class ValidationListener implements EventSubscriberInterface
     /**
      * Sets a theme resolver investigator
      *
-     * @param ThemeResolverInvestigatorInterface $investigator A checker
+     * @param ThemeResolverInvestigatorInterface $investigator A theme resolver investigator
      *
      * @return void
      */
@@ -71,7 +71,7 @@ class ValidationListener implements EventSubscriberInterface
     /**
      * Validates the theme from an event
      *
-     * @param ResolvedThemeEvent $event A event
+     * @param ResolvedThemeEvent $event An event
      *
      * @return void
      */
@@ -101,8 +101,7 @@ class ValidationListener implements EventSubscriberInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\EventDispatcher\EventSubscriberInterface::getSubscribedEvents()
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {

@@ -23,7 +23,7 @@ class TagFactory implements TagFactoryInterface
     /**
      * @var \ReflectionClass[]
      */
-    protected $cache;
+    private $cache;
 
     /**
      * @var TagRegistryInterface
@@ -44,7 +44,7 @@ class TagFactory implements TagFactoryInterface
     /**
      * Creates the tag by a given tag name
      *
-     * @param string $name A tag name
+     * @param string       $name      A tag name
      * @param string|array $arguments Arguments or an argument for a tag (optional)
      *
      * @return string

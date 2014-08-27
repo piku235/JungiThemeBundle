@@ -16,7 +16,7 @@ use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch;
 use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Tag\Core\TagCollection;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
 

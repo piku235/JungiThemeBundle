@@ -15,7 +15,6 @@ use Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper;
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
-
 /**
  * XmlFileLoader Test Case
  *

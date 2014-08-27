@@ -15,7 +15,6 @@ use Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper;
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
-
 /**
  * YamlFileLoader Test Case
  *

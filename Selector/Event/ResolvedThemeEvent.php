@@ -24,7 +24,8 @@ class ResolvedThemeEvent extends ThemeEvent
     /**
      * Sets a theme
      *
-     * @param  ThemeInterface $theme A theme
+     * @param ThemeInterface $theme A theme
+     *
      * @return void
      */
     public function setTheme(ThemeInterface $theme)

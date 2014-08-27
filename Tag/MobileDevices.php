@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * MobileDevices tag represents themes designed for the mobile devices
+ * MobileDevices tag represents themes designed for mobile devices
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -46,14 +46,14 @@ class MobileDevices implements TagInterface
     /**
      * Constructor
      *
-     * @param string|array $systems Operating systems (optional)
-     *  Operating systems should be the same as in the MobileDetect class
-     * @param int $deviceType A constant of device type (optional)
+     * @param string|array $systems    Operating systems (optional)
+     *                                 Operating systems should be the same as in the MobileDetect class
+     * @param int          $deviceType A constant of device type (optional)
      */
     public function __construct($systems = array(), $deviceType = self::ALL_DEVICES)
     {
         $this->deviceType = $deviceType;
-        $this->systems = (array)$systems;
+        $this->systems = (array) $systems;
     }
 
     /**
@@ -77,8 +77,7 @@ class MobileDevices implements TagInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Tag\TagInterface::isEqual()
+     * {@inheritdoc}
      */
     public function isEqual(TagInterface $tag)
     {
@@ -86,8 +85,7 @@ class MobileDevices implements TagInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Jungi\Bundle\ThemeBundle\Tag\Tag::getName()
+     * {@inheritdoc}
      */
     public static function getName()
     {

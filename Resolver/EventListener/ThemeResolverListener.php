@@ -40,8 +40,8 @@ class ThemeResolverListener implements EventSubscriberInterface
     }
 
     /**
-     * Saves the changes done in a theme resolver if this
-     * resolver implements ResponseWriterInterface
+     * Saves theme changes done in the request only when the theme resolver
+     * implements the ResponseWriterInterface
      *
      * @param FilterResponseEvent $event An event
      *
