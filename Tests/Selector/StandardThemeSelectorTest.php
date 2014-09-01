@@ -15,7 +15,6 @@ use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener;
 use Jungi\Bundle\ThemeBundle\Selector\StandardThemeSelector;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch;
 use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
@@ -42,11 +41,6 @@ class StandardThemeSelectorTest extends TestCase
      * @var StandardThemeSelector
      */
     private $selector;
-
-    /**
-     * @var SimpleThemeHolder
-     */
-    private $holder;
 
     /**
      * @var ThemeManagerInterface
@@ -82,8 +76,7 @@ class StandardThemeSelectorTest extends TestCase
             $theme
         ));
         $this->resolver = new InMemoryThemeResolver('footheme', false);
-        $this->holder = new SimpleThemeHolder();
-        $this->selector = new StandardThemeSelector($this->manager, $this->holder, $this->eventDispatcher, $this->resolver);
+        $this->selector = new StandardThemeSelector($this->manager, $this->eventDispatcher, $this->resolver);
     }
 
     /**
@@ -93,7 +86,6 @@ class StandardThemeSelectorTest extends TestCase
     protected function tearDown()
     {
         $this->selector = null;
-        $this->holder = null;
         $this->resolver = null;
         $this->manager = null;
         $this->eventDispatcher = null;
@@ -116,14 +108,14 @@ class StandardThemeSelectorTest extends TestCase
         $this->manager->addTheme($theme);
 
         // Add the DeviceThemeSwitch
-        $this->eventDispatcher->addSubscriber(new DeviceThemeSwitch(new MobileDetect()));
+        $this->eventDispatcher->addSubscriber(new DeviceThemeSwitch(new MobileDetect(), $this->manager));
 
         // The main thread
         $request = $this->createMobileRequest();
-        $this->selector->select($request);
+        $theme = $this->selector->select($request);
 
         // Assert
-        $this->assertEquals('footheme_mobile', $this->holder->getTheme()->getName());
+        $this->assertEquals('footheme_mobile', $theme->getName());
     }
 
     /**
@@ -158,10 +150,10 @@ class StandardThemeSelectorTest extends TestCase
 
         // Sets the fallback theme resolver
         $this->selector->setFallback(new InMemoryThemeResolver('default'));
-        $this->selector->select($request);
+        $theme = $this->selector->select($request);
 
         // Assert
-        $this->assertEquals('default', $this->holder->getTheme()->getName());
+        $this->assertEquals('default', $theme->getName());
     }
 
     /**
@@ -178,10 +170,10 @@ class StandardThemeSelectorTest extends TestCase
 
         // Sets the fallback theme resolver
         $this->selector->setFallback(new InMemoryThemeResolver('default'));
-        $this->selector->select($request);
+        $theme = $this->selector->select($request);
 
         // Assert
-        $this->assertEquals('default', $this->holder->getTheme()->getName());
+        $this->assertEquals('default', $theme->getName());
     }
 
     /**
@@ -198,10 +190,10 @@ class StandardThemeSelectorTest extends TestCase
 
         // Sets the fallback theme resolver
         $this->selector->setFallback(new InMemoryThemeResolver('default'));
-        $this->selector->select($request);
+        $theme = $this->selector->select($request);
 
         // Assert
-        $this->assertEquals('default', $this->holder->getTheme()->getName());
+        $this->assertEquals('default', $theme->getName());
     }
 
     /**
@@ -217,10 +209,10 @@ class StandardThemeSelectorTest extends TestCase
 
         // Sets the fallback theme resolver
         $this->selector->setFallback(new InMemoryThemeResolver('default'));
-        $this->selector->select($request);
+        $theme = $this->selector->select($request);
 
         // Assert
-        $this->assertNotEquals('default', $this->holder->getTheme()->getName());
+        $this->assertNotEquals('default', $theme->getName());
     }
 
     /**
@@ -229,9 +221,9 @@ class StandardThemeSelectorTest extends TestCase
     public function testOnExistingTheme()
     {
         $request = $this->createDesktopRequest();
-        $this->selector->select($request);
+        $theme = $this->selector->select($request);
 
-        $this->assertEquals('footheme', $this->holder->getTheme()->getName());
+        $this->assertEquals('footheme', $theme->getName());
     }
 
     /**

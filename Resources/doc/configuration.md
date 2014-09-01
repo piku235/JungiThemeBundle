@@ -8,7 +8,7 @@ The complete configuration:
 jungi_theme:
     # theme holder configuration
     holder:
-        id: jungi.theme.holder.default
+        id: jungi_theme.holder.default
 
     # theme selector configuration
     selector:
@@ -65,7 +65,7 @@ Overview
 ### Theme holder
 
 A theme holder is responsible for holding the current theme instance obtained from a theme selector. You can set
-your own theme holder service or leave it empty which by defaults points to the `jungi.theme.holder.default` service.
+your own theme holder service or leave it empty which by defaults points to the `jungi_theme.holder.default` service.
 
 ```yaml
 # app/config/config.yml

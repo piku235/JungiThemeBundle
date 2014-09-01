@@ -117,7 +117,7 @@ built-in tags, but additionally to use tags created e.g. by you :)
 ### How to register a new tag?
 
 The registration can be done from the symfony services which is very comfortable. The only thing you have to do is to
-define a service with the tag `jungi.tag_provider`. As a service class you can use the parameter `jungi.theme.tag.registry.provider.class`
+define a service with the tag `jungi.tag_provider`. As a service class you can use the parameter `jungi_theme.tag.registry.provider.class`
 which by default points to the `Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider`. A tag provider only provides tags to
 a tag registry and nothing more.
 
@@ -130,7 +130,7 @@ a tag registry and nothing more.
 </parameters>
 
 <services>
-    <service id="foo.theme.tag.provider" class="%jungi.theme.tag.registry.provider.class%">
+    <service id="foo.theme.tag.provider" class="%jungi_theme.tag.registry.provider.class%">
         <tag name="jungi.tag_provider" />
         <argument>%foo.theme.tag.class%</argument>
     </service>
@@ -146,7 +146,7 @@ parameters:
 
 services:
     foo.theme.tag.provider:
-        class: "%jungi.theme.tag.registry.provider.class%"
+        class: "%jungi_theme.tag.registry.provider.class%"
         tags:
             -  { name: jungi.tag_provider }
         arguments: ["%foo.theme.tag.class%"]

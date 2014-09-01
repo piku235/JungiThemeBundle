@@ -19,8 +19,8 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 
 /**
- * The ThemeLocator will return a full path to a theme resource if exists otherwise it will use
- * the standard locate method of the parent class
+ * ThemeLocator returns a full path to a theme resource if exists, otherwise it will use
+ * the locate method of the TemplateLocator class for return
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

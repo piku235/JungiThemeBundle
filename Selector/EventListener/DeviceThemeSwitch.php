@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector\EventListener;
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
@@ -30,13 +31,20 @@ class DeviceThemeSwitch implements EventSubscriberInterface
     private $mobileDetect;
 
     /**
+     * @var ThemeManagerInterface
+     */
+    private $themeManager;
+
+    /**
      * Constructor
      *
-     * @param MobileDetect $mobileDetect A mobile detect instance
+     * @param MobileDetect          $mobileDetect A mobile detect instance
+     * @param ThemeManagerInterface $manager      A theme manager
      */
-    public function __construct(MobileDetect $mobileDetect)
+    public function __construct(MobileDetect $mobileDetect, ThemeManagerInterface $manager)
     {
         $this->mobileDetect = $mobileDetect;
+        $this->themeManager = $manager;
     }
 
     /**
@@ -77,7 +85,7 @@ class DeviceThemeSwitch implements EventSubscriberInterface
         }
 
         // Look for a substitute theme
-        $substituteTheme = $event->getThemeManager()->getThemeWithTags(array(
+        $substituteTheme = $this->themeManager->getThemeWithTags(array(
             new Tag\Link($theme->getName()),
             $tag
         ));

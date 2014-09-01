@@ -42,37 +42,37 @@ class JungiThemeExtension extends Extension
         $loader->load('listeners.xml');
 
         // Ignore null themes
-        $container->setParameter('jungi.theme.selector.options', array(
+        $container->setParameter('jungi_theme.selector.options', array(
             'ignore_null_themes' => $config['selector']['ignore_null_themes']
         ));
 
         // Theme resolver conf
-        $this->configureThemeResolver('jungi.theme.resolver', 'primary', $config, $container);
+        $this->configureThemeResolver('jungi_theme.resolver', 'primary', $config, $container);
 
         // Theme resolver conf
         $this->configureFallbackThemeResolver($config, $container);
 
         // Theme holder conf
-        $container->setAlias('jungi.theme.holder', $config['holder']['id']);
+        $container->setAlias('jungi_theme.holder', $config['holder']['id']);
 
         // Validation listener
         if (!$config['selector']['validation_listener']['enabled']) {
-            $container->removeDefinition('jungi.theme.selector.listener.validation');
+            $container->removeDefinition('jungi_theme.selector.listener.validation');
         } elseif ($config['selector']['validation_listener']['use_investigator']) {
-            $listener = $container->getDefinition('jungi.theme.selector.listener.validation');
-            $listener->addArgument(new Reference('jungi.theme.resolver.investigator', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+            $listener = $container->getDefinition('jungi_theme.selector.listener.validation');
+            $listener->addArgument(new Reference('jungi_theme.resolver.investigator', ContainerInterface::NULL_ON_INVALID_REFERENCE));
         }
 
         // Device Theme Switch
         if (!$config['selector']['device_switch']['enabled']) {
-            $container->removeDefinition('jungi.theme.selector.listener.device_switch');
+            $container->removeDefinition('jungi_theme.selector.listener.device_switch');
         }
 
         // Investigator
         if (!$config['resolver']['investigator']['enabled']) {
-            $container->removeDefinition('jungi.theme.resolver.investigator');
+            $container->removeDefinition('jungi_theme.resolver.investigator');
         } else {
-            $container->setParameter('jungi.theme.resolver.investigator.suspects', $config['resolver']['investigator']['suspects']);
+            $container->setParameter('jungi_theme.resolver.investigator.suspects', $config['resolver']['investigator']['suspects']);
         }
 
         // Class cache
@@ -105,7 +105,7 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Selector\Event\SmartResolvedThemeEvent',
             'Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch',
             'Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener',
-            'Jungi\Bundle\ThemeBundle\Selector\EventListener\ThemeSelectorListener',
+            'Jungi\Bundle\ThemeBundle\Selector\EventListener\ThemeHolderListener',
             'Jungi\Bundle\ThemeBundle\Validation\ValidationUtils',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
@@ -158,6 +158,6 @@ class JungiThemeExtension extends Extension
         }
 
         // Configure fallback theme resolver using the base method
-        $this->configureThemeResolver('jungi.theme.fallback_resolver', 'fallback', $config, $container);
+        $this->configureThemeResolver('jungi_theme.fallback_resolver', 'fallback', $config, $container);
     }
 }

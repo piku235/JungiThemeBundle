@@ -6,9 +6,9 @@ you have for use the following theme mapping loaders.
 
 Format | Class (default) | Service
 ---- | --------------- | -------
-xml | Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlFileLoader | jungi.theme.mapping.loader.xml
-yaml | Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader | jungi.theme.mapping.loader.yml
-php | Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader | jungi.theme.mapping.loader.php
+xml | Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlFileLoader | jungi_theme.mapping.loader.xml
+yaml | Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader | jungi_theme.mapping.loader.yml
+php | Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader | jungi_theme.mapping.loader.php
 
 **NOTE**
 
@@ -23,7 +23,7 @@ easily.
 
 ### Overview
 
-Each of theme mapping loader service has reference to the `jungi.theme.manager` service so all load operations will
+Each of theme mapping loader service has reference to the `jungi_theme.manager` service so all load operations will
 use this theme manager service. To accomplish the loading you've got available the **load** method. This method has only
 one argument responsible for the path to a theme mapping file.
 
@@ -46,7 +46,7 @@ class BooFooBundle extends Bundle
 	 */
 	public function boot()
 	{
-	    $loader = $this->container->get('jungi.theme.mapping.loader.xml');
+	    $loader = $this->container->get('jungi_theme.mapping.loader.xml');
 	    $loader->load(__DIR__ . '/Resources/config/theme.xml');
 	}
 }
@@ -71,7 +71,7 @@ class BooFooBundle extends Bundle
 	 */
 	public function boot()
 	{
-	    $loader = $this->container->get('jungi.theme.mapping.loader.yml');
+	    $loader = $this->container->get('jungi_theme.mapping.loader.yml');
 	    $loader->load(__DIR__ . '/Resources/config/theme.yml');
 	}
 }
@@ -96,7 +96,7 @@ class BooFooBundle extends Bundle
 	 */
 	public function boot()
 	{
-	    $loader = $this->container->get('jungi.theme.mapping.loader.php');
+	    $loader = $this->container->get('jungi_theme.mapping.loader.php');
 	    $loader->load(__DIR__ . '/Resources/config/theme.php');
 	}
 }

@@ -11,17 +11,18 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector\EventListener;
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * ThemeSelectorListener
+ * ThemeHolderListener
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeSelectorListener implements EventSubscriberInterface
+class ThemeHolderListener implements EventSubscriberInterface
 {
     /**
      * @var ThemeSelectorInterface
@@ -29,17 +30,24 @@ class ThemeSelectorListener implements EventSubscriberInterface
     private $selector;
 
     /**
+     * @var ThemeHolderInterface
+     */
+    private $holder;
+
+    /**
      * Constructor
      *
+     * @param ThemeHolderInterface   $holder   A theme holder
      * @param ThemeSelectorInterface $selector A theme selector
      */
-    public function __construct(ThemeSelectorInterface $selector)
+    public function __construct(ThemeHolderInterface $holder, ThemeSelectorInterface $selector)
     {
         $this->selector = $selector;
+        $this->holder = $holder;
     }
 
     /**
-     * Handles the request in aim to get a theme for this request
+     * Handles an event in aim to get a theme for the current request
      *
      * @param FilterControllerEvent $event An event
      *
@@ -51,7 +59,7 @@ class ThemeSelectorListener implements EventSubscriberInterface
             return;
         }
 
-        $this->selector->select($event->getRequest());
+        $this->holder->setTheme($this->selector->select($event->getRequest()));
     }
 
     /**

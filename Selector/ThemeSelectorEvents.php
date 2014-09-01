@@ -26,10 +26,5 @@ final class ThemeSelectorEvents
     /**
      * @var string
      */
-    const PRE_SET = 'jungi_theme.pre_set';
-
-    /**
-     * @var string
-     */
-    const POST_SET = 'jungi_theme.post_set';
+    const SELECT = 'jungi_theme.select';
 }

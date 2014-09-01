@@ -11,8 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
-use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
-
 /**
  * TagCollection provides extra features for flexible operations on theme tags
  *

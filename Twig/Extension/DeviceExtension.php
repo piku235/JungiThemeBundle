@@ -108,6 +108,6 @@ class DeviceExtension extends \Twig_Extension
      */
     private function getDeviceHelper()
     {
-        return $this->container->get('jungi.theme.helper.device');
+        return $this->container->get('jungi_theme.helper.device');
     }
 }

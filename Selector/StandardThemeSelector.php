@@ -15,10 +15,9 @@ use Jungi\Bundle\ThemeBundle\Exception\InvalidatedThemeException;
 use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException;
-use Jungi\Bundle\ThemeBundle\Event\ThemeEvent;
+use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\SmartResolvedThemeEvent;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,11 +39,6 @@ class StandardThemeSelector implements ThemeSelectorInterface
      * @var EventDispatcherInterface
      */
     private $dispatcher;
-
-    /**
-     * @var ThemeHolderInterface
-     */
-    private $holder;
 
     /**
      * @var array
@@ -70,18 +64,16 @@ class StandardThemeSelector implements ThemeSelectorInterface
      * Constructor
      *
      * @param ThemeManagerInterface    $manager    A theme manager
-     * @param ThemeHolderInterface     $holder     A theme holder
      * @param EventDispatcherInterface $dispatcher An event dispatcher
      * @param ThemeResolverInterface   $resolver   A theme resolver
      * @param array                    $options    Options (optional)
      * @param ThemeResolverInterface   $fallback   A fallback theme resolver (optional)
      */
-    public function __construct(ThemeManagerInterface $manager, ThemeHolderInterface $holder, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, array $options = array(), ThemeResolverInterface $fallback = null)
+    public function __construct(ThemeManagerInterface $manager, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, array $options = array(), ThemeResolverInterface $fallback = null)
     {
         $this->manager = $manager;
         $this->dispatcher = $dispatcher;
         $this->resolver = $resolver;
-        $this->holder = $holder;
         $this->fallback = $fallback;
         $this->options = $options + array(
             'ignore_null_themes' => false
@@ -116,9 +108,9 @@ class StandardThemeSelector implements ThemeSelectorInterface
     /**
      * Returns the option value
      *
-     * @param  string $name An option name
+     * @param string $name An option name
      *
-     * @return mixed  Null if the option is not exist
+     * @return mixed Null if the option is not exist
      */
     public function getOption($name)
     {
@@ -143,16 +135,13 @@ class StandardThemeSelector implements ThemeSelectorInterface
         }
 
         // The event
-        $event = new ThemeEvent($theme, $this->manager, $this->resolver, $request);
+        $event = new HttpThemeEvent($theme, $request);
 
         // Dispatch the event
-        $this->dispatcher->dispatch(ThemeSelectorEvents::PRE_SET, $event);
+        $this->dispatcher->dispatch(ThemeSelectorEvents::SELECT, $event);
 
-        // If everything is ok set a theme to the holder
-        $this->holder->setTheme($theme);
-
-        // Dispatch the event
-        $this->dispatcher->dispatch(ThemeSelectorEvents::POST_SET, $event);
+        // If everything is ok, return the theme
+        return $theme;
     }
 
     /**
@@ -203,10 +192,10 @@ class StandardThemeSelector implements ThemeSelectorInterface
         $theme = $this->manager->getTheme($themeName);
 
         // Dispatch the event
-        $event = new SmartResolvedThemeEvent($theme, $this->manager, $this->resolver, $request);
+        $event = new SmartResolvedThemeEvent($theme, $this->resolver, $request);
         $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED_THEME, $event);
 
-        // Check if a theme is still in the event
+        // Check if the theme is still in the event
         if (null === $theme = $event->getTheme()) {
             throw new InvalidatedThemeException(sprintf('The theme "%s" for the request "%s" has been invalidated.', $themeName, $request->getPathInfo()));
         }
@@ -236,7 +225,7 @@ class StandardThemeSelector implements ThemeSelectorInterface
         $theme = $this->manager->getTheme($themeName);
 
         // Dispatch the event
-        $event = new ResolvedThemeEvent($theme, $this->manager, $this->fallback, $request);
+        $event = new ResolvedThemeEvent($theme, $this->fallback, $request);
         $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED_THEME, $event);
 
         return $event->getTheme();

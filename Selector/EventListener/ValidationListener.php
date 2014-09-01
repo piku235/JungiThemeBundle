@@ -93,7 +93,7 @@ class ValidationListener implements EventSubscriberInterface
 
             if (null !== $this->logger) {
                 $this->logger->warning(ValidationUtils::formatValidationMessage(
-                    sprintf('The theme "%s" did not passed the validation, the theme will be invalidated.', $event->getTheme()->getName()),
+                    sprintf('The theme "%s" will be invalidated due to failed validation.', $event->getTheme()->getName()),
                     $constraints
                 ));
             }

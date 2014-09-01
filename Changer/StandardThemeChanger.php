@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Changer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
-use Jungi\Bundle\ThemeBundle\Event\ThemeEvent;
+use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
@@ -73,14 +73,14 @@ class StandardThemeChanger implements ThemeChangerInterface
         }
 
         // Dispatch the event
-        $event = new ThemeEvent($theme, $this->manager, $this->resolver, $request);
-        $this->dispatcher->dispatch(ThemeChangerEvents::PRE_SET, $event);
+        $event = new HttpThemeEvent($theme, $request);
+        $this->dispatcher->dispatch(ThemeChangerEvents::PRE_CHANGE, $event);
 
         // Change the current theme
         $this->holder->setTheme($theme);
         $this->resolver->setThemeName($theme->getName(), $request);
 
         // Dispatch the event
-        $this->dispatcher->dispatch(ThemeChangerEvents::POST_SET, $event);
+        $this->dispatcher->dispatch(ThemeChangerEvents::POST_CHANGE, $event);
     }
 }

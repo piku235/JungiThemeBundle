@@ -57,8 +57,7 @@ class ThemeResolverListener implements EventSubscriberInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\EventDispatcher\EventSubscriberInterface::getSubscribedEvents()
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {

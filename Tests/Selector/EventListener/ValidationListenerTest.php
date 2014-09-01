@@ -11,7 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Selector\EventListener;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
 use Jungi\Bundle\ThemeBundle\Selector\Event\SmartResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\LogicThemeResolverInvestigator;
 use Symfony\Component\Validator\Validator;
@@ -66,7 +65,6 @@ class ValidationListenerTest extends TestCase
         $this->listener = new ValidationListener($validator);
         $this->event = new SmartResolvedThemeEvent(
             $this->theme,
-            new ThemeManager(),
             $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface'),
             $this->getMock('Symfony\Component\HttpFoundation\Request')
         );

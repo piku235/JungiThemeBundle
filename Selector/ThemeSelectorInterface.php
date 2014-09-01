@@ -23,9 +23,9 @@ interface ThemeSelectorInterface
     /**
      * Sets the appropriate theme for a given Request
      *
-     * @param Request $request A request instance
+     * @param Request $request A Request instance
      *
-     * @return void
+     * @return \Jungi\Bundle\ThemeBundle\Core\ThemeInterface
      *
      * @throws \Exception If something goes wrong
      */

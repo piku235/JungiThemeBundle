@@ -30,17 +30,17 @@ class DeviceThemeSwitchTest extends TestCase
     /**
      * @var DeviceThemeSwitch
      */
-    protected $switch;
+    private $switch;
 
     /**
      * @var ThemeManager
      */
-    protected $manager;
+    private $manager;
 
     /**
      * @var ThemeResolverInterface
      */
-    protected $resolver;
+    private $resolver;
 
     /**
      * (non-PHPdoc)
@@ -58,7 +58,7 @@ class DeviceThemeSwitchTest extends TestCase
             ))));
 
         $this->manager = new ThemeManager(array($desktopTheme));
-        $this->switch = new DeviceThemeSwitch(new MobileDetect());
+        $this->switch = new DeviceThemeSwitch(new MobileDetect(), $this->manager);
         $this->resolver = $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface');
     }
 
@@ -112,7 +112,7 @@ class DeviceThemeSwitchTest extends TestCase
 
         // Prepare and fire the method
         $request = $this->createRequest($ua);
-        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme'), $this->manager, $this->resolver, $request);
+        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme'), $this->resolver, $request);
         $this->switch->onResolvedTheme($event);
 
         // Assert
@@ -135,7 +135,7 @@ class DeviceThemeSwitchTest extends TestCase
 
         // Prepare and fire the method
         $request = $this->createMobileRequest();
-        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme'), $this->manager, $this->resolver, $request);
+        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme'), $this->resolver, $request);
         $this->switch->onResolvedTheme($event);
 
         // Assert
@@ -159,7 +159,7 @@ class DeviceThemeSwitchTest extends TestCase
 
         // Prepare and fire the method
         $request = $this->createMobileRequest();
-        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme_boo'), $this->manager, $this->resolver, $request);
+        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme_boo'), $this->resolver, $request);
         $this->switch->onResolvedTheme($event);
 
         // Assert

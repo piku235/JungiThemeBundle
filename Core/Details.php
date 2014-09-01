@@ -63,18 +63,19 @@ class Details implements DetailsInterface
     /**
      * Constructor
      *
+     * The valid parameters:
+     *
+     *   * name
+     *   * version
+     *   * description
+     *   * license
+     *   * thumbnail
+     *   * author.name
+     *   * author.site
+     *   * author.email
+     *
      * @param array $params Parameters
-     *  The valid parameters:
-     *  array(
-     *      'name' => value,
-     *      'version' => value,
-     *      'description' => value,
-     *      'license' => value,
-     *      'thumbnail' => value,
-     *      'author.name' => value,
-     *      'author.site' => value,
-     *      'author.email' => value,
-     *  )
+     *
      * @throws \InvalidArgumentException When some of given parameters can not be handled
      * @throws \InvalidArgumentException If one of required parameters was not passed
      */
@@ -95,7 +96,7 @@ class Details implements DetailsInterface
         };
         if ($wrong = array_diff(array_keys($parameters), $validKeys)) {
             throw new \InvalidArgumentException(sprintf('The given parameters "%s" can not be handled.', implode(', ', $wrong)));
-        } else if (!$property('name') || !$property('version')) {
+        } elseif (!$property('name') || !$property('version')) {
             throw new \InvalidArgumentException('You must provide "name" and "version" argument.');
         }
 

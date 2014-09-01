@@ -16,24 +16,22 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
- * TagProviderPass
+ * CacheWarmerPass
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class TagProviderPass implements CompilerPassInterface
+class CacheWarmerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('jungi_theme.tag.registry')) {
+        if (!$container->hasDefinition('templating.cache_warmer.template_paths')) {
             return;
         }
 
-        $tagFactory = $container->getDefinition('jungi_theme.tag.registry');
-        foreach ($container->findTaggedServiceIds('jungi.tag_provider') as $id => $attrs) {
-            $tagFactory->addMethodCall('register', array(new Reference($id)));
-        }
+        $cacheWarmer = $container->getDefinition('templating.cache_warmer.template_paths');
+        $cacheWarmer->replaceArgument(0, new Reference('jungi_theme.cache_warmer.finder_chain'));
     }
 }

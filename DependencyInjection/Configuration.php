@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->info('theme holder configuration')
                     ->children()
-                        ->scalarNode('id')->defaultValue('jungi.theme.holder.default')->end()
+                        ->scalarNode('id')->defaultValue('jungi_theme.holder.default')->end()
                     ->end()
                     ->beforeNormalization()
                         ->ifString()
