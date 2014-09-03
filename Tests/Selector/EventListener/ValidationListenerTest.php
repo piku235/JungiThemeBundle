@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Selector\EventListener;
 
-use Jungi\Bundle\ThemeBundle\Selector\Event\SmartResolvedThemeEvent;
+use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\LogicThemeResolverInvestigator;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Validator\ConstraintValidatorFactory;
@@ -34,22 +34,22 @@ class ValidationListenerTest extends TestCase
     /**
      * @var ValidationListener
      */
-    protected $listener;
+    private $listener;
 
     /**
      * @var FakeMetadataFactory
      */
-    protected $metadataFactory;
+    private $metadataFactory;
 
     /**
      * @var Theme
      */
-    protected $theme;
+    private $theme;
 
     /**
-     * @var SmartResolvedThemeEvent
+     * @var ResolvedThemeEvent
      */
-    protected $event;
+    private $event;
 
     /**
      * (non-PHPdoc)
@@ -63,8 +63,9 @@ class ValidationListenerTest extends TestCase
             'footheme', 'path', $this->getMock('Jungi\Bundle\ThemeBundle\Core\DetailsInterface')
         );
         $this->listener = new ValidationListener($validator);
-        $this->event = new SmartResolvedThemeEvent(
+        $this->event = new ResolvedThemeEvent(
             $this->theme,
+            ResolvedThemeEvent::PRIMARY_RESOLVER,
             $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface'),
             $this->getMock('Symfony\Component\HttpFoundation\Request')
         );
@@ -83,7 +84,7 @@ class ValidationListenerTest extends TestCase
     }
 
     /**
-     * Tests failed validation on the untrusted theme resolver
+     * Tests the failed validation on the untrusted theme resolver
      */
     public function testFailedValidationOnSuspectResolver()
     {
@@ -110,7 +111,7 @@ class ValidationListenerTest extends TestCase
     }
 
     /**
-     * Tests succeed validation
+     * Tests the succeed validation
      */
     public function testSucceedValidation()
     {
@@ -126,7 +127,7 @@ class ValidationListenerTest extends TestCase
     }
 
     /**
-     * Tests failed validation
+     * Tests the failed validation
      */
     public function testFailedValidation()
     {
@@ -140,5 +141,28 @@ class ValidationListenerTest extends TestCase
 
         // Check
         $this->assertNull($this->event->getTheme());
+    }
+
+    /**
+     * Tests the ValidationListener when the clearing theme in an event is disabled
+     */
+    public function testWhenClearThemeIsDisabled()
+    {
+        $metadata = new ClassMetadata('Jungi\Bundle\ThemeBundle\Core\ThemeInterface');
+        $metadata->addConstraint(new FakeClassConstraint());
+        $metadata->addGetterConstraint('name', new Constraints\EqualTo('footheme_boo'));
+        $this->metadataFactory->addMetadata($metadata);
+
+        $event = new ResolvedThemeEvent(
+            $this->theme,
+            ResolvedThemeEvent::PRIMARY_RESOLVER,
+            $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface'),
+            $this->getMock('Symfony\Component\HttpFoundation\Request'),
+            false
+        );
+        $this->listener->onResolvedTheme($event);
+
+        // Check
+        $this->assertNotNull($event->getTheme());
     }
 }

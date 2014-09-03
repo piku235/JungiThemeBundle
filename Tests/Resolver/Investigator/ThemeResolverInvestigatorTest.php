@@ -26,7 +26,7 @@ class ThemeResolverInvestigatorTest extends TestCase
     /**
      * @var ThemeResolverInvestigator
      */
-    protected $investigator;
+    private $investigator;
 
     /**
      * (non-PHPdoc)

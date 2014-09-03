@@ -13,7 +13,6 @@ namespace Jungi\Bundle\ThemeBundle\Selector\EventListener;
 
 use Jungi\Bundle\ThemeBundle\Resolver\Investigator\ThemeResolverInvestigatorInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
-use Jungi\Bundle\ThemeBundle\Selector\Event\SmartResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents;
 use Jungi\Bundle\ThemeBundle\Validation\ValidationUtils;
 use Psr\Log\LoggerInterface;
@@ -77,7 +76,7 @@ class ValidationListener implements EventSubscriberInterface
      */
     public function onResolvedTheme(ResolvedThemeEvent $event)
     {
-        if (!$event instanceof SmartResolvedThemeEvent) {
+        if (!$event->canClearTheme()) {
             return;
         }
 

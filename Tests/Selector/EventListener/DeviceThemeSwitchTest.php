@@ -112,7 +112,7 @@ class DeviceThemeSwitchTest extends TestCase
 
         // Prepare and fire the method
         $request = $this->createRequest($ua);
-        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme'), $this->resolver, $request);
+        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme'), ResolvedThemeEvent::PRIMARY_RESOLVER, $this->resolver, $request);
         $this->switch->onResolvedTheme($event);
 
         // Assert
@@ -135,7 +135,7 @@ class DeviceThemeSwitchTest extends TestCase
 
         // Prepare and fire the method
         $request = $this->createMobileRequest();
-        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme'), $this->resolver, $request);
+        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme'), ResolvedThemeEvent::PRIMARY_RESOLVER, $this->resolver, $request);
         $this->switch->onResolvedTheme($event);
 
         // Assert
@@ -159,7 +159,7 @@ class DeviceThemeSwitchTest extends TestCase
 
         // Prepare and fire the method
         $request = $this->createMobileRequest();
-        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme_boo'), $this->resolver, $request);
+        $event = new ResolvedThemeEvent($this->manager->getTheme('footheme_boo'), ResolvedThemeEvent::PRIMARY_RESOLVER, $this->resolver, $request);
         $this->switch->onResolvedTheme($event);
 
         // Assert

@@ -19,7 +19,6 @@ use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException;
 use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
-use Jungi\Bundle\ThemeBundle\Selector\Event\SmartResolvedThemeEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -120,7 +119,8 @@ class StandardThemeSelector implements ThemeSelectorInterface
     /**
      * {@inheritdoc}
      *
-     * @throws NullThemeException If the given theme name is blank and ignore_null_themes is false
+     * @throws NullThemeException If the given theme name is blank and the 'ignore_null_themes'
+     *                            option is false
      */
     public function select(Request $request)
     {
@@ -145,10 +145,10 @@ class StandardThemeSelector implements ThemeSelectorInterface
     }
 
     /**
-     * Matches the theme for a given request
+     * Matches the theme for a given Request
      *
-     * If everything will go well the theme obtained from a leading theme resolver
-     * will be returned otherwise theme from the fallback theme resolver will be returned
+     * If everything will go well a theme obtained from a primary theme resolver
+     * will be returned otherwise a theme from a fallback theme resolver will be returned
      *
      * @param Request $request A request
      *
@@ -182,7 +182,7 @@ class StandardThemeSelector implements ThemeSelectorInterface
      * @throws NullThemeException        When a theme resolver returns null
      * @throws InvalidatedThemeException If the NullResolvedThemeEvent will invalidate a theme
      */
-    protected function getPrimaryTheme(Request $request)
+    private function getPrimaryTheme(Request $request)
     {
         if (null === $themeName = $this->resolver->resolveThemeName($request)) {
             throw new NullThemeException(sprintf('The theme for the request "%s" can not be found.', $request->getPathInfo()));
@@ -192,7 +192,7 @@ class StandardThemeSelector implements ThemeSelectorInterface
         $theme = $this->manager->getTheme($themeName);
 
         // Dispatch the event
-        $event = new SmartResolvedThemeEvent($theme, $this->resolver, $request);
+        $event = new ResolvedThemeEvent($theme, ResolvedThemeEvent::PRIMARY_RESOLVER, $this->resolver, $request);
         $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED_THEME, $event);
 
         // Check if the theme is still in the event
@@ -213,7 +213,7 @@ class StandardThemeSelector implements ThemeSelectorInterface
      * @throws \RuntimeException  If a fallback theme resolver was not set
      * @throws NullThemeException When a theme resolver returns null
      */
-    protected function getFallbackTheme(Request $request)
+    private function getFallbackTheme(Request $request)
     {
         if (null === $this->fallback) {
             throw new \RuntimeException('The fallback theme resolver was not set.');
@@ -225,7 +225,7 @@ class StandardThemeSelector implements ThemeSelectorInterface
         $theme = $this->manager->getTheme($themeName);
 
         // Dispatch the event
-        $event = new ResolvedThemeEvent($theme, $this->fallback, $request);
+        $event = new ResolvedThemeEvent($theme, ResolvedThemeEvent::FALLBACK_RESOLVER, $this->fallback, $request, false);
         $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED_THEME, $event);
 
         return $event->getTheme();

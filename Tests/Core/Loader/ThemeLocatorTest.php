@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Tests\Loader;
+namespace Jungi\Bundle\ThemeBundle\Tests\Core\Loader;
 
 use Jungi\Bundle\ThemeBundle\Core\Loader\ThemeLocator;
 use Jungi\Bundle\ThemeBundle\Core\ThemeReference;
