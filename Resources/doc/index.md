@@ -10,11 +10,11 @@ Here you will find out how to use and set up the bundle.
 
 ### Installation
 
-To use the bundle in your symfony project [go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/installation.md).
+To start using the bundle in your symfony project [go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/installation.md).
 
 ### Configuration
 
-To set up the bundle just like you want [go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md).
+If you wish to know more about the bundle configuration [click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md).
 
 Basics
 ------

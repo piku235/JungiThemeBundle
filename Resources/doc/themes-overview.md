@@ -53,11 +53,11 @@ FooBundle::layout.html.twig | /path/to/themebundle/Resources/themes/foo/FooBundl
 Overriding bundle templates
 ---------------------------
 
-You can override every bundle template that you wish in your theme, that's the main goal of themes. Suppose that e.g.
+You can override every bundle template that you wish in your theme and that's the main goal of themes. Suppose that e.g.
 **FooThemeBundle** is the current theme for the request, and the **Default** controller with the **index** action
 from the **BooBundle** will be performed.
 
-The BooBundle:
+The BooBundle resources:
 
 ```
 BooBundle/
@@ -67,7 +67,17 @@ BooBundle/
         layout.html.twig
 ```
 
-And the FooThemeBundle:
+And the simple content of the `index.html.twig`:
+
+```php
+{% extends 'BooBundle::layout.html.twig' %}
+
+{% block content %}
+<p>Lorem ipsum.</p>
+{% endblock %}
+```
+
+The FooThemeBundle resources:
 
 ```
 FooThemeBundle/
@@ -79,7 +89,7 @@ FooThemeBundle/
 ```
 
 In this example the **FooThemeBundle** has overwritten the template `layout.html.twig` of the **BooBundle**. When the
-template **index.html.twig** is rendered the template `layout.html.twig` of the **FooThemeBundle** is included instead
+template `index.html.twig` is rendered the template `layout.html.twig` of the **FooThemeBundle** is included instead
 of the template `layout.html.twig` from the **BooBundle**.
 
 Theme
@@ -119,45 +129,42 @@ Details
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/blob/master/Core/DetailsInterface.php)
 
-Each theme must contain an instance of the `Jungi\Bundle\ThemeBundle\Core\DetailsInterface`. It give us useful information
+Each theme must contain an instance of the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`. It give us useful information
 about a theme.
 
 **NOTE**
 
-> As you have noticed the two methods: **getName**, **getVersion** of the details interface should always return a value,
-> so that means they're required.
+> As you have noticed the two methods: **getName**, **getVersion** of the interface should always return a value, so
+> that means they're required.
 
 ### Default implementation
 
-The `Jungi\Bundle\ThemeBundle\Core\Details` is the default details implementation. In comparison with the default theme
-implementation it doesn't use the constructor like in the default theme implementation, because it would bring a mess in its
-constructor signature.
+The `Jungi\Bundle\ThemeBundle\Details\Details` is the default details implementation. It's a little bit different from the
+default theme implementation. Due to a large number of the properties I decided to not implement the constructor,
+because it would only bring a mess in its signature. Also setter methods are not a good idea, because after
+an object creation there still will be a possibility for changing an object properties and that shouldn't be possible.
+Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Details\DetailsBuilder` which is strictly
+associated with the class `Jungi\Bundle\ThemeBundle\Details\Details`. The builder provides setter methods with the fluent
+interface.
 
-The constructor of class takes only one argument `$parameters` which is of array type. This array should consist of keys
-from the table below.
-
-Key | Required
---- | --------
-name | true
-version | true
-description | false
-license | false
-thumbnail | false
-author.name | false
-author.email | false
-author.site | false
-
-#### Example
+Here is an example of creating new details instance:
 
 ```php
-$details = new Details(array(
-    'name' => 'foo',
-    'version' => '1.0.0',
-    'description' => 'awesome theme',
-    'license' => 'MIT',
-    'thumbnail' => 'a location',
-    'author.name' => 'foo_author',
-    'author.email' => 'foo_email',
-    'author.site' => 'foo_site'
-));
+use Jungi\Bundle\ThemeBundle\Details\Details;
+use Jungi\Bundle\ThemeBundle\Details\Author;
+
+$dsb = Details::createBuilder();
+$dsb
+    ->setName('A simple theme')
+    ->setVersion('1.0.0')
+    ->setDescription('a simple theme with the beautiful design')
+    ->setLicense('GPL')
+    ->setThumbnail('public/images/thumbnail.png')
+    ->setScreen('public/images/screen.png')
+    ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'foo.com'))
+;
+
+// Builds the new Details instance
+$details = $dsb->getDetails();
 ```
+

@@ -20,7 +20,7 @@ Here is the simple document which contains a single theme with basic elements:
 <?php
 // FooBundle/Resources/config/theme.php
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Core\Details;
+use Jungi\Bundle\ThemeBundle\Details\Details;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 

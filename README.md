@@ -13,8 +13,8 @@ Design). Of course the functionality of the bundle not ends here. Read the docum
 
 * Themes with tags support
 * The possibility of change the current theme
-* Smart theme resolving for a http request
-* Support of Responsive Web Design, Adaptive Web Design and Responsive + Server-Side
+* Smart theme matching for the request
+* Support of the Responsive Web Design, the Adaptive Web Design and the Responsive + Server-Side
 * Various theme mappings (xml, php, yaml)
 * Themes validation
 

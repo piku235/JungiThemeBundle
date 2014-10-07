@@ -77,7 +77,7 @@ Usage examples
 --------------
 
 How tags works you can see by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/EventListener/DeviceThemeSwitchTest.php)
-and [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/StandardThemeSelectorTest.php).
+and [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/ThemeSelectorTest.php).
 
 Also there are two example bundles which I mentioned in the **README.md** of the root directory, but I will mention them
 again if you haven't seen them yet:
@@ -148,6 +148,6 @@ services:
     foo.theme.tag.provider:
         class: "%jungi_theme.tag.registry.provider.class%"
         tags:
-            -  { name: jungi.tag_provider }
+            - { name: jungi.tag_provider }
         arguments: ["%foo.theme.tag.class%"]
 ```
