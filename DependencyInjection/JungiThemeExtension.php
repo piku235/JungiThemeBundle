@@ -80,7 +80,7 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinderChain',
             'Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder',
             'Jungi\Bundle\ThemeBundle\Core\MobileDetect',
-            'Jungi\Bundle\ThemeBundle\Core\Details',
+            'Jungi\Bundle\ThemeBundle\Details\Details',
             'Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser',
             'Jungi\Bundle\ThemeBundle\Core\Theme',
             'Jungi\Bundle\ThemeBundle\Core\ThemeManager',

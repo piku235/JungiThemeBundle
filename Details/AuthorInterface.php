@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Core;
+namespace Jungi\Bundle\ThemeBundle\Details;
 
 /**
  * AuthorInterface
@@ -38,4 +38,4 @@ interface AuthorInterface
      * @return string|null
      */
     public function getWebsite();
-} 
+}

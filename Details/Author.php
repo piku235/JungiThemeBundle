@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Core;
+namespace Jungi\Bundle\ThemeBundle\Details;
 
 /**
  * Author is the default implementation of the AuthorInterface
@@ -36,8 +36,8 @@ class Author implements AuthorInterface
     /**
      * Constructor
      *
-     * @param string $name An author name
-     * @param string $email An author email
+     * @param string $name    An author name
+     * @param string $email   An author email
      * @param string $website An author website (optional)
      */
     public function __construct($name, $email, $website = null)
@@ -80,4 +80,4 @@ class Author implements AuthorInterface
     {
         return sprintf('%s (%s)', $this->name, $this->email);
     }
-} 
+}

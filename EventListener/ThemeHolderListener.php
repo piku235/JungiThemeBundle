@@ -43,10 +43,10 @@ class ThemeHolderListener implements EventSubscriberInterface
     /**
      * Constructor
      *
-     * @param ThemeHolderInterface   $holder   A theme holder
-     * @param ThemeSelectorInterface $selector A theme selector
+     * @param ThemeHolderInterface   $holder          A theme holder
+     * @param ThemeSelectorInterface $selector        A theme selector
      * @param bool                   $ignoreNullTheme Whether to ignore the situation when the theme selector
-     *                                                 will not match any theme for the request (optional)
+     *                                                will not match any theme for the request (optional)
      */
     public function __construct(ThemeHolderInterface $holder, ThemeSelectorInterface $selector, $ignoreNullTheme = false)
     {

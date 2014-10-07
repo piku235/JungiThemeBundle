@@ -11,8 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Core;
 
-use Jungi\Bundle\ThemeBundle\Core\Author;
-use Jungi\Bundle\ThemeBundle\Core\Details;
+use Jungi\Bundle\ThemeBundle\Details\Author;
+use Jungi\Bundle\ThemeBundle\Details\Details;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**

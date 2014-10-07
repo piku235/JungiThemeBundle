@@ -11,12 +11,12 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Core\Author;
+use Jungi\Bundle\ThemeBundle\Details\Author;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
-use Jungi\Bundle\ThemeBundle\Core\Details;
+use Jungi\Bundle\ThemeBundle\Details\Details;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -84,6 +84,7 @@ class YamlFileLoader extends FileLoader
 
         $content = Yaml::parse($path, true);
         if (null === $content) { // If is an empty file
+
             return;
         }
 
@@ -206,7 +207,7 @@ class YamlFileLoader extends FileLoader
      *
      * @return Author[]
      *
-     * @throws \RuntimeException When an author definition has missing name and email
+     * @throws \RuntimeException         When an author definition has missing name and email
      * @throws \InvalidArgumentException If the "authors" is not an array
      * @throws \InvalidArgumentException If the "author" has unrecognized keys
      */
@@ -259,8 +260,8 @@ class YamlFileLoader extends FileLoader
     /**
      * Parses a tag
      *
-     * @param string $name A name
-     * @param mixed $arguments Arguments
+     * @param string $name      A name
+     * @param mixed  $arguments Arguments
      *
      * @return TagInterface
      *

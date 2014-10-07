@@ -40,19 +40,19 @@ class ThemeSelector implements ThemeSelectorInterface
     private $dispatcher;
 
     /**
+     * @var ThemeResolverInterface
+     */
+    private $fallback;
+
+    /**
+     * @var ThemeResolverInterface
+     */
+    private $resolver;
+
+    /**
      * @var ThemeManagerInterface
      */
     protected $manager;
-
-    /**
-     * @var ThemeResolverInterface
-     */
-    protected $fallback;
-
-    /**
-     * @var ThemeResolverInterface
-     */
-    protected $resolver;
 
     /**
      * Constructor

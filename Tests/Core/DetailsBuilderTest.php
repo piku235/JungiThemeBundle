@@ -11,8 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Core;
 
-use Jungi\Bundle\ThemeBundle\Core\Author;
-use Jungi\Bundle\ThemeBundle\Core\DetailsBuilder;
+use Jungi\Bundle\ThemeBundle\Details\Author;
+use Jungi\Bundle\ThemeBundle\Details\DetailsBuilder;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
@@ -63,4 +63,4 @@ class DetailsBuilderTest extends TestCase
 
         $builder->getDetails();
     }
-} 
+}

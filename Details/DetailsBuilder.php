@@ -1,6 +1,6 @@
 <?php
 
-namespace Jungi\Bundle\ThemeBundle\Core;
+namespace Jungi\Bundle\ThemeBundle\Details;
 
 /**
  * DetailsBuilder is a builder which helps with creating the Details instance

@@ -15,7 +15,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 use Jungi\Bundle\ThemeBundle\Form\Type\ThemeType;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Core\Details;
+use Jungi\Bundle\ThemeBundle\Details\Details;
 
 /**
  * ThemeType Test Case

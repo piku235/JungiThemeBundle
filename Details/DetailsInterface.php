@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Core;
+namespace Jungi\Bundle\ThemeBundle\Details;
 
 /**
  * DetailsInterface implementations are used by ThemeInterface instances in order to share

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Core;
+namespace Jungi\Bundle\ThemeBundle\Details;
 
 /**
  * Details is a simple implementation of the DetailsInterface

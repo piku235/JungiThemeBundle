@@ -56,7 +56,7 @@ class ThemeHolderListenerTest extends TestCase
         $this->selector
             ->expects($this->once())
             ->method('select')
-            ->will($this->returnCallback(function($request) use($theme) {
+            ->will($this->returnCallback(function ($request) use ($theme) {
                 if ($request->attributes->get('empty_theme')) {
                     throw new NullThemeException('empty_theme');
                 }
@@ -104,4 +104,4 @@ class ThemeHolderListenerTest extends TestCase
         $listener = new ThemeHolderListener($this->holder, $this->selector, false);
         $listener->onKernelController($this->event);
     }
-} 
+}

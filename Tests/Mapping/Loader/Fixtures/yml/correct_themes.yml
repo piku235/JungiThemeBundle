@@ -1,7 +1,10 @@
 parameters:
     foo_1.mobile.systems: [ iOS, AndroidOS ]
     foo_1.mobile.device: "const@jungi.mobile_devices::MOBILE"
-    leading_author: { name: piku235, email: piku235@gmail.com, website: www.foo.com }
+    leading_author:
+        name: piku235
+        email: piku235@gmail.com
+        website: www.foo.com
 
 themes:
     foo_1:

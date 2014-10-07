@@ -11,12 +11,12 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Core\Author;
+use Jungi\Bundle\ThemeBundle\Details\Author;
 use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Core\Details;
+use Jungi\Bundle\ThemeBundle\Details\Details;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Util\XmlUtils;
@@ -206,7 +206,7 @@ class XmlFileLoader extends FileLoader
      *
      * @return Author[]
      *
-     * @throws \RuntimeException When an author definition has missing name and email
+     * @throws \RuntimeException         When an author definition has missing name and email
      * @throws \InvalidArgumentException If the "authors" is not an array
      * @throws \InvalidArgumentException If the "author" has unrecognized keys
      */
@@ -307,9 +307,9 @@ class XmlFileLoader extends FileLoader
 
     /**
      * Returns the children of a given DOM element
-     * 
-     * @param \DOMElement $elm A DOM element
-     * @param string $name Child element name
+     *
+     * @param \DOMElement $elm  A DOM element
+     * @param string      $name Child element name
      *
      * @return \DOMElement[]
      */
@@ -331,9 +331,9 @@ class XmlFileLoader extends FileLoader
     /**
      * Returns elements with a proper php value
      *
-     * @param \DOMElement $elm A DOM element
-     * @param string $name Child element name
-     * @param bool $replaceParameters Whether to replace parameters (optional)
+     * @param \DOMElement $elm               A DOM element
+     * @param string      $name              Child element name
+     * @param bool        $replaceParameters Whether to replace parameters (optional)
      *
      * @return mixed
      */
@@ -359,9 +359,9 @@ class XmlFileLoader extends FileLoader
     /**
      * Returns arguments to the proper php values
      *
-     * @param \DOMElement $elm A DOM element
-     * @param string $name Child element name
-     * @param bool $replaceParameters Whether to replace parameters (optional)
+     * @param \DOMElement $elm               A DOM element
+     * @param string      $name              Child element name
+     * @param bool        $replaceParameters Whether to replace parameters (optional)
      *
      * @return mixed
      */
