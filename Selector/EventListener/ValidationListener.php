@@ -45,7 +45,7 @@ class ValidationListener implements EventSubscriberInterface
      * Constructor
      *
      * @param ValidatorInterface                 $validator    A validator
-     * @param ThemeResolverInvestigatorInterface $investigator An untrusted resolvers checker (optional)
+     * @param ThemeResolverInvestigatorInterface $investigator A theme resolver investigator (optional)
      * @param LoggerInterface                    $logger       A logger (optional)
      */
     public function __construct(ValidatorInterface $validator, ThemeResolverInvestigatorInterface $investigator = null, LoggerInterface $logger = null)

@@ -30,21 +30,11 @@ class ThemeLocatorTest extends TestCase
     private $manager;
 
     /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * {@inheritdoc}
      */
     protected function setUp()
     {
         $this->manager = new ThemeManager(array($this->createThemeMock('Foo', '/foo/theme/path')));
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::tearDown()
-     */
-    protected function tearDown()
-    {
-        $this->manager = null;
     }
 
     /**
@@ -103,7 +93,6 @@ class ThemeLocatorTest extends TestCase
     }
 
     /**
-     * (non-PHPdoc)
      * @see \Symfony\Bundle\FrameworkBundle\Tests\Templating\Loader\TemplateLocatorTest::testLocateATemplate()
      */
     public function testLocateATemplate()
@@ -124,7 +113,6 @@ class ThemeLocatorTest extends TestCase
     }
 
     /**
-     * (non-PHPdoc)
      * @see \Symfony\Bundle\FrameworkBundle\Tests\Templating\Loader\TemplateLocatorTest::testThrowsExceptionWhenTemplateNotFound()
      */
     public function testThrowsExceptionWhenTemplateNotFound()
@@ -155,7 +143,6 @@ class ThemeLocatorTest extends TestCase
     }
 
     /**
-     * (non-PHPdoc)
      * @see \Symfony\Bundle\FrameworkBundle\Tests\Templating\Loader\TemplateLocatorTest::testThrowsExceptionWhenTemplateNotFound()
      * @expectedException \InvalidArgumentException
      */

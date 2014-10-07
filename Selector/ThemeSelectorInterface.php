@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector;
 
+use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -21,13 +22,13 @@ use Symfony\Component\HttpFoundation\Request;
 interface ThemeSelectorInterface
 {
     /**
-     * Sets the appropriate theme for a given Request
+     * Selects an appropriate theme for a given Request
      *
      * @param Request $request A Request instance
      *
      * @return \Jungi\Bundle\ThemeBundle\Core\ThemeInterface
      *
-     * @throws \Exception If something goes wrong
+     * @throws NullThemeException If there is no any matching theme for the request
      */
     public function select(Request $request);
 }

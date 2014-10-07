@@ -42,8 +42,8 @@ class JungiThemeExtension extends Extension
         $loader->load('listeners.xml');
 
         // Ignore null themes
-        $container->setParameter('jungi_theme.selector.options', array(
-            'ignore_null_themes' => $config['selector']['ignore_null_themes']
+        $container->setParameter('jungi_theme.listener.holder.ignore_null_theme', array(
+            'ignore_null_theme' => $config['holder']['ignore_null_theme']
         ));
 
         // Theme resolver conf
@@ -87,10 +87,11 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Core\ThemeReference',
             'Jungi\Bundle\ThemeBundle\Core\ThemeNameParser',
             'Jungi\Bundle\ThemeBundle\Form\Type\ThemeType',
-            'Jungi\Bundle\ThemeBundle\Changer\StandardThemeChanger',
+            'Jungi\Bundle\ThemeBundle\Changer\ThemeChanger',
             'Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents',
             'Jungi\Bundle\ThemeBundle\Core\Loader\ThemeLocator',
             'Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent',
+            'Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\FileLoader',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader',
@@ -99,12 +100,12 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver',
             'Jungi\Bundle\ThemeBundle\Resolver\SessionThemeResolver',
             'Jungi\Bundle\ThemeBundle\Resolver\EventListener\ThemeResolverListener',
-            'Jungi\Bundle\ThemeBundle\Selector\StandardThemeSelector',
+            'Jungi\Bundle\ThemeBundle\Selector\ThemeSelector',
             'Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents',
             'Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent',
+            'Jungi\Bundle\ThemeBundle\Selector\Event\DedicatedResolvedThemeEvent',
             'Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch',
             'Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener',
-            'Jungi\Bundle\ThemeBundle\Selector\EventListener\ThemeHolderListener',
             'Jungi\Bundle\ThemeBundle\Validation\ValidationUtils',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',

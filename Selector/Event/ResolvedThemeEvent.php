@@ -24,24 +24,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ResolvedThemeEvent extends HttpThemeEvent
 {
     /**
-     * @var string
-     */
-    const PRIMARY_RESOLVER = 'primary';
-
-    /**
-     * @var string
-     */
-    const FALLBACK_RESOLVER = 'fallback';
-
-    /**
      * @var ThemeResolverInterface
      */
     protected $resolver;
-
-    /**
-     * @var string
-     */
-    protected $resolverType;
 
     /**
      * @var bool
@@ -51,52 +36,19 @@ class ResolvedThemeEvent extends HttpThemeEvent
     /**
      * Constructor
      *
-     * @param ThemeInterface         $theme        A theme
-     * @param string                 $resolverType A theme resolver type
-     * @param ThemeResolverInterface $resolver     A theme resolver
-     * @param Request                $request      A Request object
-     * @param bool                   $clearTheme   Whether the theme in the event can be cleared (optional)
+     * @param ThemeInterface         $theme      A theme
+     * @param ThemeResolverInterface $resolver   A theme resolver
+     * @param Request                $request    A Request object
+     * @param bool                   $clearTheme Whether the theme in the event can be cleared (optional)
      *
      * @throws \InvalidArgumentException When the theme resolver type is invalid
      */
-    public function __construct(ThemeInterface $theme, $resolverType, ThemeResolverInterface $resolver, Request $request, $clearTheme = true)
+    public function __construct(ThemeInterface $theme, ThemeResolverInterface $resolver, Request $request, $clearTheme = true)
     {
-        $types = array(self::PRIMARY_RESOLVER, self::FALLBACK_RESOLVER);
-        if (!in_array($resolverType, $types)) {
-            throw new \InvalidArgumentException(sprintf(
-                'The given theme resolver type "%s" is invalid, the supported types: %s.',
-                $resolverType,
-                implode(', ', $types)
-            ));
-        }
-
         $this->clearTheme = $clearTheme;
         $this->resolver = $resolver;
-        $this->resolverType = $resolverType;
 
         parent::__construct($theme, $request);
-    }
-
-    /**
-     * Checks whether the theme in the event was resolved by given theme resolver type
-     *
-     * @param string $type A theme resolver type
-     *
-     * @return bool
-     */
-    public function wasResolvedBy($type)
-    {
-        return $this->resolverType == $type;
-    }
-
-    /**
-     * Returns the theme resolver type
-     *
-     * @return string
-     */
-    public function getThemeResolverType()
-    {
-        return $this->resolverType;
     }
 
     /**
@@ -128,7 +80,7 @@ class ResolvedThemeEvent extends HttpThemeEvent
      *
      * @return void
      *
-     * @throws \BadMethodCallException When the clearing theme ability is locked
+     * @throws \BadMethodCallException When clearing theme ability is locked
      */
     public function clearTheme()
     {

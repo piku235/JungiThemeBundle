@@ -31,29 +31,18 @@ class SessionThemeResolverTest extends TestCase
     private $resolver;
 
     /**
-     * @var Request
+     * @var \Symfony\Component\HttpFoundation\Request
      */
     private $request;
 
     /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * Set up
      */
     protected function setUp()
     {
         $this->resolver = new SessionThemeResolver();
         $this->request = $this->createDesktopRequest();
         $this->request->setSession(new Session(new MockArraySessionStorage(), new AttributeBag(), new FlashBag()));
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::tearDown()
-     */
-    protected function tearDown()
-    {
-        $this->resolver = null;
-        $this->request = null;
     }
 
     /**

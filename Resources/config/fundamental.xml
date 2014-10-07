@@ -13,8 +13,8 @@
         <parameter key="jungi_theme.holder.default.class">Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder</parameter>
         <parameter key="jungi_theme.mobile_detect.class">Jungi\Bundle\ThemeBundle\Core\MobileDetect</parameter>
         <parameter key="jungi_theme.filename_parser.class">Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser</parameter>
-        <parameter key="jungi_theme.selector.class">Jungi\Bundle\ThemeBundle\Selector\StandardThemeSelector</parameter>
-        <parameter key="jungi_theme.changer.class">Jungi\Bundle\ThemeBundle\Changer\StandardThemeChanger</parameter>
+        <parameter key="jungi_theme.selector.class">Jungi\Bundle\ThemeBundle\Selector\ThemeSelector</parameter>
+        <parameter key="jungi_theme.changer.class">Jungi\Bundle\ThemeBundle\Changer\ThemeChanger</parameter>
         <parameter key="jungi_theme.resolver.investigator.class">Jungi\Bundle\ThemeBundle\Resolver\Investigator\ThemeResolverInvestigator</parameter>
         <parameter key="jungi_theme.tag.factory.class">Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory</parameter>
         <parameter key="jungi_theme.tag.registry.class">Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry</parameter>
@@ -71,7 +71,6 @@
             <argument type="service" id="jungi_theme.manager"/>
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="jungi_theme.resolver"/>
-            <argument>%jungi_theme.selector.options%</argument>
             <argument type="service" id="jungi_theme.fallback_resolver" on-invalid="null" />
         </service>
         <service id="jungi_theme.resolver.investigator" class="%jungi_theme.resolver.investigator.class%">

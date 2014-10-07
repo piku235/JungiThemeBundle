@@ -13,7 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Selector;
 
 use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener;
-use Jungi\Bundle\ThemeBundle\Selector\StandardThemeSelector;
+use Jungi\Bundle\ThemeBundle\Selector\ThemeSelector;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch;
@@ -31,14 +31,14 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * StandardThemeSelector Test Case
+ * ThemeSelector Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class StandardThemeSelectorTest extends TestCase
+class ThemeSelectorTest extends TestCase
 {
     /**
-     * @var StandardThemeSelector
+     * @var ThemeSelector
      */
     private $selector;
 
@@ -58,8 +58,7 @@ class StandardThemeSelectorTest extends TestCase
     private $resolver;
 
     /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * Set up
      */
     protected function setUp()
     {
@@ -76,23 +75,11 @@ class StandardThemeSelectorTest extends TestCase
             $theme
         ));
         $this->resolver = new InMemoryThemeResolver('footheme', false);
-        $this->selector = new StandardThemeSelector($this->manager, $this->eventDispatcher, $this->resolver);
+        $this->selector = new ThemeSelector($this->manager, $this->eventDispatcher, $this->resolver);
     }
 
     /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::tearDown()
-     */
-    protected function tearDown()
-    {
-        $this->selector = null;
-        $this->resolver = null;
-        $this->manager = null;
-        $this->eventDispatcher = null;
-    }
-
-    /**
-     * Tests a event listener (DeviceSwitch) cooperation with StandardThemeSelector
+     * Tests a event listener (DeviceSwitch) cooperation with ThemeSelector
      */
     public function testDeviceSwitchListener()
     {
@@ -240,23 +227,6 @@ class StandardThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests on an empty theme name with enabled "ignore null themes"
-     */
-    public function testOnNullThemeWithNullThemesIgnore()
-    {
-        $request = $this->createDesktopRequest();
-
-        $this->resolver->setThemeName(null, $request);
-        $this->selector->setOption('ignore_null_themes', true);
-
-        try {
-            $this->selector->select($request);
-        } catch (NullThemeException $e) {
-            $this->fail('When the option "ignore null themes" is enabled the NullThemeException should not be thrown.');
-        }
-    }
-
-    /**
      * Tests on an empty theme name
      *
      * @expectedException \Jungi\Bundle\ThemeBundle\Exception\NullThemeException
@@ -268,24 +238,6 @@ class StandardThemeSelectorTest extends TestCase
         $this->resolver->setThemeName('missing_theme', $request);
         $this->selector->setFallback(new InMemoryThemeResolver(null));
         $this->selector->select($request);
-    }
-
-    /**
-     * Tests on an empty fallback theme name with enabled "ignore null themes"
-     */
-    public function testFallbackOnNullThemeWithNullThemesIgnore()
-    {
-        $request = $this->createDesktopRequest();
-
-        $this->resolver->setThemeName('missing_theme', $request);
-        $this->selector->setFallback(new InMemoryThemeResolver(null));
-        $this->selector->setOption('ignore_null_themes', true);
-
-        try {
-            $this->selector->select($request);
-        } catch (NullThemeException $e) {
-            $this->fail('When the option "ignore null themes" is enabled the NullThemeException should not be thrown.');
-        }
     }
 
     /**

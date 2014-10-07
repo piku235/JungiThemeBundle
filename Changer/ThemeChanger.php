@@ -20,22 +20,23 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
 
 /**
- * StandardThemeChanger is a simple implementation of the ThemeChangerInterface.
+ * ThemeChanger is a simple implementation of the ThemeChangerInterface.
+ *
  * It uses a ThemeResolverInterface instance for changing the current theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class StandardThemeChanger implements ThemeChangerInterface
+class ThemeChanger implements ThemeChangerInterface
 {
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+
     /**
      * @var ThemeManagerInterface
      */
     protected $manager;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $dispatcher;
 
     /**
      * @var ThemeHolderInterface

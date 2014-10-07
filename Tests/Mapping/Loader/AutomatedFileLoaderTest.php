@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
+use Jungi\Bundle\ThemeBundle\Core\Author;
 use Jungi\Bundle\ThemeBundle\Core\Details;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
@@ -25,7 +26,7 @@ use Jungi\Bundle\ThemeBundle\Tag;
 abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
 {
     /**
-     * Set up
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -43,17 +44,36 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
     {
         $this->loadFile('correct_themes');
 
-        $details = new Details(array(
-            'name' => 'A fancy theme',
-            'version' => '1.0.0',
-            'description' => '<i>foo desc</i>',
-            'license' => 'MIT',
-            'author.name' => 'piku235',
-            'author.email' => 'piku235@gmail.com',
-            'author.site' => 'http://test.pl'
-        ));
+        $leadingAuthor = new Author('piku235', 'piku235@gmail.com', 'www.foo.com');
+        $dsb = Details::createBuilder();
+        $dsb
+            ->setName('A fancy theme')
+            ->setVersion('1.0.0')
+            ->setDescription('<i>foo desc</i>')
+            ->setLicense('MIT')
+            ->addAuthor($leadingAuthor)
+        ;
+        $details = $dsb->getDetails();
+
+        $dsb->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'));
+        $details1 = $dsb->getDetails();
+
+        $dsb = Details::createBuilder();
+        $dsb
+            ->setName('A fancy theme')
+            ->setVersion('1.0.0')
+        ;
+        $details4 = $dsb->getDetails();
+
+        $dsb = Details::createBuilder();
+        $dsb
+            ->setName('A fancy theme')
+            ->setVersion('1.0.0')
+            ->setDescription('')
+        ;
+
         $themes = array(
-            new Theme('foo_1', __DIR__ . '/Fixtures/fake_bundle', $details, new TagCollection(array(
+            new Theme('foo_1', __DIR__ . '/Fixtures/fake_bundle', $details1, new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
                 new Own('test')
@@ -64,10 +84,7 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             new Theme('foo_3', __DIR__ . '/Fixtures/fake_bundle', $details, new TagCollection(array(
                 new Own(CONST_TEST)
             ))),
-            new Theme('foo_4', __DIR__ . '/Fixtures/fake_bundle', new Details(array(
-                'name' => 'A fancy theme',
-                'version' => '1.0.0'
-            )))
+            new Theme('foo_4', __DIR__ . '/Fixtures/fake_bundle', $details4)
         );
 
         foreach ($themes as $theme) {

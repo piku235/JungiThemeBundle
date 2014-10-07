@@ -1,22 +1,20 @@
 parameters:
     foo_1.mobile.systems: [ iOS, AndroidOS ]
     foo_1.mobile.device: "const@jungi.mobile_devices::MOBILE"
+    leading_author: { name: piku235, email: piku235@gmail.com, website: www.foo.com }
 
 themes:
     foo_1:
         path: "@JungiFooBundle/Resources/theme"
         tags:
-            - name: jungi.desktop_devices
-            - name: jungi.mobile_devices
-              arguments: [ "%foo_1.mobile.systems%", "%foo_1.mobile.device%" ]
-            - name: jungi.own
-              arguments: test
+            jungi.desktop_devices: ~
+            jungi.mobile_devices: [ "%foo_1.mobile.systems%", "%foo_1.mobile.device%" ]
+            jungi.own: test
         details:
             name: A fancy theme
-            author:
-                name: piku235
-                email: piku235@gmail.com
-                site: http://test.pl
+            authors:
+                - "%leading_author%"
+                - { name: piku234, email: foo@gmail.com, website: www.boo.com }
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>
@@ -24,14 +22,10 @@ themes:
     foo_2:
         path: "@JungiFooBundle/Resources/theme"
         tags:
-            - name: jungi.own
-              arguments: "const@Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL"
+            jungi.own: "const@Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL"
         details:
             name: A fancy theme
-            author:
-                name: piku235
-                email: piku235@gmail.com
-                site: http://test.pl
+            authors: [ "%leading_author%" ]
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>
@@ -39,14 +33,10 @@ themes:
     foo_3:
         path: "@JungiFooBundle/Resources/theme"
         tags:
-            - name: jungi.own
-              arguments: "const@CONST_TEST"
+            jungi.own: "const@CONST_TEST"
         details:
             name: A fancy theme
-            author:
-                name: piku235
-                email: piku235@gmail.com
-                site: http://test.pl
+            authors: [ "%leading_author%" ]
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>

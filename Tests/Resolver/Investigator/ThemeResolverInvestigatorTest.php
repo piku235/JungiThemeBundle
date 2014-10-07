@@ -29,21 +29,11 @@ class ThemeResolverInvestigatorTest extends TestCase
     private $investigator;
 
     /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * Set up
      */
     protected function setUp()
     {
         $this->investigator = new ThemeResolverInvestigator();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::tearDown()
-     */
-    protected function tearDown()
-    {
-        $this->investigator = null;
     }
 
     /**

@@ -59,17 +59,6 @@ class ThemeNameParserTest extends TestCase
     }
 
     /**
-     * Tear down
-     *
-     * @return void
-     */
-    protected function tearDown()
-    {
-        $this->parser = null;
-        $this->holder = null;
-    }
-
-    /**
      * Tests the parse method with valid examples
      *
      * @dataProvider getValidLogicalNames
@@ -82,7 +71,8 @@ class ThemeNameParserTest extends TestCase
     }
 
     /**
-     * @dataProvider      getInvalidLogicalNames
+     * @dataProvider getInvalidLogicalNames
+     *
      * @expectedException \InvalidArgumentException
      */
     public function testOnInvalidName($name)

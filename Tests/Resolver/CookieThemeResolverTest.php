@@ -34,8 +34,7 @@ class CookieThemeResolverTest extends TestCase
     private $options;
 
     /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * Set up
      */
     protected function setUp()
     {
@@ -47,15 +46,6 @@ class CookieThemeResolverTest extends TestCase
             'httpOnly' => false
         );
         $this->resolver = new CookieThemeResolver($this->options);
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::tearDown()
-     */
-    protected function tearDown()
-    {
-        $this->resolver = null;
     }
 
     /**

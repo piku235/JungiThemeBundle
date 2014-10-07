@@ -26,17 +26,19 @@ class ThemeTypeTest extends TypeTestCase
 {
     public function testSubmitValid()
     {
-        $first = new Theme('footheme', 'path', new Details(array(
-            'name' => 'foo super theme',
-            'version' => '1.0.0'
-        )));
-        $second = new Theme('bootheme', 'path', new Details(array(
-            'name' => 'boo hio theme',
-            'version' => '1.0.0'
-        )));
-        $manager = new ThemeManager(array(
-            $first, $second
-        ));
+        $dsb = Details::createBuilder();
+        $dsb
+            ->setName('foo super theme')
+            ->setVersion('1.0.0')
+        ;
+        $first = new Theme('footheme', 'path', $dsb->getDetails());
+        $dsb = Details::createBuilder();
+        $dsb
+            ->setName('boo hio theme')
+            ->setVersion('1.0.0')
+        ;
+        $second = new Theme('bootheme', 'path', $dsb->getDetails());
+        $manager = new ThemeManager(array($first, $second));
 
         $form = $this->factory->create(new ThemeType($manager));
         $form->submit('footheme');

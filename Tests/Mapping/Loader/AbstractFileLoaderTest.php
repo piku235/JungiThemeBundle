@@ -45,7 +45,7 @@ abstract class AbstractFileLoaderTest extends TestCase
     protected $tagRegistry;
 
     /**
-     * Set up
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -61,17 +61,7 @@ abstract class AbstractFileLoaderTest extends TestCase
         $this->kernel
             ->expects($this->any())
             ->method('locateResource')
-            ->will($this->returnValue(__DIR__ . '/Fixtures/fake_bundle'));
-    }
-
-    /**
-     * Tear down
-     */
-    protected function tearDown()
-    {
-        $this->kernel = null;
-        $this->manager = null;
-        $this->tagFactory = null;
-        $this->tagRegistry = null;
+            ->will($this->returnValue(__DIR__ . '/Fixtures/fake_bundle'))
+        ;
     }
 }

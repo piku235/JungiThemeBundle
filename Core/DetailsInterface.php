@@ -34,25 +34,11 @@ interface DetailsInterface
     public function getVersion();
 
     /**
-     * Returns the author
+     * Returns the authors
      *
-     * @return string|null
+     * @return AuthorInterface[]
      */
-    public function getAuthor();
-
-    /**
-     * Returns the author email address
-     *
-     * @return string|null
-     */
-    public function getAuthorEmail();
-
-    /**
-     * Returns the author website
-     *
-     * @return string|null
-     */
-    public function getAuthorSite();
+    public function getAuthors();
 
     /**
      * Returns the description
@@ -69,9 +55,16 @@ interface DetailsInterface
     public function getLicense();
 
     /**
-     * Returns the location of a thumbnail
+     * Returns the thumbnail location
      *
      * @return string|null
      */
     public function getThumbnail();
+
+    /**
+     * Returns the high-resolution screen location
+     *
+     * @return string|null
+     */
+    public function getScreen();
 }

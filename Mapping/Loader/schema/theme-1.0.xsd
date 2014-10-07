@@ -17,59 +17,87 @@
     <xs:element name="theme-mapping">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="theme" type="Theme" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element name="parameters" type="Parameters" minOccurs="0" />
+                <xs:element name="themes" type="Themes" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="Theme">
+    <xs:complexType name="Parameter" mixed="true">
         <xs:sequence>
-            <xs:element name="tags" type="Tags" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="details" type="Details" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
-        <xs:attribute name="name" type="xs:string" use="required"/>
-        <xs:attribute name="path" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="ArgumentType" />
+        <xs:attribute name="key" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="Parameters">
+        <xs:sequence>
+            <xs:element name="parameter" type="Parameter" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Themes">
+        <xs:sequence>
+            <xs:element name="theme" type="Theme" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Theme">
+        <xs:all>
+            <xs:element name="tags" type="Tags" minOccurs="0" />
+            <xs:element name="details" type="Details" />
+        </xs:all>
+        <xs:attribute name="name" type="xs:string" use="required" />
+        <xs:attribute name="path" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="Property" mixed="true">
+        <xs:sequence>
+            <xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="type" type="PropertyType" />
+        <xs:attribute name="key" type="xs:string" />
     </xs:complexType>
 
     <xs:complexType name="Details">
         <xs:sequence>
-            <xs:element name="detail" type="Detail" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="property" type="Property" maxOccurs="unbounded" />
         </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="Detail">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute name="name" type="xs:string" use="required"/>
-            </xs:extension>
-        </xs:simpleContent>
     </xs:complexType>
 
     <xs:complexType name="Tags">
         <xs:sequence>
-            <xs:element name="tag" type="Tag" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="tag" type="Tag" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="Tag" mixed="true">
         <xs:sequence>
-            <xs:element name="argument" type="Argument" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="argument" type="Argument" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
-        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required" />
     </xs:complexType>
 
     <xs:complexType name="Argument" mixed="true">
         <xs:sequence>
-            <xs:element name="argument" type="Argument" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="argument" type="Argument" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
-        <xs:attribute name="type" type="ArgumentType"/>
+        <xs:attribute name="type" type="ArgumentType" />
     </xs:complexType>
+
+    <xs:simpleType name="PropertyType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="collection" />
+            <xs:enumeration value="string" />
+        </xs:restriction>
+    </xs:simpleType>
 
     <xs:simpleType name="ArgumentType">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="collection"/>
-            <xs:enumeration value="constant"/>
-            <xs:enumeration value="string"/>
+            <xs:enumeration value="collection" />
+            <xs:enumeration value="constant" />
+            <xs:enumeration value="string" />
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

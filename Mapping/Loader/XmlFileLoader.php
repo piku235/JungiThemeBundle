@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
+use Jungi\Bundle\ThemeBundle\Core\Author;
 use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
@@ -28,9 +29,24 @@ use Symfony\Component\Config\Util\XmlUtils;
 class XmlFileLoader extends FileLoader
 {
     /**
+     * @var string
+     */
+    const NS = 'http://piku235.github.io/JungiThemeBundle/schema/theme-mapping';
+
+    /**
      * @var LoaderHelper
      */
     private $helper;
+
+    /**
+     * @var array
+     */
+    private $parameters;
+
+    /**
+     * @var \DOMXpath
+     */
+    private $xpath;
 
     /**
      * Constructor
@@ -45,6 +61,7 @@ class XmlFileLoader extends FileLoader
         parent::__construct($themeManager, $locator, $factory);
 
         $this->helper = $helper;
+        $this->parameters = array();
     }
 
     /**
@@ -66,62 +83,71 @@ class XmlFileLoader extends FileLoader
     {
         $path = $this->locator->locate($file);
 
-        $xml = $this->loadFile($path);
-        foreach ($xml->children() as $child) {
+        $doc = $this->loadFile($path);
+        $this->xpath = new \DOMXPath($doc);
+        $this->xpath->registerNamespace('mapping', self::NS);
+
+        // Parameters
+        $this->parseParameters($doc);
+
+        // Themes
+        $this->parseThemes($doc);
+
+        // Clear tmp
+        $this->parameters = array();
+        $this->xpath = null;
+    }
+
+    /**
+     * Parses parameters from a DOM document
+     *
+     * @param \DOMDocument $doc A DOM document
+     *
+     * @return void
+     */
+    private function parseParameters(\DOMDocument $doc)
+    {
+        $parameters = $this->getElements($doc->documentElement, 'parameters');
+        if (!$parameters) {
+            return;
+        }
+
+        $this->parameters = $this->getElementsAsPhp($parameters[0], 'parameter');
+    }
+
+    /**
+     * Parses themes from a DOM document
+     *
+     * @param \DOMDocument $doc A DOM document
+     *
+     * @return void
+     */
+    private function parseThemes(\DOMDocument $doc)
+    {
+        $themes = $this->getElements($doc->documentElement, 'themes');
+        foreach ($this->getElements($themes[0], 'theme') as $child) {
             $this->themeManager->addTheme($this->parseTheme($child));
         }
     }
 
     /**
-     * Returns arguments to the proper php values
+     * Parses a theme element from a DOM document
      *
-     * @param \SimpleXmlElement $element An element
-     *
-     * @return mixed
-     */
-    private function getArgumentsAsPhp(\SimpleXmlElement $element)
-    {
-        $arguments = array();
-        foreach ($element->argument as $arg) {
-            switch ($arg['type']) {
-                case 'collection':
-                    $arguments[] = $this->getArgumentsAsPhp($arg);
-                    break;
-                case 'string':
-                    $arguments[] = (string) $arg;
-                    break;
-                case 'constant':
-                    $arguments[] = $this->helper->resolveConstant((string) $arg);
-                    break;
-                default:
-                    $arguments[] = XmlUtils::phpize($arg);
-            }
-        }
-
-        return $arguments;
-    }
-
-    /**
-     * Parses a theme element from a dom document
-     *
-     * @param \SimpleXMLElement $elm A dom element
+     * @param \DOMElement $elm A DOM element
      *
      * @return Theme
      *
      * @throws \InvalidArgumentException If a theme node has some missing attributes
      */
-    private function parseTheme(\SimpleXMLElement $elm)
+    private function parseTheme(\DOMElement $elm)
     {
-        if (!isset($elm['name']) || !isset($elm['path'])) {
+        if (!$elm->hasAttribute('name') || !$elm->hasAttribute('path')) {
             throw new \InvalidArgumentException('The node theme has some required missing attributes. Have you not forgot to specify attributes "path" and "name" for this node?');
         }
 
-        // Ns
-        $elm->registerXPathNamespace('mapping', 'http://piku235.github.io/JungiThemeBundle/schema/theme-mapping');
-
         return new Theme(
-            (string) $elm['name'],
-            $this->locator->locate((string) $elm['path']),
+            $elm->getAttribute('name'),
+            $this->locator->locate($elm->getAttribute('path')),
             $this->parseDetails($elm),
             $this->parseTags($elm)
         );
@@ -130,42 +156,125 @@ class XmlFileLoader extends FileLoader
     /**
      * Parses a details about a theme
      *
-     * @param \SimpleXMLElement $elm An element
+     * @param \DOMElement $elm A DOM element
      *
      * @return Details
      *
-     * @throws \InvalidArgumentException If a detail node has not defined attr "name"
-     * @throws \RuntimeException         When something goes wrong while parsing details node
+     * @throws \RuntimeException If "details" element has missing a required property
+     * @throws \RuntimeException When something goes wrong while parsing details node
      */
-    private function parseDetails(\SimpleXMLElement $elm)
+    private function parseDetails(\DOMElement $elm)
     {
         $collection = array();
-        foreach ($elm->xpath('mapping:details/mapping:detail') as $detail) {
-            if (!isset($detail['name'])) {
-                throw new \InvalidArgumentException('The detail node has not defined attribute "name". Have you forgot about that?');
-            }
+        foreach ($this->xpath->query('mapping:details/mapping:property', $elm) as $property) {
+            list($name, $value) = $this->parseDetailsProperty($property);
+            $collection[$name] = $value;
+        }
 
-            $collection[(string) $detail['name']] = (string) $detail;
+        $builder = Details::createBuilder();
+        $builder->addAuthors($this->processAuthors($collection));
+        if (isset($collection['license'])) {
+            $builder->setLicense($collection['license']);
+        }
+        if (isset($collection['description'])) {
+            $builder->setDescription($collection['description']);
+        }
+        if (isset($collection['thumbnail'])) {
+            $builder->setThumbnail($collection['thumbnail']);
+        }
+        if (isset($collection['screen'])) {
+            $builder->setScreen($collection['screen']);
+        }
+        if (isset($collection['name'])) {
+            $builder->setName($collection['name']);
+        }
+        if (isset($collection['version'])) {
+            $builder->setVersion($collection['version']);
         }
 
         try {
-            return new Details($collection);
+            return $builder->getDetails();
         } catch (\LogicException $e) {
-            throw new \RuntimeException('An exception has occurred while parsing the details node, see the previous exception', null, $e);
+            throw new \RuntimeException('An exception has occurred while parsing the details node, see the previous exception.', null, $e);
         }
     }
 
     /**
-     * Parses a theme tags from a given dom element
+     * Parses an authors array
      *
-     * @param \SimpleXMLElement $elm An element
+     * @param array $collection A collection of properties
+     *
+     * @return Author[]
+     *
+     * @throws \RuntimeException When an author definition has missing name and email
+     * @throws \InvalidArgumentException If the "authors" is not an array
+     * @throws \InvalidArgumentException If the "author" has unrecognized keys
+     */
+    private function processAuthors(array $collection)
+    {
+        $authors = array();
+        if (isset($collection['authors'])) {
+            if (!is_array($collection['authors'])) {
+                throw new \InvalidArgumentException('The "authors" property should be a collection.');
+            }
+
+            foreach ($collection['authors'] as $author) {
+                if (!is_array($author)) {
+                    throw new \InvalidArgumentException('The "author" property should be a collection.');
+                } elseif ($diff = array_diff(array_keys($author), array('website', 'name', 'email'))) {
+                    throw new \InvalidArgumentException(sprintf(
+                        'The "author" property is invalid, the following keys are unrecognized: "%s".',
+                        implode(', ', $diff)
+                    ));
+                } elseif (!isset($author['name']) || !isset($author['email'])) {
+                    throw new \RuntimeException('The author name and email are required if you are defining the "author" property.');
+                }
+
+                $authors[] = new Author($author['name'], $author['email'], isset($author['website']) ? $author['website'] : null);
+            }
+        }
+
+        return $authors;
+    }
+
+    /**
+     * Parses a details property
+     *
+     * @param \DOMElement $elm A DOM element
+     *
+     * @return array
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function parseDetailsProperty(\DOMElement $elm)
+    {
+        $validKeys = array('authors', 'description', 'name', 'version', 'thumbnail', 'screen', 'license');
+        if (!$elm->hasAttribute('key')) {
+            throw new \InvalidArgumentException(
+                'The "property" element of the "details" element has not defined the attribute "key". Have you forgot about that?'
+            );
+        } elseif (!in_array($elm->getAttribute('key'), $validKeys)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The key value "%s" is invalid, expected one of the following: "%s".',
+                $elm->getAttribute('key'),
+                implode(', ', $validKeys)
+            ));
+        }
+
+        return array($elm->getAttribute('key'), $this->getElementAsPhp($elm, 'property', true));
+    }
+
+    /**
+     * Parses a theme tags from a given DOM element
+     *
+     * @param \DOMElement $elm A DOM element
      *
      * @return TagCollection
      */
-    private function parseTags(\SimpleXMLElement $elm)
+    private function parseTags(\DOMElement $elm)
     {
         $tags = array();
-        foreach ($elm->xpath('mapping:tags/mapping:tag') as $tag) {
+        foreach ($this->xpath->query('mapping:tags/mapping:tag', $elm) as $tag) {
             $tags[] = $this->parseTag($tag);
         }
 
@@ -173,22 +282,111 @@ class XmlFileLoader extends FileLoader
     }
 
     /**
-     * Parses a theme tags from a given dom element
+     * Parses a theme tags from a given DOM element
      *
-     * @param \SimpleXMLElement $tag A tag element
+     * @param \DOMElement $elm A DOM element
      *
      * @return TagInterface
      *
      * @throws \InvalidArgumentException If a tag node has not defined attr "type"
      * @throws \RuntimeException         If a tag is not exist
      */
-    private function parseTag(\SimpleXMLElement $tag)
+    private function parseTag(\DOMElement $elm)
     {
-        if (!isset($tag['name'])) {
+        if (!$elm->hasAttribute('name')) {
             throw new \InvalidArgumentException('The tag node has not defined attribute "name". Have you forgot about that?');
         }
 
-        return $this->tagFactory->create((string) $tag['name'], count($tag->children()) ? $this->getArgumentsAsPhp($tag) : (string) $tag);
+        $arguments = $this->getElementsAsPhp($elm, 'argument', true);
+        if (!$arguments) {
+            $arguments = $elm->nodeValue;
+        }
+
+        return $this->tagFactory->create($elm->getAttribute('name'), $arguments);
+    }
+
+    /**
+     * Returns the children of a given DOM element
+     * 
+     * @param \DOMElement $elm A DOM element
+     * @param string $name Child element name
+     *
+     * @return \DOMElement[]
+     */
+    private function getElements(\DOMElement $elm, $name = null)
+    {
+        $collection = array();
+        foreach ($elm->childNodes as $child) {
+            if ($child instanceof \DOMElement
+                && $child->namespaceURI == self::NS
+                && (!$name || $name == $child->localName)
+            ) {
+                $collection[] = $child;
+            }
+        }
+
+        return $collection;
+    }
+
+    /**
+     * Returns elements with a proper php value
+     *
+     * @param \DOMElement $elm A DOM element
+     * @param string $name Child element name
+     * @param bool $replaceParameters Whether to replace parameters (optional)
+     *
+     * @return mixed
+     */
+    private function getElementsAsPhp(\DOMElement $elm, $name, $replaceParameters = false)
+    {
+        $i = 0;
+        $elements = array();
+        foreach ($this->getElements($elm, $name) as $child) {
+            $key = $i;
+            if ($child->hasAttribute('key')) {
+                $key = $child->getAttribute('key');
+            }
+
+            $elements[$key] = $this->getElementAsPhp($child, $name, $replaceParameters);
+            if (!$child->hasAttribute('key')) {
+                $i++;
+            }
+        }
+
+        return $elements;
+    }
+
+    /**
+     * Returns arguments to the proper php values
+     *
+     * @param \DOMElement $elm A DOM element
+     * @param string $name Child element name
+     * @param bool $replaceParameters Whether to replace parameters (optional)
+     *
+     * @return mixed
+     */
+    private function getElementAsPhp(\DOMElement $elm, $name, $replaceParameters = false)
+    {
+        switch ($elm->getAttribute('type')) {
+            case 'collection':
+                return $this->getElementsAsPhp($elm, $name, $replaceParameters);
+            case 'string':
+                return $elm->nodeValue;
+            case 'constant':
+                return $this->helper->resolveConstant($elm->nodeValue);
+            default:
+                $arg = $elm->nodeValue;
+                if ($replaceParameters && preg_match('/^%([^%]+)%$/', $arg, $matches)) {
+                    $realArg = $matches[1];
+                    if (!isset($this->parameters[$realArg])) {
+                        throw new \InvalidArgumentException(sprintf('The parameter "%s" is not defined in the theme mapping file.', $realArg));
+                    }
+
+                    return $this->parameters[$realArg];
+                }
+
+                return XmlUtils::phpize($arg);
+        }
     }
 
     /**
@@ -196,7 +394,7 @@ class XmlFileLoader extends FileLoader
      *
      * @param string $file A file
      *
-     * @return \SimpleXMLElement
+     * @return \DOMDocument
      *
      * @throws \RuntimeException When the some problem will occur while parsing a mapping file
      * @throws \RuntimeException If a file is not local
@@ -216,6 +414,6 @@ class XmlFileLoader extends FileLoader
             throw new \RuntimeException(sprintf('The problem has occurred while parsing the file "%s", see the previous exception.', $file), null, $e);
         }
 
-        return simplexml_import_dom($doc);
+        return $doc;
     }
 }

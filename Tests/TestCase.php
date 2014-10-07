@@ -70,6 +70,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      *
      * @param  string         $name A theme name
      * @param  string         $path A theme resource dir (optional)
+     *
      * @return ThemeInterface
      */
     protected function createThemeMock($name, $path = null)

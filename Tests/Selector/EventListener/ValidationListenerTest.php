@@ -52,8 +52,7 @@ class ValidationListenerTest extends TestCase
     private $event;
 
     /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * Set up
      */
     protected function setUp()
     {
@@ -65,22 +64,9 @@ class ValidationListenerTest extends TestCase
         $this->listener = new ValidationListener($validator);
         $this->event = new ResolvedThemeEvent(
             $this->theme,
-            ResolvedThemeEvent::PRIMARY_RESOLVER,
             $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface'),
             $this->getMock('Symfony\Component\HttpFoundation\Request')
         );
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::tearDown()
-     */
-    protected function tearDown()
-    {
-        $this->metadataFactory = null;
-        $this->theme = null;
-        $this->listener = null;
-        $this->event = null;
     }
 
     /**
@@ -155,7 +141,6 @@ class ValidationListenerTest extends TestCase
 
         $event = new ResolvedThemeEvent(
             $this->theme,
-            ResolvedThemeEvent::PRIMARY_RESOLVER,
             $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface'),
             $this->getMock('Symfony\Component\HttpFoundation\Request'),
             false

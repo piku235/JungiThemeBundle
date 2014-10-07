@@ -43,16 +43,6 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
     }
 
     /**
-     * Tear down
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-
-        $this->loader = null;
-    }
-
-    /**
      * Loads the given file
      *
      * @param string $file A file without ext

@@ -11,21 +11,21 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests;
 
-use Jungi\Bundle\ThemeBundle\Changer\StandardThemeChanger;
+use Jungi\Bundle\ThemeBundle\Changer\ThemeChanger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\FakeThemeResolver;
 
 /**
- * StandardThemeChanger Test Case
+ * ThemeChanger Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class StandardThemeChangerTest extends TestCase
+class ThemeChangerTest extends TestCase
 {
     /**
-     * @var StandardThemeChanger
+     * @var ThemeChanger
      */
     private $changer;
 
@@ -45,8 +45,7 @@ class StandardThemeChangerTest extends TestCase
     private $resolver;
 
     /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::setUp()
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -56,19 +55,7 @@ class StandardThemeChangerTest extends TestCase
             $this->createThemeMock('footheme'),
             $this->createThemeMock('bootheme')
         ));
-        $this->changer = new StandardThemeChanger($this->manager, $this->holder, $this->resolver, new EventDispatcher());
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see PHPUnit_Framework_TestCase::tearDown()
-     */
-    protected function tearDown()
-    {
-        $this->changer = null;
-        $this->manager = null;
-        $this->holder = null;
-        $this->resolver = null;
+        $this->changer = new ThemeChanger($this->manager, $this->holder, $this->resolver, new EventDispatcher());
     }
 
     /**

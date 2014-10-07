@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="jungi_theme.selector.listener.holder.class">Jungi\Bundle\ThemeBundle\Selector\EventListener\ThemeHolderListener</parameter>
+        <parameter key="jungi_theme.listener.holder.class">Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener</parameter>
         <parameter key="jungi_theme.resolver.listener.class">Jungi\Bundle\ThemeBundle\Resolver\EventListener\ThemeResolverListener</parameter>
         <parameter key="jungi_theme.selector.listener.validation.class">Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener</parameter>
         <parameter key="jungi_theme.selector.listener.device_switch.class">Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch</parameter>
@@ -16,10 +16,11 @@
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="jungi_theme.resolver" />
         </service>
-        <service id="jungi_theme.selector.listener.holder" class="%jungi_theme.selector.listener.holder.class%">
+        <service id="jungi_theme.listener.holder" class="%jungi_theme.listener.holder.class%">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="jungi_theme.holder" />
             <argument type="service" id="jungi_theme.selector" />
+            <argument>%jungi_theme.listener.holder.ignore_null_theme%</argument>
         </service>
         <service id="jungi_theme.selector.listener.device_switch" class="%jungi_theme.selector.listener.device_switch.class%">
             <tag name="kernel.event_subscriber" />

@@ -58,7 +58,7 @@ class MobileDetect extends \Mobile_Detect
     }
 
     /**
-     * Handles a given request
+     * Handles a given Request
      *
      * @param Request $request A request
      *
@@ -77,7 +77,7 @@ class MobileDetect extends \Mobile_Detect
     }
 
     /**
-     * Detects a operating system (OS)
+     * Detects an operating system (OS)
      *
      * @return string|false False if no match
      */

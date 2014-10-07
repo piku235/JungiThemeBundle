@@ -42,14 +42,6 @@ class TagFactoryTest extends TestCase
     }
 
     /**
-     * Tear down
-     */
-    protected function tearDown()
-    {
-        $this->factory = null;
-    }
-
-    /**
      * @dataProvider getValidTagReferences
      */
     public function testOnValidTagTypes($type, $arguments, $validTag)

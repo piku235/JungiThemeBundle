@@ -14,106 +14,77 @@ namespace Jungi\Bundle\ThemeBundle\Core;
 /**
  * Details is a simple implementation of the DetailsInterface
  *
- * All properties of the class can be only set by constructor
+ * All properties of the class can be only set by the DetailsBuilder
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class Details implements DetailsInterface
 {
     /**
-     * @var string
+     * @var AuthorInterface[]
      */
-    protected $author;
+    private $authors;
 
     /**
      * @var string
      */
-    protected $authorEmail;
+    private $version;
 
     /**
      * @var string
      */
-    protected $authorSite;
+    private $description;
 
     /**
      * @var string
      */
-    protected $version;
+    private $name;
 
     /**
      * @var string
      */
-    protected $description;
+    private $license;
 
     /**
      * @var string
      */
-    protected $name;
+    private $thumbnail;
 
     /**
      * @var string
      */
-    protected $license;
+    private $screen;
 
     /**
-     * @var string
+     * Creates a new builder instance
+     *
+     * @return DetailsBuilder
      */
-    protected $thumbnail;
+    public static function createBuilder()
+    {
+        return new DetailsBuilder();
+    }
 
     /**
      * Constructor
      *
-     * The valid parameters:
-     *
-     *   * name
-     *   * version
-     *   * description
-     *   * license
-     *   * thumbnail
-     *   * author.name
-     *   * author.site
-     *   * author.email
-     *
-     * @param array $params Parameters
-     *
-     * @throws \InvalidArgumentException When some of given parameters can not be handled
-     * @throws \InvalidArgumentException If one of required parameters was not passed
+     * @param DetailsBuilder $builder The Details builder
      */
-    public function __construct(array $parameters)
+    public function __construct(DetailsBuilder $builder)
     {
-        $validKeys = array(
-            'name',
-            'description',
-            'version',
-            'license',
-            'thumbnail',
-            'author.name',
-            'author.site',
-            'author.email'
-        );
-        $property = function ($name) use ($parameters) {
-            return isset($parameters[$name]) ? $parameters[$name] : null;
-        };
-        if ($wrong = array_diff(array_keys($parameters), $validKeys)) {
-            throw new \InvalidArgumentException(sprintf('The given parameters "%s" can not be handled.', implode(', ', $wrong)));
-        } elseif (!$property('name') || !$property('version')) {
-            throw new \InvalidArgumentException('You must provide "name" and "version" argument.');
-        }
+        $fields = $builder->getFields();
 
-        $this->name = $property('name');
-        $this->version = $property('version');
-        $this->description = $property('description');
-        $this->license = $property('license');
-        $this->thumbnail = $property('thumbnail');
-        $this->author = $property('author.name');
-        $this->authorEmail = $property('author.email');
-        $this->authorSite = $property('author.site');
+        $this->name = $fields->name;
+        $this->version = $fields->version;
+        $this->description = $fields->description;
+        $this->license = $fields->license;
+        $this->screen = $fields->screen;
+        $this->thumbnail = $fields->thumbnail;
+        $this->authors = $fields->authors;
     }
 
     /**
-     * Returns the friendly theme name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -121,39 +92,15 @@ class Details implements DetailsInterface
     }
 
     /**
-     * Returns the author
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getAuthor()
+    public function getAuthors()
     {
-        return $this->author;
+        return $this->authors;
     }
 
     /**
-     * Returns the author email address
-     *
-     * @return string
-     */
-    public function getAuthorEmail()
-    {
-        return $this->authorEmail;
-    }
-
-    /**
-     * Returns the author site
-     *
-     * @return string
-     */
-    public function getAuthorSite()
-    {
-        return $this->authorSite;
-    }
-
-    /**
-     * Returns the version
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getVersion()
     {
@@ -161,9 +108,7 @@ class Details implements DetailsInterface
     }
 
     /**
-     * Returns the description
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -171,9 +116,7 @@ class Details implements DetailsInterface
     }
 
     /**
-     * Returns the type of license
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getLicense()
     {
@@ -181,13 +124,19 @@ class Details implements DetailsInterface
     }
 
     /**
-     * Returns the location of a thumbnail
-     *
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getThumbnail()
     {
         return $this->thumbnail;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getScreen()
+    {
+        return $this->screen;
     }
 
     /**
@@ -197,6 +146,6 @@ class Details implements DetailsInterface
      */
     public function __toString()
     {
-        return sprintf('%s, %s (%s)', $this->name, $this->author ? $this->author : 'missing', $this->authorEmail ? $this->authorEmail : 'missing');
+        return sprintf('%s v.%s', $this->name, $this->version);
     }
 }

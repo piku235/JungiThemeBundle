@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
+use Jungi\Bundle\ThemeBundle\Core\Author;
 use Jungi\Bundle\ThemeBundle\Core\Details;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader;
@@ -47,14 +48,6 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
         $this->loader = new PhpFileLoader($this->manager, $this->locator, $this->tagFactory);
     }
 
-    protected function tearDown()
-    {
-        parent::tearDown();
-
-        $this->loader = null;
-        $this->locator = null;
-    }
-
     /**
      * Tests file load
      */
@@ -62,18 +55,20 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
     {
         $this->loader->load('theme.php');
 
+        $dsb = Details::createBuilder();
+        $dsb
+            ->setName('A fancy theme')
+            ->setVersion('1.0.0')
+            ->setDescription('<i>foo desc</i>')
+            ->setLicense('MIT')
+            ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'))
+            ->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'))
+        ;
+
         $this->assertEquals(new Theme(
             'foo_1',
             $this->locator->locate('@JungiFooBundle/Resources/theme'),
-            new Details(array(
-                'name' => 'A fancy theme',
-                'version' => '1.0.0',
-                'description' => '<i>foo desc</i>',
-                'license' => 'MIT',
-                'author.name' => 'piku235',
-                'author.email' => 'piku235@gmail.com',
-                'author.site' => 'http://test.pl'
-            )),
+            $dsb->getDetails(),
             new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
