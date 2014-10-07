@@ -7,8 +7,8 @@ in the JungiThemeBundle like e.g. template locations.
 Theme locations
 ---------------
 
-Just like I said in the root of documentation a theme is located in a bundle. Your job is to recognize when to use
-multiple themes in a single bundle and when to decouple these themes to separate bundles.
+Generally themes are staying in a bundle. There is no limit saying how many themes you can have in a single bundle. You
+must only decide when these themes should be together and when they should be separated into single bundles.
 
 Consider the situation when you have three themes, where only two of them are related in some way and the third one is
 whole different (different logic or maybe different graphics). You can create a first bundle e.g. **FooBundle** for these
@@ -53,9 +53,9 @@ FooBundle::layout.html.twig | /path/to/themebundle/Resources/themes/foo/FooBundl
 Overriding bundle templates
 ---------------------------
 
-You can override every bundle template that you wish in your theme and that's the main goal of themes. Suppose that e.g.
-**FooThemeBundle** is the current theme for the request, and the **Default** controller with the **index** action
-from the **BooBundle** will be performed.
+You can override every bundle template that you wish in your theme. Suppose that the theme **exclusive** of the **FooThemeBundle**
+is the current theme for the request, and the **Default** controller with the **index** action from the **BooBundle**
+will be performed.
 
 The BooBundle resources:
 
@@ -88,8 +88,8 @@ FooThemeBundle/
                     layout.html.twig
 ```
 
-In this example the **FooThemeBundle** has overwritten the template `layout.html.twig` of the **BooBundle**. When the
-template `index.html.twig` is rendered the template `layout.html.twig` of the **FooThemeBundle** is included instead
+In this example the theme **exclusive** has overwritten the template `layout.html.twig` of the **BooBundle**. When the
+template `index.html.twig` is rendered the template `layout.html.twig` of the theme **exclusive** is included instead
 of the template `layout.html.twig` from the **BooBundle**.
 
 Theme
@@ -127,7 +127,7 @@ public function __construct($name, $path, DetailsInterface $details, TagCollecti
 Details
 -------
 
-[Show the interface](https://github.com/piku235/JungiThemeBundle/blob/master/Core/DetailsInterface.php)
+[Show the interface](https://github.com/piku235/JungiThemeBundle/blob/master/Details/DetailsInterface.php)
 
 Each theme must contain an instance of the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`. It give us useful information
 about a theme.
@@ -145,9 +145,9 @@ because it would only bring a mess in its signature. Also setter methods are not
 an object creation there still will be a possibility for changing an object properties and that shouldn't be possible.
 Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Details\DetailsBuilder` which is strictly
 associated with the class `Jungi\Bundle\ThemeBundle\Details\Details`. The builder provides setter methods with the fluent
-interface.
+interface support.
 
-Here is an example of creating new details instance:
+Here is an example of creating a new details instance:
 
 ```php
 use Jungi\Bundle\ThemeBundle\Details\Details;

@@ -83,8 +83,7 @@ jungi_theme:
 
 A theme selector takes the main role of resolving a theme for the request. It has a support of primary and a fallback theme
 resolver where the fallback theme resolver can be unset. A fallback theme resolver will be only used when a primary theme
-resolver will don't match any theme for the request. A fallback theme resolver should always return some theme name.
-Also a theme selector provides events to which you can attach your own event listeners.
+resolver will don't match any theme for the request. It should always return a theme name.
 
 #### Configuration options
 
@@ -106,8 +105,8 @@ jungi_theme:
 
 ### Theme resolver
 
-We can say that a theme resolver is the heart and a theme selector is the brain of resolving theme for the request. A theme
-resolver allows for resolving and setting a theme name for the request.
+We can say that a theme resolver is the heart and a theme selector is the brain of resolving theme for the request. Basically
+a theme resolver allows for resolving and setting the theme name for the request.
 
 #### Primary and fallback
 
