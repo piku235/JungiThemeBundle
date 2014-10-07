@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
+use Jungi\Bundle\ThemeBundle\Details\DetailsInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**

@@ -42,7 +42,7 @@ interface ThemeInterface
     /**
      * Returns the details about the theme
      *
-     * @return DetailsInterface
+     * @return \Jungi\Bundle\ThemeBundle\Details\DetailsInterface
      */
     public function getDetails();
 }
