@@ -1,0 +1,13 @@
+themes:
+    foo_1:
+        path: "@JungiFooBundle/Resources/theme"
+        tags:
+            jungi.desktop_devices: ~
+            jungi.mobile_devices: [ [ iOS, AndroidOS ], "const@jungi.mobile_devices::MOBILE" ]
+            jungi.own: test
+        details:
+            name: A fancy theme
+            authors: foo
+            version: 1.0.0
+            license: MIT
+            description: <i>foo desc</i>

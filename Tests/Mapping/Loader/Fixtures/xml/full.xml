@@ -14,6 +14,7 @@
             <parameter key="email">piku235@gmail.com</parameter>
             <parameter key="website">www.foo.com</parameter>
         </parameter>
+        <parameter key="secondary_author.email">foo@gmail.com</parameter>
     </parameters>
 
     <themes>
@@ -31,14 +32,14 @@
                     <property>%leading_author%</property>
                     <property type="collection">
                         <property key="name">piku234</property>
-                        <property key="email">foo@gmail.com</property>
+                        <property key="email">%secondary_author.email%</property>
                         <property key="website">www.boo.com</property>
                     </property>
                 </property>
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
-                <property key="license">MIT</property>
+                <property key="license" type="string">MIT</property>
             </details>
         </theme>
 

@@ -43,6 +43,35 @@ class XmlFileLoaderTest extends AutomatedFileLoaderTest
     }
 
     /**
+     * @expectedException \DomainException
+     */
+    public function testLoad()
+    {
+        $this->loader->load('../yml/full.yml');
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testInvalid()
+    {
+        $this->loadFile('invalid');
+    }
+
+    /**
+     * Invalid theme mappings
+     *
+     * @return array
+     */
+    public function getInvalidThemeMappings()
+    {
+        $result = parent::getInvalidThemeMappings();
+        $result[] = array('invalid_details_missing_key');
+
+        return $result;
+    }
+
+    /**
      * Loads the given file
      *
      * @param string $file A file without ext

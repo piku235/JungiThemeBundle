@@ -42,6 +42,23 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
         );
     }
 
+    public function testEmpty()
+    {
+        try {
+            $this->loadFile('empty');
+        } catch (\Exception $e) {
+            $this->fail('Empty theme mapping files should be omitted.');
+        }
+    }
+
+    /**
+     * @expectedException \DomainException
+     */
+    public function testLoad()
+    {
+        $this->loader->load('../xml/full.xml');
+    }
+
     /**
      * Loads the given file
      *

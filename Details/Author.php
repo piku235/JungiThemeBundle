@@ -39,9 +39,15 @@ class Author implements AuthorInterface
      * @param string $name    An author name
      * @param string $email   An author email
      * @param string $website An author website (optional)
+     *
+     * @throws \RuntimeException If the name or the email wasn't provided
      */
     public function __construct($name, $email, $website = null)
     {
+        if (!$name || !$email) {
+            throw new \RuntimeException('You must provide the author name and/or the author email.');
+        }
+
         $this->name = $name;
         $this->email = $email;
         $this->website = $website;

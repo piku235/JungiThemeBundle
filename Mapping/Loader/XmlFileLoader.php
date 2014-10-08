@@ -141,10 +141,6 @@ class XmlFileLoader extends FileLoader
      */
     private function parseTheme(\DOMElement $elm)
     {
-        if (!$elm->hasAttribute('name') || !$elm->hasAttribute('path')) {
-            throw new \InvalidArgumentException('The node theme has some required missing attributes. Have you not forgot to specify attributes "path" and "name" for this node?');
-        }
-
         return new Theme(
             $elm->getAttribute('name'),
             $this->locator->locate($elm->getAttribute('path')),
@@ -206,7 +202,6 @@ class XmlFileLoader extends FileLoader
      *
      * @return Author[]
      *
-     * @throws \RuntimeException         When an author definition has missing name and email
      * @throws \InvalidArgumentException If the "authors" is not an array
      * @throws \InvalidArgumentException If the "author" has unrecognized keys
      */
@@ -226,8 +221,6 @@ class XmlFileLoader extends FileLoader
                         'The "author" property is invalid, the following keys are unrecognized: "%s".',
                         implode(', ', $diff)
                     ));
-                } elseif (!isset($author['name']) || !isset($author['email'])) {
-                    throw new \RuntimeException('The author name and email are required if you are defining the "author" property.');
                 }
 
                 $authors[] = new Author($author['name'], $author['email'], isset($author['website']) ? $author['website'] : null);
@@ -251,11 +244,11 @@ class XmlFileLoader extends FileLoader
         $validKeys = array('authors', 'description', 'name', 'version', 'thumbnail', 'screen', 'license');
         if (!$elm->hasAttribute('key')) {
             throw new \InvalidArgumentException(
-                'The "property" element of the "details" element has not defined the attribute "key". Have you forgot about that?'
+                'The "property" element of the "details" has not defined the attribute "key". Have you forgot about that?'
             );
         } elseif (!in_array($elm->getAttribute('key'), $validKeys)) {
             throw new \InvalidArgumentException(sprintf(
-                'The key value "%s" is invalid, expected one of the following: "%s".',
+                'The property key "%s" is invalid, expected one of the following: "%s".',
                 $elm->getAttribute('key'),
                 implode(', ', $validKeys)
             ));
@@ -287,16 +280,9 @@ class XmlFileLoader extends FileLoader
      * @param \DOMElement $elm A DOM element
      *
      * @return TagInterface
-     *
-     * @throws \InvalidArgumentException If a tag node has not defined attr "type"
-     * @throws \RuntimeException         If a tag is not exist
      */
     private function parseTag(\DOMElement $elm)
     {
-        if (!$elm->hasAttribute('name')) {
-            throw new \InvalidArgumentException('The tag node has not defined attribute "name". Have you forgot about that?');
-        }
-
         $arguments = $this->getElementsAsPhp($elm, 'argument', true);
         if (!$arguments) {
             $arguments = $elm->nodeValue;

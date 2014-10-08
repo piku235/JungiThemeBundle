@@ -37,12 +37,9 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
         }
     }
 
-    /**
-     * Tests on valid theme mapping
-     */
-    public function testOnValidThemeMapping()
+    public function testFull()
     {
-        $this->loadFile('correct_themes');
+        $this->loadFile('full');
 
         $leadingAuthor = new Author('piku235', 'piku235@gmail.com', 'www.foo.com');
         $dsb = Details::createBuilder();
@@ -90,6 +87,54 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
         foreach ($themes as $theme) {
             $this->assertEquals($theme, $this->manager->getTheme($theme->getName()));
         }
+    }
+
+    public function testWithoutParameters()
+    {
+        $this->loadFile('without_parameters');
+
+        $dsb = Details::createBuilder();
+        $dsb
+            ->setName('A fancy theme')
+            ->setVersion('1.0.0')
+            ->setDescription('<i>foo desc</i>')
+            ->setLicense('MIT')
+            ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'))
+            ->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'))
+        ;
+
+        $theme = new Theme('foo_1', __DIR__ . '/Fixtures/fake_bundle', $dsb->getDetails(), new TagCollection(array(
+            new Tag\DesktopDevices(),
+            new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
+            new Own('test')
+        )));
+
+        $this->assertEquals($theme, $this->manager->getTheme('foo_1'));
+    }
+
+    /**
+     * @dataProvider getInvalidThemeMappings
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidExamples($file)
+    {
+        $this->loadFile($file);
+    }
+
+    /**
+     * Invalid theme mappings
+     *
+     * @return array
+     */
+    public function getInvalidThemeMappings()
+    {
+        return array(
+            array('bad_parameter'),
+            array('invalid_details_bad_key'),
+            array('invalid_authors_first'),
+            array('invalid_authors_second'),
+            array('invalid_authors_third')
+        );
     }
 
     /**

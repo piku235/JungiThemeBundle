@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<theme-mapping xmlns="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping https://raw.githubusercontent.com/piku235/JungiThemeBundle/master/Mapping/Loader/schema/theme-1.0.xsd">
+
+    <themes>
+        <theme name="foo_1">
+            <tags>
+                <tag name="jungi.mobile_devices">
+                    <argument>%foo_1.mobile.systems%</argument>
+                    <argument>%foo_1.mobile.device%</argument>
+                </tag>
+                <tag name="jungi.desktop_devices" />
+                <tag>test</tag>
+            </tags>
+            <details>
+                <property key="authors" type="collection">
+                    <property>%leading_author%</property>
+                    <property type="collection">
+                        <property key="name">piku234</property>
+                        <property key="email">%secondary_author.email%</property>
+                        <property key="website">www.boo.com</property>
+                    </property>
+                </property>
+                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
+                <property key="version">1.0.0</property>
+                <property key="name">A fancy theme</property>
+                <property key="license" type="string">MIT</property>
+            </details>
+        </theme>
+
+        <theme name="foo_2" path="@JungiFooBundle/Resources/theme">
+            <tags>
+                <tag name="jungi.own">
+                    <argument type="constant">Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL</argument>
+                </tag>
+            </tags>
+            <details>
+                <property key="authors" type="collection">
+                    <property>%leading_author%</property>
+                </property>
+                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
+                <property key="version">1.0.0</property>
+                <property key="name">A fancy theme</property>
+                <property key="license">MIT</property>
+            </details>
+        </theme>
+
+        <theme name="foo_3" path="@JungiFooBundle/Resources/theme">
+            <tags>
+                <tag name="jungi.own">
+                    <argument type="constant">CONST_TEST</argument>
+                </tag>
+            </tags>
+            <details>
+                <property key="authors" type="collection">
+                    <property>%leading_author%</property>
+                </property>
+                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
+                <property key="version">1.0.0</property>
+                <property key="name">A fancy theme</property>
+                <property key="license">MIT</property>
+            </details>
+        </theme>
+
+        <theme name="foo_4" path="@JungiFooBundle/Resources/theme">
+            <details>
+                <property key="version">1.0.0</property>
+                <property key="name">A fancy theme</property>
+            </details>
+        </theme>
+    </themes>
+
+</theme-mapping>

@@ -163,11 +163,20 @@ class YamlFileLoader extends FileLoader
      *
      * @return Details
      *
-     * @throws \RuntimeException When something goes wrong while parsing details node
+     * @throws \RuntimeException         When something goes wrong while parsing details node
+     * @throws \InvalidArgumentException When a property key is invalid
      */
     private function parseDetails(array $specification)
     {
         $details = &$specification['details'];
+        $validKeys = array('authors', 'description', 'name', 'version', 'thumbnail', 'screen', 'license');
+        if ($diff = array_diff(array_keys($details), $validKeys)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The property keys "%s" are invalid, expected one of the following: "%s".',
+                implode(', ', $diff),
+                implode(', ', $validKeys)
+            ));
+        }
 
         // Parameters
         $this->replaceParameters($details);
