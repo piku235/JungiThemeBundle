@@ -22,8 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 class ThemeFilenameParser implements TemplateNameParserInterface
 {
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\Templating\TemplateNameParserInterface::parse()
+     * {@inheritdoc}
      */
     public function parse($name)
     {

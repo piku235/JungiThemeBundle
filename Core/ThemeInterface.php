@@ -33,14 +33,14 @@ interface ThemeInterface
     public function getTags();
 
     /**
-     * Returns the absolute path to theme resources
+     * Returns the absolute path to the theme resources
      *
      * @return string
      */
     public function getPath();
 
     /**
-     * Returns the details about the theme
+     * Returns the details of the theme
      *
      * @return \Jungi\Bundle\ThemeBundle\Details\DetailsInterface
      */

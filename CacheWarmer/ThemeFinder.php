@@ -55,14 +55,13 @@ class ThemeFinder implements TemplateFinderInterface
     {
         $result = array();
         foreach ($this->manager->getThemes() as $theme) {
-            $f = new Finder();
-            $f
+            $finder = new Finder();
+            $finder
                 ->files()
                 ->followLinks()
-                ->depth('< 3')
                 ->in($theme->getPath())
             ;
-            foreach ($f as $file) {
+            foreach ($finder as $file) {
                 $reference = $this->parser->parse($file->getRelativePathname());
                 if (false !== $reference) {
                     $result[] = new ThemeReference($reference, $theme->getName());
