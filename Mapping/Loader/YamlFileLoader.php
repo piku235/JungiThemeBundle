@@ -137,15 +137,23 @@ class YamlFileLoader extends FileLoader
      * @param array  $specification A theme specification
      *
      * @return Theme
+     *
+     * @throws \InvalidArgumentException If the path key or/and the details key is missing
+     * @throws \InvalidArgumentException If some keys are unrecognized
      */
     private function parseTheme($themeName, array $specification)
     {
         // Validation
         if (!isset($specification['path']) || !isset($specification['details'])) {
-            throw new \InvalidArgumentException('The one or all of required parameters "path, details" are missing in the theme specification.');
+            throw new \InvalidArgumentException('The path key or/and the details key is missing in the theme specification.');
         }
-        if ($keys = array_diff(array_keys($specification), array('tags', 'path', 'details'))) {
-            throw new \InvalidArgumentException(sprintf('The parameters "%s" are illegal in the theme specification.', implode(', ', $keys)));
+        $valid = array('tags', 'path', 'details');
+        if ($keys = array_diff(array_keys($specification), $valid)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The key "%s" are illegal in the theme specification.',
+                implode(', ', $keys),
+                implode(', ', $valid)
+            ));
         }
 
         return new Theme(
@@ -163,8 +171,7 @@ class YamlFileLoader extends FileLoader
      *
      * @return Details
      *
-     * @throws \RuntimeException         When something goes wrong while parsing details node
-     * @throws \InvalidArgumentException When a property key is invalid
+     * @throws \InvalidArgumentException If some keys of a property element are invalid
      */
     private function parseDetails(array $specification)
     {
@@ -202,11 +209,7 @@ class YamlFileLoader extends FileLoader
             $builder->setVersion($details['version']);
         }
 
-        try {
-            return $builder->getDetails();
-        } catch (\LogicException $e) {
-            throw new \RuntimeException('An exception has occurred while parsing the details node, see the previous exception.', null, $e);
-        }
+        return $builder->getDetails();
     }
 
     /**
@@ -216,7 +219,6 @@ class YamlFileLoader extends FileLoader
      *
      * @return Author[]
      *
-     * @throws \RuntimeException         When an author definition has missing name and email
      * @throws \InvalidArgumentException If the "authors" is not an array
      * @throws \InvalidArgumentException If the "author" has unrecognized keys
      */
@@ -236,11 +238,12 @@ class YamlFileLoader extends FileLoader
                         'The "author" element is invalid, the following keys are unrecognized: "%s".',
                         implode(', ', $diff)
                     ));
-                } elseif (!isset($author['name']) || !isset($author['email'])) {
-                    throw new \RuntimeException('The author name and email are required if you are defining the "author" element.');
                 }
 
-                $authors[] = new Author($author['name'], $author['email'], isset($author['website']) ? $author['website'] : null);
+                $name = isset($author['name']) ? $author['name'] : null;
+                $email = isset($author['email']) ? $author['email'] : null;
+                $website = isset($author['website']) ? $author['website'] : null;
+                $authors[] = new Author($name, $email, $website);
             }
         }
 
@@ -332,7 +335,7 @@ class YamlFileLoader extends FileLoader
     /**
      * Validates an entire mapping file
      *
-     * @param array  $content YAML file content
+     * @param mixed  $content YAML file content
      * @param string $file    A mapping file
      *
      * @return void
@@ -340,9 +343,9 @@ class YamlFileLoader extends FileLoader
      * @throws \InvalidArgumentException When themes node is not defined
      * @throws \UnexpectedValueException When a content from the YAML file returns other data type than array
      */
-    private function validate(array $content, $file)
+    private function validate($content, $file)
     {
-        if (!is_array($content)) { // Or a file has an illegal type
+        if (!is_array($content)) {
             throw new \UnexpectedValueException(sprintf('The return value must be of the YAML array type in the theme mapping file "%s".', $file));
         } elseif (!array_key_exists('themes', $content)) {
             throw new \InvalidArgumentException(sprintf('There is missing "themes" node in the theme mapping file "%s".', $file));

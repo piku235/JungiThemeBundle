@@ -42,7 +42,7 @@ class LoaderHelper
      *
      * @return mixed
      *
-     * @throws \RuntimeException When a constant is not exist
+     * @throws \InvalidArgumentException When the constant is wrong or not found
      */
     public function resolveConstant($value)
     {
@@ -64,6 +64,6 @@ class LoaderHelper
             }
         }
 
-        throw new \RuntimeException(sprintf('The constant "%s" is not exist.', $value));
+        throw new \InvalidArgumentException(sprintf('The constant "%s" is wrong or it can not be found.', $value));
     }
 }

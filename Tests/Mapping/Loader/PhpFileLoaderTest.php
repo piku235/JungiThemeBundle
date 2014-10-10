@@ -49,9 +49,17 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
     }
 
     /**
-     * Tests file load
+     * @expectedException \DomainException
      */
     public function testLoad()
+    {
+        $this->loader->load('../yml/full.yml');
+    }
+
+    /**
+     * Tests file load
+     */
+    public function testFull()
     {
         $this->loader->load('theme.php');
 

@@ -155,9 +155,6 @@ class XmlFileLoader extends FileLoader
      * @param \DOMElement $elm A DOM element
      *
      * @return Details
-     *
-     * @throws \RuntimeException If "details" element has missing a required property
-     * @throws \RuntimeException When something goes wrong while parsing details node
      */
     private function parseDetails(\DOMElement $elm)
     {
@@ -188,11 +185,7 @@ class XmlFileLoader extends FileLoader
             $builder->setVersion($collection['version']);
         }
 
-        try {
-            return $builder->getDetails();
-        } catch (\LogicException $e) {
-            throw new \RuntimeException('An exception has occurred while parsing the details node, see the previous exception.', null, $e);
-        }
+        return $builder->getDetails();
     }
 
     /**
@@ -223,7 +216,10 @@ class XmlFileLoader extends FileLoader
                     ));
                 }
 
-                $authors[] = new Author($author['name'], $author['email'], isset($author['website']) ? $author['website'] : null);
+                $name = isset($author['name']) ? $author['name'] : null;
+                $email = isset($author['email']) ? $author['email'] : null;
+                $website = isset($author['website']) ? $author['website'] : null;
+                $authors[] = new Author($name, $email, $website);
             }
         }
 

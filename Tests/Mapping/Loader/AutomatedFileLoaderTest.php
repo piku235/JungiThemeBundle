@@ -130,7 +130,8 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
     {
         return array(
             array('bad_parameter'),
-            array('invalid_details_bad_key'),
+            array('details_bad_property_key'),
+            array('details_missing_property_key'),
             array('invalid_authors_first'),
             array('invalid_authors_second'),
             array('invalid_authors_third')

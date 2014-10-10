@@ -60,6 +60,30 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
     }
 
     /**
+     * @expectedException \UnexpectedValueException
+     */
+    public function testInvalidContent()
+    {
+        $this->loadFile('invalid_content');
+    }
+
+    /**
+     * Invalid theme mappings
+     *
+     * @return array
+     */
+    public function getInvalidThemeMappings()
+    {
+        $result = parent::getInvalidThemeMappings();
+        $result[] = array('invalid_themes_definition');
+        $result[] = array('missing_details');
+        $result[] = array('missing_path');
+        $result[] = array('unrecognized_theme_keys');
+
+        return $result;
+    }
+
+    /**
      * Loads the given file
      *
      * @param string $file A file without ext
