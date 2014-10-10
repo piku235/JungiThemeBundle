@@ -62,7 +62,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('validation_listener')
                     ->info('theme validation listener configuration')
                     ->addDefaultsIfNotSet()
-                    ->canBeDisabled()
+                    ->canBeEnabled()
                     ->children()
                         ->booleanNode('use_investigator')->defaultTrue()->end()
                     ->end()
