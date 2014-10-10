@@ -10,7 +10,7 @@ themes:
             authors:
                 name: piku235
                 email: piku235@gmail.com
-                website: www.foo.com
+                homepage: www.foo.com
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>

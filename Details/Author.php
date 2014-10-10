@@ -31,18 +31,18 @@ class Author implements AuthorInterface
     /**
      * @var string
      */
-    protected $website;
+    protected $homepage;
 
     /**
      * Constructor
      *
-     * @param string $name    An author name
-     * @param string $email   An author email
-     * @param string $website An author website (optional)
+     * @param string $name     An author name
+     * @param string $email    An author email
+     * @param string $homepage An author homepage (optional)
      *
      * @throws \RuntimeException If the name or the email wasn't provided
      */
-    public function __construct($name, $email, $website = null)
+    public function __construct($name, $email, $homepage = null)
     {
         if (!$name || !$email) {
             throw new \RuntimeException('You must provide the author name and/or the author email.');
@@ -50,7 +50,7 @@ class Author implements AuthorInterface
 
         $this->name = $name;
         $this->email = $email;
-        $this->website = $website;
+        $this->homepage = $homepage;
     }
 
     /**
@@ -72,9 +72,9 @@ class Author implements AuthorInterface
     /**
      * {@inheritdoc}
      */
-    public function getWebsite()
+    public function getHomepage()
     {
-        return $this->website;
+        return $this->homepage;
     }
 
     /**

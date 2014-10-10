@@ -233,7 +233,7 @@ class YamlFileLoader extends FileLoader
             foreach ($collection['authors'] as $author) {
                 if (!is_array($author)) {
                     throw new \InvalidArgumentException('The "author" property should be an array.');
-                } elseif ($diff = array_diff(array_keys($author), array('website', 'name', 'email'))) {
+                } elseif ($diff = array_diff(array_keys($author), array('homepage', 'name', 'email'))) {
                     throw new \InvalidArgumentException(sprintf(
                         'The "author" element is invalid, the following keys are unrecognized: "%s".',
                         implode(', ', $diff)
@@ -242,8 +242,8 @@ class YamlFileLoader extends FileLoader
 
                 $name = isset($author['name']) ? $author['name'] : null;
                 $email = isset($author['email']) ? $author['email'] : null;
-                $website = isset($author['website']) ? $author['website'] : null;
-                $authors[] = new Author($name, $email, $website);
+                $homepage = isset($author['homepage']) ? $author['homepage'] : null;
+                $authors[] = new Author($name, $email, $homepage);
             }
         }
 

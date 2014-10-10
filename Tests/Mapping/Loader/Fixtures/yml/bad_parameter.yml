@@ -11,8 +11,8 @@ themes:
         details:
             name: A fancy theme
             authors:
-                - { name: "%non_existent_parameter%", email: piku235@gmail.com, website: www.foo.com }
-                - { name: piku234, email: foo@gmail.com, website: www.boo.com }
+                - { name: "%non_existent_parameter%", email: piku235@gmail.com, homepage: www.foo.com }
+                - { name: piku234, email: foo@gmail.com, homepage: www.boo.com }
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>

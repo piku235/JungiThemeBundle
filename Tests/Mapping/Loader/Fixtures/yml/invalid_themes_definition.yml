@@ -8,7 +8,7 @@ foo_1:
         name: A fancy theme
         authors:
             - "%leading_author%"
-            - { name: piku234, email: "%secondary_author.email%", website: www.boo.com }
+            - { name: piku234, email: "%secondary_author.email%", homepage: www.boo.com }
         version: 1.0.0
         license: MIT
         description: <i>foo desc</i>

@@ -19,7 +19,7 @@
                     <property type="collection">
                         <property key="name">piku234</property>
                         <property key="email">%secondary_author.email%</property>
-                        <property key="website">www.boo.com</property>
+                        <property key="homepage">www.boo.com</property>
                     </property>
                 </property>
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>

@@ -20,7 +20,7 @@
                 <property key="authors" type="collection">
                     <property key="name">piku235</property>
                     <property key="email">piku235@gmail.com</property>
-                    <property key="website">www.foo.com</property>
+                    <property key="homepage">www.foo.com</property>
                 </property>
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>

@@ -59,4 +59,4 @@ class LoaderHelperTest extends TestCase
     {
         $this->helper->resolveConstant('foo_boo');
     }
-} 
+}

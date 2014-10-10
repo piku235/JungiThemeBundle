@@ -33,9 +33,9 @@ interface AuthorInterface
     public function getEmail();
 
     /**
-     * Returns the author website
+     * Returns the author homepage
      *
      * @return string|null
      */
-    public function getWebsite();
+    public function getHomepage();
 }
