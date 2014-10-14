@@ -26,7 +26,7 @@ interface TagInterface
      *
      * @param TagInterface $tag A tag
      *
-     * @return boolean
+     * @return bool
      */
     public function isEqual(TagInterface $tag);
 

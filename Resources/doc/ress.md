@@ -24,7 +24,7 @@ which you must pass a value according to the accepted values by the method **is*
     <title><?php $view['slots']->output('title', 'Title') ?></title>
 </head>
 <body>
-    <h1 style="text-align: center">Super website</h1>
+    <h1 style="text-align: center">Super homepage</h1>
     <?php if ($view['slots']->has('body')): ?>
         <?php $view['slots']->output('body') ?>
     <?php else: ?>
@@ -57,7 +57,7 @@ provides the following twig functions: **is_desktop**, **is_mobile**, **is_table
     <title>{% block title %}Title{% endblock %}</title>
 </head>
 <body>
-    <h1 style="text-align: center">Super website</h1>
+    <h1 style="text-align: center">Super homepage</h1>
     {% block body %}
         {% if is_mobile() %}
             <p>Oooh, you're using a mobile device.</p>

@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 
 /**
- * A theme type is a kind of select field
+ * The select theme type
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -43,7 +43,7 @@ class ThemeType extends AbstractType
      * {@inheritdoc}
      *
      * Additional options:
-     *  - 'theme_manager' used to create the list of themes
+     * 'theme_manager' used to get themes
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

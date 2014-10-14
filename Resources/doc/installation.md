@@ -127,8 +127,8 @@ jungi_theme:
 #### Setup fallback theme resolver
 
 In the previous steps we were setting the primary theme resolver. A fallback theme resolver is very helpful when a primary
-theme resolver doesn't match any theme for the request. To setup a fallback theme resolver we have to follow the same steps
-as for the primary theme resolver. We only must change the key `primary` to `fallback`.
+theme resolver doesn't match any theme for the request. To setup a fallback theme resolver you must follow the same steps
+as for the primary theme resolver.
 
 ```yml
 # app/config/config.yml
@@ -140,7 +140,7 @@ jungi_theme:
 
 **NOTE**
 
-> Remember one thing when setting a fallback theme resolver. The set fallback theme resolver should always return
+> Remember one thing about setting a fallback theme resolver. The set fallback theme resolver should always return
 > a theme name for the request
 
 Final

@@ -19,7 +19,7 @@ jungi_theme:
 
         # theme validation listener configuration
         validation_listener:
-            enabled: true
+            enabled: false
             use_investigator: true
 
         # device theme switch configuration
@@ -68,7 +68,7 @@ Overview
 A theme holder is responsible for holding the current theme instance obtained from a theme selector. You can set
 your own theme holder service or leave it empty which by default points to the `jungi_theme.holder.default` service.
 
-If a theme selector will don't match any theme for the request then it will be generated the exception `Jungi\Bundle\ThemeBundle\Exception\NullThemeException`.
+If a theme selector will don't match any theme for the request then it will generate the exception `Jungi\Bundle\ThemeBundle\Exception\NullThemeException`.
 If you wanna ignore this kind of situation you must set the option `ignore_null_theme` to true.
 
 ```yaml
@@ -83,7 +83,7 @@ jungi_theme:
 
 A theme selector takes the main role of resolving a theme for the request. It has a support of primary and a fallback theme
 resolver where the fallback theme resolver can be unset. A fallback theme resolver will be only used when a primary theme
-resolver will don't match any theme for the request. It should always return a theme name.
+resolver will don't match any theme for the request.
 
 #### Configuration options
 

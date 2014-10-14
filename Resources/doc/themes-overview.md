@@ -105,24 +105,8 @@ manipulate themes and obtain important for us information.
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Core/Theme.php)
 
 The `Jungi\Bundle\ThemeBundle\Core\Theme` is the default theme implementation and it only defines basic methods contained
-in the interface. It's used by the XmlFileLoader and the YamlFileLoader. Properties of this class can be only set by its
-constructor.
-
-The snippet of the constructor:
-
-```php
-namespace Jungi\Bundle\ThemeBundle\Core;
-
-/**
- * Constructor
- *
- * @param string $name An unique theme name
- * @param string $path A path to theme resources
- * @param DetailsInterface $details A details
- * @param TagCollection $tags A tag collection (optional)
- */
-public function __construct($name, $path, DetailsInterface $details, TagCollection $tags = null);
-```
+in the interface. All properties of the class can be only set by its constructor. You can use this class e.g. in php
+theme mapping files.
 
 Details
 -------
@@ -159,8 +143,6 @@ $dsb
     ->setVersion('1.0.0')
     ->setDescription('a simple theme with the beautiful design')
     ->setLicense('GPL')
-    ->setThumbnail('public/images/thumbnail.png')
-    ->setScreen('public/images/screen.png')
     ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'foo.com'))
 ;
 
