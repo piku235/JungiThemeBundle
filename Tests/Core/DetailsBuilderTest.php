@@ -28,8 +28,6 @@ class DetailsBuilderTest extends TestCase
         $version = '1.0';
         $description = 'test';
         $license = 'MIT';
-        $thumbnail = 'test_thumbnail';
-        $screen = 'test_screen';
         $author = new Author('test_author', 'test_author_email', 'test_author_www');
 
         $builder = new DetailsBuilder();
@@ -38,8 +36,6 @@ class DetailsBuilderTest extends TestCase
             ->setVersion($version)
             ->setDescription($description)
             ->setLicense($license)
-            ->setThumbnail($thumbnail)
-            ->setScreen($screen)
             ->addAuthor($author)
         ;
 
@@ -48,8 +44,6 @@ class DetailsBuilderTest extends TestCase
         $this->assertEquals($version, $fields->version);
         $this->assertEquals($description, $fields->description);
         $this->assertEquals($license, $fields->license);
-        $this->assertEquals($thumbnail, $fields->thumbnail);
-        $this->assertEquals($screen, $fields->screen);
         $this->assertEquals(array($author), $fields->authors);
     }
 

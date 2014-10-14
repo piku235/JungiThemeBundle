@@ -53,18 +53,4 @@ interface DetailsInterface
      * @return string|null
      */
     public function getLicense();
-
-    /**
-     * Returns the thumbnail location
-     *
-     * @return string|null
-     */
-    public function getThumbnail();
-
-    /**
-     * Returns the high-resolution screen location
-     *
-     * @return string|null
-     */
-    public function getScreen();
 }

@@ -70,18 +70,18 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
         ;
 
         $themes = array(
-            new Theme('foo_1', __DIR__ . '/Fixtures/fake_bundle', $details1, new TagCollection(array(
+            new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $details1, new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
                 new Own('test')
             ))),
-            new Theme('foo_2', __DIR__ . '/Fixtures/fake_bundle', $details, new TagCollection(array(
+            new Theme('foo_2', __DIR__ . '/Fixtures/FakeBundle', $details, new TagCollection(array(
                 new Own(Own::SPECIAL)
             ))),
-            new Theme('foo_3', __DIR__ . '/Fixtures/fake_bundle', $details, new TagCollection(array(
+            new Theme('foo_3', __DIR__ . '/Fixtures/FakeBundle', $details, new TagCollection(array(
                 new Own(CONST_TEST)
             ))),
-            new Theme('foo_4', __DIR__ . '/Fixtures/fake_bundle', $details4)
+            new Theme('foo_4', __DIR__ . '/Fixtures/FakeBundle', $details4)
         );
 
         foreach ($themes as $theme) {
@@ -103,7 +103,7 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             ->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'))
         ;
 
-        $theme = new Theme('foo_1', __DIR__ . '/Fixtures/fake_bundle', $dsb->getDetails(), new TagCollection(array(
+        $theme = new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $dsb->getDetails(), new TagCollection(array(
             new Tag\DesktopDevices(),
             new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
             new Own('test')

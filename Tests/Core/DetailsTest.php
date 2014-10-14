@@ -31,8 +31,6 @@ class DetailsTest extends TestCase
             ->setVersion('1.0')
             ->setDescription('test')
             ->setLicense('MIT')
-            ->setThumbnail('test_thumbnail')
-            ->setScreen('test_screen')
             ->addAuthor($author)
         ;
 
@@ -41,8 +39,6 @@ class DetailsTest extends TestCase
         $this->assertEquals('1.0', $details->getVersion());
         $this->assertEquals('test', $details->getDescription());
         $this->assertEquals('MIT', $details->getLicense());
-        $this->assertEquals('test_thumbnail', $details->getThumbnail());
-        $this->assertEquals('test_screen', $details->getScreen());
         $this->assertEquals(array($author), $details->getAuthors());
     }
 }

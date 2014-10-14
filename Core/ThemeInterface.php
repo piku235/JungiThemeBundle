@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * The basic interface which every theme must have.
+ * The basic theme interface
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -33,7 +33,7 @@ interface ThemeInterface
     public function getTags();
 
     /**
-     * Returns the absolute path to the theme resources
+     * Returns the absolute path to the theme directory
      *
      * @return string
      */

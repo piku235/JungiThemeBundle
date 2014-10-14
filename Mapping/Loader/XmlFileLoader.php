@@ -172,12 +172,6 @@ class XmlFileLoader extends FileLoader
         if (isset($collection['description'])) {
             $builder->setDescription($collection['description']);
         }
-        if (isset($collection['thumbnail'])) {
-            $builder->setThumbnail($collection['thumbnail']);
-        }
-        if (isset($collection['screen'])) {
-            $builder->setScreen($collection['screen']);
-        }
         if (isset($collection['name'])) {
             $builder->setName($collection['name']);
         }

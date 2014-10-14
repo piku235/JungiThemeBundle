@@ -196,12 +196,6 @@ class YamlFileLoader extends FileLoader
         if (isset($details['description'])) {
             $builder->setDescription($details['description']);
         }
-        if (isset($details['thumbnail'])) {
-            $builder->setThumbnail($details['thumbnail']);
-        }
-        if (isset($details['screen'])) {
-            $builder->setScreen($details['screen']);
-        }
         if (isset($details['name'])) {
             $builder->setName($details['name']);
         }

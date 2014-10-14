@@ -46,16 +46,6 @@ class Details implements DetailsInterface
     private $license;
 
     /**
-     * @var string
-     */
-    private $thumbnail;
-
-    /**
-     * @var string
-     */
-    private $screen;
-
-    /**
      * Creates a new builder instance
      *
      * @return DetailsBuilder
@@ -78,8 +68,6 @@ class Details implements DetailsInterface
         $this->version = $fields->version;
         $this->description = $fields->description;
         $this->license = $fields->license;
-        $this->screen = $fields->screen;
-        $this->thumbnail = $fields->thumbnail;
         $this->authors = $fields->authors;
     }
 
@@ -121,22 +109,6 @@ class Details implements DetailsInterface
     public function getLicense()
     {
         return $this->license;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getThumbnail()
-    {
-        return $this->thumbnail;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getScreen()
-    {
-        return $this->screen;
     }
 
     /**

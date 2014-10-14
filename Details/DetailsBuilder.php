@@ -30,16 +30,6 @@ class DetailsBuilder
     private $description;
 
     /**
-     * @var string
-     */
-    private $thumbnail;
-
-    /**
-     * @var string
-     */
-    private $screen;
-
-    /**
      * @var AuthorInterface[]
      */
     private $authors = array();
@@ -101,34 +91,6 @@ class DetailsBuilder
     }
 
     /**
-     * Sets a theme thumbnail
-     *
-     * @param string $thumbnail A thumbnail location
-     *
-     * @return DetailsBuilder
-     */
-    public function setThumbnail($thumbnail)
-    {
-        $this->thumbnail = $thumbnail;
-
-        return $this;
-    }
-
-    /**
-     * Sets a high-resolution screen location
-     *
-     * @param string $screen A screen location
-     *
-     * @return DetailsBuilder
-     */
-    public function setScreen($screen)
-    {
-        $this->screen = $screen;
-
-        return $this;
-    }
-
-    /**
      * Adds an author
      *
      * @param AuthorInterface $author An author
@@ -170,8 +132,6 @@ class DetailsBuilder
         $obj->version = $this->version;
         $obj->license = $this->license;
         $obj->description = $this->description;
-        $obj->thumbnail = $this->thumbnail;
-        $obj->screen = $this->screen;
         $obj->authors = $this->authors;
 
         return $obj;
