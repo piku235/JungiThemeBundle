@@ -95,10 +95,41 @@ of the template `layout.html.twig` from the **BooBundle**.
 Theme
 -----
 
-[Show the interface](https://github.com/piku235/JungiThemeBundle/blob/master/Core/ThemeInterface.php)
-
 Each theme is an instance of the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily
 manipulate themes and obtain important for us information.
+
+```php
+interface ThemeInterface
+{
+    /**
+     * Returns the unique theme name
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * Returns the theme tag collection
+     *
+     * @return \Jungi\Bundle\ThemeBundle\Tag\TagCollection
+     */
+    public function getTags();
+
+    /**
+     * Returns the absolute path to the theme directory
+     *
+     * @return string
+     */
+    public function getPath();
+
+    /**
+     * Returns the details of the theme
+     *
+     * @return \Jungi\Bundle\ThemeBundle\Details\DetailsInterface
+     */
+    public function getDetails();
+}
+```
 
 ### Default implementation
 
@@ -111,15 +142,52 @@ theme mapping files.
 Details
 -------
 
-[Show the interface](https://github.com/piku235/JungiThemeBundle/blob/master/Details/DetailsInterface.php)
+The Details is a class which describes a theme. It can give us some important information about a theme such as a theme
+name, theme version and etc. Each details class must implement the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`.
 
-Each theme must contain an instance of the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`. It give us useful information
-about a theme.
+```php
+interface DetailsInterface
+{
+    /**
+     * Returns the friendly theme name
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * Returns the version
+     *
+     * @return string
+     */
+    public function getVersion();
+
+    /**
+     * Returns the authors
+     *
+     * @return AuthorInterface[]
+     */
+    public function getAuthors();
+
+    /**
+     * Returns the description
+     *
+     * @return string|null
+     */
+    public function getDescription();
+
+    /**
+     * Returns the license type
+     *
+     * @return string|null
+     */
+    public function getLicense();
+}
+```
 
 **NOTE**
 
-> As you have noticed the two methods: **getName**, **getVersion** of the interface should always return a value, so
-> that means they're required.
+> The two methods: **getName**, **getVersion** of the interface should always return a value
 
 ### Default implementation
 

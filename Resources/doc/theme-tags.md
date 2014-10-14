@@ -77,6 +77,8 @@ which uses the Environment tag located in the JungiSimpleEnvironmentBundle.
 Creating tag
 ------------
 
+Each tag is a class which implements the `Jungi\Bundle\ThemeBundle\Tag\TagInterface`:
+
 ```php
 interface TagInterface
 {
@@ -101,9 +103,7 @@ interface TagInterface
 }
 ```
 
-Tags are pretty straightforward due to the lightweight API. Each tag must implement the `Jungi\Bundle\ThemeBundle\Tag\TagInterface`.
-
-Here is the simple tag that you can easily create:
+Tags are pretty straightforward due to the lightweight API. Here is the simplest tag that can be created:
 
 ```php
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;

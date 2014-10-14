@@ -21,13 +21,19 @@ Basics
 
 ### What exactly is a theme?
 
-A theme is an ordinary object which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Basically themes lives
-in bundles and you can have in a single bundle one or multiple themes. When to use multiple themes in a single bundle
-you can read in the **Themes overview** chapter.
+A theme is class which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Basically themes lives in bundles
+and you can have in a single bundle one or multiple themes. When to use multiple themes in a single bundle you can read
+in the **Themes overview** chapter.
+
+### How to get the current theme?
+
+The current theme is stored under a theme holder. This theme holder is a class which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface`.
+To get the current theme you must use the service `jungi_theme.holder` and call its method **getTheme**. The class
+`Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder` is the default theme holder and you can change it at the [configuration](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md)
 
 ### Themes overview
 
-I have explained here many important details about themes e.g. template locations, overriding bundle templates. If you're
+The chapter contains many important things about themes e.g. template locations, overriding bundle templates. If you're
 interested [click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md).
 
 ### Theme mappings

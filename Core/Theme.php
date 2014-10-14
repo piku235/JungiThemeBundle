@@ -17,8 +17,6 @@ use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 /**
  * Theme is a simple implementation of the ThemeInterface
  *
- * All properties can be only set by the constructor
- *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class Theme implements ThemeInterface
