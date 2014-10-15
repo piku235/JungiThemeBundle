@@ -45,8 +45,6 @@ public function registerBundles()
 Finally you have to choose a theme resolver that the JungiThemeBundle will use. The bundle comes with the default set
 of theme resolvers. You can use one of these theme resolvers or use your own theme resolver by setting symfony service.
 
-#### Setup built-in theme resolver
-
 The bundle contains the following theme resolvers:
 
 Type | Class
@@ -54,6 +52,8 @@ Type | Class
 cookie | CookieThemeResolver
 in_memory | InMemoryThemeResolver
 session | SessionThemeResolver
+
+#### Setup primary theme resolver
 
 ##### CookieThemeResolver
 
@@ -93,7 +93,7 @@ jungi_theme:
 ##### SessionThemeResolver
 
 The SessionThemeResolver uses the session mechanism for holding the theme name. It doesn't take any arguments, so the
-`arguments` option doesn't must be provided.
+`arguments` doesn't must be provided.
 
 ```yaml
 # app/config/config.yml
@@ -103,7 +103,7 @@ jungi_theme:
             type: session
 ```
 
-#### Setup theme resolver service
+##### Theme resolver service
 
 To register a theme resolver service you have to define the configuration like below:
 
@@ -126,9 +126,8 @@ jungi_theme:
 
 #### Setup fallback theme resolver
 
-In the previous steps we were setting the primary theme resolver. A fallback theme resolver is very helpful when a primary
-theme resolver doesn't match any theme for the request. To setup a fallback theme resolver you must follow the same steps
-as for the primary theme resolver.
+A fallback theme resolver is very helpful when a primary theme resolver doesn't match any theme for the request. To setup
+a fallback theme resolver you must follow the same steps as for the primary theme resolver.
 
 ```yml
 # app/config/config.yml

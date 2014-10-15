@@ -103,7 +103,7 @@ interface TagInterface
 }
 ```
 
-Tags are pretty straightforward due to the lightweight API. Here is the simplest tag that can be created:
+Tags are pretty straightforward due to the small API. Here is the simplest tag that can be created:
 
 ```php
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
@@ -122,7 +122,7 @@ class SimpleTag extends TagInterface
 }
 ```
 
-As you see there isn't required to write a lot of code to get proper working tag. Of course the tag above does not do
+As you see there isn't required to write a lot of code to get a proper working tag. Of course the tag above does not do
 anything special, but you can write more complex tags.
 
 ### Register created tag

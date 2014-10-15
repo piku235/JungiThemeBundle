@@ -15,7 +15,8 @@ namespace Jungi\Bundle\ThemeBundle\Tag;
  * TagInterface is a basic interface for theme tags.
  *
  * Theme tags are very straightforward thanks to the small API. Tags have a great functionality
- * that allows us for doing many things. Without them the DeviceThemeSwitch class would not work properly.
+ * that allows us for doing many things. Without them the DeviceThemeSwitch class would not work
+ * properly.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
