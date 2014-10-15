@@ -55,6 +55,11 @@ class JungiThemeExtension extends Extension
         // Theme holder conf
         $container->setAlias('jungi_theme.holder', $config['holder']['id']);
 
+        // Theme selector service
+        if (isset($config['selector']['id'])) {
+            $container->setAlias('jungi_theme.selector', $config['selector']['id']);
+        }
+
         // Validation listener
         if (!$config['selector']['validation_listener']['enabled']) {
             $container->removeDefinition('jungi_theme.selector.listener.validation');
