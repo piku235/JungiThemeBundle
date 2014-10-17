@@ -19,7 +19,7 @@ If you wanna know how to create and use a theme you must only read these three c
 
 ### Themes overview
 
-What is a theme, how it works and what is related with it you will learn from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-overview.md).
+What is a theme, how it works and what is related with it you will learn from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md).
 
 Generally the chapter speaks about:
 
