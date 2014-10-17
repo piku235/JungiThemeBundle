@@ -50,4 +50,4 @@ class TemplateFinderChainTest extends TestCase
         $this->assertContains('OrdinaryBundle::layout.html.twig', $references);
         $this->assertContains('::layout.html.twig', $references);
     }
-} 
+}

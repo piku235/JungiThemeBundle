@@ -40,4 +40,4 @@ class ThemeFinderTest extends TestCase
         $this->assertContains('boo#BooBundle::navigation.html.twig', $references);
         $this->assertContains('boo#::this.is.an.interesting.template.html.twig', $references);
     }
-} 
+}

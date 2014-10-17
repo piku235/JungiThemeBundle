@@ -11,12 +11,15 @@ To get start using the bundle in your project [go here](https://github.com/piku2
 Basics
 ------
 
-If you wanna know how to create a theme you must only read these three chapters: **Themes overview**, **Theme mappings**, 
-**Theme holder**.
+If you wanna know how to create and use a theme you must only read these three chapters: 
+
+* Themes overview,
+* Theme mappings,
+* Theme holder
 
 ### Themes overview
 
-What is a theme, how it works and what is related with it you will learn from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme.md).
+What is a theme, how it works and what is related with it you will learn from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-overview.md).
 
 Generally the chapter speaks about:
 
@@ -39,7 +42,7 @@ How to load a theme mapping file, you will find out from [here](https://github.c
 ### Theme holder
 
 A theme holder is a class which job is to hold the current theme. To get the current theme you must use the service `jungi_theme.holder`
-and call its method **getTheme**.
+and call its method **getTheme** like below.
 
 ```php
 // the current theme
@@ -64,7 +67,7 @@ Advanced
 
 ### Theme resolver
 
-[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md) for more
+[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md)
 
 ### Theme selector
 

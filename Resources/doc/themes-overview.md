@@ -4,8 +4,10 @@ Themes overview
 Theme
 -----
 
-Each theme is a class of the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily
-manipulate themes and obtain important for us information.
+I assume that everyone knows more or less what is generally a theme. Typically a theme is a collection of some resources 
+like images, stylesheets, javascripts which as a result affects to the look of a page. A theme representation in the
+JungiThemeBundle is a class which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface 
+we can easily manipulate themes and obtain important for us information.
 
 ```php
 interface ThemeInterface
@@ -40,22 +42,25 @@ interface ThemeInterface
 }
 ```
 
-To create new theme you will have to use one of the available theme mappings: xml, yaml or php. Go [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings)
-to know how do that.
+**NOTE**
+
+> To create a new theme you will have to use one of the available theme mappings: xml, yaml or php. Go [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings)
+> to know how do that.
 
 ### Default implementation
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Core/Theme.php)
 
 The `Jungi\Bundle\ThemeBundle\Core\Theme` is the default theme implementation and it only defines basic methods contained
-in the interface. All properties of the class can be only set by its constructor. You can use this class e.g. in php
-theme mapping files.
+in the interface. This class is useful when you want to create a standard theme e.g. in a php theme mapping file.
 
 Details
 -------
 
-The Details is a class which describes a theme. It can give us some important information about a theme such as a theme
-name, theme version and etc. Each details class implements the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`.
+In some cases you'd like to get some information about a theme in order to show these information for a user who would 
+like to use that theme. And that information can be easily stored in a class. In the JungiThemeBundle such a class must 
+implement the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`. The interface provides the most important details about 
+a theme such as a theme name, a theme version and etc.
 
 ```php
 interface DetailsInterface
@@ -104,12 +109,11 @@ interface DetailsInterface
 ### Default implementation
 
 The `Jungi\Bundle\ThemeBundle\Details\Details` is the default details implementation. It's a little bit different from the
-default theme implementation. Due to a large number of the properties I decided to not implement the constructor,
-because it would only bring a mess in its signature. Also setter methods are not a good idea, because after
-an object creation there still will be a possibility for changing an object properties and that shouldn't be possible.
-Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Details\DetailsBuilder` which is strictly
-associated with the class `Jungi\Bundle\ThemeBundle\Details\Details`. The builder provides setter methods with the fluent
-interface support.
+default theme implementation. Due to a large number of properties the implementation of the constructor seems to be a bad
+idea, because it would only bring a mess in the constructor signature. Also setter methods are not a good idea, because 
+after an object creation there still will be a possibility for changing an object properties and that shouldn't be possible. 
+Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Details\DetailsBuilder` which is strictly 
+associated with the default details class. The builder provides setter methods with the fluent interface support.
 
 Here is an example of creating a new details instance:
 

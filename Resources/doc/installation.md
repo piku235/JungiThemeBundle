@@ -124,7 +124,7 @@ jungi_theme:
         primary: # a theme resolver service id
 ```
 
-#### Setup fallback theme resolver
+#### Setup fallback theme resolver (optional)
 
 A fallback theme resolver is very helpful when a primary theme resolver doesn't match any theme for the request. To setup
 a fallback theme resolver you must follow the same steps as for the primary theme resolver.
