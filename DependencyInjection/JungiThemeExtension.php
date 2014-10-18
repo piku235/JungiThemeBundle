@@ -93,7 +93,6 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Details\Details',
             'Jungi\Bundle\ThemeBundle\Details\DetailsBuilder',
             'Jungi\Bundle\ThemeBundle\Details\Author',
-            'Jungi\Bundle\ThemeBundle\Form\Type\ThemeType',
             'Jungi\Bundle\ThemeBundle\Changer\ThemeChanger',
             'Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents',
             'Jungi\Bundle\ThemeBundle\Core\Loader\ThemeLocator',
