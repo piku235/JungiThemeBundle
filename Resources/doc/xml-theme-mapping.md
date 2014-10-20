@@ -232,4 +232,5 @@ Now if you have properly created your theme mapping document you can finally loa
 don't be impatient.
 
 [Go to the final step](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mapping.md)
+
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

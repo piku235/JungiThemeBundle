@@ -18,7 +18,7 @@ Thanks to them you will understand things which happens in this tutorial.
 
 The first thing that we have to do is to create a "container" in which our theme will be placed. And the most suitable
 "container" is nothing else but a bundle, so we must create it. Suppose that the created bundle will be called 
-`JungiHeroThemeBundle` or whatever you want. The following directory structure of the bundle is enough for our theme:
+**JungiHeroThemeBundle** or whatever you want. The following directory structure of the bundle is enough for our theme:
 
 ```
 src/
@@ -43,10 +43,9 @@ src/
 
 As you see the theme has got own template `layout.html.twig` and also overrides some templates in the **SonataAdminBundle**
 and the **SonataUserBundle**. Thanks to that you don't have to change sonata templates in the configuration, the theme
-itself will take care of using these overridden templates. I just placed here the bundles of the **Sonata Project** only 
-as an example to show you that you can override each bundle that you use in a project. I will don't show here how each 
-theme template looks inside, because that's here unnecessary, but let's say the template `standard_layout.html.twig` of 
-the **SonataAdminBundle** extends the template `layout.html.twig`.
+itself will take care of using these overridden templates. I just placed here the bundles created by the **Sonata Project** 
+only as an example to show you that you can override each bundle that you use in a project. I will don't show here how 
+each theme template looks inside, because that's unnecessary.
 
 As the final thing in this step we only must activate the created bundle in the `app/AppKernel.php`. 
 
@@ -80,11 +79,11 @@ file for this theme can look like below:
             </tags>
             <details>
                 <property key="authors" type="collection">
-                    <parameter key="leading_author" type="collection">
-                        <parameter key="name">piku235</parameter>
-                        <parameter key="email">piku235@gmail.com</parameter>
-                        <parameter key="homepage">www.foo.com</parameter>
-                    </parameter>
+                    <property type="collection">
+                        <property key="name">piku235</property>
+                        <property key="email">piku235@gmail.com</property>
+                        <property key="homepage">www.foo.com</property>
+                    </property>
                     <property type="collection">
                         <property key="name">piku234</property>
                         <property key="email">foo@gmail.com</property>
@@ -139,8 +138,8 @@ And that's almost the end. After this step the theme should be available in a th
 
 ### Step 4: Set the theme for a theme resolver
 
-To set our theme to be visible on every page we'll use the theme resolver `Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver`.
-We only have to set the theme name and this theme resolver in the configuration.
+To set our theme to be visible on every page we'll use the theme resolver `InMemoryThemeResolver`. We only have to set the 
+theme name and the type of this theme resolver in the configuration.
 
 ```yaml
 # app/config/config.yml
@@ -151,7 +150,6 @@ jungi_theme:
             arguments: jungi_hero
 ```
 
-That's all :) 
-Thanks for your attention and have a nice further fun with the bundle.
+That's all. Thanks for your attention and have a nice further fun with the bundle :)
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

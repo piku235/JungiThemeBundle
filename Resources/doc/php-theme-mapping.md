@@ -67,4 +67,5 @@ Final
 Now if you have properly created your theme mapping file you can finally load it.
 
 [Go to the final step](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mapping.md)
+
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)
