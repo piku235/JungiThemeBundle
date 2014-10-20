@@ -116,3 +116,5 @@ Summary
 -------
 
 To see how your responsive theme works, load the created theme mapping file and set the theme name to a theme resolver.
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

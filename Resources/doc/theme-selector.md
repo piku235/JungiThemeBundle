@@ -36,3 +36,5 @@ jungi_theme:
             use_investigator: # true or false
         device_switch: # true or false
 ```
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

@@ -75,3 +75,5 @@ provides the following twig functions: **is_desktop**, **is_mobile**, **is_table
 
 * Minimization of images - I know that I have mentioned in the main documentation the example about generating images in
 appropriate dimensions, but this thing I plan to do when the bundle will be used by the majority of people.
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

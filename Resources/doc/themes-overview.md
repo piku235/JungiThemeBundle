@@ -5,7 +5,7 @@ Theme
 -----
 
 I assume that everyone knows more or less what is generally a theme. Typically a theme is a collection of some resources 
-like images, stylesheets, javascripts which as a result affects to the look of a page. A theme representation in the
+like images, stylesheets, javascripts which as a result have an influence to the look of a page. A theme representation in the
 JungiThemeBundle is a class which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface 
 we can easily manipulate themes and obtain important for us information.
 
@@ -108,6 +108,8 @@ interface DetailsInterface
 
 ### Default implementation
 
+[Show the Details class]
+
 The `Jungi\Bundle\ThemeBundle\Details\Details` is the default details implementation. It's a little bit different from the
 default theme implementation. Due to a large number of properties the implementation of the constructor seems to be a bad
 idea, because it would only bring a mess in the constructor signature. Also setter methods are not a good idea, because 
@@ -148,14 +150,14 @@ The directory structure could looks like below:
 ```
 FooBundle/
     Resources/
-        themes/
+        theme/
             first_related/
             second_related/
 
 BooBundle
     Resources/
-        themes/
-            third
+        # third theme
+        theme/
 ```
 
 Template naming and locations
@@ -175,9 +177,9 @@ the symfony does) will be performed, so finally a template resource from the **F
 
 Name | Path
 ---- | ----
-FooBundle:Default:index.html.twig | /path/to/themebundle/Resources/themes/boo/FooBundle/Default/index.html.twig
-FooBundle::layout.html.twig | /path/to/themebundle/Resources/themes/boo/FooBundle/layout.html.twig
-::master.html.php | /path/to/themebundle/Resources/themes/boo/master.html.php
+FooBundle:Default:index.html.twig | /path/to/theme/FooBundle/Default/index.html.twig
+FooBundle::layout.html.twig | /path/to/theme/FooBundle/layout.html.twig
+::master.html.php | /path/to/theme/master.html.php
 
 Overriding bundle templates
 ---------------------------
@@ -211,12 +213,14 @@ The FooThemeBundle resources:
 ```
 FooThemeBundle/
     Resources/
-        themes/
-            exclusive/
-                BooBundle/
-                    layout.html.twig
+        # exclusive theme
+        theme/
+            BooBundle/
+                layout.html.twig
 ```
 
 In this example the theme **exclusive** has overwritten the template `layout.html.twig` of the **BooBundle**. When the
 template `index.html.twig` is rendered the template `layout.html.twig` of the theme **exclusive** is included instead
 of the template `layout.html.twig` from the **BooBundle**.
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

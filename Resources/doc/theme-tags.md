@@ -176,3 +176,5 @@ services:
             - { name: jungi.tag_provider }
         arguments: ["%foo.theme.tag.class%"]
 ```
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

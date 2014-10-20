@@ -152,3 +152,5 @@ Summary
 
 Thanks to the built-in utilities creating adaptive themes is very convenient and fast. Finally you must set the theme
 name (the representative theme) to a theme resolver and load the theme mapping file to see how it works.
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

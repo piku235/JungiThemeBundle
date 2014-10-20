@@ -11,12 +11,6 @@ To get start using the bundle in your project [go here](https://github.com/piku2
 Basics
 ------
 
-If you wanna know how to create and use a theme you must only read these three chapters: 
-
-* Themes overview,
-* Theme mappings,
-* Theme holder
-
 ### Themes overview
 
 What is a theme, how it works and what is related with it you will learn from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md).
@@ -37,7 +31,7 @@ To start your adventure and create your first theme you will have to use one of 
 * [YAML](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/yaml-theme-mapping.md)
 * [PHP](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/php-theme-mapping.md)
 
-How to load a theme mapping file, you will find out from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mappings.md).
+How to load a theme mapping file, you will find out from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mapping.md).
 
 ### Theme holder
 
@@ -61,25 +55,6 @@ Here you will find out what exactly is a theme tag, which theme tags the bundle 
 
 A theme changer as the name says it's used for changing the current theme. [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-changer.md)
 to see how do that.
-
-Advanced
---------
-
-### Theme resolver
-
-[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md)
-
-### Theme selector
-
-[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-selector.md)
-
-### Theme resolver investigator
-
-[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver-investigator.md)
-
-### Configuration reference
-
-[Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md)
 
 Web Design Approaches
 ---------------------
@@ -110,3 +85,16 @@ The Responsive Web Design is probably the most used web design approach, of cour
 theme on various devices. Creating a responsive theme in the JungiThemeBundle is very easy and fast.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md)
+
+Advanced
+--------
+
+* [Theme resolver](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md)
+* [Theme selector](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-selector.md)
+* [Theme resolver investigator](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver-investigator.md)
+* [Configuration reference](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md)
+
+Tutorials
+---------
+
+* [Creating a theme](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/tutorials/creating-theme.md)

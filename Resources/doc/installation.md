@@ -148,4 +148,4 @@ Final
 So if you completed the installation you can from now on start using the bundle and learn super things which I have described
 in the documentation :)
 
-[Back to index](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md)
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md)

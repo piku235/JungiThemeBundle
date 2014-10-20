@@ -17,3 +17,5 @@ jungi_theme:
             enabled: true
             suspects: # list of theme resolver classes
 ```
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

@@ -69,3 +69,5 @@ jungi_theme:
                 # Default:
                 - Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver
 ```
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)
