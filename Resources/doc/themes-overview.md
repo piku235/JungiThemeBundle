@@ -4,10 +4,10 @@ Themes overview
 Theme
 -----
 
-I assume that everyone knows more or less what is generally a theme. Typically a theme is a collection of some resources 
-like images, stylesheets, javascripts which as a result have an influence to the look of a page. A theme representation in the
-JungiThemeBundle is a class which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface 
-we can easily manipulate themes and obtain important for us information.
+Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts which as a result 
+have an influence to the look of a page. A theme representation in the JungiThemeBundle is a class which implements the 
+`Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily manipulate themes and obtain 
+important for us information.
 
 ```php
 interface ThemeInterface
@@ -42,7 +42,7 @@ interface ThemeInterface
 }
 ```
 
-**NOTE**
+**INFO**
 
 > To create a new theme you will have to use one of the available theme mappings: xml, yaml or php. Go [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings)
 > to know how do that.
@@ -58,9 +58,9 @@ Details
 -------
 
 In some cases you'd like to get some information about a theme in order to show these information for a user who would 
-like to use that theme. And that information can be easily stored in a class. In the JungiThemeBundle such a class must 
-implement the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`. The interface provides the most important details about 
-a theme such as a theme name, a theme version and etc.
+like to use that theme. That information can be easily stored in a class. In the JungiThemeBundle such a class must 
+implement the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`. The interface provides the most important methods such 
+as a theme name, a theme version and etc.
 
 ```php
 interface DetailsInterface
@@ -104,11 +104,11 @@ interface DetailsInterface
 
 **NOTE**
 
-> the method **getName** of the interface should always return a value
+> The method **getName** of the interface should always return a value
 
 ### Default implementation
 
-[Show the Details class]
+[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Details/Details.php)
 
 The `Jungi\Bundle\ThemeBundle\Details\Details` is the default details implementation. It's a little bit different from the
 default theme implementation. Due to a large number of properties the implementation of the constructor seems to be a bad
