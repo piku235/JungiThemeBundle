@@ -1,4 +1,4 @@
-Theme Holder
+Theme holder
 ============
 
 As you should know a theme holder is used to hold the current theme instance. By default the current theme

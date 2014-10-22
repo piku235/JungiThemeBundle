@@ -28,27 +28,38 @@ I know that introduction can be insufficient so I will demonstrate creating a re
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping https://raw.githubusercontent.com/piku235/JungiThemeBundle/master/Mapping/Loader/schema/theme-1.0.xsd">
 
-    <theme name="foo" path="@JungiFooBundle/Resources/theme">
-        <tags>
-            <tag name="jungi.mobile_devices">
-                <argument type="collection">
-                    <argument>iOS</argument>
-                    <argument>AndroidOS</argument>
-                </argument>
-                <argument type="constant">jungi.mobile_devices::MOBILE</argument>
-            </tag>
-            <tag name="jungi.desktop_devices" />
-        </tags>
-        <details>
-            <detail name="author.name">piku235</detail>
-            <detail name="author.email">piku235@gmail.com</detail>
-            <detail name="author.site">http://test.pl</detail>
-            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>
-            <detail name="version">1.0.0</detail>
-            <detail name="name">A fancy theme</detail>
-            <detail name="license">MIT</detail>
-        </details>
-    </theme>
+    <parameters>
+        <parameter key="authors" type="collection">
+            <parameter>
+                <parameter key="name">piku235</parameter>
+                <parameter key="email">piku235@gmail.com</parameter>
+                <parameter key="homepage">www.foo.com</parameter>
+            </parameter>
+        </parameter>
+    </parameters>
+
+    <themes>
+        <theme name="foo" path="@JungiFooBundle/Resources/theme">
+            <tags>
+                <tag name="jungi.mobile_devices">
+                    <argument type="collection">
+                        <argument>iOS</argument>
+                        <argument>AndroidOS</argument>
+                    </argument>
+                    <argument type="constant">jungi.mobile_devices::MOBILE</argument>
+                </tag>
+                <tag name="jungi.desktop_devices" />
+            </tags>
+            <details>
+                <property key="authors">%authors%</property>
+                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
+                <property key="version">1.0.0</property>
+                <property key="name">A fancy theme</property>
+                <property key="license">MIT</property>
+            </details>
+        </theme>
+    </themes>
+    
 </theme-mapping>
 
 ```
@@ -57,24 +68,21 @@ I know that introduction can be insufficient so I will demonstrate creating a re
 
 ```yml
 # FooBundle/Resources/config/theme.yml
-
 parameters:
-    foo.mobile.systems: [ iOS, AndroidOS ]
-    foo.mobile.device: "const@jungi.mobile_devices::MOBILE"
+    authors:
+        - { name: piku235, email: piku235@gmail.com, homepage: www.foo.com }
+    foo.mobile_systems: [ iOS, AndroidOS ]
+    foo.mobile_device: "const@jungi.mobile_devices::MOBILE"
 
 themes:
     foo:
         path: "@JungiFooBundle/Resources/theme"
         tags:
-            - name: jungi.desktop_devices
-            - name: jungi.mobile_devices
-              arguments: [ "%foo.mobile.systems%", "%foo.mobile.device%" ]
+            jungi.desktop_devices: ~
+            jungi.mobile_devices: [ "%foo.mobile_systems%", "%foo.mobile_device%" ]
         details:
+            authors: %authors%
             name: A fancy theme
-            author:
-                name: piku235
-                email: piku235@gmail.com
-                site: http://test.pl
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>
@@ -89,21 +97,22 @@ themes:
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Details\Details;
+use Jungi\Bundle\ThemeBundle\Details\Author;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
+
+$dsb = Details::createBuilder();
+$dsb
+    ->setName('A fancy theme')
+    ->setDescription('<i>foo desc</i>')
+    ->setVersion('1.0.0')
+    ->setLicense('MIT')
+    ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'));
 
 $manager->addTheme(new Theme(
     'foo',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    new Details(array(
-        'name' => 'A fancy theme',
-        'version' => '1.0.0',
-        'description' => '<i>foo desc</i>',
-        'license' => 'MIT',
-        'author.name' => 'piku235',
-        'author.email' => 'piku235@gmail.com',
-        'author.site' => 'http://test.pl'
-    )),
+    $dsb->getDetails(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
         new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)

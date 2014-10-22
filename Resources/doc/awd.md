@@ -31,36 +31,45 @@ designed for mobile devices (incl. tablet devices).
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping https://raw.githubusercontent.com/piku235/JungiThemeBundle/master/Mapping/Loader/schema/theme-1.0.xsd">
 
-    <theme name="foo_main" path="@JungiFooBundle/Resources/theme/desktop">
-        <tags>
-            <tag name="jungi.desktop_devices" />
-        </tags>
-        <details>
-            <detail name="author.name">piku235</detail>
-            <detail name="author.email">piku235@gmail.com</detail>
-            <detail name="author.site">http://test.pl</detail>
-            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>
-            <detail name="version">1.0.0</detail>
-            <detail name="name">A fancy theme</detail>
-            <detail name="license">MIT</detail>
-        </details>
-    </theme>
-    <theme name="foo_mobile" path="@JungiFooBundle/Resources/theme/mobile">
-        <tags>
-            <tag name="jungi.mobile_devices" />
-            <tag name="jungi.link">foo_main</tag>
-        </tags>
-        <details>
-            <detail name="author.name">piku235</detail>
-            <detail name="author.email">piku235@gmail.com</detail>
-            <detail name="author.site">http://test.pl</detail>
-            <detail name="description"><![CDATA[<i>foo desc</i>]]></detail>
-            <detail name="version">1.0.0</detail>
-            <detail name="name">A fancy theme</detail>
-            <detail name="license">MIT</detail>
-        </details>
-    </theme>
+    <parameters>
+        <parameter key="authors" type="collection">
+            <parameter>
+                <parameter key="name">piku235</parameter>
+                <parameter key="email">piku235@gmail.com</parameter>
+                <parameter key="homepage">www.foo.com</parameter>
+            </parameter>
+        </parameter>
+        <parameter key="license">MIT</parameter>
+    </parameters>
 
+    <themes>
+        <theme name="foo_main" path="@JungiFooBundle/Resources/theme/desktop">
+            <tags>
+                <tag name="jungi.desktop_devices" />
+            </tags>
+            <details>
+                <property key="authors">%authors%</property>
+                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
+                <property key="version">1.0.0</property>
+                <property key="name">Super theme</property>
+                <property key="license">%license%</property>
+            </details>
+        </theme>
+        <theme name="foo_mobile" path="@JungiFooBundle/Resources/theme/mobile">
+            <tags>
+                <tag name="jungi.mobile_devices" />
+                <tag name="jungi.link">foo_main</tag>
+            </tags>
+            <details>
+                <property key="authors">%authors%</property>
+                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
+                <property key="version">1.0.0</property>
+                <property key="name">Super theme (ver. mobile)</property>
+                <property key="license">%license%</property>
+            </details>
+        </theme>
+    </themes>
+    
 </theme-mapping>
 ```
 
@@ -68,35 +77,32 @@ designed for mobile devices (incl. tablet devices).
 
 ```yml
 # FooBundle/Resources/config/theme.yml
+parameters:
+    license: MIT
+    authors:
+        - { name: piku235, email: piku235@gmail.com, homepage: www.foo.com }
 
 themes:
     foo_main:
         path: "@JungiFooBundle/Resources/theme/desktop"
         tags:
-            - name: jungi.desktop_devices
+            jungi.desktop_devices: ~
         details:
-            name: A fancy theme
-            author:
-                name: piku235
-                email: piku235@gmail.com
-                www: http://test.pl
+            authors: %authors%
+            name: Super theme
             version: 1.0.0
-            license: MIT
+            license: %license%
             description: <i>foo desc</i>
     foo_mobile:
         path: "@JungiFooBundle/Resources/theme/mobile"
         tags:
-            - name: jungi.mobile_devices
-            - name: jungi.link
-              arguments: foo_main
+            jungi.mobile_devices: ~
+            jungi.link: foo_main
         details:
-            name: A fancy theme
-            author:
-                name: piku235
-                email: piku235@gmail.com
-                site: http://test.pl
+            authors: %authors%
+            name: Super theme (ver. mobile)
             version: 1.0.0
-            license: MIT
+            license: %license%
             description: <i>foo desc</i>
 
 ```
@@ -109,37 +115,32 @@ themes:
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Details\Details;
+use Jungi\Bundle\ThemeBundle\Details\Author;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
+
+$dsb = Details::createBuilder();
+$dsb
+    ->setName('Super theme')
+    ->setDescription('<i>foo desc</i>')
+    ->setVersion('1.0.0')
+    ->setLicense('MIT')
+    ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'));
 
 $manager->addTheme(new Theme(
     'foo_main',
     $locator->locate('@JungiFooBundle/Resources/theme/desktop'),
-    new Details(array(
-        'name' => 'A fancy desktop theme',
-        'version' => '1.0.0',
-        'description' => '<i>foo desc</i>',
-        'license' => 'MIT',
-        'author.name' => 'piku235',
-        'author.email' => 'piku235@gmail.com',
-        'author.site' => 'http://test.pl'
-    )),
+    $dsb->getDetails(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
     ))
 ));
+
+$dsb->setName('Super theme (ver. mobile)');
 $manager->addTheme(new Theme(
     'foo_mobile',
     $locator->locate('@JungiFooBundle/Resources/theme/mobile'),
-    new Details(array(
-        'name' => 'A fancy mobile theme',
-        'version' => '1.0.0',
-        'description' => '<i>foo desc</i>',
-        'license' => 'MIT',
-        'author.name' => 'piku235',
-        'author.email' => 'piku235@gmail.com',
-        'author.site' => 'http://test.pl'
-    )),
+    $dsb->getDetails(),
     new TagCollection(array(
         new Tag\Link('foo_main'),
         new Tag\MobileDevices()

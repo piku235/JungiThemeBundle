@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * TagCollection provides extra features for flexible operations on theme tags
+ * TagCollection provides features for flexible operations on theme tags
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -100,10 +100,9 @@ class TagCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Checks if a given tag or collection of tags exists
-     * and if they are EQUAL to the found tags
+     * Checks if a given tag or collection of tags exists and if they are EQUAL to the found tags
      *
-     * @param TagInterface|TagInterface[] $tags A single tag or a collection of tags
+     * @param TagInterface|TagInterface[] $tags A tag or a collection of tags
      *
      * @return bool
      *

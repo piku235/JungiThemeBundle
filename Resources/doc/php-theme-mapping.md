@@ -3,7 +3,7 @@ PHP Theme Mapping
 
 [Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/PhpFileLoader.php)
 
-Documents of this theme mapping are handled by the `Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader`.
+Documents of this theme mapping are handled by the `PhpFileLoader`.
 
 Prerequisites
 -------------

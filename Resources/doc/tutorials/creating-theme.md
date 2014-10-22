@@ -43,7 +43,7 @@ src/
 
 As you see the theme has got own template `layout.html.twig` and also overrides some templates in the **SonataAdminBundle**
 and the **SonataUserBundle**. Thanks to that you don't have to change sonata templates in the configuration, the theme
-itself will take care of using these overridden templates. I just placed here the bundles created by the **Sonata Project** 
+itself will take care of these overridden templates. I just placed here the bundles created by the **Sonata Project** 
 only as an example to show you that you can override each bundle that you use in a project. I will don't show here how 
 each theme template looks inside, because that's unnecessary.
 
@@ -52,8 +52,8 @@ As the final thing in this step we only must activate the created bundle in the 
 ### Step 2: Decide which theme mapping to use
 
 After we have our theme we must define it so that the JungiThemeBundle could recognize it. To define a theme you have for 
-use three various theme mappings: xml, yaml and php. For this tutorial I chose the xml theme mapping. The theme mapping
-file for this theme can look like below:
+use three various theme mappings: xml, yaml and php. For this tutorial I chose the xml theme mapping. The file of this 
+theme mapping for this theme can looks like below:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -107,7 +107,7 @@ We can save this theme mapping file into `Resources/config` as `theme.xml`.
 
 Now that the JungiThemeBundle could notice our theme we must load the created theme mapping file. We can achieve that by
 using a theme mapping loader which will load all themes contained in a theme mapping file to a theme manager. We're gonna 
-to use the xml theme mapping loader in the method `boot` of bundle.
+to use the xml theme mapping loader in the method `boot` of the bundle.
 
 Finally the bundle class should looks like below:
 
@@ -138,8 +138,8 @@ And that's almost the end. After this step the theme should be available in a th
 
 ### Step 4: Set the theme for a theme resolver
 
-To set our theme to be visible on every page we'll use the theme resolver `InMemoryThemeResolver`. We only have to set the 
-theme name and the type of this theme resolver in the configuration.
+To set our theme to be visible on every page we'll use the `InMemoryThemeResolver`. We only have to set the theme name 
+and the type of this theme resolver in the configuration.
 
 ```yaml
 # app/config/config.yml
@@ -150,6 +150,7 @@ jungi_theme:
             arguments: jungi_hero
 ```
 
-That's all. Thanks for your attention and have a nice further fun with the bundle :)
+That's all. From now the theme should be visible on every page. Thanks for your attention and have a nice further fun 
+with the bundle :)
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

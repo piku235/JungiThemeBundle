@@ -75,7 +75,7 @@ interface DetailsInterface
     /**
      * Returns the version
      *
-     * @return string
+     * @return string|null
      */
     public function getVersion();
 
@@ -104,7 +104,7 @@ interface DetailsInterface
 
 **NOTE**
 
-> The two methods: **getName**, **getVersion** of the interface should always return a value
+> the method **getName** of the interface should always return a value
 
 ### Default implementation
 
