@@ -2,6 +2,7 @@ parameters:
     foo_1.mobile.systems: [ iOS, AndroidOS ]
     foo_1.mobile.device: "const@jungi.mobile_devices::MOBILE"
     secondary_author.email: foo@gmail.com
+    license: MIT
     leading_author:
         name: piku235
         email: piku235@gmail.com
@@ -20,7 +21,7 @@ themes:
                 - "%leading_author%"
                 - { name: piku234, email: "%secondary_author.email%", homepage: www.boo.com }
             version: 1.0.0
-            license: MIT
+            license: "%license%"
             description: <i>foo desc</i>
 
     foo_2:
@@ -31,7 +32,7 @@ themes:
             name: A fancy theme
             authors: [ "%leading_author%" ]
             version: 1.0.0
-            license: MIT
+            license: "%license%"
             description: <i>foo desc</i>
 
     foo_3:
@@ -42,7 +43,7 @@ themes:
             name: A fancy theme
             authors: [ "%leading_author%" ]
             version: 1.0.0
-            license: MIT
+            license: "%license%"
             description: <i>foo desc</i>
 
     foo_4:

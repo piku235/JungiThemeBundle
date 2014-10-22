@@ -14,6 +14,7 @@
             <parameter key="email">piku235@gmail.com</parameter>
             <parameter key="homepage">www.foo.com</parameter>
         </parameter>
+        <parameter key="license" type="string">MIT</parameter>
         <parameter key="secondary_author.email">foo@gmail.com</parameter>
     </parameters>
 
@@ -39,7 +40,7 @@
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
-                <property key="license" type="string">MIT</property>
+                <property key="license">%license%</property>
             </details>
         </theme>
 
@@ -56,7 +57,7 @@
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
-                <property key="license">MIT</property>
+                <property key="license">%license%</property>
             </details>
         </theme>
 
@@ -73,7 +74,7 @@
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
-                <property key="license">MIT</property>
+                <property key="license">%license%</property>
             </details>
         </theme>
 
