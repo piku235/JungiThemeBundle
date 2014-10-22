@@ -84,6 +84,18 @@ class UserThemeResolver implements ThemeResolverInterface
         
         return $this->defaultTheme;
     }
+    
+    public function setThemeName($themeName, Request $request)
+    {
+        $token = $this->securityContext->getToken();
+        if (!$token->isGranted(new Expression('is_authenticated()'))) {
+            throw new LogicException('You cannot change the theme when the user is not authenticated.');
+        }
+        
+        /* @var UserWithTheme $user */
+        $user = $token->getUser();
+        $user->setThemeName($themeName);
+    }
 }
 ```
 

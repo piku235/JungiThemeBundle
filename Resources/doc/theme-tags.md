@@ -1,4 +1,4 @@
-Theme Tags
+Theme tags
 ==========
 
 The goal of the JungiThemeBundle are the mostly tags. They takes the information role and can be used for searching and

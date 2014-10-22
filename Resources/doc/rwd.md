@@ -81,7 +81,7 @@ themes:
             jungi.desktop_devices: ~
             jungi.mobile_devices: [ "%foo.mobile_systems%", "%foo.mobile_device%" ]
         details:
-            authors: %authors%
+            authors: "%authors%"
             name: A fancy theme
             version: 1.0.0
             license: MIT

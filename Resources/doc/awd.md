@@ -88,10 +88,10 @@ themes:
         tags:
             jungi.desktop_devices: ~
         details:
-            authors: %authors%
+            authors: "%authors%"
             name: Super theme
             version: 1.0.0
-            license: %license%
+            license: "%license%"
             description: <i>foo desc</i>
     foo_mobile:
         path: "@JungiFooBundle/Resources/theme/mobile"
@@ -99,10 +99,10 @@ themes:
             jungi.mobile_devices: ~
             jungi.link: foo_main
         details:
-            authors: %authors%
+            authors: "%authors%"
             name: Super theme (ver. mobile)
             version: 1.0.0
-            license: %license%
+            license: "%license%"
             description: <i>foo desc</i>
 
 ```

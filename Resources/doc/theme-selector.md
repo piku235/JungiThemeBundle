@@ -28,9 +28,7 @@ interface ThemeSelectorInterface
 The default theme selector is the class `Jungi\Bundle\ThemeBundle\Selector\ThemeSelector`. It has a support of primary and 
 fallback theme resolver where the fallback theme resolver can be unset. If a fallback theme resolver was set then it'll 
 be only used when the primary theme resolver will don't match any theme for the request. Also this theme selector supports 
-events, where you can find them in the class `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents`.
-
-[Show the events](https://github.com/piku235/JungiThemeBundle/blob/master/Selector/ThemeSelectorEvents.php)
+events, where you can find them in the class `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents` ([click here](https://github.com/piku235/JungiThemeBundle/blob/master/Selector/ThemeSelectorEvents.php)).
 
 #### Primary and fallback theme resolver
 
@@ -43,13 +41,6 @@ steps.
 
 #### Configuration
 
-* The `id` is used to set a theme selector service by typing its service id.
-* The `validation_listener` says whether a theme selector should validate themes resolved from theme resolvers. The 
-`use_investigator` only says whether to use a theme resolver investigator. Thanks to this investigator we can choose for
-which theme resolvers the validation should be executed. About a theme resolver investigator you can read [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-resolver-investigator.md).
-* The `device_switch` is responsible for use of the `DeviceThemeSwitch` listener which its job is detecting the device
-which has sent the request. Thanks to this listener adaptive themes can work.
-
 ```yaml
 # app/config/config.yml
 jungi_theme:
@@ -60,5 +51,12 @@ jungi_theme:
             use_investigator: # true or false
         device_switch: # true or false
 ```
+
+* The `id` is used to set a theme selector service by typing its service id.
+* The `validation_listener` says whether a theme selector should validate themes resolved from theme resolvers. The 
+`use_investigator` only says whether to use a theme resolver investigator. Thanks to this investigator we can choose for
+which theme resolvers the validation should be executed. About a theme resolver investigator you can read [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-resolver-investigator.md).
+* The `device_switch` is responsible for use of the `DeviceThemeSwitch` listener which its job is detecting the device
+which has sent the request. Thanks to this listener adaptive themes can work.
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)
