@@ -142,12 +142,12 @@ class DetailsBuilder
      *
      * @return Details
      *
-     * @throws \RuntimeException When the name or the version is missing
+     * @throws \RuntimeException When the name is missing
      */
     public function getDetails()
     {
-        if (!$this->name || !$this->version) {
-            throw new \RuntimeException('You must set the name and/or the version to create new "Details" instance.');
+        if (!$this->name) {
+            throw new \RuntimeException('You must set the name of theme to create new "Details" instance.');
         }
 
         return new Details($this);

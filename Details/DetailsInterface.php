@@ -29,7 +29,7 @@ interface DetailsInterface
     /**
      * Returns the version
      *
-     * @return string
+     * @return string|null
      */
     public function getVersion();
 

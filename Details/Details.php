@@ -118,6 +118,6 @@ class Details implements DetailsInterface
      */
     public function __toString()
     {
-        return sprintf('%s v.%s', $this->name, $this->version);
+        return sprintf('%s v. %s', $this->name, $this->version ?: 'unknown');
     }
 }
