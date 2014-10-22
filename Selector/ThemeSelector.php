@@ -92,7 +92,7 @@ class ThemeSelector implements ThemeSelectorInterface
 
         // Dispatch the event
         $event = new HttpThemeEvent($theme, $request);
-        $this->dispatcher->dispatch(ThemeSelectorEvents::SELECT, $event);
+        $this->dispatcher->dispatch(ThemeSelectorEvents::SELECTED_THEME, $event);
 
         // If everything is ok, return the theme
         return $theme;

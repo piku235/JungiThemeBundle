@@ -26,5 +26,5 @@ final class ThemeSelectorEvents
     /**
      * @var string
      */
-    const SELECT = 'jungi_theme.select';
+    const SELECTED_THEME = 'jungi_theme.selected_theme';
 }
