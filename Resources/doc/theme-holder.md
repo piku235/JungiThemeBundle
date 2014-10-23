@@ -30,9 +30,9 @@ interface ThemeHolderInterface
 
 ### Default implementation
 
-[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Core/SimpleThemeHolder.php)
+[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Core/ThemeHolder.php)
 
-The `Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder` is the default theme holder which has only basic methods contained
+The `Jungi\Bundle\ThemeBundle\Core\ThemeHolder` is the default theme holder which has only basic methods contained
 in the interface. Of course you can change it by setting your own theme holder service in the configuration.
 
 ### Configuration

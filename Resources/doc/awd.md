@@ -33,7 +33,7 @@ designed for mobile devices (incl. tablet devices).
 
     <parameters>
         <parameter key="authors" type="collection">
-            <parameter>
+            <parameter type="collection">
                 <parameter key="name">piku235</parameter>
                 <parameter key="email">piku235@gmail.com</parameter>
                 <parameter key="homepage">www.foo.com</parameter>

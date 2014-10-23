@@ -63,11 +63,7 @@ jungi_theme:
 
         # theme resolver investigator configuration
         investigator:
-            enabled: false
-            suspects: 
-            
-                # Default:
-                - Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver
+            suspects: []
 ```
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

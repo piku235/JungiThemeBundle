@@ -150,7 +150,7 @@ jungi_theme:
             arguments: jungi_hero
 ```
 
-That's all. From now the theme should be visible on every page. Thanks for your attention and have a nice further fun 
+That's all. From now on the theme should be visible on every page. Thanks for your attention and have a nice further fun 
 with the bundle :)
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)
