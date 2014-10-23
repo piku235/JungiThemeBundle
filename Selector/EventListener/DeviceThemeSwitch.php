@@ -60,8 +60,7 @@ class DeviceThemeSwitch implements EventSubscriberInterface
         $theme = $event->getTheme();
 
         // Only the representative themes will be handled
-        // so the themes which does not have a link tag
-        // will be omitted
+        // so themes which does not have a link tag will be omitted
         if ($theme->getTags()->has(Tag\Link::getName())) {
             return;
         }
@@ -69,7 +68,7 @@ class DeviceThemeSwitch implements EventSubscriberInterface
         // Handle the request from the event
         $this->mobileDetect->handleRequest($event->getRequest());
 
-        // If none of devices had not match, stop
+        // Get the tag for match
         if ($this->mobileDetect->isMobile()) { // Is a mobile or a tablet device?
             $tag = new Tag\MobileDevices(
                 $this->mobileDetect->detectOS(),

@@ -38,7 +38,6 @@ class JungiThemeExtension extends Extension
         $loader->load('fundamental.xml');
         $loader->load('extensions.xml');
         $loader->load('mappings.xml');
-        $loader->load('form.xml');
         $loader->load('listeners.xml');
 
         // Ignore null themes
@@ -74,11 +73,7 @@ class JungiThemeExtension extends Extension
         }
 
         // Investigator
-        if (!$config['resolver']['investigator']['enabled']) {
-            $container->removeDefinition('jungi_theme.resolver.investigator');
-        } else {
-            $container->setParameter('jungi_theme.resolver.investigator.suspects', $config['resolver']['investigator']['suspects']);
-        }
+        $container->setParameter('jungi_theme.resolver.investigator.suspects', $config['resolver']['investigator']['suspects']);
 
         // Class cache
         $this->addClassesToCompile(array(

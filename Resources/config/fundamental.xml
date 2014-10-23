@@ -10,7 +10,7 @@
         <parameter key="jungi_theme.cache_warmer.finder_chain.class">Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinderChain</parameter>
         <parameter key="jungi_theme.cache_warmer.finder.class">Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder</parameter>
         <parameter key="jungi_theme.locator.class">Jungi\Bundle\ThemeBundle\Core\Loader\ThemeLocator</parameter>
-        <parameter key="jungi_theme.holder.default.class">Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder</parameter>
+        <parameter key="jungi_theme.holder.default.class">Jungi\Bundle\ThemeBundle\Core\ThemeHolder</parameter>
         <parameter key="jungi_theme.mobile_detect.class">Jungi\Bundle\ThemeBundle\Core\MobileDetect</parameter>
         <parameter key="jungi_theme.filename_parser.class">Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser</parameter>
         <parameter key="jungi_theme.selector.class">Jungi\Bundle\ThemeBundle\Selector\ThemeSelector</parameter>
@@ -43,7 +43,7 @@
             <argument type="service" id="file_locator" />
             <argument>%kernel.cache_dir%</argument>
         </service>
-        <service id="jungi_theme.name_parser" class="%jungi_theme.name_parser.class%" public="false">
+        <service id="jungi_theme.name_parser" class="%jungi_theme.name_parser.class%">
             <argument type="service" id="jungi_theme.holder" />
             <argument type="service" id="kernel" />
         </service>
@@ -65,7 +65,6 @@
             <argument type="service" id="jungi_theme.holder"/>
             <argument type="service" id="jungi_theme.resolver"/>
             <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="validator"/>
         </service>
         <service id="jungi_theme.selector" class="%jungi_theme.selector.class%">
             <argument type="service" id="jungi_theme.manager"/>

@@ -115,7 +115,6 @@ class Configuration implements ConfigurationInterface
                 ->append($this->addPrimaryThemeResolverNode())
                 ->arrayNode('investigator')
                     ->info('theme resolver investigator configuration')
-                    ->canBeEnabled()
                     ->fixXmlConfig('suspect')
                     ->children()
                         ->arrayNode('suspects')
