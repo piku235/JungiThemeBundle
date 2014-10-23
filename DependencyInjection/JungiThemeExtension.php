@@ -13,9 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -41,15 +39,15 @@ class JungiThemeExtension extends Extension
         $loader->load('listeners.xml');
 
         // Ignore null themes
-        $container->setParameter('jungi_theme.listener.holder.ignore_null_theme', array(
-            'ignore_null_theme' => $config['holder']['ignore_null_theme']
-        ));
+        $container->setParameter('jungi_theme.listener.holder.ignore_null_theme', $config['holder']['ignore_null_theme']);
 
-        // Theme resolver conf
+        // Primary theme resolver conf
         $this->configureThemeResolver('jungi_theme.resolver', 'primary', $config, $container);
 
-        // Theme resolver conf
-        $this->configureFallbackThemeResolver($config, $container);
+        // Fallback theme resolver conf
+        if ($config['resolver']['fallback']['enabled']) {
+            $this->configureThemeResolver('jungi_theme.fallback_resolver', 'fallback', $config, $container);
+        }
 
         // Theme holder conf
         $container->setAlias('jungi_theme.holder', $config['holder']['id']);
@@ -62,18 +60,14 @@ class JungiThemeExtension extends Extension
         // Validation listener
         if (!$config['selector']['validation_listener']['enabled']) {
             $container->removeDefinition('jungi_theme.selector.listener.validation');
-        } elseif ($config['selector']['validation_listener']['use_investigator']) {
-            $listener = $container->getDefinition('jungi_theme.selector.listener.validation');
-            $listener->addArgument(new Reference('jungi_theme.resolver.investigator', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        } else {
+            $container->setParameter('jungi_theme.selector.listener.validation.suspects', $config['selector']['validation_listener']['suspects']);
         }
 
         // Device Theme Switch
         if (!$config['selector']['device_switch']['enabled']) {
             $container->removeDefinition('jungi_theme.selector.listener.device_switch');
         }
-
-        // Investigator
-        $container->setParameter('jungi_theme.resolver.investigator.suspects', $config['resolver']['investigator']['suspects']);
 
         // Class cache
         $this->addClassesToCompile(array(
@@ -150,15 +144,5 @@ class JungiThemeExtension extends Extension
         } else {
             $container->setAlias($id, $resolver['id']);
         }
-    }
-
-    protected function configureFallbackThemeResolver($config, ContainerBuilder $container)
-    {
-        if (!$config['resolver']['fallback']['enabled']) {
-            return;
-        }
-
-        // Configure fallback theme resolver using the base method
-        $this->configureThemeResolver('jungi_theme.fallback_resolver', 'fallback', $config, $container);
     }
 }

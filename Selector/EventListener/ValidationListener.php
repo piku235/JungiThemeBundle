@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector\EventListener;
 
-use Jungi\Bundle\ThemeBundle\Resolver\Investigator\ThemeResolverInvestigatorInterface;
+use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents;
 use Jungi\Bundle\ThemeBundle\Validation\ValidationUtils;
@@ -32,27 +32,55 @@ class ValidationListener implements EventSubscriberInterface
     private $validator;
 
     /**
-     * @var ThemeResolverInvestigatorInterface
-     */
-    private $investigator;
-
-    /**
      * @var LoggerInterface
      */
     private $logger;
 
     /**
+     * @var array
+     */
+    private $suspects;
+
+    /**
      * Constructor
      *
-     * @param ValidatorInterface                 $validator    A validator
-     * @param ThemeResolverInvestigatorInterface $investigator A theme resolver investigator (optional)
-     * @param LoggerInterface                    $logger       A logger (optional)
+     * @param ValidatorInterface $validator A validator
+     * @param LoggerInterface    $logger    A logger (optional)
+     * @param array              $suspects  Suspect theme resolvers (optional)
      */
-    public function __construct(ValidatorInterface $validator, ThemeResolverInvestigatorInterface $investigator = null, LoggerInterface $logger = null)
+    public function __construct(ValidatorInterface $validator, LoggerInterface $logger = null, array $suspects = array())
     {
         $this->validator = $validator;
-        $this->investigator = $investigator;
         $this->logger = $logger;
+        $this->suspects = array();
+        foreach ($suspects as $resolver) {
+            $this->addSuspect($resolver);
+        }
+    }
+
+    /**
+     * Adds a suspect theme resolver
+     *
+     * @param ThemeResolverInterface|string $class An object or a class name
+     *
+     * @return void
+     *
+     * @throws \InvalidArgumentException When the $class argument will be wrong
+     */
+    public function addSuspect($class)
+    {
+        if ($class instanceof ThemeResolverInterface) {
+            $class = get_class($class);
+        } elseif (is_string($class)) {
+            $ref = new \ReflectionClass($class);
+            if (!$ref->implementsInterface('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface')) {
+                throw new \InvalidArgumentException(sprintf('The given class "%s" must implement the ThemeResolverInterface.', $class));
+            }
+        } else {
+            throw new \InvalidArgumentException('The $class variable should be a class or an object.');
+        }
+
+        $this->suspects[] = $class;
     }
 
     /**
@@ -69,7 +97,7 @@ class ValidationListener implements EventSubscriberInterface
         }
 
         // If is a trusted theme resolver, omit the validation
-        if (null !== $this->investigator && !$this->investigator->isSuspect($event->getThemeResolver())) {
+        if ($this->suspects && !in_array(get_class($event->getThemeResolver()), $this->suspects)) {
             return;
         }
 

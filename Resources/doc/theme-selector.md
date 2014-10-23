@@ -41,8 +41,9 @@ steps.
 
 This listener is used to validate the resolved theme. The validation is no so very important here, but in some circumstances 
 can be very helpful like e.g. when we're using the **CookieThemeResolver**. We know that a cookie value can be easily 
-changed causing that a user could use any theme without our knowledge. Also we can use a theme resolver investigator to 
-tell the **ValidationListener** which theme resolvers should be validated. A theme resolver investigator was mentioned [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-resolver-investigator.md).
+changed by user causing that the user could use any theme without our knowledge. Additionally the listener allows you to 
+perform the validation only for chosen theme resolvers like e.g. this **CookieThemeResolver**. Everything for this listener 
+can be set in the configuration.
 
 #### DeviceThemeSwitch
 
@@ -59,8 +60,23 @@ jungi_theme:
         id: # theme selector service
         validation_listener:
             enabled: # true or false
-            use_investigator: # true or false
+            suspects: # list of theme resolver classes
         device_switch: # true or false
 ```
+
+An example of setting the **CookieThemeResolver** as suspect for the **ValidationListener**:
+
+```yaml
+# app/config/config.yml
+jungi_theme:
+    selector:
+        validation_listener:
+            suspects: [ 'CookieThemeResolver' ]
+```
+
+**NOTE**
+
+> You can use shorthand class names just like above only for those theme resolvers which are located in the JungiThemeBundle.
+> Normally you must write a fully qualified class name.
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

@@ -11,8 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Selector\EventListener;
 
+use Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
-use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\LogicThemeResolverInvestigator;
 use Symfony\Component\Validator\Validator;
 use Symfony\Component\Validator\ConstraintValidatorFactory;
 use Symfony\Component\Validator\DefaultTranslator;
@@ -64,39 +64,40 @@ class ValidationListenerTest extends TestCase
         $this->listener = new ValidationListener($validator);
         $this->event = new ResolvedThemeEvent(
             $this->theme,
-            $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface'),
+            new InMemoryThemeResolver('footheme'),
             $this->getMock('Symfony\Component\HttpFoundation\Request')
         );
     }
 
     /**
-     * Tests the failed validation on the untrusted theme resolver
+     * Tests the validation when it should be executed
      */
-    public function testFailedValidationOnSuspectResolver()
+    public function testSuspectResolvers()
     {
-        $metadata = new ClassMetadata('Jungi\Bundle\ThemeBundle\Core\ThemeInterface');
-        $metadata->addGetterConstraint('name', new Constraints\EqualTo('footheme_boo'));
-        $this->metadataFactory->addMetadata($metadata);
-
-        $investigator = new LogicThemeResolverInvestigator(true);
-        $ref = new \ReflectionObject($this->listener);
-        $property = $ref->getProperty('investigator');
-        $property->setAccessible(true);
-        $property->setValue($this->listener, $investigator);
+        $this->listener->addSuspect('Jungi\Bundle\ThemeBundle\Resolver\SessionThemeResolver');
+        $this->listener->addSuspect(new InMemoryThemeResolver());
 
         // Execute
+        $this->prepareFailedValidation();
         $this->listener->onResolvedTheme($this->event);
 
-        // First check
+        // Assert
         $this->assertNull($this->event->getTheme());
+    }
+
+    /**
+     * Tests the validation when it shouldn't be executed
+     */
+    public function testTrustedResolvers()
+    {
+        $this->listener->addSuspect('Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver');
 
         // Execute
-        $investigator->suspect = false;
-        $this->event->setTheme($this->theme);
+        $this->prepareFailedValidation();
         $this->listener->onResolvedTheme($this->event);
 
-        // Second check
-        $this->assertEquals($this->theme, $this->event->getTheme());
+        // Check
+        $this->assertSame($this->theme, $this->event->getTheme());
     }
 
     /**
@@ -112,7 +113,7 @@ class ValidationListenerTest extends TestCase
         $this->listener->onResolvedTheme($this->event);
 
         // Check
-        $this->assertEquals($this->theme, $this->event->getTheme());
+        $this->assertSame($this->theme, $this->event->getTheme());
     }
 
     /**
@@ -120,10 +121,7 @@ class ValidationListenerTest extends TestCase
      */
     public function testFailedValidation()
     {
-        $metadata = new ClassMetadata('Jungi\Bundle\ThemeBundle\Core\ThemeInterface');
-        $metadata->addConstraint(new FakeClassConstraint());
-        $metadata->addGetterConstraint('name', new Constraints\EqualTo('footheme_boo'));
-        $this->metadataFactory->addMetadata($metadata);
+        $this->prepareFailedValidation();
 
         // Execute
         $this->listener->onResolvedTheme($this->event);
@@ -152,5 +150,13 @@ class ValidationListenerTest extends TestCase
 
         // Check
         $this->assertNotNull($event->getTheme());
+    }
+
+    private function prepareFailedValidation()
+    {
+        $metadata = new ClassMetadata('Jungi\Bundle\ThemeBundle\Core\ThemeInterface');
+        $metadata->addConstraint(new FakeClassConstraint());
+        $metadata->addGetterConstraint('name', new Constraints\EqualTo('footheme_boo'));
+        $this->metadataFactory->addMetadata($metadata);
     }
 }

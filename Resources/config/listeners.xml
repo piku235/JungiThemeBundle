@@ -30,7 +30,8 @@
         <service id="jungi_theme.selector.listener.validation" class="%jungi_theme.selector.listener.validation.class%">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="validator" />
-            <!-- investigator -->
+            <argument type="service" id="logger" />
+            <argument>%jungi_theme.selector.listener.validation.suspects%</argument>
         </service>
     </services>
 </container>

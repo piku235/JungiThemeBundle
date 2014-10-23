@@ -11,7 +11,7 @@ jungi_theme:
         # theme holder service id
         id: jungi_theme.holder.default
 
-        # whether to ignore the situation when the theme selector will don't match any theme for the request.
+        # whether to ignore the situation when the theme selector will not match any theme for the request.
         ignore_null_theme: true
 
     # theme selector configuration
@@ -23,15 +23,16 @@ jungi_theme:
         # theme validation listener configuration
         validation_listener:
             enabled: false
-            use_investigator: true
+
+            # a list of theme resolvers which should be validated
+            suspects: []
 
         # device theme switch configuration
         device_switch:
             enabled: true
 
     # general theme resolver configuration
-    # required
-    resolver:
+    resolver: # Required
 
         # fallback theme resolver configuration
         fallback:
@@ -41,29 +42,23 @@ jungi_theme:
             id: ~
 
             # a type of theme resolver
-            # one of "in_memory", "cookie", "service", "session"
-            type: ~
+            type: ~ # One of "in_memory"; "cookie"; "service"; "session"
 
             # arguments to be passed to the theme resolver
-            arguments: []
+            arguments:  []
 
         # theme resolver configuration
-        # required
-        primary:
+        primary: # Required
 
             # theme resolver service id
             id: ~
 
             # a type of theme resolver
-            # one of "in_memory", "cookie", "service", "session"
-            type: ~
+            type: ~ # One of "in_memory"; "cookie"; "service"; "session"
 
             # arguments to be passed to the theme resolver
             arguments: []
 
-        # theme resolver investigator configuration
-        investigator:
-            suspects: []
 ```
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

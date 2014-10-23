@@ -91,7 +91,6 @@ Advanced
 
 * [Theme resolver](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md)
 * [Theme selector](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-selector.md)
-* [Theme resolver investigator](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver-investigator.md)
 * [Configuration reference](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md)
 
 Tutorials

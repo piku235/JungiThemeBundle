@@ -57,37 +57,6 @@ class Configuration implements ConfigurationInterface
     {
         $builder = new TreeBuilder();
         $rootNode = $builder->root('selector');
-
-        $rootNode
-            ->addDefaultsIfNotSet()
-            ->info('theme selector configuration')
-            ->children()
-                ->scalarNode('id')
-                    ->cannotBeEmpty()
-                    ->info('theme selector service id')
-                ->end()
-                ->arrayNode('validation_listener')
-                    ->info('theme validation listener configuration')
-                    ->addDefaultsIfNotSet()
-                    ->canBeEnabled()
-                    ->children()
-                        ->booleanNode('use_investigator')->defaultTrue()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('device_switch')
-                    ->info('device theme switch configuration')
-                    ->addDefaultsIfNotSet()
-                    ->canBeDisabled()
-                ->end()
-            ->end();
-
-        return $rootNode;
-    }
-
-    protected function addThemeResolverNode()
-    {
-        $builder = new TreeBuilder();
-        $rootNode = $builder->root('resolver');
         $investigatorNorm = function ($v) {
             if (isset($v['suspects'])) {
                 array_walk($v['suspects'], function (&$class) {
@@ -108,16 +77,20 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->addDefaultsIfNotSet()
-            ->isRequired()
-            ->info('general theme resolver configuration')
+            ->info('theme selector configuration')
             ->children()
-                ->append($this->addFallbackThemeResolverNode())
-                ->append($this->addPrimaryThemeResolverNode())
-                ->arrayNode('investigator')
-                    ->info('theme resolver investigator configuration')
+                ->scalarNode('id')
+                    ->cannotBeEmpty()
+                    ->info('theme selector service id')
+                ->end()
+                ->arrayNode('validation_listener')
+                    ->info('theme validation listener configuration')
+                    ->addDefaultsIfNotSet()
+                    ->canBeEnabled()
                     ->fixXmlConfig('suspect')
                     ->children()
                         ->arrayNode('suspects')
+                            ->info('a list of theme resolvers which should be validated')
                             ->prototype('scalar')->cannotBeEmpty()->end()
                         ->end()
                     ->end()
@@ -126,6 +99,28 @@ class Configuration implements ConfigurationInterface
                         ->then($investigatorNorm)
                     ->end()
                 ->end()
+                ->arrayNode('device_switch')
+                    ->info('device theme switch configuration')
+                    ->addDefaultsIfNotSet()
+                    ->canBeDisabled()
+                ->end()
+            ->end();
+
+        return $rootNode;
+    }
+
+    protected function addThemeResolverNode()
+    {
+        $builder = new TreeBuilder();
+        $rootNode = $builder->root('resolver');
+
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->isRequired()
+            ->info('general theme resolver configuration')
+            ->children()
+                ->append($this->addFallbackThemeResolverNode())
+                ->append($this->addPrimaryThemeResolverNode())
             ->end();
 
         return $rootNode;
