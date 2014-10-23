@@ -71,18 +71,6 @@ class ThemeSelector implements ThemeSelectorInterface
     }
 
     /**
-     * Sets a fallback theme resolver
-     *
-     * @param ThemeResolverInterface $resolver A fallback theme resolver
-     *
-     * @return void
-     */
-    public function setFallback(ThemeResolverInterface $resolver)
-    {
-        $this->fallback = $resolver;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function select(Request $request)

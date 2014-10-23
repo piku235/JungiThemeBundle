@@ -14,8 +14,8 @@ namespace Jungi\Bundle\ThemeBundle\Resolver\Investigator;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 
 /**
- * Implemented classes allows for check if a given theme resolver is suspected
- * and something special should be done with it
+ * Implemented classes allows for check if a given theme resolver is suspected and something special
+ * should be done with it
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

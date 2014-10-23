@@ -66,11 +66,15 @@ class ThemeChanger implements ThemeChangerInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException If the given theme does not implement the ThemeInterface
      */
     public function change($theme, Request $request)
     {
-        if (!$theme instanceof ThemeInterface) {
+        if (is_string($theme)) {
             $theme = $this->manager->getTheme($theme);
+        } elseif (!$theme instanceof ThemeInterface) {
+            throw new \InvalidArgumentException('The given theme must implements the "Jungi\Bundle\ThemeBundle\Core\ThemeInterface".');
         }
 
         // Dispatch the event
@@ -78,8 +82,8 @@ class ThemeChanger implements ThemeChangerInterface
         $this->dispatcher->dispatch(ThemeChangerEvents::PRE_CHANGE, $event);
 
         // Change the current theme
-        $this->holder->setTheme($theme);
         $this->resolver->setThemeName($theme->getName(), $request);
+        $this->holder->setTheme($theme);
 
         // Dispatch the event
         $this->dispatcher->dispatch(ThemeChangerEvents::POST_CHANGE, $event);

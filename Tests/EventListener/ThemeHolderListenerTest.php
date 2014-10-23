@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\EventListener;
 
-use Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder;
+use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
 use Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener;
 use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
@@ -24,7 +24,7 @@ use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 class ThemeHolderListenerTest extends TestCase
 {
     /**
-     * @var SimpleThemeHolder
+     * @var ThemeHolder
      */
     private $holder;
 
@@ -50,7 +50,7 @@ class ThemeHolderListenerTest extends TestCase
 
     protected function setUp()
     {
-        $this->holder = new SimpleThemeHolder();
+        $this->holder = new ThemeHolder();
         $this->theme = $theme = $this->createThemeMock('foo');
         $this->selector = $this->getMock('Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface');
         $this->selector

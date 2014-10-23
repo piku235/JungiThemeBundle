@@ -106,21 +106,6 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests the behaviour in situations when a theme has been invalidated e.g. by validation process
-     *
-     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\InvalidatedThemeException
-     */
-    public function testOnInvalidatedTheme()
-    {
-        // Add the ValidationListener
-        $this->eventDispatcher->addSubscriber(new ValidationListener($this->getValidator()));
-
-        // Execute
-        $request = $this->createDesktopRequest();
-        $this->selector->select($request);
-    }
-
-    /**
      * Tests the fallback functionality when a theme has been invalidated
      */
     public function testFallbackOnInvalidatedTheme()
@@ -136,7 +121,12 @@ class ThemeSelectorTest extends TestCase
         $this->resolver->setThemeName('footheme', $request);
 
         // Sets the fallback theme resolver
-        $this->selector->setFallback(new InMemoryThemeResolver('default'));
+        $ref = new \ReflectionObject($this->selector);
+        $property = $ref->getProperty('fallback');
+        $property->setAccessible(true);
+        $property->setValue($this->selector, new InMemoryThemeResolver('default'));
+
+        // Execute
         $theme = $this->selector->select($request);
 
         // Assert
@@ -156,7 +146,12 @@ class ThemeSelectorTest extends TestCase
         $this->resolver->setThemeName(null, $request);
 
         // Sets the fallback theme resolver
-        $this->selector->setFallback(new InMemoryThemeResolver('default'));
+        $ref = new \ReflectionObject($this->selector);
+        $property = $ref->getProperty('fallback');
+        $property->setAccessible(true);
+        $property->setValue($this->selector, new InMemoryThemeResolver('default'));
+
+        // Execute
         $theme = $this->selector->select($request);
 
         // Assert
@@ -176,7 +171,12 @@ class ThemeSelectorTest extends TestCase
         $this->resolver->setThemeName('missing_theme', $request);
 
         // Sets the fallback theme resolver
-        $this->selector->setFallback(new InMemoryThemeResolver('default'));
+        $ref = new \ReflectionObject($this->selector);
+        $property = $ref->getProperty('fallback');
+        $property->setAccessible(true);
+        $property->setValue($this->selector, new InMemoryThemeResolver('default'));
+
+        // Execute
         $theme = $this->selector->select($request);
 
         // Assert
@@ -195,11 +195,52 @@ class ThemeSelectorTest extends TestCase
         $request = $this->createDesktopRequest();
 
         // Sets the fallback theme resolver
-        $this->selector->setFallback(new InMemoryThemeResolver('default'));
+        $ref = new \ReflectionObject($this->selector);
+        $property = $ref->getProperty('fallback');
+        $property->setAccessible(true);
+        $property->setValue($this->selector, new InMemoryThemeResolver('default'));
+
+        // Execute
         $theme = $this->selector->select($request);
 
         // Assert
-        $this->assertNotEquals('default', $theme->getName());
+        $this->assertEquals('footheme', $theme->getName());
+    }
+
+    /**
+     * Tests on an empty theme name
+     *
+     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\NullThemeException
+     */
+    public function testFallbackOnMissingTheme()
+    {
+        $request = $this->createDesktopRequest();
+
+        $this->resolver->setThemeName('missing_theme', $request);
+
+        // Sets the fallback theme resolver
+        $ref = new \ReflectionObject($this->selector);
+        $property = $ref->getProperty('fallback');
+        $property->setAccessible(true);
+        $property->setValue($this->selector, new InMemoryThemeResolver(null));
+
+        // Execute
+        $this->selector->select($request);
+    }
+
+    /**
+     * Tests the behaviour in situations when a theme has been invalidated e.g. by validation process
+     *
+     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\InvalidatedThemeException
+     */
+    public function testOnInvalidatedTheme()
+    {
+        // Add the ValidationListener
+        $this->eventDispatcher->addSubscriber(new ValidationListener($this->getValidator()));
+
+        // Execute
+        $request = $this->createDesktopRequest();
+        $this->selector->select($request);
     }
 
     /**
@@ -223,20 +264,6 @@ class ThemeSelectorTest extends TestCase
         $request = $this->createDesktopRequest();
 
         $this->resolver->setThemeName(null, $request);
-        $this->selector->select($request);
-    }
-
-    /**
-     * Tests on an empty theme name
-     *
-     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\NullThemeException
-     */
-    public function testFallbackOnNullTheme()
-    {
-        $request = $this->createDesktopRequest();
-
-        $this->resolver->setThemeName('missing_theme', $request);
-        $this->selector->setFallback(new InMemoryThemeResolver(null));
         $this->selector->select($request);
     }
 

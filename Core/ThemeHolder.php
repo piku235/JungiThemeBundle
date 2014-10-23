@@ -12,11 +12,11 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * SimpleThemeHolder is a default theme holder
+ * ThemeHolder is a default theme holder
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class SimpleThemeHolder implements ThemeHolderInterface
+class ThemeHolder implements ThemeHolderInterface
 {
     /**
      * @var ThemeInterface

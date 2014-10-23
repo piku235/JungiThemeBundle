@@ -79,7 +79,10 @@ class ValidationListenerTest extends TestCase
         $this->metadataFactory->addMetadata($metadata);
 
         $investigator = new LogicThemeResolverInvestigator(true);
-        $this->listener->setThemeResolverInvestigator($investigator);
+        $ref = new \ReflectionObject($this->listener);
+        $property = $ref->getProperty('investigator');
+        $property->setAccessible(true);
+        $property->setValue($this->listener, $investigator);
 
         // Execute
         $this->listener->onResolvedTheme($this->event);
@@ -88,7 +91,7 @@ class ValidationListenerTest extends TestCase
         $this->assertNull($this->event->getTheme());
 
         // Execute
-        $investigator->setSuspect(false);
+        $investigator->suspect = false;
         $this->event->setTheme($this->theme);
         $this->listener->onResolvedTheme($this->event);
 

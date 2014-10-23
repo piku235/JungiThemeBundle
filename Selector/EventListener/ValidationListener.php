@@ -56,18 +56,6 @@ class ValidationListener implements EventSubscriberInterface
     }
 
     /**
-     * Sets a theme resolver investigator
-     *
-     * @param ThemeResolverInvestigatorInterface $investigator A theme resolver investigator
-     *
-     * @return void
-     */
-    public function setThemeResolverInvestigator(ThemeResolverInvestigatorInterface $investigator)
-    {
-        $this->investigator = $investigator;
-    }
-
-    /**
      * Validates the theme from an event
      *
      * @param ResolvedThemeEvent $event An event

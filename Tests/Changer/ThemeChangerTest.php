@@ -13,7 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests;
 
 use Jungi\Bundle\ThemeBundle\Changer\ThemeChanger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Jungi\Bundle\ThemeBundle\Core\SimpleThemeHolder;
+use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\FakeThemeResolver;
 
@@ -30,7 +30,7 @@ class ThemeChangerTest extends TestCase
     private $changer;
 
     /**
-     * @var SimpleThemeHolder
+     * @var ThemeHolder
      */
     private $holder;
 
@@ -50,7 +50,7 @@ class ThemeChangerTest extends TestCase
     protected function setUp()
     {
         $this->resolver = new FakeThemeResolver('bootheme', false);
-        $this->holder = new SimpleThemeHolder();
+        $this->holder = new ThemeHolder();
         $this->manager = new ThemeManager(array(
             $this->createThemeMock('footheme'),
             $this->createThemeMock('bootheme')

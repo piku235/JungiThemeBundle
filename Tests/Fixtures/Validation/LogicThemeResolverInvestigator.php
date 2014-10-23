@@ -21,14 +21,9 @@ use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
  */
 class LogicThemeResolverInvestigator implements ThemeResolverInvestigatorInterface
 {
-    private $suspect;
+    public $suspect;
 
     public function __construct($pass)
-    {
-        $this->suspect = $pass;
-    }
-
-    public function setSuspect($pass)
     {
         $this->suspect = $pass;
     }

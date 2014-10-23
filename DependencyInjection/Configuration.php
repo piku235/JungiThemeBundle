@@ -119,7 +119,6 @@ class Configuration implements ConfigurationInterface
                     ->fixXmlConfig('suspect')
                     ->children()
                         ->arrayNode('suspects')
-                            ->defaultValue(array('Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver'))
                             ->prototype('scalar')->cannotBeEmpty()->end()
                         ->end()
                     ->end()

@@ -24,27 +24,15 @@ use Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver;
 class ThemeResolverInvestigatorTest extends TestCase
 {
     /**
-     * @var ThemeResolverInvestigator
-     */
-    private $investigator;
-
-    /**
-     * Set up
-     */
-    protected function setUp()
-    {
-        $this->investigator = new ThemeResolverInvestigator();
-    }
-
-    /**
      * @dataProvider getThemeResolvers
      */
     public function testSuspectResolvers($themeResolver)
     {
-        $this->investigator->add('Jungi\Bundle\ThemeBundle\Resolver\SessionThemeResolver');
-        $this->investigator->add(new InMemoryThemeResolver());
+        $investigator = new ThemeResolverInvestigator();
+        $investigator->add('Jungi\Bundle\ThemeBundle\Resolver\SessionThemeResolver');
+        $investigator->add(new InMemoryThemeResolver());
 
-        $this->assertTrue($this->investigator->isSuspect($themeResolver));
+        $this->assertTrue($investigator->isSuspect($themeResolver));
     }
 
     /**
@@ -52,9 +40,10 @@ class ThemeResolverInvestigatorTest extends TestCase
      */
     public function testTrustedResolvers($themeResolver)
     {
-        $this->investigator->add('Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver');
+        $investigator = new ThemeResolverInvestigator();
+        $investigator->add('Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver');
 
-        $this->assertFalse($this->investigator->isSuspect($themeResolver));
+        $this->assertFalse($investigator->isSuspect($themeResolver));
     }
 
     /**
