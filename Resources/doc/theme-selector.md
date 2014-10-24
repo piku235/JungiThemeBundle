@@ -42,8 +42,8 @@ steps.
 This listener is used to validate the resolved theme. The validation is no so very important here, but in some circumstances 
 can be very helpful like e.g. when we're using the **CookieThemeResolver**. We know that a cookie value can be easily 
 changed by user causing that the user could use any theme without our knowledge. Additionally the listener allows you to 
-perform the validation only for chosen theme resolvers like e.g. this **CookieThemeResolver**. Everything for this listener 
-can be set in the configuration.
+perform the validation only for chosen theme resolvers like e.g. this **CookieThemeResolver** (scroll to the configuration
+to see how).
 
 #### DeviceThemeSwitch
 

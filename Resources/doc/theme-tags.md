@@ -8,8 +8,13 @@ and they should be used in each theme but they are not required.
 Built-in tags
 -------------
 
-The bundle comes with three built-in tags: **MobileDevices**, **DesktopDevices** and **Link**. All tags are located in
-the `Jungi\Bundle\ThemeBundle\Tag` namespace.
+The bundle comes with three built-in tags. All tags are located under the `Jungi\Bundle\ThemeBundle\Tag` namespace.
+
+Class | Name
+----- | ----
+MobileDevices | jungi.mobile_devices
+DesktopDevices | jungi.desktop_devices
+Link | jungi.link
 
 ### MobileDevices
 
