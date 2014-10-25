@@ -75,5 +75,6 @@
         <!-- Aliases -->
         <service id="templating.locator" alias="jungi_theme.locator" />
         <service id="templating.name_parser" alias="jungi_theme.name_parser" />
+        <service id="jungi_theme.resolver" alias="jungi_theme.resolver.primary" />
     </services>
 </container>
