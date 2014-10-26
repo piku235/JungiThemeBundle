@@ -76,7 +76,7 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
     {
         $result = parent::getInvalidThemeMappings();
         $result[] = array('invalid_themes_definition');
-        $result[] = array('missing_metadata');
+        $result[] = array('missing_info');
         $result[] = array('missing_path');
         $result[] = array('unrecognized_theme_keys');
 

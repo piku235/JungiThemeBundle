@@ -11,12 +11,12 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Metadata\Author;
+use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
-use Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadataEssence;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -138,16 +138,16 @@ class YamlFileLoader extends FileLoader
      *
      * @return Theme
      *
-     * @throws \InvalidArgumentException If the path key or/and the metadata key is missing
+     * @throws \InvalidArgumentException If the path key or/and the info key is missing
      * @throws \InvalidArgumentException If some keys are unrecognized
      */
     private function parseTheme($themeName, array $specification)
     {
         // Validation
-        if (!isset($specification['path']) || !isset($specification['metadata'])) {
-            throw new \InvalidArgumentException('The path key or/and the metadata key is missing in the theme specification.');
+        if (!isset($specification['path']) || !isset($specification['info'])) {
+            throw new \InvalidArgumentException('The path key or/and the info key is missing in the theme specification.');
         }
-        $valid = array('tags', 'path', 'metadata');
+        $valid = array('tags', 'path', 'info');
         if ($keys = array_diff(array_keys($specification), $valid)) {
             throw new \InvalidArgumentException(sprintf(
                 'The key "%s" are illegal in the theme specification.',
@@ -159,25 +159,25 @@ class YamlFileLoader extends FileLoader
         return new Theme(
             $themeName,
             $this->locator->locate($specification['path']),
-            $this->parseMetadata($specification),
+            $this->parseInfo($specification),
             $this->parseTags($specification)
         );
     }
 
     /**
-     * Parses metadata specification
+     * Parses info specification
      *
      * @param array $specification A specification
      *
-     * @return ThemeMetadata
+     * @return ThemeInfoEssence
      *
      * @throws \InvalidArgumentException If some keys of a property element are invalid
      */
-    private function parseMetadata(array $specification)
+    private function parseInfo(array $specification)
     {
-        $metadata = &$specification['metadata'];
+        $info = &$specification['info'];
         $validKeys = array('authors', 'description', 'name', 'version', 'thumbnail', 'screen', 'license');
-        if ($diff = array_diff(array_keys($metadata), $validKeys)) {
+        if ($diff = array_diff(array_keys($info), $validKeys)) {
             throw new \InvalidArgumentException(sprintf(
                 'The property keys "%s" are invalid, expected one of the following: "%s".',
                 implode(', ', $diff),
@@ -186,24 +186,24 @@ class YamlFileLoader extends FileLoader
         }
 
         // Parameters
-        $this->replaceParameters($metadata);
+        $this->replaceParameters($info);
 
-        $builder = ThemeMetadataEssence::createBuilder();
-        $builder->addAuthors($this->parseAuthors($metadata));
-        if (isset($metadata['license'])) {
-            $builder->setLicense($metadata['license']);
+        $builder = ThemeInfoEssence::createBuilder();
+        $builder->addAuthors($this->parseAuthors($info));
+        if (isset($info['license'])) {
+            $builder->setLicense($info['license']);
         }
-        if (isset($metadata['description'])) {
-            $builder->setDescription($metadata['description']);
+        if (isset($info['description'])) {
+            $builder->setDescription($info['description']);
         }
-        if (isset($metadata['name'])) {
-            $builder->setName($metadata['name']);
+        if (isset($info['name'])) {
+            $builder->setName($info['name']);
         }
-        if (isset($metadata['version'])) {
-            $builder->setVersion($metadata['version']);
+        if (isset($info['version'])) {
+            $builder->setVersion($info['version']);
         }
 
-        return $builder->getMetadata();
+        return $builder->getInformation();
     }
 
     /**

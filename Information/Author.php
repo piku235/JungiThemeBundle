@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Metadata;
+namespace Jungi\Bundle\ThemeBundle\Information;
 
 /**
  * Author is the default implementation of the AuthorInterface

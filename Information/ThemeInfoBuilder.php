@@ -1,13 +1,13 @@
 <?php
 
-namespace Jungi\Bundle\ThemeBundle\Metadata;
+namespace Jungi\Bundle\ThemeBundle\Information;
 
 /**
- * ThemeMetadataBuilder is a builder which helps with creating the ThemeMetadataEssence instance
+ * ThemeInfoBuilder is a builder which helps with creating the ThemeInfoEssence instance
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeMetadataBuilder
+class ThemeInfoBuilder
 {
     /**
      * @var string
@@ -39,7 +39,7 @@ class ThemeMetadataBuilder
      *
      * @param string $name A name
      *
-     * @return ThemeMetadataBuilder
+     * @return ThemeInfoBuilder
      */
     public function setName($name)
     {
@@ -53,7 +53,7 @@ class ThemeMetadataBuilder
      *
      * @param string $license A theme license
      *
-     * @return ThemeMetadataBuilder
+     * @return ThemeInfoBuilder
      */
     public function setLicense($license)
     {
@@ -67,7 +67,7 @@ class ThemeMetadataBuilder
      *
      * @param string $description A description
      *
-     * @return ThemeMetadataBuilder
+     * @return ThemeInfoBuilder
      */
     public function setDescription($description)
     {
@@ -81,7 +81,7 @@ class ThemeMetadataBuilder
      *
      * @param string $version A version
      *
-     * @return ThemeMetadataBuilder
+     * @return ThemeInfoBuilder
      */
     public function setVersion($version)
     {
@@ -95,7 +95,7 @@ class ThemeMetadataBuilder
      *
      * @param AuthorInterface $author An author
      *
-     * @return ThemeMetadataBuilder
+     * @return ThemeInfoBuilder
      */
     public function addAuthor(AuthorInterface $author)
     {
@@ -109,7 +109,7 @@ class ThemeMetadataBuilder
      *
      * @param AuthorInterface[] $authors Authors
      *
-     * @return ThemeMetadataBuilder
+     * @return ThemeInfoBuilder
      */
     public function addAuthors(array $authors)
     {
@@ -138,18 +138,18 @@ class ThemeMetadataBuilder
     }
 
     /**
-     * Builds the Metadata instance
+     * Builds the Information instance
      *
-     * @return ThemeMetadataEssence
+     * @return ThemeInfoEssence
      *
      * @throws \RuntimeException When the name is missing
      */
-    public function getMetadata()
+    public function getInformation()
     {
         if (!$this->name) {
-            throw new \RuntimeException('You must set the name of theme to create new "Metadata" instance.');
+            throw new \RuntimeException('You must set the name of theme to create a new "ThemeInfoEssence" instance.');
         }
 
-        return new ThemeMetadataEssence($this);
+        return new ThemeInfoEssence($this);
     }
 }

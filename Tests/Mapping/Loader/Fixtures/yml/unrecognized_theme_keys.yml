@@ -5,7 +5,7 @@ themes:
             jungi.desktop_devices: ~
             jungi.mobile_devices: [ [ iOS, AndroidOS ], "const@jungi.mobile_devices::MOBILE" ]
             jungi.own: test
-        metadata:
+        info:
             name: A fancy theme
             authors:
                 - { name: piku235, email: piku235@gmail.com, homepage: www.foo.com }

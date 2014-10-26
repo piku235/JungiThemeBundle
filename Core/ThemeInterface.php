@@ -40,9 +40,9 @@ interface ThemeInterface
     public function getPath();
 
     /**
-     * Returns the metadata of the theme
+     * Returns the info of the theme
      *
-     * @return \Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadata
+     * @return \Jungi\Bundle\ThemeBundle\Information\ThemeInfo
      */
-    public function getMetadata();
+    public function getInformation();
 }

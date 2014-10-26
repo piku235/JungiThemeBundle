@@ -9,14 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Metadata;
+namespace Jungi\Bundle\ThemeBundle\Information;
 
 /**
- * ThemeMetadata is used to describe a theme by other data like a theme name or a theme version.
+ * ThemeInfo is used to describe a theme and instances of this interface can return e.g.
+ * a theme name or a theme version.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-abstract class ThemeMetadata
+abstract class ThemeInfo
 {
     /**
      * @var AuthorInterface[]
@@ -94,7 +95,7 @@ abstract class ThemeMetadata
     }
 
     /**
-     * Represents the metadata object
+     * Represents the info object
      *
      * @return string
      */

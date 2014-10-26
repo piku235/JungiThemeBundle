@@ -11,8 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Metadata\Author;
-use Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadataEssence;
+use Jungi\Bundle\ThemeBundle\Information\Author;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own;
@@ -63,8 +63,8 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
     {
         $this->loader->load('theme.php');
 
-        $mb = ThemeMetadataEssence::createBuilder();
-        $mb
+        $ib = ThemeInfoEssence::createBuilder();
+        $ib
             ->setName('A fancy theme')
             ->setVersion('1.0.0')
             ->setDescription('<i>foo desc</i>')
@@ -76,7 +76,7 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
         $this->assertEquals(new Theme(
             'foo_1',
             $this->locator->locate('@JungiFooBundle/Resources/theme'),
-            $mb->getMetadata(),
+            $ib->getInformation(),
             new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),

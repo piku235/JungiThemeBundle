@@ -11,16 +11,16 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Core;
 
-use Jungi\Bundle\ThemeBundle\Metadata\Author;
-use Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadataBuilder;
+use Jungi\Bundle\ThemeBundle\Information\Author;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoBuilder;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * ThemeMetadataBuilderTest
+ * ThemeInfoBuilder Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeMetadataBuilderTest extends TestCase
+class ThemeInfoBuilderTest extends TestCase
 {
     public function testValidCreation()
     {
@@ -30,7 +30,7 @@ class ThemeMetadataBuilderTest extends TestCase
         $license = 'MIT';
         $author = new Author('test_author', 'test_author_email', 'test_author_www');
 
-        $builder = new ThemeMetadataBuilder();
+        $builder = new ThemeInfoBuilder();
         $builder
             ->setName($name)
             ->setVersion($version)
@@ -52,9 +52,9 @@ class ThemeMetadataBuilderTest extends TestCase
      */
     public function testOnMissingParameters()
     {
-        $builder = new ThemeMetadataBuilder();
+        $builder = new ThemeInfoBuilder();
         $builder->setDescription('test');
 
-        $builder->getMetadata();
+        $builder->getInformation();
     }
 }

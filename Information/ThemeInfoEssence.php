@@ -9,34 +9,34 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Metadata;
+namespace Jungi\Bundle\ThemeBundle\Information;
 
 /**
- * The class is a simple implementation of the ThemeMetadata and was built
- * on the basis of the Essence design pattern
+ * The class is a simple implementation of the ThemeInfo and was built on the basis of
+ * the Essence design pattern
  *
- * To set properties of the class you must use the ThemeMetadataBuilder
+ * To set properties of the class you must use the ThemeInfoBuilder
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeMetadataEssence extends ThemeMetadata
+class ThemeInfoEssence extends ThemeInfo
 {
     /**
      * Creates a new builder instance
      *
-     * @return ThemeMetadataBuilder
+     * @return ThemeInfoBuilder
      */
     public static function createBuilder()
     {
-        return new ThemeMetadataBuilder();
+        return new ThemeInfoBuilder();
     }
 
     /**
      * Constructor
      *
-     * @param ThemeMetadataBuilder $builder The Metadata builder
+     * @param ThemeInfoBuilder $builder The Information builder
      */
-    public function __construct(ThemeMetadataBuilder $builder)
+    public function __construct(ThemeInfoBuilder $builder)
     {
         $fields = $builder->getFields();
 

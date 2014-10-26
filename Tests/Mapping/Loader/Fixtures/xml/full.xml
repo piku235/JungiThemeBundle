@@ -28,7 +28,7 @@
                 <tag name="jungi.desktop_devices" />
                 <tag name="jungi.own">test</tag>
             </tags>
-            <metadata>
+            <info>
                 <property key="authors" type="collection">
                     <property>%leading_author%</property>
                     <property type="collection">
@@ -41,7 +41,7 @@
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
                 <property key="license">%license%</property>
-            </metadata>
+            </info>
         </theme>
 
         <theme name="foo_2" path="@JungiFooBundle/Resources/theme">
@@ -50,7 +50,7 @@
                     <argument type="constant">Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL</argument>
                 </tag>
             </tags>
-            <metadata>
+            <info>
                 <property key="authors" type="collection">
                     <property>%leading_author%</property>
                 </property>
@@ -58,7 +58,7 @@
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
                 <property key="license">%license%</property>
-            </metadata>
+            </info>
         </theme>
 
         <theme name="foo_3" path="@JungiFooBundle/Resources/theme">
@@ -67,7 +67,7 @@
                     <argument type="constant">CONST_TEST</argument>
                 </tag>
             </tags>
-            <metadata>
+            <info>
                 <property key="authors" type="collection">
                     <property>%leading_author%</property>
                 </property>
@@ -75,14 +75,14 @@
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
                 <property key="license">%license%</property>
-            </metadata>
+            </info>
         </theme>
 
         <theme name="foo_4" path="@JungiFooBundle/Resources/theme">
-            <metadata>
+            <info>
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
-            </metadata>
+            </info>
         </theme>
     </themes>
 

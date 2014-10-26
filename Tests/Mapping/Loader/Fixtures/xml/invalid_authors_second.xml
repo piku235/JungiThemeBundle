@@ -16,13 +16,13 @@
                 <tag name="jungi.desktop_devices" />
                 <tag name="jungi.own">test</tag>
             </tags>
-            <metadata>
+            <info>
                 <property key="authors">foo</property>
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
                 <property key="license">MIT</property>
-            </metadata>
+            </info>
         </theme>
     </themes>
 

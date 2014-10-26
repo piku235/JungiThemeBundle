@@ -50,13 +50,13 @@ I know that introduction can be insufficient so I will demonstrate creating a re
                 </tag>
                 <tag name="jungi.desktop_devices" />
             </tags>
-            <metadata>
+            <info>
                 <property key="authors">%authors%</property>
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
                 <property key="license">MIT</property>
-            </metadata>
+            </info>
         </theme>
     </themes>
     
@@ -80,7 +80,7 @@ themes:
         tags:
             jungi.desktop_devices: ~
             jungi.mobile_devices: [ "%foo.mobile_systems%", "%foo.mobile_device%" ]
-        metadata:
+        info:
             authors: "%authors%"
             name: A fancy theme
             version: 1.0.0
@@ -96,13 +96,13 @@ themes:
 // FooBundle/Resources/config/theme.php
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Metadata\Metadata;
-use Jungi\Bundle\ThemeBundle\Metadata\Author;
+use Jungi\Bundle\ThemeBundle\Information\Information;
+use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
-$mb = Metadata::createBuilder();
-$mb
+$ib = ThemeInfoEssence::createBuilder();
+$ib
     ->setName('A fancy theme')
     ->setDescription('<i>foo desc</i>')
     ->setVersion('1.0.0')
@@ -112,7 +112,7 @@ $mb
 $manager->addTheme(new Theme(
     'foo',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    $mb->getMetadata(),
+    $ib->getInformation(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
         new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)

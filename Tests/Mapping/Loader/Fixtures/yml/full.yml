@@ -15,7 +15,7 @@ themes:
             jungi.desktop_devices: ~
             jungi.mobile_devices: [ "%foo_1.mobile.systems%", "%foo_1.mobile.device%" ]
             jungi.own: test
-        metadata:
+        info:
             name: A fancy theme
             authors:
                 - "%leading_author%"
@@ -28,7 +28,7 @@ themes:
         path: "@JungiFooBundle/Resources/theme"
         tags:
             jungi.own: "const@Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL"
-        metadata:
+        info:
             name: A fancy theme
             authors: [ "%leading_author%" ]
             version: 1.0.0
@@ -39,7 +39,7 @@ themes:
         path: "@JungiFooBundle/Resources/theme"
         tags:
             jungi.own: "const@CONST_TEST"
-        metadata:
+        info:
             name: A fancy theme
             authors: [ "%leading_author%" ]
             version: 1.0.0
@@ -48,6 +48,6 @@ themes:
 
     foo_4:
         path: "@JungiFooBundle/Resources/theme"
-        metadata:
+        info:
             name: A fancy theme
             version: 1.0.0
