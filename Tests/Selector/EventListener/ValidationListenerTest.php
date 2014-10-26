@@ -59,7 +59,7 @@ class ValidationListenerTest extends TestCase
         $this->metadataFactory = new FakeMetadataFactory();
         $validator = new Validator($this->metadataFactory, new ConstraintValidatorFactory(), new DefaultTranslator());
         $this->theme = new Theme(
-            'footheme', 'path', $this->getMock('Jungi\Bundle\ThemeBundle\Details\DetailsInterface')
+            'footheme', 'path', $this->getMock('Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadata')
         );
         $this->listener = new ValidationListener($validator);
         $this->event = new ResolvedThemeEvent(

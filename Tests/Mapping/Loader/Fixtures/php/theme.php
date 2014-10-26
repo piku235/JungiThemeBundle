@@ -4,11 +4,11 @@ use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
-use Jungi\Bundle\ThemeBundle\Details\Author;
-use Jungi\Bundle\ThemeBundle\Details\Details;
+use Jungi\Bundle\ThemeBundle\Metadata\Author;
+use Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadataEssence;
 
-$dsb = Details::createBuilder();
-$dsb
+$mb = ThemeMetadataEssence::createBuilder();
+$mb
     ->setName('A fancy theme')
     ->setVersion('1.0.0')
     ->setDescription('<i>foo desc</i>')
@@ -19,7 +19,7 @@ $dsb
 $manager->addTheme(new Theme(
     'foo_1',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    $dsb->getDetails(),
+    $mb->getMetadata(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
         $tagFactory->create('jungi.mobile_devices', array(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)),

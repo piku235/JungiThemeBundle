@@ -1,13 +1,13 @@
 <?php
 
-namespace Jungi\Bundle\ThemeBundle\Details;
+namespace Jungi\Bundle\ThemeBundle\Metadata;
 
 /**
- * DetailsBuilder is a builder which helps with creating the Details instance
+ * ThemeMetadataBuilder is a builder which helps with creating the ThemeMetadataEssence instance
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class DetailsBuilder
+class ThemeMetadataBuilder
 {
     /**
      * @var string
@@ -39,7 +39,7 @@ class DetailsBuilder
      *
      * @param string $name A name
      *
-     * @return DetailsBuilder
+     * @return ThemeMetadataBuilder
      */
     public function setName($name)
     {
@@ -53,7 +53,7 @@ class DetailsBuilder
      *
      * @param string $license A theme license
      *
-     * @return DetailsBuilder
+     * @return ThemeMetadataBuilder
      */
     public function setLicense($license)
     {
@@ -67,7 +67,7 @@ class DetailsBuilder
      *
      * @param string $description A description
      *
-     * @return DetailsBuilder
+     * @return ThemeMetadataBuilder
      */
     public function setDescription($description)
     {
@@ -81,7 +81,7 @@ class DetailsBuilder
      *
      * @param string $version A version
      *
-     * @return DetailsBuilder
+     * @return ThemeMetadataBuilder
      */
     public function setVersion($version)
     {
@@ -95,7 +95,7 @@ class DetailsBuilder
      *
      * @param AuthorInterface $author An author
      *
-     * @return DetailsBuilder
+     * @return ThemeMetadataBuilder
      */
     public function addAuthor(AuthorInterface $author)
     {
@@ -109,7 +109,7 @@ class DetailsBuilder
      *
      * @param AuthorInterface[] $authors Authors
      *
-     * @return DetailsBuilder
+     * @return ThemeMetadataBuilder
      */
     public function addAuthors(array $authors)
     {
@@ -138,18 +138,18 @@ class DetailsBuilder
     }
 
     /**
-     * Builds the Details instance
+     * Builds the Metadata instance
      *
-     * @return Details
+     * @return ThemeMetadataEssence
      *
      * @throws \RuntimeException When the name is missing
      */
-    public function getDetails()
+    public function getMetadata()
     {
         if (!$this->name) {
-            throw new \RuntimeException('You must set the name of theme to create new "Details" instance.');
+            throw new \RuntimeException('You must set the name of theme to create new "Metadata" instance.');
         }
 
-        return new Details($this);
+        return new ThemeMetadataEssence($this);
     }
 }

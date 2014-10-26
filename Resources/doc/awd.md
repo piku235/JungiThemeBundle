@@ -47,26 +47,26 @@ designed for mobile devices (incl. tablet devices).
             <tags>
                 <tag name="jungi.desktop_devices" />
             </tags>
-            <details>
+            <metadata>
                 <property key="authors">%authors%</property>
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">Super theme</property>
                 <property key="license">%license%</property>
-            </details>
+            </metadata>
         </theme>
         <theme name="foo_mobile" path="@JungiFooBundle/Resources/theme/mobile">
             <tags>
                 <tag name="jungi.mobile_devices" />
                 <tag name="jungi.link">foo_main</tag>
             </tags>
-            <details>
+            <metadata>
                 <property key="authors">%authors%</property>
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">Super theme (ver. mobile)</property>
                 <property key="license">%license%</property>
-            </details>
+            </metadata>
         </theme>
     </themes>
     
@@ -87,7 +87,7 @@ themes:
         path: "@JungiFooBundle/Resources/theme/desktop"
         tags:
             jungi.desktop_devices: ~
-        details:
+        metadata:
             authors: "%authors%"
             name: Super theme
             version: 1.0.0
@@ -98,7 +98,7 @@ themes:
         tags:
             jungi.mobile_devices: ~
             jungi.link: foo_main
-        details:
+        metadata:
             authors: "%authors%"
             name: Super theme (ver. mobile)
             version: 1.0.0
@@ -114,13 +114,13 @@ themes:
 // FooBundle/Resources/config/theme.php
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Details\Details;
-use Jungi\Bundle\ThemeBundle\Details\Author;
+use Jungi\Bundle\ThemeBundle\Metadata\Metadata;
+use Jungi\Bundle\ThemeBundle\Metadata\Author;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
-$dsb = Details::createBuilder();
-$dsb
+$mb = Metadata::createBuilder();
+$mb
     ->setName('Super theme')
     ->setDescription('<i>foo desc</i>')
     ->setVersion('1.0.0')
@@ -130,17 +130,17 @@ $dsb
 $manager->addTheme(new Theme(
     'foo_main',
     $locator->locate('@JungiFooBundle/Resources/theme/desktop'),
-    $dsb->getDetails(),
+    $mb->getMetadata(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
     ))
 ));
 
-$dsb->setName('Super theme (ver. mobile)');
+$mb->setName('Super theme (ver. mobile)');
 $manager->addTheme(new Theme(
     'foo_mobile',
     $locator->locate('@JungiFooBundle/Resources/theme/mobile'),
-    $dsb->getDetails(),
+    $mb->getMetadata(),
     new TagCollection(array(
         new Tag\Link('foo_main'),
         new Tag\MobileDevices()

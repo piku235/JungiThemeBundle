@@ -9,70 +9,44 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Details;
+namespace Jungi\Bundle\ThemeBundle\Metadata;
 
 /**
- * Details is a simple implementation of the DetailsInterface
- *
- * All properties of the class can be only set by the DetailsBuilder
+ * ThemeMetadata is used to describe a theme by other data like a theme name or a theme version.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class Details implements DetailsInterface
+abstract class ThemeMetadata
 {
     /**
      * @var AuthorInterface[]
      */
-    private $authors;
+    protected $authors = array();
 
     /**
      * @var string
      */
-    private $version;
+    protected $version;
 
     /**
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $license;
+    protected $license;
 
     /**
-     * Creates a new builder instance
+     * Returns the friendly theme name
      *
-     * @return DetailsBuilder
-     */
-    public static function createBuilder()
-    {
-        return new DetailsBuilder();
-    }
-
-    /**
-     * Constructor
-     *
-     * @param DetailsBuilder $builder The Details builder
-     */
-    public function __construct(DetailsBuilder $builder)
-    {
-        $fields = $builder->getFields();
-
-        $this->name = $fields->name;
-        $this->version = $fields->version;
-        $this->description = $fields->description;
-        $this->license = $fields->license;
-        $this->authors = $fields->authors;
-    }
-
-    /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getName()
     {
@@ -80,7 +54,9 @@ class Details implements DetailsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the authors
+     *
+     * @return AuthorInterface[]
      */
     public function getAuthors()
     {
@@ -88,7 +64,9 @@ class Details implements DetailsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the version
+     *
+     * @return string|null
      */
     public function getVersion()
     {
@@ -96,7 +74,9 @@ class Details implements DetailsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the description
+     *
+     * @return string|null
      */
     public function getDescription()
     {
@@ -104,7 +84,9 @@ class Details implements DetailsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the license type
+     *
+     * @return string|null
      */
     public function getLicense()
     {
@@ -112,7 +94,7 @@ class Details implements DetailsInterface
     }
 
     /**
-     * Represents the details object
+     * Represents the metadata object
      *
      * @return string
      */

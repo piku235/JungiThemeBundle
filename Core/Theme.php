@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
-use Jungi\Bundle\ThemeBundle\Details\DetailsInterface;
+use Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadata;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
@@ -32,9 +32,9 @@ class Theme implements ThemeInterface
     protected $path;
 
     /**
-     * @var DetailsInterface
+     * @var ThemeMetadata
      */
-    protected $details;
+    protected $metadata;
 
     /**
      * @var TagCollection
@@ -44,25 +44,25 @@ class Theme implements ThemeInterface
     /**
      * Constructor
      *
-     * @param string           $name    An unique theme name
-     * @param string           $path    A path to theme resources
-     * @param DetailsInterface $details A details
-     * @param TagCollection    $tags    A tag collection (optional)
+     * @param string        $name     An unique theme name
+     * @param string        $path     A path to theme resources
+     * @param ThemeMetadata $metadata A metadata
+     * @param TagCollection $tags     A tag collection (optional)
      */
-    public function __construct($name, $path, DetailsInterface $details, TagCollection $tags = null)
+    public function __construct($name, $path, ThemeMetadata $metadata, TagCollection $tags = null)
     {
         $this->name = $name;
         $this->path = $path;
-        $this->details = $details;
+        $this->metadata = $metadata;
         $this->tags = $tags ?: new TagCollection();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDetails()
+    public function getMetadata()
     {
-        return $this->details;
+        return $this->metadata;
     }
 
     /**

@@ -32,7 +32,7 @@ themes:
               arguments: [ "%footheme.mobile.systems%", "%footheme.mobile.device%" ]
             - name: jungi.environment
               arguments: admin
-        details:
+        metadata:
             name: An awesome theme
             author:
                 name: piku235
@@ -73,8 +73,8 @@ footheme:
     tags:
         # tag list
     # Required
-    details:
-        # details definition
+    metadata:
+        # metadata definition
 ```
 
 **NOTE**
@@ -82,10 +82,10 @@ footheme:
 > As shown in the quick example a path can be a bundle resource `@JungiFooBundle/Resources/theme`. This is possible thanks
 > to using the `Symfony\Component\HttpKernel\Config\FileLocator` by the **YamlFileLoader**
 
-### Details
+### Metadata
 
 ```yml
-details:
+metadata:
     name: An awesome theme
     author:
         name: piku235
@@ -96,8 +96,8 @@ details:
     description: <i>foo desc</i>
 ```
 
-The `details` element can define children like in the table below. The children are almost the same as keys from the
-default details implementation (described in the **Theme Overview** chapter), expect only the `author` element which has
+The `metadata` element can define children like in the table below. The children are almost the same as keys from the
+default metadata implementation (described in the **Theme Overview** chapter), expect only the `author` element which has
 own children.
 
 Name | Child | Required
@@ -113,7 +113,7 @@ author | site | false
 
 **INFO**
 
-> The **details** element is required due to his two required children which are listed in the table
+> The **metadata** element is required due to his two required children which are listed in the table
 
 ### Tags
 

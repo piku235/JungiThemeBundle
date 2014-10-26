@@ -77,7 +77,7 @@ theme mapping for this theme can looks like below:
                 </tag>
                 <tag name="jungi.desktop_devices" />
             </tags>
-            <details>
+            <metadata>
                 <property key="authors" type="collection">
                     <property type="collection">
                         <property key="name">piku235</property>
@@ -94,7 +94,7 @@ theme mapping for this theme can looks like below:
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
                 <property key="license" type="string">MIT</property>
-            </details>
+            </metadata>
         </theme>
     </themes>
 

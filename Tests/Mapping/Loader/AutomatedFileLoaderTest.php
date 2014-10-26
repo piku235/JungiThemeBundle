@@ -11,8 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Details\Author;
-use Jungi\Bundle\ThemeBundle\Details\Details;
+use Jungi\Bundle\ThemeBundle\Metadata\Author;
+use Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadataEssence;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own;
@@ -42,46 +42,46 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
         $this->loadFile('full');
 
         $leadingAuthor = new Author('piku235', 'piku235@gmail.com', 'www.foo.com');
-        $dsb = Details::createBuilder();
-        $dsb
+        $mb = ThemeMetadataEssence::createBuilder();
+        $mb
             ->setName('A fancy theme')
             ->setVersion('1.0.0')
             ->setDescription('<i>foo desc</i>')
             ->setLicense('MIT')
             ->addAuthor($leadingAuthor)
         ;
-        $details = $dsb->getDetails();
+        $metadata = $mb->getMetadata();
 
-        $dsb->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'));
-        $details1 = $dsb->getDetails();
+        $mb->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'));
+        $metadata1 = $mb->getMetadata();
 
-        $dsb = Details::createBuilder();
-        $dsb
+        $mb = ThemeMetadataEssence::createBuilder();
+        $mb
             ->setName('A fancy theme')
             ->setVersion('1.0.0')
         ;
-        $details4 = $dsb->getDetails();
+        $metadata4 = $mb->getMetadata();
 
-        $dsb = Details::createBuilder();
-        $dsb
+        $mb = ThemeMetadataEssence::createBuilder();
+        $mb
             ->setName('A fancy theme')
             ->setVersion('1.0.0')
             ->setDescription('')
         ;
 
         $themes = array(
-            new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $details1, new TagCollection(array(
+            new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $metadata1, new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
                 new Own('test')
             ))),
-            new Theme('foo_2', __DIR__ . '/Fixtures/FakeBundle', $details, new TagCollection(array(
+            new Theme('foo_2', __DIR__ . '/Fixtures/FakeBundle', $metadata, new TagCollection(array(
                 new Own(Own::SPECIAL)
             ))),
-            new Theme('foo_3', __DIR__ . '/Fixtures/FakeBundle', $details, new TagCollection(array(
+            new Theme('foo_3', __DIR__ . '/Fixtures/FakeBundle', $metadata, new TagCollection(array(
                 new Own(CONST_TEST)
             ))),
-            new Theme('foo_4', __DIR__ . '/Fixtures/FakeBundle', $details4)
+            new Theme('foo_4', __DIR__ . '/Fixtures/FakeBundle', $metadata4)
         );
 
         foreach ($themes as $theme) {
@@ -93,8 +93,8 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
     {
         $this->loadFile('without_parameters');
 
-        $dsb = Details::createBuilder();
-        $dsb
+        $mb = ThemeMetadataEssence::createBuilder();
+        $mb
             ->setName('A fancy theme')
             ->setVersion('1.0.0')
             ->setDescription('<i>foo desc</i>')
@@ -103,7 +103,7 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             ->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'))
         ;
 
-        $theme = new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $dsb->getDetails(), new TagCollection(array(
+        $theme = new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $mb->getMetadata(), new TagCollection(array(
             new Tag\DesktopDevices(),
             new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
             new Own('test')
@@ -130,8 +130,8 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
     {
         return array(
             array('bad_parameter'),
-            array('details_bad_property_key'),
-            array('details_missing_property_key'),
+            array('metadata_bad_property_key'),
+            array('metadata_missing_property_key'),
             array('invalid_authors_first'),
             array('invalid_authors_second'),
             array('invalid_authors_third')

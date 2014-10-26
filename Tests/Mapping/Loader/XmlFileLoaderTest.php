@@ -66,7 +66,7 @@ class XmlFileLoaderTest extends AutomatedFileLoaderTest
     public function getInvalidThemeMappings()
     {
         $result = parent::getInvalidThemeMappings();
-        $result[] = array('invalid_details_missing_key');
+        $result[] = array('invalid_metadata_missing_key');
 
         return $result;
     }

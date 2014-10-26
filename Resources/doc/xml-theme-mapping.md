@@ -64,13 +64,13 @@ Here is the simple document which defines the single theme with basic elements:
                     <argument type="constant">jungi.mobile_devices::MOBILE</argument>
                 </tag>
             </tags>
-            <details>
+            <metadata>
                 <property key="authors">%authors%</property>
                 <property key="name">Foo theme</property>
                 <property key="version">1.0.0</property>
                 <property key="description">description</property>
                 <property key="license">MIT</property>
-            </details>
+            </metadata>
         </theme>
     </themes>
     
@@ -140,7 +140,7 @@ like in the example above.
 
 #### Usage
 
-Parameters can be only used in properties of the details and in arguments of the tag. To use a parameter as a value you 
+Parameters can be only used in properties of the metadata and in arguments of the tag. To use a parameter as a value you 
 must surround the parameter with percent sings **%** e.g. **%footheme.mobile_systems%**, just like in the symfony xml 
 services.
 
@@ -173,31 +173,31 @@ Inside the `<theme />` element can be only defined:
     <tags>
         <!-- tag list -->
     </tags>
-    <!-- details are required -->
-    <details>
+    <!-- metadata are required -->
+    <metadata>
         <!-- list of properties -->
-    </details>
+    </metadata>
 </theme>
 ```
 
-### Details
+### Metadata
 
 ```xml
-<details>
+<metadata>
     <property key="one_of_keys">
         <!-- value depending on the property type -->
     </property>
     <!-- other properties -->
-</details>
+</metadata>
 ```
 
-From the **Themes overview** chapter you should know what are the theme details. The `<property />` element specifies 
-the properties of theme details. It has the same structure as the `<parameter />` element, so you have the same attributes 
+From the **Themes overview** chapter you should know what are the theme metadata. The `<property />` element specifies 
+the properties of theme metadata. It has the same structure as the `<parameter />` element, so you have the same attributes 
 as there.
 
 **NOTE**
 
-> The **key** attribute of the `<property />` element is required if is directly defined in the `<details />` element.
+> The **key** attribute of the `<property />` element is required if is directly defined in the `<metadata />` element.
 
 The available keys:
 
@@ -211,19 +211,19 @@ authors | collection | false
 
 **INFO**
 
-> The `<details />` element is required due to name property which is listed in the table
+> The `<metadata />` element is required due to name property which is listed in the table
 
 As you have seen in the quick example to define an author you'll use the following formula:
 
 ```xml
-<details>
+<metadata>
     <property key="authors" type="collection">
         <property type="collection">
             <!-- properties describing an author -->
         </property>
         <!-- other authors -->
     </property>
-</details>
+</metadata>
 ```
 
 An author must be defined as the `<property type="collection" />` element, where for the children `<property />` elements 
@@ -240,9 +240,9 @@ homepage | string | false
 Here is just a small snippet of how to use a defined parameter in every `<property />` element.
 
 ```xml
-<details>
+<metadata>
     <property key="license">%parameter_key%</property>
-</details>
+</metadata>
 ```
 
 ### Tags

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Details;
+namespace Jungi\Bundle\ThemeBundle\Metadata;
 
 /**
  * AuthorInterface

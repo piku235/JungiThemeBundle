@@ -11,21 +11,21 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Core;
 
-use Jungi\Bundle\ThemeBundle\Details\Author;
-use Jungi\Bundle\ThemeBundle\Details\Details;
+use Jungi\Bundle\ThemeBundle\Metadata\Author;
+use Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadataEssence;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * Details Test Case
+ * Metadata Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class DetailsTest extends TestCase
+class ThemeMetadataTest extends TestCase
 {
     public function testValidCreation()
     {
         $author = new Author('test_author', 'test_author_email', 'test_author_www');
-        $builder = Details::createBuilder();
+        $builder = ThemeMetadataEssence::createBuilder();
         $builder
             ->setName('Super Theme')
             ->setVersion('1.0')
@@ -34,11 +34,11 @@ class DetailsTest extends TestCase
             ->addAuthor($author)
         ;
 
-        $details = $builder->getDetails();
-        $this->assertEquals('Super Theme', $details->getName());
-        $this->assertEquals('1.0', $details->getVersion());
-        $this->assertEquals('test', $details->getDescription());
-        $this->assertEquals('MIT', $details->getLicense());
-        $this->assertEquals(array($author), $details->getAuthors());
+        $metadata = $builder->getMetadata();
+        $this->assertEquals('Super Theme', $metadata->getName());
+        $this->assertEquals('1.0', $metadata->getVersion());
+        $this->assertEquals('test', $metadata->getDescription());
+        $this->assertEquals('MIT', $metadata->getLicense());
+        $this->assertEquals(array($author), $metadata->getAuthors());
     }
 }

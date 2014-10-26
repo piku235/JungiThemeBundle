@@ -16,8 +16,8 @@
                 <tag name="jungi.desktop_devices" />
                 <tag name="jungi.own">test</tag>
             </tags>
-            <details>
-                <property type="collection">
+            <metadata>
+                <property key="not_recognized" type="collection">
                     <property type="collection">
                         <property key="name">piku235</property>
                         <property key="email">piku235@gmail.com</property>
@@ -33,7 +33,7 @@
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
                 <property key="license">MIT</property>
-            </details>
+            </metadata>
         </theme>
     </themes>
 

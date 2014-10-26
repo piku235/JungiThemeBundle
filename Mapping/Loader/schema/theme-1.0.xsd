@@ -46,7 +46,7 @@
     <xs:complexType name="Theme">
         <xs:all>
             <xs:element name="tags" type="Tags" minOccurs="0" />
-            <xs:element name="details" type="Details" />
+            <xs:element name="metadata" type="Metadata" />
         </xs:all>
         <xs:attribute name="name" type="xs:string" use="required" />
         <xs:attribute name="path" type="xs:string" use="required" />
@@ -60,7 +60,7 @@
         <xs:attribute name="key" type="xs:string" />
     </xs:complexType>
 
-    <xs:complexType name="Details">
+    <xs:complexType name="Metadata">
         <xs:sequence>
             <xs:element name="property" type="Property" maxOccurs="unbounded" />
         </xs:sequence>

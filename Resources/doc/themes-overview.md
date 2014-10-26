@@ -34,11 +34,11 @@ interface ThemeInterface
     public function getPath();
 
     /**
-     * Returns the details of the theme
+     * Returns the metadata of the theme
      *
-     * @return \Jungi\Bundle\ThemeBundle\Details\DetailsInterface
+     * @return \Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadata
      */
-    public function getDetails();
+    public function getMetadata();
 }
 ```
 
@@ -54,16 +54,16 @@ interface ThemeInterface
 The `Jungi\Bundle\ThemeBundle\Core\Theme` is the default theme implementation and it only defines basic methods contained
 in the interface. This class is useful when you want to create a standard theme e.g. in a php theme mapping file.
 
-Details
+Metadata
 -------
 
 In some cases you'd like to get some information about a theme in order to show these information for a user who would 
 like to use that theme. That information can be easily stored in a class. In the JungiThemeBundle such a class must 
-implement the `Jungi\Bundle\ThemeBundle\Details\DetailsInterface`. The interface provides the most important methods such 
+implement the `Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadata`. The interface provides the most important methods such 
 as a theme name, a theme version and etc.
 
 ```php
-interface DetailsInterface
+interface ThemeMetadata
 {
     /**
      * Returns the friendly theme name
@@ -108,31 +108,31 @@ interface DetailsInterface
 
 ### Default implementation
 
-[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Details/Details.php)
+[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Metadata/Metadata.php)
 
-The `Jungi\Bundle\ThemeBundle\Details\Details` is the default details implementation. It's a little bit different from the
+The `Jungi\Bundle\ThemeBundle\Metadata\Metadata` is the default metadata implementation. It's a little bit different from the
 default theme implementation. Due to a large number of properties the implementation of the constructor seems to be a bad
 idea, because it would only bring a mess in the constructor signature. Also setter methods are not a good idea, because 
 after an object creation there still will be a possibility for changing an object properties and that shouldn't be possible. 
-Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Details\DetailsBuilder` which is strictly 
-associated with the default details class. The builder provides setter methods with the fluent interface support.
+Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadataBuilder` which is strictly 
+associated with the default metadata class. The builder provides setter methods with the fluent interface support.
 
-Here is an example of creating a new details instance:
+Here is an example of creating a new metadata instance:
 
 ```php
-use Jungi\Bundle\ThemeBundle\Details\Details;
-use Jungi\Bundle\ThemeBundle\Details\Author;
+use Jungi\Bundle\ThemeBundle\Metadata\Metadata;
+use Jungi\Bundle\ThemeBundle\Metadata\Author;
 
-$dsb = Details::createBuilder();
-$dsb
+$mb = Metadata::createBuilder();
+$mb
     ->setName('A simple theme')
     ->setVersion('1.0.0')
     ->setDescription('a simple theme with the beautiful design')
     ->setLicense('GPL')
     ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'foo.com'));
 
-// Builds the new Details instance
-$details = $dsb->getDetails();
+// Builds the new Metadata instance
+$metadata = $mb->getMetadata();
 ```
 
 Themes locations

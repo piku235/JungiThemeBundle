@@ -11,12 +11,12 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Details\Author;
+use Jungi\Bundle\ThemeBundle\Metadata\Author;
 use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Details\Details;
+use Jungi\Bundle\ThemeBundle\Metadata\ThemeMetadataEssence;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Util\XmlUtils;
@@ -144,27 +144,27 @@ class XmlFileLoader extends FileLoader
         return new Theme(
             $elm->getAttribute('name'),
             $this->locator->locate($elm->getAttribute('path')),
-            $this->parseDetails($elm),
+            $this->parseMetadata($elm),
             $this->parseTags($elm)
         );
     }
 
     /**
-     * Parses a details about a theme
+     * Parses a metadata about a theme
      *
      * @param \DOMElement $elm A DOM element
      *
-     * @return Details
+     * @return ThemeMetadata
      */
-    private function parseDetails(\DOMElement $elm)
+    private function parseMetadata(\DOMElement $elm)
     {
         $collection = array();
-        foreach ($this->xpath->query('mapping:details/mapping:property', $elm) as $property) {
-            list($name, $value) = $this->parseDetailsProperty($property);
+        foreach ($this->xpath->query('mapping:metadata/mapping:property', $elm) as $property) {
+            list($name, $value) = $this->parseMetadataProperty($property);
             $collection[$name] = $value;
         }
 
-        $builder = Details::createBuilder();
+        $builder = ThemeMetadataEssence::createBuilder();
         $builder->addAuthors($this->processAuthors($collection));
         if (isset($collection['license'])) {
             $builder->setLicense($collection['license']);
@@ -179,7 +179,7 @@ class XmlFileLoader extends FileLoader
             $builder->setVersion($collection['version']);
         }
 
-        return $builder->getDetails();
+        return $builder->getMetadata();
     }
 
     /**
@@ -221,7 +221,7 @@ class XmlFileLoader extends FileLoader
     }
 
     /**
-     * Parses a details property
+     * Parses a metadata property
      *
      * @param \DOMElement $elm A DOM element
      *
@@ -229,12 +229,12 @@ class XmlFileLoader extends FileLoader
      *
      * @throws \InvalidArgumentException
      */
-    private function parseDetailsProperty(\DOMElement $elm)
+    private function parseMetadataProperty(\DOMElement $elm)
     {
         $validKeys = array('authors', 'description', 'name', 'version', 'thumbnail', 'screen', 'license');
         if (!$elm->hasAttribute('key')) {
             throw new \InvalidArgumentException(
-                'The "property" element of the "details" has not defined the attribute "key". Have you forgot about that?'
+                'The "property" element of the "metadata" has not defined the attribute "key". Have you forgot about that?'
             );
         } elseif (!in_array($elm->getAttribute('key'), $validKeys)) {
             throw new \InvalidArgumentException(sprintf(
