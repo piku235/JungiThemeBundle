@@ -16,11 +16,11 @@ use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * ThemeInfo Test Case
+ * ThemeInfoEssence Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeInfoTest extends TestCase
+class ThemeInfoEssenceTest extends TestCase
 {
     public function testValidCreation()
     {

@@ -131,7 +131,7 @@ The `Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence` can be used as the d
 little bit different from the default theme implementation. Due to a large number of properties the implementation of the 
 constructor seems to be a bad idea, because it would only bring a mess in the constructor signature. Also setter methods 
 are not a good idea, because after an object creation there still will be a possibility for changing an object properties 
-and that shouldn't be possible. Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Information\ThemeInfoBuilder` 
+and that shouldn't be possible. Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssenceBuilder` 
 which is strictly associated with the **ThemeInfoEssence** class. The builder provides setter methods with the fluent 
 interface support.
 

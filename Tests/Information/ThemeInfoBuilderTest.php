@@ -12,11 +12,11 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\Core;
 
 use Jungi\Bundle\ThemeBundle\Information\Author;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfoBuilder;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssenceBuilder;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * ThemeInfoBuilder Test Case
+ * ThemeInfoEssenceBuilder Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -30,7 +30,7 @@ class ThemeInfoBuilderTest extends TestCase
         $license = 'MIT';
         $author = new Author('test_author', 'test_author_email', 'test_author_www');
 
-        $builder = new ThemeInfoBuilder();
+        $builder = new ThemeInfoEssenceBuilder();
         $builder
             ->setName($name)
             ->setVersion($version)
@@ -52,7 +52,7 @@ class ThemeInfoBuilderTest extends TestCase
      */
     public function testOnMissingParameters()
     {
-        $builder = new ThemeInfoBuilder();
+        $builder = new ThemeInfoEssenceBuilder();
         $builder->setDescription('test');
 
         $builder->getThemeInfo();

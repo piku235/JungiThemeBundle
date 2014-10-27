@@ -80,7 +80,7 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Core\ThemeReference',
             'Jungi\Bundle\ThemeBundle\Core\ThemeNameParser',
             'Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence',
-            'Jungi\Bundle\ThemeBundle\Information\ThemeInfoBuilder',
+            'Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssenceBuilder',
             'Jungi\Bundle\ThemeBundle\Information\Author',
             'Jungi\Bundle\ThemeBundle\Changer\ThemeChanger',
             'Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents',

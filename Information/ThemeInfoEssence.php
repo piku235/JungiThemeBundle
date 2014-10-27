@@ -15,7 +15,7 @@ namespace Jungi\Bundle\ThemeBundle\Information;
  * The class is a simple implementation of the ThemeInfo and was built on the basis of
  * the Essence design pattern
  *
- * To set properties of the class you must use the ThemeInfoBuilder
+ * To set properties of the class you must use the ThemeInfoEssenceBuilder
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,19 +24,19 @@ class ThemeInfoEssence extends ThemeInfo
     /**
      * Creates a new builder instance
      *
-     * @return ThemeInfoBuilder
+     * @return ThemeInfoEssenceBuilder
      */
     public static function createBuilder()
     {
-        return new ThemeInfoBuilder();
+        return new ThemeInfoEssenceBuilder();
     }
 
     /**
      * Constructor
      *
-     * @param ThemeInfoBuilder $builder The Information builder
+     * @param ThemeInfoEssenceBuilder $builder The Information builder
      */
-    public function __construct(ThemeInfoBuilder $builder)
+    public function __construct(ThemeInfoEssenceBuilder $builder)
     {
         $fields = $builder->getFields();
 

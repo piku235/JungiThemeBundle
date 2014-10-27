@@ -3,11 +3,11 @@
 namespace Jungi\Bundle\ThemeBundle\Information;
 
 /**
- * ThemeInfoBuilder is a builder which helps with creating the ThemeInfoEssence instance
+ * ThemeInfoEssenceBuilder is a builder which helps with creating the ThemeInfoEssence instance
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeInfoBuilder
+class ThemeInfoEssenceBuilder
 {
     /**
      * @var string
@@ -39,7 +39,7 @@ class ThemeInfoBuilder
      *
      * @param string $name A name
      *
-     * @return ThemeInfoBuilder
+     * @return ThemeInfoEssenceBuilder
      */
     public function setName($name)
     {
@@ -53,7 +53,7 @@ class ThemeInfoBuilder
      *
      * @param string $license A theme license
      *
-     * @return ThemeInfoBuilder
+     * @return ThemeInfoEssenceBuilder
      */
     public function setLicense($license)
     {
@@ -67,7 +67,7 @@ class ThemeInfoBuilder
      *
      * @param string $description A description
      *
-     * @return ThemeInfoBuilder
+     * @return ThemeInfoEssenceBuilder
      */
     public function setDescription($description)
     {
@@ -81,7 +81,7 @@ class ThemeInfoBuilder
      *
      * @param string $version A version
      *
-     * @return ThemeInfoBuilder
+     * @return ThemeInfoEssenceBuilder
      */
     public function setVersion($version)
     {
@@ -95,7 +95,7 @@ class ThemeInfoBuilder
      *
      * @param AuthorInterface $author An author
      *
-     * @return ThemeInfoBuilder
+     * @return ThemeInfoEssenceBuilder
      */
     public function addAuthor(AuthorInterface $author)
     {
@@ -109,7 +109,7 @@ class ThemeInfoBuilder
      *
      * @param AuthorInterface[] $authors Authors
      *
-     * @return ThemeInfoBuilder
+     * @return ThemeInfoEssenceBuilder
      */
     public function addAuthors(array $authors)
     {
