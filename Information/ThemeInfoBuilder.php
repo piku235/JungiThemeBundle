@@ -138,13 +138,13 @@ class ThemeInfoBuilder
     }
 
     /**
-     * Builds the Information instance
+     * Builds the ThemeInfoEssence instance
      *
      * @return ThemeInfoEssence
      *
      * @throws \RuntimeException When the name is missing
      */
-    public function getInformation()
+    public function getThemeInfo()
     {
         if (!$this->name) {
             throw new \RuntimeException('You must set the name of theme to create a new "ThemeInfoEssence" instance.');

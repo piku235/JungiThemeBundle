@@ -203,7 +203,7 @@ class YamlFileLoader extends FileLoader
             $builder->setVersion($info['version']);
         }
 
-        return $builder->getInformation();
+        return $builder->getThemeInfo();
     }
 
     /**

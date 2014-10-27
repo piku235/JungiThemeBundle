@@ -34,7 +34,7 @@ class ThemeInfoTest extends TestCase
             ->addAuthor($author)
         ;
 
-        $info = $builder->getInformation();
+        $info = $builder->getThemeInfo();
         $this->assertEquals('Super Theme', $info->getName());
         $this->assertEquals('1.0', $info->getVersion());
         $this->assertEquals('test', $info->getDescription());

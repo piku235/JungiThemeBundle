@@ -114,7 +114,7 @@ themes:
 // FooBundle/Resources/config/theme.php
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Information\Information;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
@@ -130,7 +130,7 @@ $ib
 $manager->addTheme(new Theme(
     'foo_main',
     $locator->locate('@JungiFooBundle/Resources/theme/desktop'),
-    $ib->getInformation(),
+    $ib->getThemeInfo(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
     ))
@@ -140,7 +140,7 @@ $ib->setName('Super theme (ver. mobile)');
 $manager->addTheme(new Theme(
     'foo_mobile',
     $locator->locate('@JungiFooBundle/Resources/theme/mobile'),
-    $ib->getInformation(),
+    $ib->getThemeInfo(),
     new TagCollection(array(
         new Tag\Link('foo_main'),
         new Tag\MobileDevices()

@@ -46,7 +46,7 @@ class Theme implements ThemeInterface
      *
      * @param string        $name An unique theme name
      * @param string        $path A path to theme resources
-     * @param ThemeInfo     $info A info
+     * @param ThemeInfo     $info A ThemeInfo instance
      * @param TagCollection $tags A tag collection (optional)
      */
     public function __construct($name, $path, ThemeInfo $info, TagCollection $tags = null)

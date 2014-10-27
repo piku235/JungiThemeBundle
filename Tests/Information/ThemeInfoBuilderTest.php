@@ -55,6 +55,6 @@ class ThemeInfoBuilderTest extends TestCase
         $builder = new ThemeInfoBuilder();
         $builder->setDescription('test');
 
-        $builder->getInformation();
+        $builder->getThemeInfo();
     }
 }

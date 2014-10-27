@@ -179,7 +179,7 @@ class XmlFileLoader extends FileLoader
             $builder->setVersion($collection['version']);
         }
 
-        return $builder->getInformation();
+        return $builder->getThemeInfo();
     }
 
     /**

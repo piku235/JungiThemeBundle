@@ -50,17 +50,17 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             ->setLicense('MIT')
             ->addAuthor($leadingAuthor)
         ;
-        $info = $ib->getInformation();
+        $info = $ib->getThemeInfo();
 
         $ib->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'));
-        $info1 = $ib->getInformation();
+        $info1 = $ib->getThemeInfo();
 
         $ib = ThemeInfoEssence::createBuilder();
         $ib
             ->setName('A fancy theme')
             ->setVersion('1.0.0')
         ;
-        $info4 = $ib->getInformation();
+        $info4 = $ib->getThemeInfo();
 
         $ib = ThemeInfoEssence::createBuilder();
         $ib
@@ -103,7 +103,7 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             ->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'))
         ;
 
-        $theme = new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $ib->getInformation(), new TagCollection(array(
+        $theme = new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $ib->getThemeInfo(), new TagCollection(array(
             new Tag\DesktopDevices(),
             new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
             new Own('test')

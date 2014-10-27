@@ -40,7 +40,7 @@ interface ThemeInterface
     public function getPath();
 
     /**
-     * Returns the info of the theme
+     * Returns the information about the theme
      *
      * @return \Jungi\Bundle\ThemeBundle\Information\ThemeInfo
      */

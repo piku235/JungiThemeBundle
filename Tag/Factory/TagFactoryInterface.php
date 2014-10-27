@@ -22,7 +22,7 @@ interface TagFactoryInterface
      * Creates the tag by given tag name
      *
      * @param string       $name      A tag name
-     * @param string|array $arguments Arguments or an argument for a tag (optional)
+     * @param string|array $arguments Arguments or an argument for the tag (optional)
      *
      * @return string
      */

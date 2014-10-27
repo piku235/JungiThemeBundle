@@ -3,7 +3,7 @@ YAML Theme Mapping
 
 [Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/YamlFileLoader.php)
 
-Documents of this theme mapping are handled by the `YamlFileLoader`. By default the loader uses the `Jungi\Bundle\ThemeBundle\Core\Theme` 
+Documents of this theme mapping are handled by the **YamlFileLoader**. By default the loader uses the `Jungi\Bundle\ThemeBundle\Core\Theme` 
 for creating theme instances.
 
 Prerequisites

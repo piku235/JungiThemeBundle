@@ -3,7 +3,7 @@ PHP Theme Mapping
 
 [Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/PhpFileLoader.php)
 
-Documents of this theme mapping are handled by the `PhpFileLoader`.
+Documents of this theme mapping are handled by the **PhpFileLoader**.
 
 Prerequisites
 -------------
@@ -20,22 +20,23 @@ Here is the simple document which contains a single theme with basic elements:
 <?php
 // FooBundle/Resources/config/theme.php
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Information\Information;
+use Jungi\Bundle\ThemeBundle\Information\Author;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
+
+$ib = ThemeInfoEssence::createBuilder();
+$ib
+    ->setName('A fancy theme')
+    ->setVersion('1.0.0')
+    ->setDescription('<i>foo desc</i>')
+    ->setLicense('MIT')
+    ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'));
 
 $theme = new Theme(
     'footheme',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    new Information(array(
-        'name' => 'A fancy theme',
-        'version' => '1.0.0',
-        'description' => '<i>foo desc</i>',
-        'license' => 'MIT',
-        'author.name' => 'piku235',
-        'author.email' => 'piku235@gmail.com',
-        'author.site' => 'http://test.pl'
-    )),
+    $ib->getThemeInfo(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
         $tagFactory->create('jungi.mobile_devices', array(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE))

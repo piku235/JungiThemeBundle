@@ -34,7 +34,7 @@ interface ThemeInterface
     public function getPath();
 
     /**
-     * Returns the info of the theme
+     * Returns the information about the theme
      *
      * @return \Jungi\Bundle\ThemeBundle\Information\ThemeInfo
      */
@@ -57,71 +57,88 @@ in the interface. This class is useful when you want to create a standard theme 
 ThemeInfo
 ---------
 
+[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Information/ThemeInfo.php)
+
 In some cases you'd like to get some information about a theme in order to show these information to a user who would 
-like to use that theme. That information can be easily stored in a class. In the JungiThemeBundle such a class must 
-implement the `Jungi\Bundle\ThemeBundle\Information\ThemeInfo`. The interface provides the most important methods such 
-as a theme name, a theme version and etc.
+like to use that theme. Information can be easily stored in a class. In the JungiThemeBundle such a class must implement 
+the `Jungi\Bundle\ThemeBundle\Information\ThemeInfo` abstract class. This abstract class is used as the interface and it
+provides the most important getter methods.
 
 ```php
-interface ThemeInfo
+abstract class ThemeInfo
 {
     /**
      * Returns the friendly theme name
      *
      * @return string
      */
-    public function getName();
-
-    /**
-     * Returns the version
-     *
-     * @return string|null
-     */
-    public function getVersion();
+    public function getName()
+    {
+        // code
+    }
 
     /**
      * Returns the authors
      *
      * @return AuthorInterface[]
      */
-    public function getAuthors();
+    public function getAuthors()
+    {
+        // code
+    }
+
+    /**
+     * Returns the version
+     *
+     * @return string|null
+     */
+    public function getVersion()
+    {
+        // code
+    }
 
     /**
      * Returns the description
      *
      * @return string|null
      */
-    public function getDescription();
+    public function getDescription()
+    {
+        // code
+    }
 
     /**
      * Returns the license type
      *
      * @return string|null
      */
-    public function getLicense();
+    public function getLicense()
+    {
+        // code
+    }
 }
 ```
 
 **NOTE**
 
-> The method **getName** of the interface should always return a value
+> The method **getName** of the ThemeInfo should always return a value
 
-### Default implementation
+### ThemeInfoEssence
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Information/ThemeInfoEssence.php)
 
-The `Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence` is the default info implementation. It's a little bit different 
-from the default theme implementation. Due to a large number of properties the implementation of the constructor seems to 
-be a bad idea, because it would only bring a mess in the constructor signature. Also setter methods are not a good idea, 
-because after an object creation there still will be a possibility for changing an object properties and that shouldn't
-be possible. Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Information\ThemeInfoBuilder` 
-which is strictly associated with the default info class. The builder provides setter methods with the fluent interface 
-support.
+The `Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence` can be used as the default ThemeInfo implementation. It's a 
+little bit different from the default theme implementation. Due to a large number of properties the implementation of the 
+constructor seems to be a bad idea, because it would only bring a mess in the constructor signature. Also setter methods 
+are not a good idea, because after an object creation there still will be a possibility for changing an object properties 
+and that shouldn't be possible. Finally I came to conclusion to create the simple builder `Jungi\Bundle\ThemeBundle\Information\ThemeInfoBuilder` 
+which is strictly associated with the **ThemeInfoEssence** class. The builder provides setter methods with the fluent 
+interface support.
 
-Here is an example of creating a new info instance:
+Here is an example of creating a new instance of the **ThemeInfoEssence**:
 
 ```php
-use Jungi\Bundle\ThemeBundle\Information\Information;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Information\Author;
 
 $ib = ThemeInfoEssence::createBuilder();
@@ -132,8 +149,8 @@ $ib
     ->setLicense('GPL')
     ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'foo.com'));
 
-// Builds the new Information instance
-$info = $ib->getInformation();
+// Builds the new ThemeInfoEssence instance
+$info = $ib->getThemeInfo();
 ```
 
 Themes locations

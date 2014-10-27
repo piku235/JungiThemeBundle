@@ -3,7 +3,7 @@ XML Theme Mapping
 
 [Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/XmlFileLoader.php)
 
-Documents of this theme mapping are handled by the `XmlFileLoader`. By default the loader uses the `Jungi\Bundle\ThemeBundle\Core\Theme` 
+Documents of this theme mapping are handled by the **XmlFileLoader**. By default the loader uses the `Jungi\Bundle\ThemeBundle\Core\Theme` 
 for creating theme instances.
 
 Prerequisites
@@ -180,7 +180,7 @@ Inside the `<theme />` element can be only defined:
 </theme>
 ```
 
-### Information
+### ThemeInfo
 
 ```xml
 <info>
@@ -191,8 +191,8 @@ Inside the `<theme />` element can be only defined:
 </info>
 ```
 
-From the **Themes overview** chapter you should know what are the theme info. The `<property />` element specifies 
-the properties of theme info. It has the same structure as the `<parameter />` element, so you have the same attributes 
+From the **Themes overview** chapter you should know what is the **ThemeInfo**. The `<property />` element specifies 
+the properties of the **ThemeInfo**. It has the same structure as the `<parameter />` element, so you have the same attributes 
 as there.
 
 **NOTE**
@@ -252,9 +252,10 @@ tags.
 
 ```xml
 <tags>
-    <tag name="jungi.environment">admin</tag>
-    <tag name="jungi.desktop_devices" />
-    <!-- the rest of tags -->
+    <tag name="vendor.tag_name">
+        <!-- arguments -->
+    </tag>
+    <!-- other tags -->
 </tags>
 ```
 
@@ -265,9 +266,9 @@ For use you have the following built-in tags:
 
 Name | Class
 ---- | -----
-jungi.mobile_devices | Jungi\Bundle\ThemeBundle\Tag\MobileDevices
-jungi.desktop_devices | Jungi\Bundle\ThemeBundle\Tag\DesktopDevices
-jungi.link | Jungi\Bundle\ThemeBundle\Tag\Link
+jungi.mobile_devices | MobileDevices
+jungi.desktop_devices | DesktopDevices
+jungi.link | Link
 
 Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
 allows for dynamically registering tags in the convenient way. You can read about that [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).

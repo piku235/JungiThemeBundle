@@ -19,7 +19,7 @@ $ib
 $manager->addTheme(new Theme(
     'foo_1',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    $ib->getInformation(),
+    $ib->getThemeInfo(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
         $tagFactory->create('jungi.mobile_devices', array(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)),

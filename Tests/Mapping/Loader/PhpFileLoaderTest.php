@@ -76,7 +76,7 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
         $this->assertEquals(new Theme(
             'foo_1',
             $this->locator->locate('@JungiFooBundle/Resources/theme'),
-            $ib->getInformation(),
+            $ib->getThemeInfo(),
             new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),

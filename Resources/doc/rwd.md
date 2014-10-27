@@ -96,7 +96,7 @@ themes:
 // FooBundle/Resources/config/theme.php
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Information\Information;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
@@ -112,7 +112,7 @@ $ib
 $manager->addTheme(new Theme(
     'foo',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    $ib->getInformation(),
+    $ib->getThemeInfo(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
         new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)
