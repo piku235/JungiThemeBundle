@@ -20,27 +20,23 @@ Here is the simple document which defines the single theme with basic elements:
 ```yml
 # FooBundle/Resources/config/theme.yml
 parameters:
-    footheme.mobile.systems: [ iOS, AndroidOS ]
-    footheme.mobile.device: "const@jungi.mobile_devices::MOBILE"
+    footheme.mobile_systems: [ iOS, AndroidOS ]
+    footheme.mobile_device: "const@jungi.mobile_devices::MOBILE"
 
 themes:
     footheme:
         path: "@JungiFooBundle/Resources/theme"
         tags:
-            - name: jungi.desktop_devices
-            - name: jungi.mobile_devices
-              arguments: [ "%footheme.mobile.systems%", "%footheme.mobile.device%" ]
-            - name: jungi.environment
-              arguments: admin
+            jungi.desktop_devices: ~
+            jungi.mobile_devices: [ "%footheme.mobile_systems%", "%footheme.mobile_device%" ]
+            jungi.environment: admin
         info:
             name: An awesome theme
-            author:
-                name: piku235
-                email: piku235@gmail.com
-                site: http://test.pl
             version: 1.0.0
             license: MIT
             description: <i>foo desc</i>
+            authors:
+                - { name: piku235, email: piku235@gmail.com, homepage: www.foo.com }
 
 ```
 
@@ -51,7 +47,38 @@ themes:
 Getting Started
 ---------------
 
-OK, so let's start explaining from `themes`, `parameters` will be mentioned together with tag arguments:
+OK, so let's start explaining from the `parameters`, the `themes` will be discussed after that:
+
+### Parameters
+
+```yml
+parameters:
+    key: value
+    # other parameters
+```
+
+Parameters can facilitate many things, especially when you've got the definition of multiple themes. They're almost the 
+same as parameters in the symfony services, with the difference that parameters in a theme mapping file has a local scope, 
+so you don't must be afraid that some variable will be overwritten by other theme mapping file.
+
+#### Constants
+
+```yml
+parameters:
+    footheme.mobile_device: "const@jungi.mobile_devices::MOBILE"
+    footheme.mobile_device.global: "const@CONSTANT_BOO"
+    footheme.mobile_device.full: "const@Jungi\Bundle\ThemeBundle\FooClass::MOBILE"
+```
+
+Additionally the support of constants was introduced. Like in the example above to call a constant you must only prepend 
+it with the `const@`. You can use a shortcut or a full qualified constant name. By the shortcut I mean the notation 
+`tag_name::constant` e.g. `jungi.mobile_devices::MOBILE` where it refers to a constant located in a tag. Naturally you can 
+refer to global constants e.g. **SOME_CONSTANT** and to constants located in classes like in the example above.
+
+#### Usage
+
+Parameters can be only used in the info and in arguments of tag. To use a parameter as a value you must surround the 
+parameter with percent sings "%" e.g. **%footheme.mobile_systems%**, just like in the symfony yaml services.
 
 ### Themes
 
@@ -60,60 +87,72 @@ OK, so let's start explaining from `themes`, `parameters` will be mentioned toge
 themes:
     footheme:
         # theme definition
+    # other themes
 ```
 
-Each document can define plenty of themes. The `footheme` in the example is the unique name of the theme. A theme
-definition can only define elements like below:
+Each theme mapping file can contain many theme definitions. The `footheme` in the example is the unique name of the theme.
+A theme definition can only define keys like below:
 
 ```yml
 footheme:
     # Required
-    path: # an absolute path or a path to a bundle resources
+    path: # an absolute path or a path to bundle resources
     # Optional
     tags:
         # tag list
     # Required
     info:
-        # info definition
+        # information definition
 ```
 
 **NOTE**
 
-> As shown in the quick example a path can be a bundle resource `@JungiFooBundle/Resources/theme`. This is possible thanks
-> to using the `Symfony\Component\HttpKernel\Config\FileLocator` by the **YamlFileLoader**
+> As shown in the quick example a path can be a bundle resource `@JungiFooBundle/Resources/theme`.
 
-### Information
+### ThemeInfo
 
 ```yml
 info:
-    name: An awesome theme
-    author:
-        name: piku235
-        email: piku235@gmail.com
-        site: http://test.pl
-    version: 1.0.0
-    license: MIT
-    description: <i>foo desc</i>
+    key: value
+    # other properties
 ```
 
-The `info` element can define children like in the table below. The children are almost the same as keys from the
-default info implementation (described in the **Theme Overview** chapter), expect only the `author` element which has
-own children.
+From the **Themes overview** chapter you should know what is the **ThemeInfo**. Each key of the `info` maps appropriate 
+field of the **ThemeInfo**, so keys that you can use are following:
 
-Name | Child | Required
----- | ----- | --------
-name | - | true
-version | - | true
-description | - | false
-license | - | false
-thumbnail | - | false
-author | name | false
-author | email | false
-author | site | false
+Key | Type | Required
+--- | ---- | --------
+name | string | true
+version | string | false
+description | string | false
+license | string | false
+authors | collection | false
 
-**INFO**
+As you see the `authors` is a collection type. to define an author you have the following formula:
 
-> The **info** element is required due to his two required children which are listed in the table
+```yml
+info:
+    authors:
+        - { name: foo, email: foo@bar.com, homepage: www.bar.com }
+        # other authors
+```
+
+Each author must be also a collection type and an author can have only the following keys:
+
+Key | Type | Required
+--- | ---- | --------
+name | string | true
+email | string | true
+homepage | string | false
+
+#### Parameters usage
+
+Here is just a small snippet of how to use a defined parameter.
+
+```yml
+info:
+    license: "%parameter_key%"
+```
 
 ### Tags
 
@@ -122,82 +161,39 @@ tags.
 
 ```yml
 tags:
-    - name: jungi.desktop_devices
-    - name: jungi.mobile_devices
-      arguments: [ "%footheme.mobile.systems%", "%footheme.mobile.device%" ]
-    - name: jungi.environment
-      arguments: admin
+    vendor.tag_name: # arguments
+    # other tags
 ```
 
-The `tags` element is a list of tags which a theme will be supporting. Each entry of tag list represents a tag definition
-where there are two variants of defining them. Which of them you will use depends only on you.
-
-The first one:
-
-```yml
-tags:
-    - name: jungi.desktop_devices
-    - name: jungi.mobile_devices
-      arguments: [ "%footheme.mobile.systems%", "%footheme.mobile.device%" ]
-```
-
-or the second one:
-
-```yml
-tags:
-    - { name: 'jungi.desktop_devices' }
-    - { name: 'jungi.mobile_devices', arguments: [ "%footheme.mobile.systems%", "%footheme.mobile.device%" ] }
-```
-
-#### Tag
-
-For a tag definition you have available these elements:
-
-Name | Description | Required
----- | ----------- | --------
-name | A tag name | true
-arguments | Arguments which are passed to a tag instance | false
-
-The `name` element takes an unique tag name by whose we don't have to provide a full class name. You can use one of the
-following built-in tags.
+The `tags` element is a collection of tags which the theme will support.
 
 Name | Class
 ---- | -----
-jungi.mobile_devices | Jungi\Bundle\ThemeBundle\Tag\MobileDevices
-jungi.desktop_devices | Jungi\Bundle\ThemeBundle\Tag\DesktopDevices
-jungi.link | Jungi\Bundle\ThemeBundle\Tag\Link
+jungi.mobile_devices | MobileDevices
+jungi.desktop_devices | DesktopDevices
+jungi.link | Link
 
 Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
 allows for dynamically registering tags in much convenient way. You can read about a tag registry [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
 
-#### Arguments and parameters
+#### Arguments
 
-```yml
-parameters:
-    footheme.mobile.systems: [ iOS, AndroidOS ]
-    footheme.mobile.device: "const@jungi.mobile_devices::MOBILE"
-    footheme.mobile.device_full: "const@Jungi\Bundle\ThemeBundle\FooClass::MOBILE"
-```
-
-Parameters facilitates providing arguments to a chosen tag. They have a local scope, so parameters defined in a document
-will be only available in this document. To use a parameter as the tag argument you must surround the parameter with
-percent sings "%" e.g. *%footheme.mobile.systems%*, just like in symfony yaml services. The **YamlFileLoader** automatically
-will look for values of these parameters.
-
-Usage example:
+Arguments are significant when you want pass some data to a tag. Here's an example of passing arguments to the `jungi.mobile_devices`
+tag.
 
 ```yml
 tags:
-    - name: jungi.mobile_devices
-      arguments: [ "%footheme.mobile.systems%", "const@jungi.mobile_devices::MOBILE" ]
+    jungi.mobile_devices: [ [ AndroidOS, WindowsPhoneOS ], "const@jungi.mobile_devices::MOBILE" ]
 ```
 
-##### Constants
+#### Parameters usage
 
-Additionally I've provided support of constants. Like in the example above to call a constant you must only prepend it
-with the `const@`. You can use a shortcut or a full qualified constant name as the constant value. By a shortcut I mean
-the notation `tag_name::constant` e.g. `jungi.mobile_devices::MOBILE`. This notation refers to a constant located in a
-tag. Naturally you can refer to global constants e.g. **SOME_CONSTANT** and to constants located in classes.
+Sometimes arguments can be very long and thus very hard to read, so to simplify you can use parameters.
+
+```yml
+tags:
+    foo.bar_tag: "%parameter_key%"
+```
 
 Final
 -----

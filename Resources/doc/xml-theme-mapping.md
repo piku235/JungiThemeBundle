@@ -101,7 +101,7 @@ So let's start explaining from the `<parameters />` element, the `<themes />` el
 
 Parameters can facilitate many things, especially when you've got the definition of multiple themes. They're almost the 
 same as parameters in the symfony services, with the difference that parameters in a theme mapping file has a local scope, 
-so you don't must be afraid that some variable will be overwritten by other theme mapping files.
+so you don't must be afraid that some variable will be overwritten by other theme mapping file.
 
 The parameter is specified by the `<parameter />` element which is a direct child of the `<parameters />` element. 
 The `<parameter />` element has the following attributes:
@@ -140,11 +140,10 @@ like in the example above.
 
 #### Usage
 
-Parameters can be only used in properties of the info and in arguments of the tag. To use a parameter as a value you 
-must surround the parameter with percent sings **%** e.g. **%footheme.mobile_systems%**, just like in the symfony xml 
-services.
+Parameters can be only used in properties of the info and in arguments of tag. To use a parameter as a value you must 
+surround the parameter with percent sings "%" e.g. **%footheme.mobile_systems%**, just like in the symfony xml services.
 
-### Theme
+### Themes
 
 ```xml
 <theme-mapping>
@@ -291,7 +290,7 @@ so you must follow the same things as for the `<parameter />` element to create 
 
 #### Parameters usage
 
-Here is just a small snippet of how to use a defined parameter in every `<argument />` element.
+Here is just a small snippet of how to use a defined parameter in the `<argument />` element.
 
 ```xml
 <tags>
