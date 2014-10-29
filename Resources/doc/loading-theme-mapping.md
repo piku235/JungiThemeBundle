@@ -107,7 +107,7 @@ Summary
 
 And that's all :)
 
-If your bundle is enabled in the **AppKernel** the theme\themes from the mapping file should be now loaded. You can check
+If your bundle is enabled in the **AppKernel** the theme(s) from the mapping file should be now loaded. You can check
 it by accessing a theme manager.
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

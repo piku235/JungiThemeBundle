@@ -53,7 +53,7 @@ OK, so let's start explaining from the `parameters`, the `themes` will be discus
 
 ```yml
 parameters:
-    key: value
+    parameter_key: parameter_value
     # other parameters
 ```
 
@@ -71,7 +71,7 @@ parameters:
 ```
 
 Additionally the support of constants was introduced. Like in the example above to call a constant you must only prepend 
-it with the `const@`. You can use a shortcut or a full qualified constant name. By the shortcut I mean the notation 
+it with the `const@` string. You can use a shortcut or a full qualified constant name. By the shortcut I mean the notation 
 `tag_name::constant` e.g. `jungi.mobile_devices::MOBILE` where it refers to a constant located in a tag. Naturally you can 
 refer to global constants e.g. **SOME_CONSTANT** and to constants located in classes like in the example above.
 
@@ -128,7 +128,7 @@ description | string | false
 license | string | false
 authors | collection | false
 
-As you see the `authors` is a collection type. to define an author you have the following formula:
+As you see the `authors` is a collection type. To define an author you have to use the formula below:
 
 ```yml
 info:
@@ -137,7 +137,7 @@ info:
         # other authors
 ```
 
-Each author must be also a collection type and an author can have only the following keys:
+Each author must be also a collection type wherein you can only use the following keys:
 
 Key | Type | Required
 --- | ---- | --------
@@ -165,16 +165,22 @@ tags:
     # other tags
 ```
 
-The `tags` element is a collection of tags which the theme will support.
+The `tags` element is a collection of tags which the theme will support. For use you have the following built-in tags:
 
-Name | Class
----- | -----
-jungi.mobile_devices | MobileDevices
-jungi.desktop_devices | DesktopDevices
-jungi.link | Link
+Class | Name
+----- | ----
+MobileDevices | jungi.mobile_devices
+DesktopDevices | jungi.desktop_devices
+Link | jungi.link
 
 Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
-allows for dynamically registering tags in much convenient way. You can read about a tag registry [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
+allows for dynamically registering new tags in much convenient way. You can read about a tag registry [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
+
+**IMPORTANT**
+
+There is also one thing worthy to say here. If you're creating a standard theme which generally will be used for desktop 
+devices you must remember to define the `jungi.desktop_device` tag. In some cases this tag can be significant and it can 
+be useful when viewing information about a theme.
 
 #### Arguments
 

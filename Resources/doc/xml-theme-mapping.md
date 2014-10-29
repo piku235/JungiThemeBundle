@@ -263,14 +263,20 @@ value a unique tag name which identifies a tag.
 
 For use you have the following built-in tags:
 
-Name | Class
----- | -----
-jungi.mobile_devices | MobileDevices
-jungi.desktop_devices | DesktopDevices
-jungi.link | Link
+Class | Name
+----- | ----
+MobileDevices | jungi.mobile_devices
+DesktopDevices | jungi.desktop_devices
+Link | jungi.link
 
 Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
 allows for dynamically registering tags in the convenient way. You can read about that [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
+
+**IMPORTANT**
+
+There is also one thing worthy to say here. If you're creating a standard theme which generally will be used for desktop 
+devices you must remember to define the `jungi.desktop_device` tag. In some cases this tag can be significant and it can 
+be useful when viewing information about a theme.
 
 #### Arguments
 

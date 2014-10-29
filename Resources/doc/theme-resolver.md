@@ -44,9 +44,9 @@ The bundle comes with the following theme resolvers:
 
 They're mentioned in the installation steps, so if you still don't know what every of them does [go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/installation.md#step-3-configuration).
 
-### Create theme resolver
+### Creating theme resolver
 
-I will show you how to create a theme resolver on the example. Let's say that we're creating a theme resolver whose task
+I will show you how to create a theme resolver on an example. Let's say that we're creating a theme resolver whose task
 will be to return a theme chosen by user. If the user hasn't chosen any theme then a default theme for users will be 
 returned. However a user can be not authenticated, then let us assume that the theme resolver will return null.
 
@@ -99,17 +99,16 @@ class UserThemeResolver implements ThemeResolverInterface
 }
 ```
 
-Now when we have our theme resolver created a normal thing is we want use it in a project. We must create a service
-for this theme resolver and activate it in the configuration. Assume that the service is called `foo_vendor.resolver.user`.
-Like mentioned in the installation steps to setup a theme resolver service we must to define the theme resolver configuration
-like below:
+Now when we have our theme resolver created a normal thing is we want to use it in a project. We must create a service
+for this theme resolver and activate it in the configuration. Assume that the service is called `jungi_theme.resolver.user`.
+Like mentioned in the installation steps to setup a theme resolver service we must to define the configuration like below:
 
 ```yml
 # app/config/config.yml
 jungi_theme:
     resolver:
         primary:
-            id: foo_vendor.resolver.user
+            id: jungi_theme.resolver.user
 ```
 
 Or the shorthand version:
@@ -118,7 +117,7 @@ Or the shorthand version:
 # app/config/config.yml
 jungi_theme:
     resolver:
-        primary: foo_vendor.resolver.user
+        primary: jungi_theme.resolver.user
 ```
 
 And that's all, after this step our theme resolver should be normally working.
