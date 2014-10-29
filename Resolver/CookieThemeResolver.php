@@ -45,16 +45,12 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     public function __construct(array $options = array())
     {
         $this->options = $options + array(
-            'expire' => time() + 2592000, // +30 days
+            'lifetime' => 2592000, // +30 days
             'path' => '/',
             'domain' => null,
             'secure' => false,
             'httpOnly' => true
         );
-
-        if (isset($this->options['lifetime'])) {
-            $this->options['expire'] = time() + $this->options['lifetime'];
-        }
     }
 
     /**
@@ -87,7 +83,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
         $response->headers->setCookie(new Cookie(
             self::COOKIE_NAME,
             $this->resolveThemeName($request),
-            $this->options['expire'],
+            time() + $this->options['lifetime'],
             $this->options['path'],
             $this->options['domain'],
             $this->options['secure'],
