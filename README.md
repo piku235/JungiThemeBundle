@@ -7,7 +7,9 @@ devices (Responsive Web Design) or create two separate themes where each one is 
 Design). Of course the functionality of the bundle not ends here. Read the documentation to know more.
 
 [![Build Status](https://travis-ci.org/piku235/JungiThemeBundle.svg?branch=master)](https://travis-ci.org/piku235/JungiThemeBundle)
+[![Latest Stable Version](https://poser.pugx.org/jungi/theme-bundle/v/stable.svg)](https://packagist.org/packages/jungi/theme-bundle)
 [![Total Downloads](https://poser.pugx.org/jungi/theme-bundle/downloads.svg)](https://packagist.org/packages/jungi/theme-bundle)
+[![License](https://poser.pugx.org/jungi/theme-bundle/license.svg)](https://packagist.org/packages/jungi/theme-bundle)
 
 **The most useful features:**
 
