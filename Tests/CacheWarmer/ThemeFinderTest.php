@@ -12,8 +12,8 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\CacheWarmer;
 
 use Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder;
-use Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
+use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
@@ -29,7 +29,7 @@ class ThemeFinderTest extends TestCase
             $this->createThemeMock('foo', __DIR__ . '/Fixtures/FooThemeBundle/Resources/theme'),
             $this->createThemeMock('boo', __DIR__ . '/Fixtures/BooThemeBundle/Resources/theme')
         ));
-        $finder = new ThemeFinder($manager, new ThemeFilenameParser());
+        $finder = new ThemeFinder($manager, new TemplateFilenameParser());
         $references = $finder->findAllTemplates();
 
         $this->assertCount(6, $references);

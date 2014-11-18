@@ -21,7 +21,7 @@ Add the JungiThemeBundle in your composer.json:
 Or run the following command in your project:
 
 ```bash
-$ php composer.phar require jungi/theme-bundle "dev-master"
+$ php composer.phar require jungi/theme-bundle "~1.0"
 ```
 
 ### Step 2: Enable the bundle

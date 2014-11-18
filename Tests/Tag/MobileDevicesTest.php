@@ -58,7 +58,7 @@ class MobileDevicesTest extends TestCase
             array(new MobileDevices('iOS', MobileDevices::MOBILE), new MobileDevices(array(), MobileDevices::MOBILE)),
             array(new MobileDevices('iOS', MobileDevices::TABLET), new MobileDevices()),
             array(new MobileDevices('iOS', MobileDevices::TABLET), new MobileDevices(array('iOS', 'WindowsPhoneOS'), MobileDevices::TABLET)),
-            array(new MobileDevices('iOS', MobileDevices::TABLET), new MobileDevices(array(), MobileDevices::TABLET)),
+            array(new MobileDevices('iOS', MobileDevices::TABLET), new MobileDevices(array(), MobileDevices::TABLET))
         );
     }
 
@@ -69,6 +69,7 @@ class MobileDevicesTest extends TestCase
     {
         return array(
             array(new MobileDevices('iOS'), new MobileDevices('AndroidOS')),
+            array(new MobileDevices('iOS', MobileDevices::TABLET), new MobileDevices('AndroidOS', MobileDevices::TABLET)),
             array(new MobileDevices('iOS'), new MobileDevices('AndroidOS', 'WindowsPhoneOS')),
             array(new MobileDevices('iOS', MobileDevices::MOBILE), new MobileDevices(array('iOS', 'WindowsPhoneOS'), MobileDevices::TABLET))
         );

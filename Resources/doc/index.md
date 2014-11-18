@@ -86,14 +86,14 @@ theme on various devices. Creating a responsive theme in the JungiThemeBundle is
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md)
 
+Tutorials
+---------
+
+* [Creating a theme](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/tutorials/creating-theme.md)
+
 Advanced
 --------
 
 * [Theme resolver](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md)
 * [Theme selector](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-selector.md)
 * [Configuration reference](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md)
-
-Tutorials
----------
-
-* [Creating a theme](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/tutorials/creating-theme.md)

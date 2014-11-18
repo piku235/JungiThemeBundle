@@ -92,7 +92,7 @@ class ValidationListener implements EventSubscriberInterface
      */
     public function onResolvedTheme(ResolvedThemeEvent $event)
     {
-        if (!$event->canClearTheme()) {
+        if (!$event->canCancel()) {
             return;
         }
 
@@ -104,7 +104,7 @@ class ValidationListener implements EventSubscriberInterface
         $constraints = $this->validator->validate($event->getTheme());
         if (count($constraints)) {
             // Invalidate the theme
-            $event->clearTheme();
+            $event->cancel();
 
             if (null !== $this->logger) {
                 $this->logger->warning(ValidationUtils::formatValidationMessage(

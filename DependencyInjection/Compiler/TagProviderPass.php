@@ -32,7 +32,7 @@ class TagProviderPass implements CompilerPassInterface
         }
 
         $tagFactory = $container->getDefinition('jungi_theme.tag.registry');
-        foreach ($container->findTaggedServiceIds('jungi.tag_provider') as $id => $attrs) {
+        foreach ($container->findTaggedServiceIds('jungi_theme.tag_provider') as $id => $attrs) {
             $tagFactory->addMethodCall('register', array(new Reference($id)));
         }
     }

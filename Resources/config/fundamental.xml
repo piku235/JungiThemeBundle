@@ -5,15 +5,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="jungi_theme.manager.class">Jungi\Bundle\ThemeBundle\Core\ThemeManager</parameter>
         <parameter key="jungi_theme.name_parser.class">Jungi\Bundle\ThemeBundle\Core\ThemeNameParser</parameter>
+        <parameter key="jungi_theme.manager.class">Jungi\Bundle\ThemeBundle\Core\ThemeManager</parameter>
         <parameter key="jungi_theme.cache_warmer.finder_chain.class">Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinderChain</parameter>
         <parameter key="jungi_theme.cache_warmer.finder.class">Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder</parameter>
-        <parameter key="jungi_theme.locator.class">Jungi\Bundle\ThemeBundle\Core\Loader\ThemeLocator</parameter>
         <parameter key="jungi_theme.holder.default.class">Jungi\Bundle\ThemeBundle\Core\ThemeHolder</parameter>
         <parameter key="jungi_theme.mobile_detect.class">Jungi\Bundle\ThemeBundle\Core\MobileDetect</parameter>
-        <parameter key="jungi_theme.filename_parser.class">Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser</parameter>
         <parameter key="jungi_theme.selector.class">Jungi\Bundle\ThemeBundle\Selector\ThemeSelector</parameter>
+        <parameter key="jungi_theme.matcher.class">Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcher</parameter>
+        <parameter key="jungi_theme.matcher.filter.device.class">Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter</parameter>
         <parameter key="jungi_theme.changer.class">Jungi\Bundle\ThemeBundle\Changer\ThemeChanger</parameter>
         <parameter key="jungi_theme.tag.factory.class">Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory</parameter>
         <parameter key="jungi_theme.tag.registry.class">Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry</parameter>
@@ -21,7 +21,7 @@
         <parameter key="jungi_theme.tag.classes" type="collection">
             <parameter>Jungi\Bundle\ThemeBundle\Tag\MobileDevices</parameter>
             <parameter>Jungi\Bundle\ThemeBundle\Tag\DesktopDevices</parameter>
-            <parameter>Jungi\Bundle\ThemeBundle\Tag\Link</parameter>
+            <parameter>Jungi\Bundle\ThemeBundle\Tag\Group</parameter>
         </parameter>
     </parameters>
 
@@ -37,15 +37,6 @@
         <service id="jungi_theme.tag.factory" class="%jungi_theme.tag.factory.class%">
             <argument type="service" id="jungi_theme.tag.registry" />
         </service>
-        <service id="jungi_theme.locator" class="%jungi_theme.locator.class%" public="false">
-            <argument type="service" id="jungi_theme.manager" />
-            <argument type="service" id="file_locator" />
-            <argument>%kernel.cache_dir%</argument>
-        </service>
-        <service id="jungi_theme.name_parser" class="%jungi_theme.name_parser.class%">
-            <argument type="service" id="jungi_theme.holder" />
-            <argument type="service" id="kernel" />
-        </service>
         <service id="jungi_theme.holder.default" class="%jungi_theme.holder.default.class%" />
         <service id="jungi_theme.cache_warmer.finder_chain" class="%jungi_theme.cache_warmer.finder_chain.class%" public="false">
             <argument type="collection">
@@ -55,26 +46,33 @@
         </service>
         <service id="jungi_theme.cache_warmer.finder" class="%jungi_theme.cache_warmer.finder.class%" public="false">
             <argument type="service" id="jungi_theme.manager" />
-            <argument type="service" id="jungi_theme.filename_parser" />
+            <argument type="service" id="jungi_theme.templating.filename_parser" />
         </service>
-        <service id="jungi_theme.filename_parser" class="%jungi_theme.filename_parser.class%" />
+        <service id="jungi_theme.name_parser" class="%jungi_theme.name_parser.class%" />
         <service id="jungi_theme.manager" class="%jungi_theme.manager.class%" />
+        <service id="jungi_theme.matcher" class="%jungi_theme.matcher.class%">
+            <argument type="service" id="jungi_theme.manager" />
+            <argument type="service" id="jungi_theme.name_parser" />
+        </service>
+        <service id="jungi_theme.matcher.filter.device" class="%jungi_theme.matcher.filter.device.class%">
+            <tag name="jungi_theme.filter" />
+            <argument type="service" id="jungi_theme.mobile_detect" />
+            <argument type="service" id="jungi_theme.manager" />
+        </service>
         <service id="jungi_theme.changer" class="%jungi_theme.changer.class%">
-            <argument type="service" id="jungi_theme.manager"/>
-            <argument type="service" id="jungi_theme.holder"/>
-            <argument type="service" id="jungi_theme.resolver"/>
-            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="jungi_theme.matcher" />
+            <argument type="service" id="jungi_theme.name_parser" />
+            <argument type="service" id="jungi_theme.resolver" />
+            <argument type="service" id="event_dispatcher" />
         </service>
         <service id="jungi_theme.selector" class="%jungi_theme.selector.class%">
-            <argument type="service" id="jungi_theme.manager"/>
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="jungi_theme.resolver"/>
+            <argument type="service" id="jungi_theme.matcher" />
+            <argument type="service" id="jungi_theme.name_parser" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="jungi_theme.resolver" />
             <argument type="service" id="jungi_theme.fallback_resolver" on-invalid="null" />
         </service>
-
         <!-- Aliases -->
-        <service id="templating.locator" alias="jungi_theme.locator" />
-        <service id="templating.name_parser" alias="jungi_theme.name_parser" />
         <service id="jungi_theme.resolver" alias="jungi_theme.resolver.primary" />
     </services>
 </container>

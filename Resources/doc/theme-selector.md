@@ -45,7 +45,7 @@ changed by user causing that the user could use any theme without our knowledge.
 perform the validation only for chosen theme resolvers like e.g. this **CookieThemeResolver** (scroll to the configuration
 to see how).
 
-#### DeviceThemeSwitch
+#### DeviceThemeFilter
 
 This listener is mandatory for properly work adaptive themes (AWD). When the theme has been resolved then the listener
 will try to find a better matching theme. The search will be only executed when the resolved theme doesn't support a device

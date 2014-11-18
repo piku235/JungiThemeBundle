@@ -12,19 +12,19 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\Tag;
 
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Jungi\Bundle\ThemeBundle\Tag\Link;
+use Jungi\Bundle\ThemeBundle\Tag\Group;
 
 /**
- * Link tag test case
+ * Group tag test case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class LinkTest extends TestCase
+class GroupTest extends TestCase
 {
     /**
      * @dataProvider getMatchingTags
      */
-    public function testWhenEqual(Link $firstTag, Link $secondTag)
+    public function testWhenEqual(Group $firstTag, Group $secondTag)
     {
         $this->assertTrue($firstTag->isEqual($secondTag));
         $this->assertTrue($secondTag->isEqual($firstTag));
@@ -33,7 +33,7 @@ class LinkTest extends TestCase
     /**
      * @dataProvider getNonMatchingTags
      */
-    public function testWhenNotEqual(Link $firstTag, Link $secondTag)
+    public function testWhenNotEqual(Group $firstTag, Group $secondTag)
     {
         $this->assertFalse($firstTag->isEqual($secondTag));
         $this->assertFalse($secondTag->isEqual($firstTag));
@@ -45,8 +45,8 @@ class LinkTest extends TestCase
     public function getMatchingTags()
     {
         return array(
-            array(new Link('footheme'), new Link('footheme')),
-            array(new Link('bootheme'), new Link('bootheme'))
+            array(new Group('footheme'), new Group('footheme')),
+            array(new Group('bootheme'), new Group('bootheme'))
         );
     }
 
@@ -56,8 +56,8 @@ class LinkTest extends TestCase
     public function getNonMatchingTags()
     {
         return array(
-            array(new Link('footheme'), new Link('footheme_boo')),
-            array(new Link('bootheme'), new Link(''))
+            array(new Group('footheme'), new Group('footheme_boo')),
+            array(new Group('bootheme'), new Group(''))
         );
     }
 }

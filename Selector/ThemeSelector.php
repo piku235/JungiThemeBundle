@@ -11,9 +11,10 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector;
 
-use Jungi\Bundle\ThemeBundle\Exception\InvalidatedThemeException;
-use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
-use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeNameParserInterface;
+use Jungi\Bundle\ThemeBundle\Selector\Exception\InvalidatedThemeException;
+use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
+use Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcherInterface;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\DetailedResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException;
@@ -50,22 +51,29 @@ class ThemeSelector implements ThemeSelectorInterface
     private $resolver;
 
     /**
-     * @var ThemeManagerInterface
+     * @var ThemeMatcherInterface
      */
-    protected $manager;
+    private $matcher;
+
+    /**
+     * @var ThemeNameParserInterface
+     */
+    private $nameParser;
 
     /**
      * Constructor
      *
-     * @param ThemeManagerInterface    $manager    A theme manager
+     * @param ThemeMatcherInterface    $matcher    A theme matcher
+     * @param ThemeNameParserInterface $nameParser A theme name parser
      * @param EventDispatcherInterface $dispatcher An event dispatcher
      * @param ThemeResolverInterface   $resolver   A theme resolver
      * @param ThemeResolverInterface   $fallback   A fallback theme resolver (optional)
      */
-    public function __construct(ThemeManagerInterface $manager, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
+    public function __construct(ThemeMatcherInterface $matcher, ThemeNameParserInterface $nameParser, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
     {
-        $this->manager = $manager;
         $this->dispatcher = $dispatcher;
+        $this->matcher = $matcher;
+        $this->nameParser = $nameParser;
         $this->resolver = $resolver;
         $this->fallback = $fallback;
     }
@@ -135,10 +143,17 @@ class ThemeSelector implements ThemeSelectorInterface
         }
 
         // Theme
-        $theme = $this->manager->getTheme($themeName);
+        $themeName = $this->nameParser->parse($themeName);
+        $theme = $this->matcher->match($themeName, $request);
 
         // Dispatch the event
-        $event = new DetailedResolvedThemeEvent(DetailedResolvedThemeEvent::PRIMARY_RESOLVER, $theme, $this->resolver, $request);
+        $event = new DetailedResolvedThemeEvent(
+            DetailedResolvedThemeEvent::PRIMARY_RESOLVER,
+            $themeName,
+            $theme,
+            $this->resolver,
+            $request
+        );
         $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED_THEME, $event);
 
         // Check if the theme is still in the event
@@ -168,10 +183,18 @@ class ThemeSelector implements ThemeSelectorInterface
         }
 
         // Theme
-        $theme = $this->manager->getTheme($themeName);
+        $themeName = $this->nameParser->parse($themeName);
+        $theme = $this->matcher->match($themeName, $request);
 
         // Dispatch the event
-        $event = new DetailedResolvedThemeEvent(DetailedResolvedThemeEvent::FALLBACK_RESOLVER, $theme, $this->fallback, $request, false);
+        $event = new DetailedResolvedThemeEvent(
+            DetailedResolvedThemeEvent::FALLBACK_RESOLVER,
+            $themeName,
+            $theme,
+            $this->fallback,
+            $request,
+            false
+        );
         $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED_THEME, $event);
 
         return $event->getTheme();

@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Tests\Core;
+namespace Jungi\Bundle\ThemeBundle\Tests\Templating;
 
+use Jungi\Bundle\ThemeBundle\Templating\TemplateNameParser;
+use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\FakeThemeHolder;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
-use Jungi\Bundle\ThemeBundle\Core\ThemeReference;
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
+use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
- * ThemeNameParserTest
+ * TemplateNameParserTest
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeNameParserTest extends TestCase
+class TemplateNameParserTest extends TestCase
 {
     /**
-     * @var ThemeNameParser
+     * @var TemplateNameParser
      */
     private $parser;
 
@@ -55,7 +55,7 @@ class ThemeNameParserTest extends TestCase
 
         $this->holder = new FakeThemeHolder();
         $this->holder->setTheme($this->createThemeMock('Foo'));
-        $this->parser = new ThemeNameParser($this->holder, $kernel);
+        $this->parser = new TemplateNameParser($this->holder, $kernel);
     }
 
     /**
@@ -88,7 +88,7 @@ class ThemeNameParserTest extends TestCase
         $this->holder->theme = null;
         $template = $this->parser->parse('FooBundle:Default:index.html.twig');
 
-        $this->assertEquals($template, new TemplateReference('FooBundle', 'Default', 'index', 'html', 'twig'));
+        $this->assertEquals($template, new BaseTemplateReference('FooBundle', 'Default', 'index', 'html', 'twig'));
     }
 
     /**
@@ -114,10 +114,10 @@ class ThemeNameParserTest extends TestCase
     public function getValidLogicalNames()
     {
         return array(
-            array('FooBundle:Default:index.html.twig', new ThemeReference(new TemplateReference('FooBundle', 'Default', 'index', 'html', 'twig'), 'Foo')),
-            array('JungiTestBundle::index.html.twig', new ThemeReference(new TemplateReference('JungiTestBundle', null, 'index', 'html', 'twig'), 'Foo')),
-            array('::index.html.twig', new ThemeReference(new TemplateReference(null, null, 'index', 'html', 'twig'), 'Foo')),
-            array(':FooBundle:index.html.twig', new ThemeReference(new TemplateReference(null, 'FooBundle', 'index', 'html', 'twig'), 'Foo'))
+            array('FooBundle:Default:index.html.twig', new TemplateReference(new BaseTemplateReference('FooBundle', 'Default', 'index', 'html', 'twig'), 'Foo')),
+            array('JungiTestBundle::index.html.twig', new TemplateReference(new BaseTemplateReference('JungiTestBundle', null, 'index', 'html', 'twig'), 'Foo')),
+            array('::index.html.twig', new TemplateReference(new BaseTemplateReference(null, null, 'index', 'html', 'twig'), 'Foo')),
+            array(':FooBundle:index.html.twig', new TemplateReference(new BaseTemplateReference(null, 'FooBundle', 'index', 'html', 'twig'), 'Foo'))
         );
     }
 }

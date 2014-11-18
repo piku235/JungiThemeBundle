@@ -33,6 +33,7 @@ class JungiThemeExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('templating.xml');
         $loader->load('fundamental.xml');
         $loader->load('extensions.xml');
         $loader->load('mappings.xml');
@@ -65,32 +66,35 @@ class JungiThemeExtension extends Extension
         }
 
         // Device Theme Switch
+        /*
         if (!$config['selector']['device_switch']['enabled']) {
             $container->removeDefinition('jungi_theme.selector.listener.device_switch');
-        }
+        }*/
 
         // Class cache
         $this->addClassesToCompile(array(
             'Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinderChain',
             'Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder',
             'Jungi\Bundle\ThemeBundle\Core\MobileDetect',
-            'Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser',
             'Jungi\Bundle\ThemeBundle\Core\Theme',
             'Jungi\Bundle\ThemeBundle\Core\ThemeManager',
-            'Jungi\Bundle\ThemeBundle\Core\ThemeReference',
+            'Jungi\Bundle\ThemeBundle\Core\ThemeNameReference',
             'Jungi\Bundle\ThemeBundle\Core\ThemeNameParser',
             'Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence',
             'Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssenceBuilder',
             'Jungi\Bundle\ThemeBundle\Information\Author',
             'Jungi\Bundle\ThemeBundle\Changer\ThemeChanger',
             'Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents',
-            'Jungi\Bundle\ThemeBundle\Core\Loader\ThemeLocator',
+            'Jungi\Bundle\ThemeBundle\Changer\Event\ChangeThemeEvent',
             'Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent',
             'Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\FileLoader',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper',
+            'Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcher',
+            'Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter',
+            'Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection',
             'Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver',
             'Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver',
             'Jungi\Bundle\ThemeBundle\Resolver\SessionThemeResolver',
@@ -99,18 +103,21 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents',
             'Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent',
             'Jungi\Bundle\ThemeBundle\Selector\Event\DetailedResolvedThemeEvent',
-            'Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch',
             'Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener',
             'Jungi\Bundle\ThemeBundle\Validation\ValidationUtils',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\Link',
+            'Jungi\Bundle\ThemeBundle\Tag\Group',
             'Jungi\Bundle\ThemeBundle\Tag\TagCollection',
             'Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory',
             'Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry',
             'Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider',
             'Jungi\Bundle\ThemeBundle\Helper\DeviceHelper',
-            'Jungi\Bundle\ThemeBundle\Twig\Extension\DeviceExtension'
+            'Jungi\Bundle\ThemeBundle\Twig\Extension\DeviceExtension',
+            'Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser',
+            'Jungi\Bundle\ThemeBundle\Templating\TemplateNameParser',
+            'Jungi\Bundle\ThemeBundle\Templating\TemplateReference',
+            'Jungi\Bundle\ThemeBundle\Templating\Loader\TemplateLocator'
         ));
     }
 

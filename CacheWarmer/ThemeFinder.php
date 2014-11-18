@@ -11,11 +11,11 @@
 
 namespace Jungi\Bundle\ThemeBundle\CacheWarmer;
 
-use Symfony\Component\Finder\Finder;
+use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
+use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeReference;
-use Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser;
+use Symfony\Component\Finder\Finder;
 
 /**
  * ThemeFinder looks for all template paths in each theme
@@ -30,17 +30,17 @@ class ThemeFinder implements TemplateFinderInterface
     private $manager;
 
     /**
-     * @var ThemeFilenameParser
+     * @var TemplateFilenameParser
      */
     private $parser;
 
     /**
      * Constructor
      *
-     * @param ThemeManagerInterface $manager A theme manager
-     * @param ThemeFilenameParser   $parser  A template name parser
+     * @param ThemeManagerInterface  $manager A theme manager
+     * @param TemplateFilenameParser $parser  A template name parser
      */
-    public function __construct(ThemeManagerInterface $manager, ThemeFilenameParser $parser)
+    public function __construct(ThemeManagerInterface $manager, TemplateFilenameParser $parser)
     {
         $this->manager = $manager;
         $this->parser = $parser;
@@ -59,12 +59,12 @@ class ThemeFinder implements TemplateFinderInterface
             $finder
                 ->files()
                 ->followLinks()
-                ->in($theme->getPath())
-            ;
+                ->in($theme->getPath());
+
             foreach ($finder as $file) {
                 $reference = $this->parser->parse($file->getRelativePathname());
                 if (false !== $reference) {
-                    $result[] = new ThemeReference($reference, $theme->getName());
+                    $result[] = new TemplateReference($reference, $theme->getName());
                 }
             }
         }

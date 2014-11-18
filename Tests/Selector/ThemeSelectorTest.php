@@ -11,13 +11,13 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Selector;
 
-use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
+use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
+use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
+use Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcher;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelector;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
-use Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch;
-use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
@@ -75,34 +75,9 @@ class ThemeSelectorTest extends TestCase
             $theme
         ));
         $this->resolver = new InMemoryThemeResolver('footheme', false);
-        $this->selector = new ThemeSelector($this->manager, $this->eventDispatcher, $this->resolver);
-    }
 
-    /**
-     * Tests a event listener (DeviceSwitch) cooperation with ThemeSelector
-     */
-    public function testDeviceSwitchListener()
-    {
-        // Prepare
-        $theme = $this->createThemeMock('footheme_mobile');
-        $theme
-            ->expects($this->any())
-            ->method('getTags')
-            ->will($this->returnValue(new TagCollection(array(
-                new Tag\Link('footheme'),
-                new Tag\MobileDevices()
-            ))));
-        $this->manager->addTheme($theme);
-
-        // Add the DeviceThemeSwitch
-        $this->eventDispatcher->addSubscriber(new DeviceThemeSwitch(new MobileDetect(), $this->manager));
-
-        // The main thread
-        $request = $this->createMobileRequest();
-        $theme = $this->selector->select($request);
-
-        // Assert
-        $this->assertEquals('footheme_mobile', $theme->getName());
+        $matcher = new ThemeMatcher($this->manager, new ThemeNameParser());
+        $this->selector = new ThemeSelector($matcher, new ThemeNameParser(), $this->eventDispatcher, $this->resolver);
     }
 
     /**
@@ -210,7 +185,7 @@ class ThemeSelectorTest extends TestCase
     /**
      * Tests on an empty theme name
      *
-     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\NullThemeException
+     * @expectedException \Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException
      */
     public function testFallbackOnMissingTheme()
     {
@@ -231,7 +206,7 @@ class ThemeSelectorTest extends TestCase
     /**
      * Tests the behaviour in situations when a theme has been invalidated e.g. by validation process
      *
-     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\InvalidatedThemeException
+     * @expectedException \Jungi\Bundle\ThemeBundle\Selector\Exception\InvalidatedThemeException
      */
     public function testOnInvalidatedTheme()
     {
@@ -257,7 +232,7 @@ class ThemeSelectorTest extends TestCase
     /**
      * Tests on an empty theme name
      *
-     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\NullThemeException
+     * @expectedException \Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException
      */
     public function testOnNullTheme()
     {

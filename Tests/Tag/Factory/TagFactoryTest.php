@@ -36,7 +36,7 @@ class TagFactoryTest extends TestCase
         $registry = new TagRegistry();
         $registry->register(array(
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\Link'
+            'Jungi\Bundle\ThemeBundle\Tag\Group'
         ));
         $this->factory = new TagFactory($registry);
     }
@@ -59,7 +59,7 @@ class TagFactoryTest extends TestCase
         return array(
             array('jungi.mobile_devices', array(), new Tag\MobileDevices()),
             array('jungi.mobile_devices', array('iOS', Tag\MobileDevices::TABLET), new Tag\MobileDevices('iOS', Tag\MobileDevices::TABLET)),
-            array('jungi.link', 'footheme', new Tag\Link('footheme')),
+            array('jungi.group', 'footheme', new Tag\Group('footheme')),
         );
     }
 }

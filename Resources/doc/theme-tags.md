@@ -67,7 +67,7 @@ want to link them together ([Adaptive Web Design](https://github.com/piku235/Jun
 Usage examples
 --------------
 
-How tags works you can see by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/EventListener/DeviceThemeSwitchTest.php)
+How tags works you can see by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/EventListener/DeviceThemeFilterTest.php)
 and [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/ThemeSelectorTest.php).
 
 Also there are two example bundles which I mentioned in the **README.md** of the root directory, but I will mention them
@@ -147,7 +147,7 @@ built-in tags, but additionally to use tags created e.g. by you :)
 ### How to register a new tag?
 
 The registration can be done from the symfony services which is very comfortable. The only thing you have to do is to
-define a service with the tag `jungi.tag_provider`. As a service class you can use the parameter `jungi_theme.tag.registry.provider.class`
+define a service with the tag `jungi_theme.tag_provider`. As a service class you can use the parameter `jungi_theme.tag.registry.provider.class`
 which by default points to the `Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider`. A tag provider only provides tags to
 a tag registry and nothing more.
 
@@ -161,7 +161,7 @@ a tag registry and nothing more.
 
 <services>
     <service id="foo.theme.tag.provider" class="%jungi_theme.tag.registry.provider.class%">
-        <tag name="jungi.tag_provider" />
+        <tag name="jungi_theme.tag_provider" />
         <argument>%foo.theme.tag.class%</argument>
     </service>
     <!-- other services -->
@@ -178,7 +178,7 @@ services:
     foo.theme.tag.provider:
         class: "%jungi_theme.tag.registry.provider.class%"
         tags:
-            - { name: jungi.tag_provider }
+            - { name: jungi_theme.tag_provider }
         arguments: ["%foo.theme.tag.class%"]
 ```
 

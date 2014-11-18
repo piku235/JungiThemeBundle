@@ -9,24 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Core;
+namespace Jungi\Bundle\ThemeBundle\Templating;
 
 use Symfony\Component\Templating\TemplateNameParserInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
+use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
- * ThemeFilenameParser
+ * TemplateFilenameParser
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeFilenameParser implements TemplateNameParserInterface
+class TemplateFilenameParser implements TemplateNameParserInterface
 {
     /**
      * {@inheritdoc}
      */
     public function parse($name)
     {
-        if ($name instanceof TemplateReference) {
+        if ($name instanceof BaseTemplateReference) {
             return $name;
         }
 
@@ -40,6 +40,6 @@ class ThemeFilenameParser implements TemplateNameParserInterface
         $engine = array_pop($elements);
         $format = array_pop($elements);
 
-        return new TemplateReference($bundle, implode('/', $parts), implode('.', $elements), $format, $engine);
+        return new BaseTemplateReference($bundle, implode('/', $parts), implode('.', $elements), $format, $engine);
     }
 }

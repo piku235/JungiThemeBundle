@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Core;
+namespace Jungi\Bundle\ThemeBundle\Templating;
 
-use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
+use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
- * ThemeReference
+ * TemplateReference
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeReference extends TemplateReference
+class TemplateReference extends BaseTemplateReference
 {
     /**
      * @var string
@@ -26,17 +26,17 @@ class ThemeReference extends TemplateReference
     const DELIMITER = '#';
 
     /**
-     * @var TemplateReference
+     * @var BaseTemplateReference
      */
     protected $origin;
 
     /**
      * Constructor
      *
-     * @param TemplateReference $template A template reference
-     * @param string            $theme    A theme name
+     * @param BaseTemplateReference $template A template reference
+     * @param string                $theme    A theme name
      */
-    public function __construct(TemplateReference $template, $theme)
+    public function __construct(BaseTemplateReference $template, $theme)
     {
         $this->parameters = array('theme' => $theme) + $template->parameters;
         $this->origin = $template;
@@ -45,7 +45,7 @@ class ThemeReference extends TemplateReference
     /**
      * Returns the origin template reference
      *
-     * @return TemplateReference
+     * @return BaseTemplateReference
      */
     public function getOrigin()
     {

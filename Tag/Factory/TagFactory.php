@@ -49,13 +49,13 @@ class TagFactory implements TagFactoryInterface
      *
      * @return string
      */
-    public function create($type, $arguments = null)
+    public function create($name, $arguments = null)
     {
-        if (!isset($this->cache[$type])) {
-            $this->cache[$type] = new \ReflectionClass($this->registry->getTagClass($type));
+        if (!isset($this->cache[$name])) {
+            $this->cache[$name] = new \ReflectionClass($this->registry->getTagClass($name));
         }
 
-        $reflection = $this->cache[$type];
+        $reflection = $this->cache[$name];
         if ($arguments) {
             if (!is_array($arguments)) {
                 return $reflection->newInstance($arguments);

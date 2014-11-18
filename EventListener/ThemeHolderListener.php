@@ -11,8 +11,10 @@
 
 namespace Jungi\Bundle\ThemeBundle\EventListener;
 
+use Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
-use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
+use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
+use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -84,12 +86,25 @@ class ThemeHolderListener implements EventSubscriberInterface
     }
 
     /**
+     * Handles the change theme event
+     *
+     * @param HttpThemeEvent $event An event
+     *
+     * @return void
+     */
+    public function onChange(HttpThemeEvent $event)
+    {
+        $this->holder->setTheme($event->getTheme());
+    }
+
+    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::CONTROLLER => array('onKernelController', -100)
+            KernelEvents::CONTROLLER => array('onKernelController', -100),
+            ThemeChangerEvents::POST_CHANGE => array('onChange')
         );
     }
 }

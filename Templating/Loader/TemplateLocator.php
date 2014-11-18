@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Core\Loader;
+namespace Jungi\Bundle\ThemeBundle\Templating\Loader;
 
-use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
+use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
+use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator as BaseTemplateLocator;
 use Symfony\Component\Templating\TemplateReferenceInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeReference;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 
 /**
- * ThemeLocator returns a full path to a theme resource if exists, otherwise it will use
+ * TemplateLocator returns a full path to a theme resource if exists, otherwise it will use
  * the locate method of the TemplateLocator class for return
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeLocator extends TemplateLocator
+class TemplateLocator extends BaseTemplateLocator
 {
     /**
      * @var ThemeManagerInterface
@@ -57,9 +57,9 @@ class ThemeLocator extends TemplateLocator
      *
      * @return string
      *
-     * @throws \RuntimeException         When the theme from a ThemeReference instance is not exist
+     * @throws \RuntimeException         When the theme from a TemplateReference instance is not exist
      *                                   in the theme manager
-     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException If the given $template is not an instance of the TemplateReferenceInterface
      */
     public function locate($template, $currentPath = null, $first = true)
     {
@@ -74,7 +74,7 @@ class ThemeLocator extends TemplateLocator
             return $this->cache[$key];
         }
 
-        if ($template instanceof ThemeReference) {
+        if ($template instanceof TemplateReference) {
             try {
                 $theme = $this->manager->getTheme($template->get('theme'));
                 $path = $theme->getPath() . '/' . $template->getPath();

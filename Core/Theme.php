@@ -51,6 +51,10 @@ class Theme implements ThemeInterface
      */
     public function __construct($name, $path, ThemeInfo $info, TagCollection $tags = null)
     {
+        if (!preg_match('/^[\w-_]+$/', $name)) {
+            throw new \InvalidArgumentException(sprintf('The given theme name "%s" is invalid. A theme name can only has "a-zA-Z0-9-_" characters.', $name));
+        }
+
         $this->name = $name;
         $this->path = $path;
         $this->info = $info;
@@ -87,5 +91,15 @@ class Theme implements ThemeInterface
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * The string representation
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 }

@@ -12,6 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Selector\Event;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeNameReferenceInterface;
 use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,26 +30,43 @@ class ResolvedThemeEvent extends HttpThemeEvent
     protected $resolver;
 
     /**
+     * @var string|ThemeNameReferenceInterface
+     */
+    protected $themeName;
+
+    /**
      * @var bool
      */
-    protected $clearTheme;
+    protected $cancel;
 
     /**
      * Constructor
      *
-     * @param ThemeInterface         $theme      A theme
-     * @param ThemeResolverInterface $resolver   A theme resolver
-     * @param Request                $request    A Request object
-     * @param bool                   $clearTheme Whether the theme in the event can be cleared (optional)
+     * @param string|ThemeNameReferenceInterface $themeName  A theme name from which the theme was resolved
+     * @param ThemeInterface                     $theme      A theme
+     * @param ThemeResolverInterface             $resolver   A theme resolver
+     * @param Request                            $request    A Request object
+     * @param bool                               $cancel     Whether a resolved theme can be canceled (optional)
      *
      * @throws \InvalidArgumentException When the theme resolver type is invalid
      */
-    public function __construct(ThemeInterface $theme, ThemeResolverInterface $resolver, Request $request, $clearTheme = true)
+    public function __construct($themeName, ThemeInterface $theme, ThemeResolverInterface $resolver, Request $request, $cancel = true)
     {
-        $this->clearTheme = $clearTheme;
+        $this->themeName = $themeName;
+        $this->cancel = $cancel;
         $this->resolver = $resolver;
 
         parent::__construct($theme, $request);
+    }
+
+    /**
+     * Returns the theme name from which the theme was resolved
+     *
+     * @return string|ThemeNameReferenceInterface
+     */
+    public function getThemeName()
+    {
+        return $this->themeName;
     }
 
     /**
@@ -64,17 +82,17 @@ class ResolvedThemeEvent extends HttpThemeEvent
     }
 
     /**
-     * Checks whether the theme in the event can be cleared by the "clearTheme" method
+     * Checks whether the theme in the event can be cleared by the "cancel" method
      *
      * @return bool
      */
-    public function canClearTheme()
+    public function canCancel()
     {
-        return $this->clearTheme;
+        return $this->cancel;
     }
 
     /**
-     * Clears the current theme and stops the execution of rest listeners
+     * Cancels the resolved theme and stops the execution of the rest listeners
      *
      * It can be useful when the theme did not passed some conditions
      *
@@ -82,9 +100,9 @@ class ResolvedThemeEvent extends HttpThemeEvent
      *
      * @throws \BadMethodCallException When clearing theme ability is locked
      */
-    public function clearTheme()
+    public function cancel()
     {
-        if (!$this->clearTheme) {
+        if (!$this->cancel) {
             throw new \BadMethodCallException('The theme cannot be cleared due to the locked status.');
         }
 

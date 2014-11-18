@@ -12,37 +12,37 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * Link tag takes the role of a pointer to another theme.
+ * Group tag is used to connect multiple themes into one
  *
  * Generally the tag is used by AWD (Adaptive Web Design)
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class Link implements TagInterface
+class Group implements TagInterface
 {
     /**
      * @var string
      */
-    protected $theme;
+    protected $group;
 
     /**
      * Constructor
      *
-     * @param string $theme A pointed theme name
+     * @param string $group A group name
      */
-    public function __construct($theme)
+    public function __construct($group)
     {
-        $this->theme = $theme;
+        $this->group = $group;
     }
 
     /**
-     * Returns the pointed theme name
+     * Returns the group name
      *
      * @return string
      */
-    public function getTheme()
+    public function getGroup()
     {
-        return $this->theme;
+        return $this->group;
     }
 
     /**
@@ -58,6 +58,6 @@ class Link implements TagInterface
      */
     public static function getName()
     {
-        return 'jungi.link';
+        return 'jungi.group';
     }
 }

@@ -63,6 +63,7 @@ class ValidationListenerTest extends TestCase
         );
         $this->listener = new ValidationListener($validator);
         $this->event = new ResolvedThemeEvent(
+            $this->theme->getName(),
             $this->theme,
             new InMemoryThemeResolver('footheme'),
             $this->getMock('Symfony\Component\HttpFoundation\Request')
@@ -141,6 +142,7 @@ class ValidationListenerTest extends TestCase
         $this->metadataFactory->addMetadata($metadata);
 
         $event = new ResolvedThemeEvent(
+            $this->theme->getName(),
             $this->theme,
             $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface'),
             $this->getMock('Symfony\Component\HttpFoundation\Request'),

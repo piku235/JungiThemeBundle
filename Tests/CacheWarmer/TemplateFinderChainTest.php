@@ -13,12 +13,12 @@ namespace Jungi\Bundle\ThemeBundle\Tests\CacheWarmer;
 
 use Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinderChain;
 use Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder;
-use Jungi\Bundle\ThemeBundle\Core\ThemeFilenameParser;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
+use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Tests\CacheWarmer\Fixtures\OrdinaryBundle\OrdinaryBundle;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder;
-use Symfony\Bundle\FrameworkBundle\Templating\TemplateFilenameParser;
+use Symfony\Bundle\FrameworkBundle\Templating\TemplateFilenameParser as sfTemplateFilenameParser;
 
 /**
  * TemplateFinderChain Test Case
@@ -39,8 +39,8 @@ class TemplateFinderChainTest extends TestCase
             ->method('getBundles')
             ->will($this->returnValue(array('OrdinaryBundle' => new OrdinaryBundle())))
         ;
-        $chain = new TemplateFinderChain(array(new ThemeFinder($manager, new ThemeFilenameParser())));
-        $chain->addFinder(new TemplateFinder($kernel, new TemplateFilenameParser(), __DIR__ . '/Fixtures/Resources'));
+        $chain = new TemplateFinderChain(array(new ThemeFinder($manager, new TemplateFilenameParser())));
+        $chain->addFinder(new TemplateFinder($kernel, new sfTemplateFilenameParser(), __DIR__ . '/Fixtures/Resources'));
         $references = $chain->findAllTemplates();
 
         $this->assertCount(9, $references);

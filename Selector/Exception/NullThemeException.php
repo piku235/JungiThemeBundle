@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Exception;
+namespace Jungi\Bundle\ThemeBundle\Selector\Exception;
 
 /**
  * NullThemeException

@@ -12,6 +12,9 @@
 namespace Jungi\Bundle\ThemeBundle\Tests;
 
 use Jungi\Bundle\ThemeBundle\Changer\ThemeChanger;
+use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
+use Jungi\Bundle\ThemeBundle\Core\ThemeNameReference;
+use Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcher;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
@@ -50,38 +53,35 @@ class ThemeChangerTest extends TestCase
     protected function setUp()
     {
         $this->resolver = new FakeThemeResolver('bootheme', false);
-        $this->holder = new ThemeHolder();
         $this->manager = new ThemeManager(array(
             $this->createThemeMock('footheme'),
             $this->createThemeMock('bootheme')
         ));
-        $this->changer = new ThemeChanger($this->manager, $this->holder, $this->resolver, new EventDispatcher());
+        $nameParser = new ThemeNameParser();
+        $matcher = new ThemeMatcher($this->manager, $nameParser);
+        $this->changer = new ThemeChanger($matcher, $nameParser, $this->resolver, new EventDispatcher());
     }
 
     /**
-     * Tests change
-     *
      * @dataProvider getThemesForChange
      */
-    public function testChange($theme)
+    public function testChange($theme, $matchTheme)
     {
         $request = $this->createDesktopRequest();
         $this->changer->change($theme, $request);
 
-        $this->assertEquals('footheme', $this->resolver->resolveThemeName($request));
-        $this->assertEquals('footheme', $this->holder->getTheme()->getName());
+        $this->assertEquals($matchTheme, $this->resolver->resolveThemeName($request));
     }
 
     /**
-     * Data provider
-     *
      * @return array
      */
     public function getThemesForChange()
     {
         return array(
-            array($this->createThemeMock('footheme')),
-            array('footheme')
+            array($this->createThemeMock('footheme'), 'footheme'),
+            array('footheme', 'footheme'),
+            array(new ThemeNameReference('bootheme'), 'bootheme')
         );
     }
 }

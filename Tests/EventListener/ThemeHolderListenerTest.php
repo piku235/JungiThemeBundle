@@ -11,9 +11,10 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\EventListener;
 
+use Jungi\Bundle\ThemeBundle\Changer\Event\ChangeThemeEvent;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
 use Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener;
-use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
+use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
@@ -27,11 +28,6 @@ class ThemeHolderListenerTest extends TestCase
      * @var ThemeHolder
      */
     private $holder;
-
-    /**
-     * @var \Jungi\Bundle\ThemeBundle\Selector\ThemeSelector
-     */
-    private $selector;
 
     /**
      * @var \Symfony\Component\HttpKernel\Event\FilterControllerEvent
@@ -48,13 +44,28 @@ class ThemeHolderListenerTest extends TestCase
      */
     private $request;
 
+    /**
+     * @var ThemeHolderListener
+     */
+    private $listener;
+
     protected function setUp()
     {
         $this->holder = new ThemeHolder();
         $this->theme = $theme = $this->createThemeMock('foo');
-        $this->selector = $this->getMock('Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface');
-        $this->selector
-            ->expects($this->once())
+        $this->request = $this->createDesktopRequest();
+        $this->event = $this->getMock('Symfony\Component\HttpKernel\Event\FilterControllerEvent', array(), array(), '', false);
+        $this->event
+            ->expects($this->any())
+            ->method('isMasterRequest')
+            ->will($this->returnValue(true));
+        $this->event
+            ->expects($this->any())
+            ->method('getRequest')
+            ->will($this->returnValue($this->request));
+        $selector = $this->getMock('Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface');
+        $selector
+            ->expects($this->any())
             ->method('select')
             ->will($this->returnCallback(function ($request) use ($theme) {
                 if ($request->attributes->get('empty_theme')) {
@@ -62,46 +73,43 @@ class ThemeHolderListenerTest extends TestCase
                 }
 
                 return $theme;
-            }))
-        ;
-        $this->request = $this->createDesktopRequest();
-        $this->event = $this->getMock('Symfony\Component\HttpKernel\Event\FilterControllerEvent', array(), array(), '', false);
-        $this->event
-            ->expects($this->once())
-            ->method('isMasterRequest')
-            ->will($this->returnValue(true))
-        ;
-        $this->event
-            ->expects($this->once())
-            ->method('getRequest')
-            ->will($this->returnValue($this->request))
-        ;
+            }));
+        $this->listener = new ThemeHolderListener($this->holder, $selector, false);
+    }
+
+    public function testOnChange()
+    {
+        $theme = $this->createThemeMock('footheme');
+        $event = new ChangeThemeEvent('footheme', $theme, $this->createDesktopRequest());
+        $this->listener->onChange($event);
+
+        $this->assertSame($theme, $this->holder->getTheme());
     }
 
     public function testWithTheme()
     {
-        $listener = new ThemeHolderListener($this->holder, $this->selector, false);
-        $listener->onKernelController($this->event);
-
-        $this->assertEquals($this->theme, $this->holder->getTheme());
+        $this->listener->onKernelController($this->event);
+        $this->assertSame($this->theme, $this->holder->getTheme());
     }
 
     public function testWithoutThemeOnIgnoreNullTheme()
     {
+        $reflection = new \ReflectionObject($this->listener);
+        $property = $reflection->getProperty('ignoreNullTheme');
+        $property->setAccessible(true);
+        $property->setValue($this->listener, true);
         $this->request->attributes->set('empty_theme', true);
-        $listener = new ThemeHolderListener($this->holder, $this->selector, true);
-        $listener->onKernelController($this->event);
 
+        $this->listener->onKernelController($this->event);
         $this->assertNull($this->holder->getTheme());
     }
 
     /**
-     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\NullThemeException
+     * @expectedException \Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException
      */
     public function testWithoutTheme()
     {
         $this->request->attributes->set('empty_theme', true);
-        $listener = new ThemeHolderListener($this->holder, $this->selector, false);
-        $listener->onKernelController($this->event);
+        $this->listener->onKernelController($this->event);
     }
 }

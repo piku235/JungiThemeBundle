@@ -12,6 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollectionInterface;
 
 /**
  * ThemeManager is a simple implementation of the ThemeManagerInterface
@@ -43,7 +44,7 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function addTheme(ThemeInterface $theme)
     {
-        $this->themes[] = $theme;
+        $this->themes[$theme->getName()] = $theme;
     }
 
     /**
@@ -51,13 +52,7 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function hasTheme($name)
     {
-        foreach ($this->themes as $theme) {
-            if ($theme->getName() == $name) {
-                return true;
-            }
-        }
-
-        return false;
+        return isset($this->themes[$name]);
     }
 
     /**
@@ -65,22 +60,32 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function getTheme($name)
     {
-        foreach ($this->themes as $theme) {
-            if ($theme->getName() == $name) {
-                return $theme;
-            }
+        if (!$this->hasTheme($name)) {
+            throw new ThemeNotFoundException($name);
         }
 
-        throw new ThemeNotFoundException($name);
+        return $this->themes[$name];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getThemeWithTags($tags)
+    public function getThemes()
     {
+        return array_values($this->themes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findThemeWithTags($tags, $condition = TagCollectionInterface::COND_AND)
+    {
+        if (!is_array($tags)) {
+            $tags = array($tags);
+        }
+
         foreach ($this->themes as $theme) {
-            if ($theme->getTags()->contains($tags)) {
+            if ($theme->getTags()->containsSet($tags, $condition)) {
                 return $theme;
             }
         }
@@ -91,23 +96,19 @@ class ThemeManager implements ThemeManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getThemesWithTags($tags)
+    public function findThemesWithTags($tags, $condition = TagCollectionInterface::COND_AND)
     {
+        if (!is_array($tags)) {
+            $tags = array($tags);
+        }
+
         $result = array();
         foreach ($this->themes as $theme) {
-            if ($theme->getTags()->contains($tags)) {
+            if ($theme->getTags()->containsSet($tags, $condition)) {
                 $result[] = $theme;
             }
         }
 
         return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getThemes()
-    {
-        return $this->themes;
     }
 }

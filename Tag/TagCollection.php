@@ -16,7 +16,7 @@ namespace Jungi\Bundle\ThemeBundle\Tag;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class TagCollection implements \IteratorAggregate, \Countable
+class TagCollection implements \IteratorAggregate, TagCollectionInterface
 {
     /**
      * @var TagInterface[]
@@ -61,13 +61,7 @@ class TagCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Returns a tag by tag name
-     *
-     * @param string $name A tag name
-     *
-     * @return TagInterface
-     *
-     * @throws \RuntimeException When there is no tag with a given tag name
+     * {@inheritdoc}
      */
     public function get($name)
     {
@@ -79,49 +73,80 @@ class TagCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Checks if a given tag name or names exists
-     *
-     * Be careful, because this method ONLY looks for a given tag name
-     * and it does not check if the tag is EQUAL to a found tag
-     *
-     * @param string|array $names A tag name or tag names
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
-    public function has($names)
+    public function has($name)
     {
-        foreach ((array) $names as $name) {
-            if (!isset($this->tags[$name])) {
-                return false;
-            }
-        }
-
-        return true;
+        return isset($this->tags[$name]);
     }
 
     /**
-     * Checks if a given tag or collection of tags exists and if they are EQUAL to the found tags
-     *
-     * @param TagInterface|TagInterface[] $tags A tag or a collection of tags
-     *
-     * @return bool
-     *
-     * @throws \InvalidArgumentException If the given tag or tags has bad type
+     * {@inheritdoc}
      */
-    public function contains($tags)
+    public function hasSet(array $names, $condition = self::COND_AND)
     {
-        if (!is_array($tags)) {
-            $tags = array($tags);
-        }
+        switch ($condition) {
+            case self::COND_AND:
+                foreach ($names as $name) {
+                    if (!$this->has($name)) {
+                        return false;
+                    }
+                }
 
-        foreach ($tags as $tag) {
-            if (!$tag instanceof TagInterface) {
-                throw new \InvalidArgumentException('Only TagInterface instances are allowed.');
-            } elseif (!isset($this->tags[$tag->getName()]) || !$tag->isEqual($this->tags[$tag->getName()])) {
+                return true;
+            case self::COND_OR:
+                foreach ($names as $name) {
+                    if ($this->has($name)) {
+                        return true;
+                    }
+                }
+
                 return false;
-            }
+            default:
+                throw new \InvalidArgumentException(sprintf(
+                    'The chosen condition "%s" is incorrect. The supported conditions are only: "%s".',
+                    $condition,
+                    implode(', ', array(self::COND_OR, self::COND_AND))
+                ));
         }
+    }
 
-        return true;
+    /**
+     * {@inheritdoc}
+     */
+    public function contains(TagInterface $tag)
+    {
+        return $this->has($tag->getName()) && $tag->isEqual($this->tags[$tag->getName()]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function containsSet(array $tags, $condition = self::COND_AND)
+    {
+        switch ($condition) {
+            case self::COND_AND:
+                foreach ($tags as $tag) {
+                    if (!$this->contains($tag)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            case self::COND_OR:
+                foreach ($tags as $tag) {
+                    if ($this->contains($tag)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            default:
+                throw new \InvalidArgumentException(sprintf(
+                    'The chosen condition "%s" is incorrect. The supported conditions are only: "%s".',
+                    $condition,
+                    implode(', ', array(self::COND_OR, self::COND_AND))
+                ));
+        }
     }
 }

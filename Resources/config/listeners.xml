@@ -8,7 +8,6 @@
         <parameter key="jungi_theme.listener.holder.class">Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener</parameter>
         <parameter key="jungi_theme.resolver.listener.class">Jungi\Bundle\ThemeBundle\Resolver\EventListener\ThemeResolverListener</parameter>
         <parameter key="jungi_theme.selector.listener.validation.class">Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener</parameter>
-        <parameter key="jungi_theme.selector.listener.device_switch.class">Jungi\Bundle\ThemeBundle\Selector\EventListener\DeviceThemeSwitch</parameter>
     </parameters>
 
     <services>
@@ -21,11 +20,6 @@
             <argument type="service" id="jungi_theme.holder" />
             <argument type="service" id="jungi_theme.selector" />
             <argument>%jungi_theme.listener.holder.ignore_null_theme%</argument>
-        </service>
-        <service id="jungi_theme.selector.listener.device_switch" class="%jungi_theme.selector.listener.device_switch.class%">
-            <tag name="kernel.event_subscriber" />
-            <argument type="service" id="jungi_theme.mobile_detect" />
-            <argument type="service" id="jungi_theme.manager" />
         </service>
         <service id="jungi_theme.selector.listener.validation" class="%jungi_theme.selector.listener.validation.class%">
             <tag name="kernel.event_subscriber" />
