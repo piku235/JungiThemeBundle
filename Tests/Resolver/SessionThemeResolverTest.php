@@ -74,7 +74,7 @@ class SessionThemeResolverTest extends TestCase
      */
     public function testOnMessyRequest()
     {
-        $this->request->getSession()->set(SessionThemeResolver::SESSION_NAME . '_some_messy_things', 'test');
+        $this->request->getSession()->set(SessionThemeResolver::SESSION_NAME.'_some_messy_things', 'test');
 
         $this->assertNull($this->resolver->resolveThemeName($this->request));
     }

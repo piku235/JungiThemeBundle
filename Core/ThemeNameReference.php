@@ -63,6 +63,6 @@ class ThemeNameReference implements ThemeNameReferenceInterface
      */
     public function __toString()
     {
-        return ($this->virtual ? '@' : '') . $this->themeName;
+        return ($this->virtual ? '@' : '').$this->themeName;
     }
 }

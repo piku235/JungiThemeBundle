@@ -70,18 +70,18 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
         ;
 
         $themes = array(
-            new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $info1, new TagCollection(array(
+            new Theme('foo_1', __DIR__.'/Fixtures/FakeBundle', $info1, new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
-                new Own('test')
+                new Own('test'),
             ))),
-            new Theme('foo_2', __DIR__ . '/Fixtures/FakeBundle', $info, new TagCollection(array(
-                new Own(Own::SPECIAL)
+            new Theme('foo_2', __DIR__.'/Fixtures/FakeBundle', $info, new TagCollection(array(
+                new Own(Own::SPECIAL),
             ))),
-            new Theme('foo_3', __DIR__ . '/Fixtures/FakeBundle', $info, new TagCollection(array(
-                new Own(CONST_TEST)
+            new Theme('foo_3', __DIR__.'/Fixtures/FakeBundle', $info, new TagCollection(array(
+                new Own(CONST_TEST),
             ))),
-            new Theme('foo_4', __DIR__ . '/Fixtures/FakeBundle', $info4)
+            new Theme('foo_4', __DIR__.'/Fixtures/FakeBundle', $info4),
         );
 
         foreach ($themes as $theme) {
@@ -103,10 +103,10 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             ->addAuthor(new Author('piku234', 'foo@gmail.com', 'www.boo.com'))
         ;
 
-        $theme = new Theme('foo_1', __DIR__ . '/Fixtures/FakeBundle', $ib->getThemeInfo(), new TagCollection(array(
+        $theme = new Theme('foo_1', __DIR__.'/Fixtures/FakeBundle', $ib->getThemeInfo(), new TagCollection(array(
             new Tag\DesktopDevices(),
             new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
-            new Own('test')
+            new Own('test'),
         )));
 
         $this->assertEquals($theme, $this->manager->getTheme('foo_1'));
@@ -134,7 +134,7 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             array('info_missing_property_key'),
             array('invalid_authors_first'),
             array('invalid_authors_second'),
-            array('invalid_authors_third')
+            array('invalid_authors_third'),
         );
     }
 

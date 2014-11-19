@@ -23,6 +23,6 @@ $manager->addTheme(new Theme(
     new TagCollection(array(
         new Tag\DesktopDevices(),
         $tagFactory->create('jungi.mobile_devices', array(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)),
-        new Own('test')
+        new Own('test'),
     ))
 ));

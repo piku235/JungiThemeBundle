@@ -55,7 +55,7 @@ class ThemeChangerTest extends TestCase
         $this->resolver = new FakeThemeResolver('bootheme', false);
         $this->manager = new ThemeManager(array(
             $this->createThemeMock('footheme'),
-            $this->createThemeMock('bootheme')
+            $this->createThemeMock('bootheme'),
         ));
         $nameParser = new ThemeNameParser();
         $matcher = new ThemeMatcher($this->manager, $nameParser);
@@ -81,7 +81,7 @@ class ThemeChangerTest extends TestCase
         return array(
             array($this->createThemeMock('footheme'), 'footheme'),
             array('footheme', 'footheme'),
-            array(new ThemeNameReference('bootheme'), 'bootheme')
+            array(new ThemeNameReference('bootheme'), 'bootheme'),
         );
     }
 }

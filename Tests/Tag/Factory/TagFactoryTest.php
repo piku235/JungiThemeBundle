@@ -36,7 +36,7 @@ class TagFactoryTest extends TestCase
         $registry = new TagRegistry();
         $registry->register(array(
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\Group'
+            'Jungi\Bundle\ThemeBundle\Tag\Group',
         ));
         $this->factory = new TagFactory($registry);
     }

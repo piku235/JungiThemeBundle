@@ -12,7 +12,6 @@
 namespace Jungi\Bundle\ThemeBundle\Matcher;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameReference;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameReferenceInterface;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection;
@@ -76,8 +75,8 @@ class ThemeMatcher implements ThemeMatcherInterface
      * {@inheritdoc}
      *
      * @throws \InvalidArgumentException When the given theme name is invalid
-     * @throws \RuntimeException When there is no matching theme
-     * @throws \RuntimeException When there is more than one matching theme
+     * @throws \RuntimeException         When there is no matching theme
+     * @throws \RuntimeException         When there is more than one matching theme
      */
     public function match($themeName, Request $request)
     {

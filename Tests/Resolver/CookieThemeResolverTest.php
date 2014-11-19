@@ -43,7 +43,7 @@ class CookieThemeResolverTest extends TestCase
             'path' => '/foo',
             'domain' => 'fooweb.com',
             'secure' => true,
-            'httpOnly' => false
+            'httpOnly' => false,
         );
         $this->resolver = new CookieThemeResolver($this->options);
     }

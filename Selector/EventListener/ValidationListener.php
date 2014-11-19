@@ -121,7 +121,7 @@ class ValidationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            ThemeSelectorEvents::RESOLVED_THEME => array('onResolvedTheme', -100)
+            ThemeSelectorEvents::RESOLVED_THEME => array('onResolvedTheme', -100),
         );
     }
 }

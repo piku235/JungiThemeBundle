@@ -42,11 +42,11 @@ class ResolvedThemeEvent extends HttpThemeEvent
     /**
      * Constructor
      *
-     * @param string|ThemeNameReferenceInterface $themeName  A theme name from which the theme was resolved
-     * @param ThemeInterface                     $theme      A theme
-     * @param ThemeResolverInterface             $resolver   A theme resolver
-     * @param Request                            $request    A Request object
-     * @param bool                               $cancel     Whether a resolved theme can be canceled (optional)
+     * @param string|ThemeNameReferenceInterface $themeName A theme name from which the theme was resolved
+     * @param ThemeInterface                     $theme     A theme
+     * @param ThemeResolverInterface             $resolver  A theme resolver
+     * @param Request                            $request   A Request object
+     * @param bool                               $cancel    Whether a resolved theme can be canceled (optional)
      *
      * @throws \InvalidArgumentException When the theme resolver type is invalid
      */

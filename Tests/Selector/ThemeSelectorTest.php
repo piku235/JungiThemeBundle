@@ -67,12 +67,12 @@ class ThemeSelectorTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\DesktopDevices()
+                new Tag\DesktopDevices(),
             ))));
 
         $this->eventDispatcher = new EventDispatcher();
         $this->manager = new ThemeManager(array(
-            $theme
+            $theme,
         ));
         $this->resolver = new InMemoryThemeResolver('footheme', false);
 

@@ -44,7 +44,7 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
     {
         parent::setUp();
 
-        $this->locator = new FileLocator($this->kernel, __DIR__ . '/Fixtures/php');
+        $this->locator = new FileLocator($this->kernel, __DIR__.'/Fixtures/php');
         $this->loader = new PhpFileLoader($this->manager, $this->locator, $this->tagFactory);
     }
 
@@ -80,7 +80,7 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
             new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
-                new Own('test')
+                new Own('test'),
             ))
         ), $this->manager->getTheme('foo_1'));
     }

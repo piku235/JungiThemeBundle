@@ -36,7 +36,7 @@ class XmlFileLoaderTest extends AutomatedFileLoaderTest
 
         $this->loader = new XmlFileLoader(
             $this->manager,
-            new FileLocator($this->kernel, __DIR__ . '/Fixtures/xml'),
+            new FileLocator($this->kernel, __DIR__.'/Fixtures/xml'),
             $this->tagFactory,
             new LoaderHelper($this->tagRegistry)
         );
@@ -80,6 +80,6 @@ class XmlFileLoaderTest extends AutomatedFileLoaderTest
      */
     protected function loadFile($file)
     {
-        $this->loader->load($file . '.xml');
+        $this->loader->load($file.'.xml');
     }
 }

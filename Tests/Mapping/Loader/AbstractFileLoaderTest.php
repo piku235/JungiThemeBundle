@@ -61,7 +61,7 @@ abstract class AbstractFileLoaderTest extends TestCase
         $this->kernel
             ->expects($this->any())
             ->method('locateResource')
-            ->will($this->returnValue(__DIR__ . '/Fixtures/FakeBundle'))
+            ->will($this->returnValue(__DIR__.'/Fixtures/FakeBundle'))
         ;
     }
 }

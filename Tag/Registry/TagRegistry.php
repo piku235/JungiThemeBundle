@@ -43,7 +43,7 @@ class TagRegistry implements TagRegistryInterface
         }
 
         foreach ((array) $class as $child) {
-            $child = '\\' . ltrim($child, '\\');
+            $child = '\\'.ltrim($child, '\\');
             if (!class_exists($child)) {
                 throw new \RuntimeException(sprintf('The tag with the class "%s" is not exist.', $child));
             }

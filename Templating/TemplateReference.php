@@ -61,12 +61,12 @@ class TemplateReference extends BaseTemplateReference
     {
         $path = '';
         if ($this->parameters['bundle']) {
-            $path .= $this->parameters['bundle'] . '/';
+            $path .= $this->parameters['bundle'].'/';
         }
         if ($this->parameters['controller']) {
-            $path .= $this->parameters['controller'] . '/';
+            $path .= $this->parameters['controller'].'/';
         }
-        $path .= $this->parameters['name'] . '.' . $this->parameters['format'] . '.' . $this->parameters['engine'];
+        $path .= $this->parameters['name'].'.'.$this->parameters['format'].'.'.$this->parameters['engine'];
 
         return $path;
     }

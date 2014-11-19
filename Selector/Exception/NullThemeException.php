@@ -18,5 +18,4 @@ namespace Jungi\Bundle\ThemeBundle\Selector\Exception;
  */
 class NullThemeException extends \LogicException
 {
-
 }

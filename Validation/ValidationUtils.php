@@ -44,11 +44,11 @@ class ValidationUtils
      */
     public static function formatValidationMessage($message, ConstraintViolationListInterface $violations)
     {
-        $message = rtrim($message, '. ') . '.';
+        $message = rtrim($message, '. ').'.';
         foreach ($violations as $violation) {
             $message .= $violation->getPropertyPath()
                 ? sprintf(' Property %s: %s', $violation->getPropertyPath(), $violation->getMessage())
-                : ' ' . $violation->getMessage();
+                : ' '.$violation->getMessage();
         }
 
         return $message;

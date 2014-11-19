@@ -11,5 +11,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class OrdinaryBundle extends Bundle
 {
-
 }

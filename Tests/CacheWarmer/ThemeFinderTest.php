@@ -26,8 +26,8 @@ class ThemeFinderTest extends TestCase
     public function testFind()
     {
         $manager = new ThemeManager(array(
-            $this->createThemeMock('foo', __DIR__ . '/Fixtures/FooThemeBundle/Resources/theme'),
-            $this->createThemeMock('boo', __DIR__ . '/Fixtures/BooThemeBundle/Resources/theme')
+            $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
+            $this->createThemeMock('boo', __DIR__.'/Fixtures/BooThemeBundle/Resources/theme'),
         ));
         $finder = new ThemeFinder($manager, new TemplateFilenameParser());
         $references = $finder->findAllTemplates();

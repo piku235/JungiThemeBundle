@@ -47,7 +47,7 @@ class DeviceThemeFilterTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\DesktopDevices()
+                new Tag\DesktopDevices(),
             ))));
 
         $this->filter = new DeviceThemeFilter(new MobileDetect());
@@ -66,28 +66,28 @@ class DeviceThemeFilterTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\MobileDevices(array('iOS', 'AndroidOS', 'BlackBerryOS', 'WindowsMobileOS', 'WindowsPhoneOS'), Tag\MobileDevices::MOBILE)
+                new Tag\MobileDevices(array('iOS', 'AndroidOS', 'BlackBerryOS', 'WindowsMobileOS', 'WindowsPhoneOS'), Tag\MobileDevices::MOBILE),
             ))));
         $secondTheme = $this->createThemeMock('footheme_androtab');
         $secondTheme
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\MobileDevices(array('AndroidOS'), Tag\MobileDevices::TABLET)
+                new Tag\MobileDevices(array('AndroidOS'), Tag\MobileDevices::TABLET),
             ))));
         $thirdTheme = $this->createThemeMock('footheme_win');
         $thirdTheme
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\MobileDevices(array('WindowsPhoneOS'))
+                new Tag\MobileDevices(array('WindowsPhoneOS')),
             ))));
         $fourthTheme = $this->createThemeMock('footheme_global');
         $fourthTheme
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\MobileDevices()
+                new Tag\MobileDevices(),
             ))));
 
         // Prepare and fire the method
@@ -112,14 +112,14 @@ class DeviceThemeFilterTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('test')
+                new Tag\Group('test'),
             ))));
         $secondTheme = $this->createThemeMock('footheme_second');
         $secondTheme
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Own('foo')
+                new Own('foo'),
             ))));
 
         // Prepare and fire the method
@@ -152,7 +152,7 @@ class DeviceThemeFilterTest extends TestCase
             array(array('footheme_global', 'footheme_win'), 'Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; HTC; iPad 3)'),
             // Other
             array(array('footheme_desktop'), 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0; Touch; MASMJS)'),
-            array(array('footheme_desktop'), 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:25.0) Gecko/20130626 Firefox/25.0')
+            array(array('footheme_desktop'), 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:25.0) Gecko/20130626 Firefox/25.0'),
         );
     }
 }

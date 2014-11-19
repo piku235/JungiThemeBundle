@@ -14,6 +14,16 @@ jungi_theme:
         # whether to ignore the situation when the theme selector will not match any theme for the request.
         ignore_null_theme: true
 
+    # theme matcher configuration
+    matcher:
+
+        # theme matcher service id
+        id: ~
+
+        # device theme filter configuration
+        device_filter:
+            enabled: true
+
     # theme selector configuration
     selector:
 
@@ -26,10 +36,6 @@ jungi_theme:
 
             # a list of theme resolvers which should be validated
             suspects: []
-
-        # device theme switch configuration
-        device_switch:
-            enabled: true
 
     # general theme resolver configuration
     resolver: # Required
@@ -45,7 +51,7 @@ jungi_theme:
             type: ~ # One of "in_memory"; "cookie"; "service"; "session"
 
             # arguments to be passed to the theme resolver
-            arguments:  []
+            arguments: []
 
         # theme resolver configuration
         primary: # Required

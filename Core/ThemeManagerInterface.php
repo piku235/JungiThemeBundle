@@ -61,8 +61,8 @@ interface ThemeManagerInterface
     /**
      * Returns the theme which have given tags
      *
-     * @param TagInterface|TagInterface[] $tags A one tag or tags
-     * @param string $condition A condition (optional)
+     * @param TagInterface|TagInterface[] $tags      A one tag or tags
+     * @param string                      $condition A condition (optional)
      *
      * @return ThemeInterface|null Null if the theme can not be found
      */
@@ -71,8 +71,8 @@ interface ThemeManagerInterface
     /**
      * Returns all themes which have given tags
      *
-     * @param TagInterface|TagInterface[] $tags A one tag or tags
-     * @param string $condition A condition (optional)
+     * @param TagInterface|TagInterface[] $tags      A one tag or tags
+     * @param string                      $condition A condition (optional)
      *
      * @return ThemeInterface[]
      */

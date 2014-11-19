@@ -62,7 +62,7 @@ class ThemeResolverListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::RESPONSE => 'onKernelResponse'
+            KernelEvents::RESPONSE => 'onKernelResponse',
         );
     }
 }

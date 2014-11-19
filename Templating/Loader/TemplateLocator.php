@@ -77,7 +77,7 @@ class TemplateLocator extends BaseTemplateLocator
         if ($template instanceof TemplateReference) {
             try {
                 $theme = $this->manager->getTheme($template->get('theme'));
-                $path = $theme->getPath() . '/' . $template->getPath();
+                $path = $theme->getPath().'/'.$template->getPath();
 
                 return $this->cache[$key] = $this->locator->locate($path);
             } catch (ThemeNotFoundException $e) {

@@ -49,7 +49,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
             'path' => '/',
             'domain' => null,
             'secure' => false,
-            'httpOnly' => true
+            'httpOnly' => true,
         );
     }
 

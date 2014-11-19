@@ -385,7 +385,7 @@ class XmlFileLoader extends FileLoader
         }
 
         try {
-            $doc = XmlUtils::loadFile($file, __DIR__ . '/schema/theme-1.0.xsd');
+            $doc = XmlUtils::loadFile($file, __DIR__.'/schema/theme-1.0.xsd');
         } catch (\InvalidArgumentException $e) {
             throw new \RuntimeException(sprintf('The problem has occurred while parsing the file "%s", see the previous exception.', $file), null, $e);
         }

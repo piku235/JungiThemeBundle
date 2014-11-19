@@ -45,7 +45,7 @@ class DeviceExtension extends \Twig_Extension
             new \Twig_SimpleFunction('is_mobile', array($this, 'isMobile')),
             new \Twig_SimpleFunction('is_tablet', array($this, 'isTablet')),
             new \Twig_SimpleFunction('is_desktop', array($this, 'isDesktop')),
-            new \Twig_SimpleFunction('is_device', array($this, 'isDevice'))
+            new \Twig_SimpleFunction('is_device', array($this, 'isDevice')),
         );
     }
 

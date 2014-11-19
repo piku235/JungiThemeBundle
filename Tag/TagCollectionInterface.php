@@ -55,7 +55,7 @@ interface TagCollectionInterface extends \Countable, \Traversable
      * The same as method "has" with the difference that it can
      * iterate over given tag names
      *
-     * @param array $names Tag names
+     * @param array  $names     Tag names
      * @param string $condition A condition (optional)
      *
      * @return bool
@@ -79,7 +79,7 @@ interface TagCollectionInterface extends \Countable, \Traversable
      * The same as method "contains" with the difference that it can
      * iterate over given tags
      *
-     * @param array $tags Tags
+     * @param array  $tags      Tags
      * @param string $condition A condition (optional)
      *
      * @return bool

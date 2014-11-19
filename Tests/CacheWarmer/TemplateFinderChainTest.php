@@ -30,8 +30,8 @@ class TemplateFinderChainTest extends TestCase
     public function testFind()
     {
         $manager = new ThemeManager(array(
-            $this->createThemeMock('foo', __DIR__ . '/Fixtures/FooThemeBundle/Resources/theme'),
-            $this->createThemeMock('boo', __DIR__ . '/Fixtures/BooThemeBundle/Resources/theme')
+            $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
+            $this->createThemeMock('boo', __DIR__.'/Fixtures/BooThemeBundle/Resources/theme'),
         ));
         $kernel = $this->getMock('Symfony\Component\HttpKernel\KernelInterface');
         $kernel
@@ -40,7 +40,7 @@ class TemplateFinderChainTest extends TestCase
             ->will($this->returnValue(array('OrdinaryBundle' => new OrdinaryBundle())))
         ;
         $chain = new TemplateFinderChain(array(new ThemeFinder($manager, new TemplateFilenameParser())));
-        $chain->addFinder(new TemplateFinder($kernel, new sfTemplateFilenameParser(), __DIR__ . '/Fixtures/Resources'));
+        $chain->addFinder(new TemplateFinder($kernel, new sfTemplateFilenameParser(), __DIR__.'/Fixtures/Resources'));
         $references = $chain->findAllTemplates();
 
         $this->assertCount(9, $references);

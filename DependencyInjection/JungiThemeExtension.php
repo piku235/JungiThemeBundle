@@ -32,7 +32,7 @@ class JungiThemeExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('templating.xml');
         $loader->load('fundamental.xml');
         $loader->load('extensions.xml');
@@ -65,11 +65,10 @@ class JungiThemeExtension extends Extension
             $container->setParameter('jungi_theme.selector.listener.validation.suspects', $config['selector']['validation_listener']['suspects']);
         }
 
-        // Device Theme Switch
-        /*
-        if (!$config['selector']['device_switch']['enabled']) {
-            $container->removeDefinition('jungi_theme.selector.listener.device_switch');
-        }*/
+        // Device theme filter
+        if (!$config['matcher']['device_filter']['enabled']) {
+            $container->removeDefinition('jungi_theme.matcher.filter.device');
+        }
 
         // Class cache
         $this->addClassesToCompile(array(
@@ -117,7 +116,7 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser',
             'Jungi\Bundle\ThemeBundle\Templating\TemplateNameParser',
             'Jungi\Bundle\ThemeBundle\Templating\TemplateReference',
-            'Jungi\Bundle\ThemeBundle\Templating\Loader\TemplateLocator'
+            'Jungi\Bundle\ThemeBundle\Templating\Loader\TemplateLocator',
         ));
     }
 
@@ -141,7 +140,7 @@ class JungiThemeExtension extends Extension
             }
 
             // Class
-            $resolverClass = 'Jungi\\Bundle\\ThemeBundle\\Resolver\\' . $class;
+            $resolverClass = 'Jungi\\Bundle\\ThemeBundle\\Resolver\\'.$class;
 
             // Definition
             $definition = new Definition($resolverClass, $arguments);

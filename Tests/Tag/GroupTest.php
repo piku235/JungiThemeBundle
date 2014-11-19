@@ -46,7 +46,7 @@ class GroupTest extends TestCase
     {
         return array(
             array(new Group('footheme'), new Group('footheme')),
-            array(new Group('bootheme'), new Group('bootheme'))
+            array(new Group('bootheme'), new Group('bootheme')),
         );
     }
 
@@ -57,7 +57,7 @@ class GroupTest extends TestCase
     {
         return array(
             array(new Group('footheme'), new Group('footheme_boo')),
-            array(new Group('bootheme'), new Group(''))
+            array(new Group('bootheme'), new Group('')),
         );
     }
 }

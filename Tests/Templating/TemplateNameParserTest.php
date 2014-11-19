@@ -117,7 +117,7 @@ class TemplateNameParserTest extends TestCase
             array('FooBundle:Default:index.html.twig', new TemplateReference(new BaseTemplateReference('FooBundle', 'Default', 'index', 'html', 'twig'), 'Foo')),
             array('JungiTestBundle::index.html.twig', new TemplateReference(new BaseTemplateReference('JungiTestBundle', null, 'index', 'html', 'twig'), 'Foo')),
             array('::index.html.twig', new TemplateReference(new BaseTemplateReference(null, null, 'index', 'html', 'twig'), 'Foo')),
-            array(':FooBundle:index.html.twig', new TemplateReference(new BaseTemplateReference(null, 'FooBundle', 'index', 'html', 'twig'), 'Foo'))
+            array(':FooBundle:index.html.twig', new TemplateReference(new BaseTemplateReference(null, 'FooBundle', 'index', 'html', 'twig'), 'Foo')),
         );
     }
 }

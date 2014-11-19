@@ -36,7 +36,7 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
 
         $this->loader = new YamlFileLoader(
             $this->manager,
-            new FileLocator($this->kernel, __DIR__ . '/Fixtures/yml'),
+            new FileLocator($this->kernel, __DIR__.'/Fixtures/yml'),
             $this->tagFactory,
             new LoaderHelper($this->tagRegistry)
         );
@@ -92,6 +92,6 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
      */
     protected function loadFile($file)
     {
-        $this->loader->load($file . '.yml');
+        $this->loader->load($file.'.yml');
     }
 }

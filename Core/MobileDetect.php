@@ -69,7 +69,7 @@ class MobileDetect extends \Mobile_Detect
         // Set all HTTP headers
         $this->httpHeaders = array();
         foreach ($request->headers->all() as $key => $val) {
-            $this->httpHeaders['HTTP_' . strtr(strtoupper($key), '-', '_')] = $val[0];
+            $this->httpHeaders['HTTP_'.strtr(strtoupper($key), '-', '_')] = $val[0];
         }
 
         // Automatically detect the UA from the set HTTP headers

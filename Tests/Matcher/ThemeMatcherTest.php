@@ -47,7 +47,7 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\DesktopDevices()
+                new Tag\DesktopDevices(),
             ))));
         $mobileTheme = $this->createThemeMock('footheme_mobile');
         $mobileTheme
@@ -55,7 +55,7 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\MobileDevices(array(), Tag\MobileDevices::MOBILE)
+                new Tag\MobileDevices(array(), Tag\MobileDevices::MOBILE),
             ))));
         $tabletTheme = $this->createThemeMock('footheme_tablet');
         $tabletTheme
@@ -63,10 +63,10 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\MobileDevices(array(), Tag\MobileDevices::TABLET)
+                new Tag\MobileDevices(array(), Tag\MobileDevices::TABLET),
             ))));
         $this->manager = new ThemeManager(array(
-            $desktopTheme, $mobileTheme, $tabletTheme
+            $desktopTheme, $mobileTheme, $tabletTheme,
         ));
 
         $this->matcher = new ThemeMatcher($this->manager, new ThemeNameParser(), array(new DeviceThemeFilter(new MobileDetect())));
@@ -97,7 +97,7 @@ class ThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('bartheme')
+                new Tag\Group('bartheme'),
             ))));
 
         $this->manager->addTheme($barTheme);
@@ -112,7 +112,7 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\DesktopDevices()
+                new Tag\DesktopDevices(),
             ))));
         $mobileTheme1 = $this->createThemeMock('footheme_mobile');
         $mobileTheme1
@@ -120,7 +120,7 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\MobileDevices()
+                new Tag\MobileDevices(),
             ))));
         $mobileTheme2 = $this->createThemeMock('footheme_mobile_again');
         $mobileTheme2
@@ -128,20 +128,21 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\MobileDevices()
+                new Tag\MobileDevices(),
             ))));
 
         $reflection = new \ReflectionObject($this->matcher);
         $property = $reflection->getProperty('manager');
         $property->setAccessible(true);
         $property->setValue($this->matcher, new ThemeManager(array(
-            $desktopTheme, $mobileTheme1, $mobileTheme2
+            $desktopTheme, $mobileTheme1, $mobileTheme2,
         )));
 
         try {
             $this->matcher->match('@footheme', $this->createMobileRequest());
         } catch (\RuntimeException $e) {
             $this->assertStringStartsWith('There is more than one matching theme', $e->getMessage());
+
             return;
         }
 
@@ -156,7 +157,7 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\DesktopDevices()
+                new Tag\DesktopDevices(),
             ))));
         $mobileTheme2 = $this->createThemeMock('footheme_mobile2');
         $mobileTheme2
@@ -164,7 +165,7 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\DesktopDevices()
+                new Tag\DesktopDevices(),
             ))));
         $mobileTheme3 = $this->createThemeMock('footheme_mobile3');
         $mobileTheme3
@@ -172,20 +173,21 @@ class ThemeMatcherTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\Group('footheme'),
-                new Tag\DesktopDevices()
+                new Tag\DesktopDevices(),
             ))));
 
         $reflection = new \ReflectionObject($this->matcher);
         $property = $reflection->getProperty('manager');
         $property->setAccessible(true);
         $property->setValue($this->matcher, new ThemeManager(array(
-            $mobileTheme1, $mobileTheme2, $mobileTheme3
+            $mobileTheme1, $mobileTheme2, $mobileTheme3,
         )));
 
         try {
             $this->matcher->match('@footheme', $this->createMobileRequest());
         } catch (\RuntimeException $e) {
             $this->assertStringStartsWith('There is no matching theme', $e->getMessage());
+
             return;
         }
 
@@ -213,8 +215,7 @@ class ThemeMatcherTest extends TestCase
         return array(
             array('footheme_mobile', 'footheme', $this->createMobileRequest()),
             array('footheme_tablet', 'footheme',  $this->createTabletRequest()),
-            array('footheme_desktop', 'footheme', $this->createDesktopRequest())
+            array('footheme_desktop', 'footheme', $this->createDesktopRequest()),
         );
     }
 }
- 

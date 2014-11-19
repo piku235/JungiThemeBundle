@@ -32,25 +32,56 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('holder')
-                    ->addDefaultsIfNotSet()
-                    ->info('theme holder configuration')
-                    ->children()
-                        ->scalarNode('id')
-                            ->defaultValue('jungi_theme.holder.default')
-                            ->info('theme holder service id')
-                        ->end()
-                        ->booleanNode('ignore_null_theme')
-                            ->defaultTrue()
-                            ->info('whether to ignore the situation when the theme selector will not match any theme for the request.')
-                        ->end()
-                    ->end()
-                ->end()
+                ->append($this->addThemeHolderNode())
+                ->append($this->addThemeMatcherNode())
                 ->append($this->addThemeSelectorNode())
                 ->append($this->addThemeResolverNode())
             ->end();
 
         return $treeBuilder;
+    }
+
+    protected function addThemeHolderNode()
+    {
+        $builder = new TreeBuilder();
+        $rootNode = $builder->root('holder');
+
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->info('theme holder configuration')
+            ->children()
+                ->scalarNode('id')
+                    ->defaultValue('jungi_theme.holder.default')
+                    ->info('theme holder service id')
+                ->end()
+                ->booleanNode('ignore_null_theme')
+                    ->defaultTrue()
+                    ->info('whether to ignore the situation when the theme selector will not match any theme for the request.')
+                ->end()
+            ->end();
+
+        return $rootNode;
+    }
+
+    protected function addThemeMatcherNode()
+    {
+        $builder = new TreeBuilder();
+        $rootNode = $builder->root('matcher');
+
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->info('theme matcher configuration')
+            ->children()
+                ->scalarNode('id')
+                ->info('theme matcher service id')
+            ->end()
+            ->arrayNode('device_filter')
+                ->info('device theme filter configuration')
+                ->addDefaultsIfNotSet()
+                ->canBeDisabled()
+            ->end();
+
+        return $rootNode;
     }
 
     protected function addThemeSelectorNode()
@@ -61,7 +92,7 @@ class Configuration implements ConfigurationInterface
             if (isset($v['suspects'])) {
                 array_walk($v['suspects'], function (&$class) {
                     if (false === strpos($class, '\\')) {
-                        $class = 'Jungi\\Bundle\\ThemeBundle\\Resolver\\' . $class;
+                        $class = 'Jungi\\Bundle\\ThemeBundle\\Resolver\\'.$class;
                     }
 
                     if (!class_exists($class)) {
@@ -84,7 +115,7 @@ class Configuration implements ConfigurationInterface
                     ->info('theme selector service id')
                 ->end()
                 ->arrayNode('validation_listener')
-                    ->info('theme validation listener configuration')
+                ->info('theme validation listener configuration')
                     ->addDefaultsIfNotSet()
                     ->canBeEnabled()
                     ->fixXmlConfig('suspect')
@@ -98,11 +129,6 @@ class Configuration implements ConfigurationInterface
                         ->always()
                         ->then($investigatorNorm)
                     ->end()
-                ->end()
-                ->arrayNode('device_switch')
-                    ->info('device theme switch configuration')
-                    ->addDefaultsIfNotSet()
-                    ->canBeDisabled()
                 ->end()
             ->end();
 

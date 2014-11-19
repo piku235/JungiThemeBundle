@@ -104,7 +104,7 @@ class ThemeHolderListener implements EventSubscriberInterface
     {
         return array(
             KernelEvents::CONTROLLER => array('onKernelController', -100),
-            ThemeChangerEvents::POST_CHANGE => array('onChange')
+            ThemeChangerEvents::POST_CHANGE => array('onChange'),
         );
     }
 }

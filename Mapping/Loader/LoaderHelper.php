@@ -58,7 +58,7 @@ class LoaderHelper
                 $location = $this->tagRegistry->getTagClass($location);
             }
 
-            $const = $location . substr($value, $pos);
+            $const = $location.substr($value, $pos);
             if (defined($const)) {
                 return constant($const);
             }
