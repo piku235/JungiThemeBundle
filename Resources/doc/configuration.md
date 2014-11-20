@@ -18,11 +18,10 @@ jungi_theme:
     matcher:
 
         # theme matcher service id
-        id: ~
+        id: jungi_theme.matcher.chain
 
-        # device theme filter configuration
-        device_filter:
-            enabled: true
+        # use the device theme filter
+        device_filter: true
 
     # theme selector configuration
     selector:

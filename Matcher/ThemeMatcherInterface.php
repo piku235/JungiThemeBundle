@@ -13,6 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Matcher;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameReferenceInterface;
+use Jungi\Bundle\ThemeBundle\Exception\NotSupportedException;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,7 +26,18 @@ use Symfony\Component\HttpFoundation\Request;
 interface ThemeMatcherInterface
 {
     /**
+     * Checks whether a given theme name is supported by the matcher
+     *
+     * @param string $themeName A theme name
+     *
+     * @return bool
+     */
+    public function supports($themeName);
+
+    /**
      * Matches an appropriate theme based on a given theme name for a given Request
+     *
+     * A Request instance is an addition which can be used for different goals
      *
      * @param string|ThemeNameReferenceInterface $themeName A theme name
      * @param Request                            $request   A Request instance

@@ -12,7 +12,8 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * ThemeNameParser
+ * ThemeNameParser converts unique theme names like e.g. "footheme" and virtual theme names
+ * like e.g. "@bartheme" to an appropriate ThemeNameReference
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,15 +25,13 @@ class ThemeNameParser implements ThemeNameParserInterface
     protected $cache = array();
 
     /**
-     * Converts a given theme name to a theme reference
-     *
-     * @param string $theme A theme name
-     *
-     * @return ThemeNameReference
+     * {@inheritdoc}
      */
     public function parse($theme)
     {
-        if (isset($this->cache[$theme])) {
+        if ($theme instanceof ThemeNameReferenceInterface) {
+            return $theme;
+        } elseif (isset($this->cache[$theme])) {
             return $this->cache[$theme];
         }
 

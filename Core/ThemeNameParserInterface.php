@@ -21,7 +21,7 @@ interface ThemeNameParserInterface
     /**
      * Converts a given theme name to a theme reference
      *
-     * @param string $theme A theme name
+     * @param string|ThemeNameReferenceInterface $theme A theme name
      *
      * @return ThemeNameReferenceInterface
      */

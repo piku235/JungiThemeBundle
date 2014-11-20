@@ -73,12 +73,13 @@ class Configuration implements ConfigurationInterface
             ->info('theme matcher configuration')
             ->children()
                 ->scalarNode('id')
-                ->info('theme matcher service id')
-            ->end()
-            ->arrayNode('device_filter')
-                ->info('device theme filter configuration')
-                ->addDefaultsIfNotSet()
-                ->canBeDisabled()
+                    ->defaultValue('jungi_theme.matcher.chain')
+                    ->info('theme matcher service id')
+                ->end()
+                ->booleanNode('device_filter')
+                    ->defaultTrue()
+                    ->info('use the device theme filter')
+                ->end()
             ->end();
 
         return $rootNode;

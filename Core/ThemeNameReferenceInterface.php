@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * ThemeNameReferenceInterface
+ * The implemented classes are used to expose information about a theme name
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

@@ -12,7 +12,8 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * ThemeNameReference
+ * ThemeNameReference represents standard theme names e.g. "footheme", as well virtual theme
+ * names e.g. "@bartheme"
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

@@ -65,8 +65,11 @@ class JungiThemeExtension extends Extension
             $container->setParameter('jungi_theme.selector.listener.validation.suspects', $config['selector']['validation_listener']['suspects']);
         }
 
+        // Theme matcher service
+        $container->setAlias('jungi_theme.matcher', $config['matcher']['id']);
+
         // Device theme filter
-        if (!$config['matcher']['device_filter']['enabled']) {
+        if (!$config['matcher']['device_filter']) {
             $container->removeDefinition('jungi_theme.matcher.filter.device');
         }
 
@@ -91,7 +94,9 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader',
             'Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper',
-            'Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcher',
+            'Jungi\Bundle\ThemeBundle\Matcher\ChainThemeMatcher',
+            'Jungi\Bundle\ThemeBundle\Matcher\StandardThemeMatcher',
+            'Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher',
             'Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter',
             'Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection',
             'Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver',

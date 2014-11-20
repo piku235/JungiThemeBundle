@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests;
 use Jungi\Bundle\ThemeBundle\Changer\ThemeChanger;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameReference;
-use Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcher;
+use Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
@@ -58,7 +58,7 @@ class ThemeChangerTest extends TestCase
             $this->createThemeMock('bootheme'),
         ));
         $nameParser = new ThemeNameParser();
-        $matcher = new ThemeMatcher($this->manager, $nameParser);
+        $matcher = new VirtualThemeMatcher($this->manager, $nameParser);
         $this->changer = new ThemeChanger($matcher, $nameParser, $this->resolver, new EventDispatcher());
     }
 

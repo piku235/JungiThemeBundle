@@ -16,21 +16,21 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameReference;
 use Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter;
-use Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcher;
+use Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Matcher\Filter\FakeThemeFilter;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * ThemeMatcherTest
+ * VirtualThemeMatcher Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeMatcherTest extends TestCase
+class VirtualThemeMatcherTest extends TestCase
 {
     /**
-     * @var ThemeMatcher
+     * @var VirtualThemeMatcher
      */
     protected $matcher;
 
@@ -69,21 +69,14 @@ class ThemeMatcherTest extends TestCase
             $desktopTheme, $mobileTheme, $tabletTheme,
         ));
 
-        $this->matcher = new ThemeMatcher($this->manager, new ThemeNameParser(), array(new DeviceThemeFilter(new MobileDetect())));
+        $this->matcher = new VirtualThemeMatcher($this->manager, new ThemeNameParser(), array(new DeviceThemeFilter(new MobileDetect())));
         $this->matcher->addFilter(new FakeThemeFilter());
-    }
-
-    public function testOnUniqueThemeName()
-    {
-        $request = $this->createDesktopRequest();
-        $this->assertSame($this->matcher->match('footheme_desktop', $request), $this->manager->getTheme('footheme_desktop'));
-        $this->assertSame($this->matcher->match(new ThemeNameReference('footheme_desktop'), $request), $this->manager->getTheme('footheme_desktop'));
     }
 
     /**
      * @dataProvider getVirtualThemeMatches
      */
-    public function testOnVirtualTheme($matchTheme, $virtualTheme, $request)
+    public function testOnValidMatch($matchTheme, $virtualTheme, $request)
     {
         $reference = new ThemeNameReference($virtualTheme, true);
         $this->assertSame($this->manager->getTheme($matchTheme), $this->matcher->match((string) $reference, $request));
