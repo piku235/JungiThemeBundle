@@ -28,7 +28,7 @@ interface ThemeInterface
     /**
      * Returns the theme tag collection
      *
-     * @return \Jungi\Bundle\ThemeBundle\Tag\TagCollection
+     * @return \Jungi\Bundle\ThemeBundle\Tag\TagCollectionInterface
      */
     public function getTags();
 

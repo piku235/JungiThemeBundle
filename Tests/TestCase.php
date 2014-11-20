@@ -12,6 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tests;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

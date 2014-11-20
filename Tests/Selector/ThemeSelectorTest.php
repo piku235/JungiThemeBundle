@@ -13,6 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Selector;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
+use Jungi\Bundle\ThemeBundle\Matcher\StandardThemeMatcher;
 use Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelector;
@@ -76,7 +77,7 @@ class ThemeSelectorTest extends TestCase
         ));
         $this->resolver = new InMemoryThemeResolver('footheme', false);
 
-        $matcher = new VirtualThemeMatcher($this->manager, new ThemeNameParser());
+        $matcher = new StandardThemeMatcher($this->manager, new ThemeNameParser());
         $this->selector = new ThemeSelector($matcher, new ThemeNameParser(), $this->eventDispatcher, $this->resolver);
     }
 
