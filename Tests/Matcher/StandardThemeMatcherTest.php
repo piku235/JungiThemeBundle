@@ -52,13 +52,20 @@ class StandardThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\MobileDevices()
+                new Tag\MobileDevices(),
             ))));
         $this->manager = new ThemeManager(array(
-            $desktopTheme, $mobileTheme
+            $desktopTheme, $mobileTheme,
         ));
 
         $this->matcher = new StandardThemeMatcher($this->manager, new ThemeNameParser());
+    }
+
+    public function testSupports()
+    {
+        $this->assertTrue($this->matcher->supports('footheme_desktop'));
+        $this->assertTrue($this->matcher->supports(new ThemeNameReference('footheme_mobile')));
+        $this->assertFalse($this->matcher->supports('@footheme_desktop'));
     }
 
     public function testValidMatch()

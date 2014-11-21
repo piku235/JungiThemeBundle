@@ -73,6 +73,13 @@ class VirtualThemeMatcherTest extends TestCase
         $this->matcher->addFilter(new FakeThemeFilter());
     }
 
+    public function testSupports()
+    {
+        $this->assertTrue($this->matcher->supports('@footheme_desktop'));
+        $this->assertTrue($this->matcher->supports(new ThemeNameReference('footheme_mobile', true)));
+        $this->assertFalse($this->matcher->supports('footheme_tablet'));
+    }
+
     /**
      * @dataProvider getVirtualThemeMatches
      */

@@ -48,11 +48,17 @@ class Theme implements ThemeInterface
      * @param string        $path A path to theme resources
      * @param ThemeInfo     $info A ThemeInfo instance
      * @param TagCollection $tags A tag collection (optional)
+     *
+     * @throws \InvalidArgumentException If the given theme name is invalid
      */
     public function __construct($name, $path, ThemeInfo $info, TagCollection $tags = null)
     {
-        if (!preg_match('/^[\w-_]+$/', $name)) {
-            throw new \InvalidArgumentException(sprintf('The given theme name "%s" is invalid. A theme name can only has "a-zA-Z0-9-_" characters.', $name));
+        if (!preg_match('/^[a-z]{1}[a-z0-9-_.]+$/', $name)) {
+            throw new \InvalidArgumentException(sprintf(
+                'The given theme name "%s" is invalid. A theme name must starts with at least one "a-z" character'
+                .' and the whole theme name can contain only "a-z0-9-_." characters.',
+                $name
+            ));
         }
 
         $this->name = $name;

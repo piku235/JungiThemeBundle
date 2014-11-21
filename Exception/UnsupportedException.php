@@ -18,5 +18,4 @@ namespace Jungi\Bundle\ThemeBundle\Exception;
  */
 class UnsupportedException extends \InvalidArgumentException
 {
-
-} 
+}

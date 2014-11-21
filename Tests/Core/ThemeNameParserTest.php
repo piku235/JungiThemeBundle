@@ -36,8 +36,7 @@ class ThemeNameParserTest extends TestCase
     {
         return array(
             array('footheme', new ThemeNameReference('footheme')),
-            array('@bartheme', new ThemeNameReference('bartheme', true))
+            array('@bartheme', new ThemeNameReference('bartheme', true)),
         );
     }
 }
- 

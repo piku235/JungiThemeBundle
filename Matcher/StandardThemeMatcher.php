@@ -13,7 +13,6 @@ namespace Jungi\Bundle\ThemeBundle\Matcher;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameReference;
-use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameParserInterface;
 use Symfony\Component\HttpFoundation\Request;
 

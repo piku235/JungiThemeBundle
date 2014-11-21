@@ -16,7 +16,7 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeNameReferenceInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * ThemeChangerInterface allows for change the current theme for the request
+ * Implementations of the interface allows for change the current theme for the request
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

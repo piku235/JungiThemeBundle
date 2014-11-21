@@ -15,7 +15,6 @@ use Jungi\Bundle\ThemeBundle\Changer\ThemeChanger;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameReference;
 use Jungi\Bundle\ThemeBundle\Matcher\StandardThemeMatcher;
-use Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeManager;

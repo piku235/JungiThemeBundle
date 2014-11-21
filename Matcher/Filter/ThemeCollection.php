@@ -23,7 +23,7 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     /**
      * @var ThemeInterface[]
      */
-    private $themes;
+    protected $themes;
 
     /**
      * Constructor

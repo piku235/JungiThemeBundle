@@ -12,9 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\Selector;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
-use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Matcher\StandardThemeMatcher;
-use Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelector;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
