@@ -12,27 +12,27 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * Group tag is used to connect multiple themes into one
+ * VirtualTheme tag is used to connect multiple themes into one
  *
  * Generally the tag is used by AWD (Adaptive Web Design)
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class Group implements TagInterface
+class VirtualTheme implements TagInterface
 {
     /**
      * @var string
      */
-    protected $group;
+    protected $themeName;
 
     /**
      * Constructor
      *
-     * @param string $group A group name
+     * @param string $themeName A group name
      */
-    public function __construct($group)
+    public function __construct($themeName)
     {
-        $this->group = $group;
+        $this->themeName = $themeName;
     }
 
     /**
@@ -40,9 +40,9 @@ class Group implements TagInterface
      *
      * @return string
      */
-    public function getGroup()
+    public function getThemeName()
     {
-        return $this->group;
+        return $this->themeName;
     }
 
     /**
@@ -58,6 +58,6 @@ class Group implements TagInterface
      */
     public static function getName()
     {
-        return 'jungi.group';
+        return 'jungi.virtual_theme';
     }
 }

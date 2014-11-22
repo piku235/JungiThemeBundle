@@ -29,7 +29,7 @@ class TagRegistryTest extends TestCase
     {
         $tags = array(
             'jungi.mobile_devices' => '\Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'jungi.group' => '\Jungi\Bundle\ThemeBundle\Tag\Group',
+            'jungi.virtual_theme' => '\Jungi\Bundle\ThemeBundle\Tag\VirtualTheme',
             'jungi.desktop_devices' => '\Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
         );
         $provider = new TagProvider($tags['jungi.desktop_devices']);

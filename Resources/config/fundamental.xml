@@ -23,7 +23,7 @@
         <parameter key="jungi_theme.tag.classes" type="collection">
             <parameter>Jungi\Bundle\ThemeBundle\Tag\MobileDevices</parameter>
             <parameter>Jungi\Bundle\ThemeBundle\Tag\DesktopDevices</parameter>
-            <parameter>Jungi\Bundle\ThemeBundle\Tag\Group</parameter>
+            <parameter>Jungi\Bundle\ThemeBundle\Tag\VirtualTheme</parameter>
         </parameter>
     </parameters>
 

@@ -12,19 +12,19 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\Tag;
 
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Jungi\Bundle\ThemeBundle\Tag\Group;
+use Jungi\Bundle\ThemeBundle\Tag\VirtualTheme;
 
 /**
- * Group tag test case
+ * VirtualTheme tag test case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class GroupTest extends TestCase
+class VirtualThemeTest extends TestCase
 {
     /**
      * @dataProvider getMatchingTags
      */
-    public function testWhenEqual(Group $firstTag, Group $secondTag)
+    public function testWhenEqual(VirtualTheme $firstTag, VirtualTheme $secondTag)
     {
         $this->assertTrue($firstTag->isEqual($secondTag));
         $this->assertTrue($secondTag->isEqual($firstTag));
@@ -33,7 +33,7 @@ class GroupTest extends TestCase
     /**
      * @dataProvider getNonMatchingTags
      */
-    public function testWhenNotEqual(Group $firstTag, Group $secondTag)
+    public function testWhenNotEqual(VirtualTheme $firstTag, VirtualTheme $secondTag)
     {
         $this->assertFalse($firstTag->isEqual($secondTag));
         $this->assertFalse($secondTag->isEqual($firstTag));
@@ -45,8 +45,8 @@ class GroupTest extends TestCase
     public function getMatchingTags()
     {
         return array(
-            array(new Group('footheme'), new Group('footheme')),
-            array(new Group('bootheme'), new Group('bootheme')),
+            array(new VirtualTheme('footheme'), new VirtualTheme('footheme')),
+            array(new VirtualTheme('bootheme'), new VirtualTheme('bootheme')),
         );
     }
 
@@ -56,8 +56,8 @@ class GroupTest extends TestCase
     public function getNonMatchingTags()
     {
         return array(
-            array(new Group('footheme'), new Group('footheme_boo')),
-            array(new Group('bootheme'), new Group('')),
+            array(new VirtualTheme('footheme'), new VirtualTheme('footheme_boo')),
+            array(new VirtualTheme('bootheme'), new VirtualTheme('')),
         );
     }
 }

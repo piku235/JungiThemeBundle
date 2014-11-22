@@ -112,7 +112,7 @@ class DeviceThemeFilterTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('test'),
+                new Tag\VirtualTheme('test'),
             ))));
         $secondTheme = $this->createThemeMock('footheme_second');
         $secondTheme

@@ -111,7 +111,7 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Validation\ValidationUtils',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\Group',
+            'Jungi\Bundle\ThemeBundle\Tag\VirtualTheme',
             'Jungi\Bundle\ThemeBundle\Tag\TagCollection',
             'Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory',
             'Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry',

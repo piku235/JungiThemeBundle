@@ -82,7 +82,7 @@ class VirtualThemeMatcher implements ThemeMatcherInterface
     public function match($themeName, Request $request)
     {
         $themeName = $this->nameParser->parse($themeName);
-        $themes = $this->manager->findThemesWithTags(new Tag\Group($themeName->getName()));
+        $themes = $this->manager->findThemesWithTags(new Tag\VirtualTheme($themeName->getName()));
         $count = count($themes);
         switch ($count) {
             case 0:

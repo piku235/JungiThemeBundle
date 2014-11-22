@@ -17,7 +17,7 @@ use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * TagFactoryTest
+ * TagFactory Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -36,7 +36,7 @@ class TagFactoryTest extends TestCase
         $registry = new TagRegistry();
         $registry->register(array(
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\Group',
+            'Jungi\Bundle\ThemeBundle\Tag\VirtualTheme',
         ));
         $this->factory = new TagFactory($registry);
     }
@@ -57,9 +57,9 @@ class TagFactoryTest extends TestCase
     public function getValidTagReferences()
     {
         return array(
-            array('jungi.mobile_devices', array(), new Tag\MobileDevices()),
-            array('jungi.mobile_devices', array('iOS', Tag\MobileDevices::TABLET), new Tag\MobileDevices('iOS', Tag\MobileDevices::TABLET)),
-            array('jungi.group', 'footheme', new Tag\Group('footheme')),
+            array(Tag\MobileDevices::getName(), array(), new Tag\MobileDevices()),
+            array(Tag\MobileDevices::getName(), array('iOS', Tag\MobileDevices::TABLET), new Tag\MobileDevices('iOS', Tag\MobileDevices::TABLET)),
+            array(Tag\VirtualTheme::getName(), 'footheme', new Tag\VirtualTheme('footheme')),
         );
     }
 }

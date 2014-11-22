@@ -44,7 +44,7 @@ class StandardThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\DesktopDevices(),
             ))));
         $mobileTheme = $this->createThemeMock('footheme_mobile');

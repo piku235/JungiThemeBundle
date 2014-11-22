@@ -46,7 +46,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\DesktopDevices(),
             ))));
         $mobileTheme = $this->createThemeMock('footheme_mobile');
@@ -54,7 +54,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\MobileDevices(array(), Tag\MobileDevices::MOBILE),
             ))));
         $tabletTheme = $this->createThemeMock('footheme_tablet');
@@ -62,11 +62,11 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\MobileDevices(array(), Tag\MobileDevices::TABLET),
             ))));
         $this->manager = new ThemeManager(array(
-            $desktopTheme, $mobileTheme, $tabletTheme,
+            $desktopTheme, $mobileTheme, $tabletTheme
         ));
 
         $this->matcher = new VirtualThemeMatcher($this->manager, new ThemeNameParser(), array(new DeviceThemeFilter(new MobileDetect())));
@@ -97,7 +97,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('bartheme'),
+                new Tag\VirtualTheme('bartheme'),
             ))));
 
         $this->manager->addTheme($barTheme);
@@ -111,7 +111,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\DesktopDevices(),
             ))));
         $mobileTheme1 = $this->createThemeMock('footheme_mobile');
@@ -119,7 +119,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\MobileDevices(),
             ))));
         $mobileTheme2 = $this->createThemeMock('footheme_mobile_again');
@@ -127,7 +127,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\MobileDevices(),
             ))));
 
@@ -156,7 +156,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\DesktopDevices(),
             ))));
         $mobileTheme2 = $this->createThemeMock('footheme_mobile2');
@@ -164,7 +164,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\DesktopDevices(),
             ))));
         $mobileTheme3 = $this->createThemeMock('footheme_mobile3');
@@ -172,7 +172,7 @@ class VirtualThemeMatcherTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Tag\Group('footheme'),
+                new Tag\VirtualTheme('footheme'),
                 new Tag\DesktopDevices(),
             ))));
 
@@ -200,14 +200,6 @@ class VirtualThemeMatcherTest extends TestCase
     public function testOnNonExistentVirtualTheme()
     {
         $this->matcher->match('@mootheme', $this->createDesktopRequest());
-    }
-
-    /**
-     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException
-     */
-    public function testOnNonExistentTheme()
-    {
-        $this->matcher->match('nootheme', $this->createDesktopRequest());
     }
 
     public function getVirtualThemeMatches()
