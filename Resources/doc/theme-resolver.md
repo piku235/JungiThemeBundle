@@ -46,9 +46,9 @@ They're mentioned in the installation steps, so if you still don't know what eve
 
 ### Creating theme resolver
 
-I will show you how to create a theme resolver on an example. Let's say that we're creating a theme resolver whose task
-will be to return a theme chosen by user. If the user hasn't chosen any theme then a default theme for users will be 
-returned. However a user can be not authenticated, then let us assume that the theme resolver will return null.
+I will show you how to create a theme resolver on the example. Let's say that we're creating a theme resolver whose task
+will be to return a theme chose by user. If the user hasn't chosen any theme then a default theme for users will be 
+returned. However the user can be not authenticated, then lets say that the theme resolver will return null in this case.
 
 The theme resolver could look like below:
 
@@ -99,7 +99,7 @@ class UserThemeResolver implements ThemeResolverInterface
 }
 ```
 
-Now when we have our theme resolver created a normal thing is we want to use it in a project. We must create a service
+Now when we created our theme resolver a normal thing is we want to use it in a project. We must create a service
 for this theme resolver and activate it in the configuration. Assume that the service is called `jungi_theme.resolver.user`.
 Like mentioned in the installation steps to setup a theme resolver service we must to define the configuration like below:
 

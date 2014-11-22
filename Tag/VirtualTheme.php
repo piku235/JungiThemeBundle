@@ -28,7 +28,7 @@ class VirtualTheme implements TagInterface
     /**
      * Constructor
      *
-     * @param string $themeName A group name
+     * @param string $themeName A virtual theme name
      */
     public function __construct($themeName)
     {
@@ -36,7 +36,7 @@ class VirtualTheme implements TagInterface
     }
 
     /**
-     * Returns the group name
+     * Returns the virtual theme name
      *
      * @return string
      */

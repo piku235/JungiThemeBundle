@@ -56,13 +56,13 @@ MobileDevices::ALL | all
 The DesktopDevices is a very basic tag and it implements only basic methods contained in the interface. Each theme designed
 for desktop devices (the most likely scenario) should have this tag.
 
-### Link
+### VirtualTheme
 
-[Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/Link.php)
+[Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/VirtualTheme.php)
 
-The aim of the Link tag is to be a pointer to another theme. It can be only used with the one from the above tags. It's
-mainly used in situations such as when you have two separate themes where each one is designed for another device and you
-want to link them together ([Adaptive Web Design](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md#awd-adaptive-web-design)).
+The aim of the VirtualTheme tag is to connect multiple themes into one. It can be done by implementing this tag to desired
+themes through specifying the same virtual theme name. It's mainly used in the [AWD](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md#awd-adaptive-web-design) (Adaptive Web Design),
+but it can be used also for any other purpose.
 
 Usage examples
 --------------
