@@ -67,8 +67,8 @@ but it can be used also for any other purpose.
 Usage examples
 --------------
 
-How tags works you can see by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/EventListener/DeviceThemeFilterTest.php)
-and [here](https://github.com/piku235/JungiThemeBundle/tree/master/Tests/Selector/ThemeSelectorTest.php).
+How tags works you can see by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/Filter/DeviceThemeFilterTest.php)
+and [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/VirtualThemeMatcherTest.php).
 
 Also there are two example bundles which I mentioned in the **README.md** of the root directory, but I will mention them
 again if you haven't seen them yet:
@@ -155,14 +155,14 @@ a tag registry and nothing more.
 
 ```xml
 <parameters>
-    <parameter key="foo.theme.tag.class">Foo\FooBundle\Theme\Tag\BooTag</parameter>
+    <parameter key="foo_vendor.theme.tag.class">Foo\FooBundle\Theme\Tag\BooTag</parameter>
     <!-- other parameters -->
 </parameters>
 
 <services>
-    <service id="foo.theme.tag.provider" class="%jungi_theme.tag.registry.provider.class%">
+    <service id="foo_vendor.theme.tag.provider" class="%jungi_theme.tag.registry.provider.class%">
         <tag name="jungi_theme.tag_provider" />
-        <argument>%foo.theme.tag.class%</argument>
+        <argument>%foo_vendor.theme.tag.class%</argument>
     </service>
     <!-- other services -->
 </services>
@@ -172,14 +172,14 @@ a tag registry and nothing more.
 
 ```yml
 parameters:
-    foo.theme.tag.class: Foo\FooBundle\Theme\Tag\BooTag
+    foo_vendor.theme.tag.class: Foo\FooBundle\Theme\Tag\BooTag
 
 services:
-    foo.theme.tag.provider:
+    foo_vendor.theme.tag.provider:
         class: "%jungi_theme.tag.registry.provider.class%"
         tags:
             - { name: jungi_theme.tag_provider }
-        arguments: ["%foo.theme.tag.class%"]
+        arguments: ["%foo_vendor.theme.tag.class%"]
 ```
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

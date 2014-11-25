@@ -56,10 +56,11 @@ class DeviceThemeFilter implements ThemeFilterInterface
             $tag = new Tag\DesktopDevices();
         }
 
+        $supported = array(Tag\DesktopDevices::getName(), Tag\MobileDevices::getName());
         foreach ($themes as $theme) {
             /* @var ThemeInterface $theme */
             $tags = $theme->getTags();
-            if (($tags->has(Tag\DesktopDevices::getName()) || $tags->has(Tag\MobileDevices::getName())) && !$tags->contains($tag)) {
+            if ($tags->hasSet($supported, Tag\TagCollectionInterface::COND_OR) && !$tags->contains($tag)) {
                 $themes->remove($theme);
             }
         }

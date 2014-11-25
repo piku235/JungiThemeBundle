@@ -32,7 +32,8 @@ interface ThemeResolverInterface
 }
 ```
 
-### Built-in theme resolvers
+Built-in theme resolvers
+------------------------
 
 The bundle comes with the following theme resolvers:
 
@@ -44,7 +45,8 @@ The bundle comes with the following theme resolvers:
 
 They're mentioned in the installation steps, so if you still don't know what every of them does [go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/installation.md#step-3-configuration).
 
-### Creating theme resolver
+Creating theme resolver
+-----------------------
 
 I will show you how to create a theme resolver on the example. Let's say that we're creating a theme resolver whose task
 will be to return a theme chose by user. If the user hasn't chosen any theme then a default theme for users will be 

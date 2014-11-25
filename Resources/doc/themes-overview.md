@@ -15,6 +15,8 @@ interface ThemeInterface
     /**
      * Returns the unique theme name
      *
+     * A theme name should be as simple as possible so e.g. "footheme", "bar-theme".
+     *
      * @return string
      */
     public function getName();

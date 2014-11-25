@@ -76,7 +76,7 @@ class ThemeSelectorTest extends TestCase
         $this->resolver = new InMemoryThemeResolver('footheme', false);
 
         $matcher = new StandardThemeMatcher($this->manager, new ThemeNameParser());
-        $this->selector = new ThemeSelector($matcher, new ThemeNameParser(), $this->eventDispatcher, $this->resolver);
+        $this->selector = new ThemeSelector($matcher, $this->eventDispatcher, $this->resolver);
     }
 
     /**

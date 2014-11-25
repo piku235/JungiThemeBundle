@@ -11,7 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameParserInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Exception\InvalidatedThemeException;
 use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcherInterface;
@@ -56,24 +55,17 @@ class ThemeSelector implements ThemeSelectorInterface
     private $matcher;
 
     /**
-     * @var ThemeNameParserInterface
-     */
-    private $nameParser;
-
-    /**
      * Constructor
      *
      * @param ThemeMatcherInterface    $matcher    A theme matcher
-     * @param ThemeNameParserInterface $nameParser A theme name parser
      * @param EventDispatcherInterface $dispatcher An event dispatcher
      * @param ThemeResolverInterface   $resolver   A theme resolver
      * @param ThemeResolverInterface   $fallback   A fallback theme resolver (optional)
      */
-    public function __construct(ThemeMatcherInterface $matcher, ThemeNameParserInterface $nameParser, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
+    public function __construct(ThemeMatcherInterface $matcher, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
     {
         $this->dispatcher = $dispatcher;
         $this->matcher = $matcher;
-        $this->nameParser = $nameParser;
         $this->resolver = $resolver;
         $this->fallback = $fallback;
     }
@@ -143,7 +135,6 @@ class ThemeSelector implements ThemeSelectorInterface
         }
 
         // Theme
-        $themeName = $this->nameParser->parse($themeName);
         $theme = $this->matcher->match($themeName, $request);
 
         // Dispatch the event
@@ -183,7 +174,6 @@ class ThemeSelector implements ThemeSelectorInterface
         }
 
         // Theme
-        $themeName = $this->nameParser->parse($themeName);
         $theme = $this->matcher->match($themeName, $request);
 
         // Dispatch the event
