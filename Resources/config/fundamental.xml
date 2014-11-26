@@ -79,7 +79,6 @@
         </service>
         <service id="jungi_theme.selector" class="%jungi_theme.selector.class%">
             <argument type="service" id="jungi_theme.matcher" />
-            <argument type="service" id="jungi_theme.name_parser" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="jungi_theme.resolver" />
             <argument type="service" id="jungi_theme.fallback_resolver" on-invalid="null" />

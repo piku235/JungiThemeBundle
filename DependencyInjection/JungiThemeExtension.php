@@ -69,7 +69,7 @@ class JungiThemeExtension extends Extension
         $container->setAlias('jungi_theme.matcher', $config['matcher']['id']);
 
         // Device theme filter
-        if (!$config['matcher']['device_filter']) {
+        if (!$config['matcher']['virtual']['device_filter']) {
             $container->removeDefinition('jungi_theme.matcher.filter.device');
         }
 

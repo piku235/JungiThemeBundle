@@ -51,7 +51,7 @@ In comparison with the previous one this theme matcher is more complex. As the n
 names. A virtual theme name is preceded by the character "@" and it refers to a theme that doesn't really exist. To say 
 more precisely a virtual theme name refers to a collection of themes where only one of this collection will be matched 
 at the final stage. All of this is possible thanks to the tag `Jungi\Bundle\ThemeBundle\Tag\VirtualTheme`. To reduce such 
-a collection of themes, the theme matcher uses theme filters like DeviceThemeFilter. 
+a collection of themes, the theme matcher uses theme filters like **DeviceThemeFilter**. 
 
 Filters
 -------
@@ -77,9 +77,9 @@ interface ThemeFilterInterface
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Matcher/Filter/DeviceThemeFilter.php)
 
-This filter is mandatory for working adaptive themes (AWD) properly. The filter will only work for themes which has the 
-**MobileDevices** tag or the **DesktopDevices** tag. If such a theme will not meet the requirements of the theme filter, 
-the theme will be removed from collection and thereby, the collection of themes will be reduced.
+The filter is mandatory for working adaptive themes (AWD) properly. The filter will only work for themes which has the 
+**MobileDevices** tag or the **DesktopDevices** tag. If such a theme will not meet the requirements of the filter, 
+the theme will be removed from the collection and thereby, the collection of themes will be reduced.
 
 Configuration
 -------------
@@ -94,3 +94,5 @@ jungi_theme:
             # use the device theme filter
             device_filter: # true or false
 ```
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)
