@@ -1,20 +1,19 @@
 Adaptive Web Design (AWD)
 =========================
 
-The AWD is right for you when you need a separate themes for different devices e.g. a first one for desktop devices
-and a second one for mobile devices. Thanks to the JungiThemeBundle instead of doing many things to get this properly
-working you just need a few simple steps. You can have as much separate themes as you wish e.g. a first theme designed
-for desktop devices, a second theme designed for mobile devices (excl. tablet devices) and a third theme designed for
+The AWD is right for you when you need a separate themes for different devices as e.g. the first theme for desktop devices
+and the second theme for mobile devices. Thanks to the JungiThemeBundle instead of doing many things to get this properly
+working you just need a few simple steps. You can have as much separate themes as you wish e.g. the first theme designed
+for desktop devices, the second theme designed for mobile devices (excl. tablet devices) and the third theme designed for
 tablet devices.
 
 Explanation
 -----------
 
-Each of separate themes should have a tag which describes this theme e.g. a first theme will has the **DesktopDevices**
-tag and a second theme will has the **MobileDevices** tag. Almost all of these themes must implement the **Link** tag
-to create a connection between them, expect one theme which don't have to implement this tag. This theme behaves like
-the representative of all connected themes, like the main theme. Which of these themes will be the representative theme
-depends only on you.
+The AWD in the bundle is based on following tags: **MobileDevices**, **DesktopDevices** and **VirtualTheme**. Each of 
+separate themes should has a tag which describes this theme e.g. the first theme with the **DesktopDevices** tag and the 
+second theme with the **MobileDevices** tag. All of these themes must also has the **VirtualTheme** tag, which basically
+merges these themes into one (virtual theme). Thus, we can use such a virtual theme by setting it to a theme resolver.
 
 Example
 -------
@@ -43,9 +42,10 @@ designed for mobile devices (incl. tablet devices).
     </parameters>
 
     <themes>
-        <theme name="foo_main" path="@JungiFooBundle/Resources/theme/desktop">
+        <theme name="foo_desktop" path="@JungiFooBundle/Resources/theme/desktop">
             <tags>
                 <tag name="jungi.desktop_devices" />
+                <tag name="jungi.virtual_theme">foo</tag>
             </tags>
             <info>
                 <property key="authors">%authors%</property>
@@ -58,7 +58,7 @@ designed for mobile devices (incl. tablet devices).
         <theme name="foo_mobile" path="@JungiFooBundle/Resources/theme/mobile">
             <tags>
                 <tag name="jungi.mobile_devices" />
-                <tag name="jungi.link">foo_main</tag>
+                <tag name="jungi.virtual_theme">foo</tag>
             </tags>
             <info>
                 <property key="authors">%authors%</property>
@@ -83,10 +83,11 @@ parameters:
         - { name: piku235, email: piku235@gmail.com, homepage: www.foo.com }
 
 themes:
-    foo_main:
+    foo_desktop:
         path: "@JungiFooBundle/Resources/theme/desktop"
         tags:
             jungi.desktop_devices: ~
+            jungi.virtual_theme: foo
         info:
             authors: "%authors%"
             name: Super theme
@@ -97,7 +98,7 @@ themes:
         path: "@JungiFooBundle/Resources/theme/mobile"
         tags:
             jungi.mobile_devices: ~
-            jungi.link: foo_main
+            jungi.virtual_theme: foo
         info:
             authors: "%authors%"
             name: Super theme (ver. mobile)
@@ -128,10 +129,11 @@ $ib
     ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'));
 
 $manager->addTheme(new Theme(
-    'foo_main',
+    'foo',
     $locator->locate('@JungiFooBundle/Resources/theme/desktop'),
     $ib->getThemeInfo(),
     new TagCollection(array(
+        new Tag\VirtualTheme('foo'),
         new Tag\DesktopDevices(),
     ))
 ));
@@ -142,7 +144,7 @@ $manager->addTheme(new Theme(
     $locator->locate('@JungiFooBundle/Resources/theme/mobile'),
     $ib->getThemeInfo(),
     new TagCollection(array(
-        new Tag\Link('foo_main'),
+        new Tag\VirtualTheme('foo'),
         new Tag\MobileDevices()
     ))
 ));
@@ -151,7 +153,11 @@ $manager->addTheme(new Theme(
 Summary
 -------
 
-Thanks to the built-in utilities creating adaptive themes is very convenient and fast. Finally you must set the theme
-name (the representative theme) to a theme resolver and load the theme mapping file to see how it works.
+Finally to get it working you must set up the virtual theme name (in the example it's the "@foo") to a theme resolver and 
+of course load the theme mapping file.
+
+**NOTE**
+
+> Remember that to use a virtual theme, you have to precede its name by the character "@".
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector;
 
-use Jungi\Bundle\ThemeBundle\Exception\NullThemeException;
+use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

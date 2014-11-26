@@ -46,11 +46,11 @@ class DetailedResolvedThemeEvent extends ResolvedThemeEvent
      * @param ThemeInterface                     $theme        A theme
      * @param ThemeResolverInterface             $resolver     A theme resolver
      * @param Request                            $request      A Request object
-     * @param bool                               $clearTheme   Whether the theme in the event can be cleared (optional)
+     * @param bool                               $cancel       Whether a resolved theme can be canceled (optional)
      *
      * @throws \InvalidArgumentException When the theme resolver type is invalid
      */
-    public function __construct($resolverType, $themeName, ThemeInterface $theme, ThemeResolverInterface $resolver, Request $request, $clearTheme = true)
+    public function __construct($resolverType, $themeName, ThemeInterface $theme, ThemeResolverInterface $resolver, Request $request, $cancel = true)
     {
         $types = array(self::PRIMARY_RESOLVER, self::FALLBACK_RESOLVER);
         if (!in_array($resolverType, $types)) {
@@ -64,7 +64,7 @@ class DetailedResolvedThemeEvent extends ResolvedThemeEvent
         $this->resolverType = $resolverType;
 
         // Parent
-        parent::__construct($themeName, $theme, $resolver, $request, $clearTheme);
+        parent::__construct($themeName, $theme, $resolver, $request, $cancel);
     }
 
     /**

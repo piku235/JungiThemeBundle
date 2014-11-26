@@ -76,9 +76,15 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('jungi_theme.matcher.chain')
                     ->info('theme matcher service id')
                 ->end()
-                ->booleanNode('device_filter')
-                    ->defaultTrue()
-                    ->info('use the device theme filter')
+                ->arrayNode('virtual')
+                    ->info('virtual theme matcher configuration')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('device_filter')
+                            ->defaultTrue()
+                            ->info('use the device theme filter')
+                        ->end()
+                    ->end()
                 ->end()
             ->end();
 

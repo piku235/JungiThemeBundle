@@ -61,23 +61,20 @@ for desktop devices (the most likely scenario) should have this tag.
 [Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/VirtualTheme.php)
 
 The aim of the VirtualTheme tag is to connect multiple themes into one. It can be done by implementing this tag to desired
-themes through specifying the same virtual theme name. It's mainly used in the [AWD](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md#awd-adaptive-web-design) (Adaptive Web Design),
-but it can be used also for any other purpose.
+themes through specifying the same virtual theme name. It's mainly used in the [AWD](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md#awd-adaptive-web-design) 
+(Adaptive Web Design), but it can be also used for any other purpose. Virtual themes are discussed in the [Theme matcher](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-matcher.md)
+chapter.
 
-Usage examples
---------------
+Usage
+-----
+
+The usage of each tags depends on a theme mapping that you'll choose.
+
+The **MobileDevices** tag and the **DesktopDevices** tag were used in the [RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md) 
+chapter and also they were used with the **VirtualTheme** in the [AWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md) chapter.
 
 How tags works you can see by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/Filter/DeviceThemeFilterTest.php)
 and [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/VirtualThemeMatcherTest.php).
-
-Also there are two example bundles which I mentioned in the **README.md** of the root directory, but I will mention them
-again if you haven't seen them yet:
-
-* [JungiSimpleEnvironmentBundle](https://github.com/piku235/JungiSimpleEnvironmentBundle) - this bundle defines own
-environment system where each environment may use different themes. So e.g. admin environment may has a theme **foo_admin**
-and default environment may has a theme **foo_default**.
-* [JungiSimpleThemeBundle](https://github.com/piku235/JungiSimpleThemeBundle) - this bundle has a definition of two themes
-which uses the Environment tag located in the JungiSimpleEnvironmentBundle.
 
 Creating tag
 ------------

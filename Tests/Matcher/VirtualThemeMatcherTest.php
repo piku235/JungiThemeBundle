@@ -66,7 +66,7 @@ class VirtualThemeMatcherTest extends TestCase
                 new Tag\MobileDevices(array(), Tag\MobileDevices::TABLET),
             ))));
         $this->manager = new ThemeManager(array(
-            $desktopTheme, $mobileTheme, $tabletTheme
+            $desktopTheme, $mobileTheme, $tabletTheme,
         ));
 
         $this->matcher = new VirtualThemeMatcher($this->manager, new ThemeNameParser(), array(new DeviceThemeFilter(new MobileDetect())));
