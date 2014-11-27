@@ -1,11 +1,10 @@
 Theme holder
 ============
 
-As you should know a theme holder is used to hold the current theme instance. By default the current theme
-is resolved by theme selector. To access a theme holder you have to use the service `jungi_theme.holder`.
+As you know a theme holder is used to hold the current theme instance. By default the current theme is resolved by theme 
+selector. To access a theme holder you have to use the service `jungi_theme.holder`.
 
 Basically a theme holder is a class which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface`. With this
-interface you can easily create your own theme holder.
 
 ```php
 interface ThemeHolderInterface
@@ -39,9 +38,9 @@ in the interface. Of course you can change it by setting your own theme holder s
 
 To set your own theme holder you must only set the `id` to the appropriate symfony service.
 
-The `ignore_null_theme` has only meaning when a theme selector will don't match any theme for the request. By default a
-theme selector will throw the exception `Jungi\Bundle\ThemeBundle\Exception\NullThemeException` in this kind of situation.
-If you wanna ignore that you must set the `ignore_null_theme` to true.
+The `ignore_null_theme` has only meaning when a theme selector will not match any theme for the request. By default
+a theme selector will throw the exception `Jungi\Bundle\ThemeBundle\Exception\NullThemeException` in this sort of 
+situation. If you wanna ignore that you must set the `ignore_null_theme` to true.
 
 ```yaml
 # app/config/config.yml

@@ -13,7 +13,7 @@ Add the JungiThemeBundle in your composer.json:
 ```js
 {
     "require": {
-        "jungi/theme-bundle": "dev-master"
+        "jungi/theme-bundle": "~1.0@dev"
     }
 }
 ```
@@ -21,7 +21,7 @@ Add the JungiThemeBundle in your composer.json:
 Or run the following command in your project:
 
 ```bash
-$ php composer.phar require jungi/theme-bundle "~1.0"
+$ php composer.phar require jungi/theme-bundle "~1.0@dev"
 ```
 
 ### Step 2: Enable the bundle
@@ -126,8 +126,8 @@ jungi_theme:
 
 #### Setup fallback theme resolver (optional)
 
-A fallback theme resolver is very helpful when a primary theme resolver doesn't match any theme for the request. To setup
-a fallback theme resolver you must follow the same steps as for the primary theme resolver.
+A fallback theme resolver is very helpful when a primary theme resolver will not match any theme for the request. To setup
+the fallback theme resolver you must follow the same steps as for the primary theme resolver.
 
 ```yml
 # app/config/config.yml
@@ -139,13 +139,12 @@ jungi_theme:
 
 **NOTE**
 
-> Remember one thing about setting a fallback theme resolver. The set fallback theme resolver should always return
-> a theme name for the request
+> Remember one thing about setting a fallback theme resolver - it should always return a theme name for the request.
 
 Final
 -----
 
-So if you completed the installation you can from now on start using the bundle and learn super things which I have described
+So if you completed the installation you can from now on start using the bundle and learn super things which I described
 in the documentation :)
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md)

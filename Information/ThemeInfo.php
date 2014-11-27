@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Information;
 
 /**
- * The ThemeInfo is kind of the interface which is used to describe a theme.
+ * The ThemeInfo is a kind of the interface which is used to describe a theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

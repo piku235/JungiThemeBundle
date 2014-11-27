@@ -14,7 +14,7 @@ Class | Name
 ----- | ----
 MobileDevices | jungi.mobile_devices
 DesktopDevices | jungi.desktop_devices
-Link | jungi.link
+VirtualTheme | jungi.virtual_theme
 
 ### MobileDevices
 
@@ -62,18 +62,17 @@ for desktop devices (the most likely scenario) should have this tag.
 
 The aim of the VirtualTheme tag is to connect multiple themes into one. It can be done by implementing this tag to desired
 themes through specifying the same virtual theme name. It's mainly used in the [AWD](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md#awd-adaptive-web-design) 
-(Adaptive Web Design), but it can be also used for any other purpose. Virtual themes are discussed in the [Theme matcher](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-matcher.md)
-chapter.
+(Adaptive Web Design), but it can be also used for any other purpose. More details about virtual themes you'll find in 
+the [Theme matcher](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-matcher.md) chapter.
 
 Usage
 -----
 
-The usage of each tags depends on a theme mapping that you'll choose.
-
-The **MobileDevices** tag and the **DesktopDevices** tag were used in the [RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md) 
+The usage of each tags depends on a theme mapping that you'll choose. For example the **MobileDevices** tag and the 
+**DesktopDevices** tag were used in the [RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md) 
 chapter and also they were used with the **VirtualTheme** in the [AWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md) chapter.
 
-How tags works you can see by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/Filter/DeviceThemeFilterTest.php)
+If you're curious how exactly tags works, you can see it by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/Filter/DeviceThemeFilterTest.php)
 and [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/VirtualThemeMatcherTest.php).
 
 Creating tag
@@ -124,29 +123,29 @@ class SimpleTag extends TagInterface
 }
 ```
 
-As you see there isn't required to write a lot of code to get a proper working tag. Of course the tag above does not do
+As you see there isn't required to write a lot of code to get a proper working tag. Of course the tag above doesn't do
 anything special, but you can write more complex tags.
 
 ### Register created tag
 
-After you created a tag you will have to register it to use it e.g. in a theme mapping document. To do this follow the
-instructions located in the **Tag Registry** section.
+After you created a tag you will need to register it in order to use it e.g. in a theme mapping document. To do this follow 
+the instructions located in the **Tag Registry** section.
 
 Tag registry
 ------------
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/Registry/TagRegistryInterface.php)
 
-A tag registry is a place where you can obtain the path to the class of tag by passing tag name. The main goal of a
-tag registry is an ability about registering new tags. Thanks to that theme mapping loaders are able to not only use the
-built-in tags, but additionally to use tags created e.g. by you :)
+A tag registry is a place where you can obtain a full qualified class name of tag by passing only a tag name. The main 
+goal of a tag registry is an ability about registering new tags. Thanks to that theme mapping loaders are able to not only 
+use the built-in tags, but also to use tags created by you :)
 
 ### How to register a new tag?
 
-The registration can be done from the symfony services which is very comfortable. The only thing you have to do is to
-define a service with the tag `jungi_theme.tag_provider`. As a service class you can use the parameter `jungi_theme.tag.registry.provider.class`
-which by default points to the `Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider`. A tag provider only provides tags to
-a tag registry and nothing more.
+The registration of a new tag can be done from the symfony services which is a very comfortable way. The only thing you 
+have to do is to define a service with the tag `jungi_theme.tag_provider`. As a service class you can use the parameter 
+`jungi_theme.tag.registry.provider.class` which by default points to the `Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider`
+class. A tag provider only delivers tags to a tag registry and nothing more.
 
 #### XML Service
 

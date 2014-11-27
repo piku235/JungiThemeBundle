@@ -4,7 +4,7 @@ Themes overview
 Theme
 -----
 
-Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts which as a result 
+Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts which as the result 
 have an influence to the look of a page. A theme representation in the JungiThemeBundle is a class which implements the 
 `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily manipulate themes and obtain 
 important for us information.
@@ -162,8 +162,8 @@ Generally themes are staying in a bundle. There is no limit saying how many them
 must only decide when these themes should be together and when they should be separated into single bundles.
 
 Consider the situation when you have three themes, where only two of them are related in some way and the third one is
-whole different (different logic or maybe different graphics). You can create a first bundle e.g. **FooBundle** for these
-two related themes and create a second bundle e.g. **BooBundle** for the third theme.
+whole different (different logic or maybe different graphics). For example you can create the first bundle **FooBundle** 
+for these two related themes and create the second bundle **BooBundle** for the third theme.
 
 The directory structure could looks like below:
 
@@ -188,7 +188,7 @@ for templates. The only difference are locations of templates.
 
 Suppose that we want to render e.g `FooBundle:Default:index.html.twig`:
 
-1. The template name will be searched in the current theme resources and if the given template name exists then this found
+1. The template name will be searched in the current theme resources and if the given template name exists then the found
 template resource will be used.
 2. If the given template name can not be found in the current theme resources then the default search process (just like
 the symfony does) will be performed, so finally a template resource from the **FooBundle** will be used.

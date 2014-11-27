@@ -99,9 +99,9 @@ So let's start explaining from the `<parameters />` element, the `<themes />` el
 </theme-mapping>
 ```
 
-Parameters can facilitate many things, especially when you've got the definition of multiple themes. They're almost the 
-same as parameters in the symfony services, with the difference that parameters in a theme mapping file has a local scope, 
-so you don't must be afraid that some variable will be overwritten by other theme mapping file.
+Parameters can facilitate many things, especially when you have the definition of multiple themes. They're almost the 
+same as parameters in the symfony services, expect that parameters in a theme mapping file has a local scope, so you 
+don't must be afraid that some variable will be overwritten by other theme mapping file.
 
 The parameter is specified by the `<parameter />` element which is a direct child of the `<parameters />` element. 
 The `<parameter />` element has the following attributes:
@@ -148,7 +148,7 @@ surround the parameter with percent sings "%" e.g. **%footheme.mobile_systems%**
 ```xml
 <theme-mapping>
     <themes>
-        <theme name="unique_name" path="@JungiFooBundle/Resources/theme">
+        <theme name="" path="">
             <!-- definition -->
         </theme>
         <!-- other themes -->
@@ -164,15 +164,19 @@ Attribute | Description | Required
 name | An unique name of theme | true
 path | An absolute path to theme resources. The path to a bundle resource is also allowed | true
 
+**NOTE**
+
+> As shown in the quick example a path can be a bundle resource e.g. `@JungiFooBundle/Resources/theme`.
+
 Inside the `<theme />` element can be only defined:
 
 ```xml
-<theme name="foo" path="@JungiFooBundle/Resources/theme">
+<theme name="" path="">
     <!-- tags are optional -->
     <tags>
         <!-- tag list -->
     </tags>
-    <!-- info are required -->
+    <!-- info is required -->
     <info>
         <!-- list of properties -->
     </info>
@@ -208,25 +212,23 @@ description | string | false
 license | string | false
 authors | collection | false
 
-**INFO**
-
-> The `<info />` element is required due to name property which is listed in the table
-
-As you have seen in the quick example to define an author you'll use the following formula:
+As you've seen in the quick example to define an author you'll use the following formula:
 
 ```xml
 <info>
     <property key="authors" type="collection">
         <property type="collection">
-            <!-- properties describing an author -->
+            <parameter key="name">foo</parameter>
+            <parameter key="email">foo@bar.com</parameter>
+            <parameter key="homepage">www.bar.com</parameter>
         </property>
         <!-- other authors -->
     </property>
 </info>
 ```
 
-An author must be defined as the `<property type="collection" />` element, where for the children `<property />` elements 
-you can use only the following keys:
+An author must be defined as a property of the collection type, where the children of the `<property />` element can only 
+have the following keys:
 
 Key | Type | Required
 --- | ---- | --------
@@ -259,7 +261,7 @@ tags.
 ```
 
 The `<tags />` element has only children `<tag />` which have one required attribute **name**. This attribute takes as
-value a unique tag name which identifies a tag. 
+the value a unique tag name which identifies a tag. 
 
 For use you have the following built-in tags:
 
@@ -267,16 +269,16 @@ Class | Name
 ----- | ----
 MobileDevices | jungi.mobile_devices
 DesktopDevices | jungi.desktop_devices
-Link | jungi.link
+VirtualTheme | jungi.virtual_theme
 
 Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
-allows for dynamically registering tags in the convenient way. You can read about that [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
+allows for dynamically registering tags in a much more convenient way. You can read about that [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
 
 **IMPORTANT**
 
 There is also one thing worthy to say here. If you're creating a standard theme which generally will be used for desktop 
-devices you must remember to define the `jungi.desktop_device` tag. In some cases this tag can be significant and it can 
-be useful when viewing information about a theme.
+devices you must remember to define the `jungi.desktop_device` tag. In some cases this tag can be very useful when viewing 
+information about a theme.
 
 #### Arguments
 

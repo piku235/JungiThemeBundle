@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
 
 /**
- * Classes with this interface are responsible for handling tag classes
+ * Classes with this interface are responsible for managing tag classes
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -23,12 +23,12 @@ interface TagRegistryInterface
      *
      * @param string $name A tag name
      *
-     * @return boolean
+     * @return bool
      */
     public function hasTagClass($name);
 
     /**
-     * Gets the class of a given tag name
+     * Gets the full qualified class name of a given tag name
      *
      * @param string $name A tag name
      *

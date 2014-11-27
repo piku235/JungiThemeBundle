@@ -57,9 +57,9 @@ parameters:
     # other parameters
 ```
 
-Parameters can facilitate many things, especially when you've got the definition of multiple themes. They're almost the 
-same as parameters in the symfony services, with the difference that parameters in a theme mapping file has a local scope, 
-so you don't must be afraid that some variable will be overwritten by other theme mapping file.
+Parameters can facilitate many things, especially when you have the definition of multiple themes. They're almost the 
+same as parameters in the symfony services, expect that parameters in a theme mapping file has a local scope, so you 
+don't must be afraid that some variable will be overwritten by other theme mapping file.
 
 #### Constants
 
@@ -107,7 +107,7 @@ footheme:
 
 **NOTE**
 
-> As shown in the quick example a path can be a bundle resource `@JungiFooBundle/Resources/theme`.
+> As shown in the quick example a path can be a bundle resource e.g. `@JungiFooBundle/Resources/theme`.
 
 ### ThemeInfo
 
@@ -128,7 +128,7 @@ description | string | false
 license | string | false
 authors | collection | false
 
-As you see the `authors` is a collection type. To define an author you have to use the formula below:
+As you see the `authors` is a collection type. To define an author you have to use the following formula:
 
 ```yml
 info:
@@ -137,7 +137,7 @@ info:
         # other authors
 ```
 
-Each author must be also a collection type wherein you can only use the following keys:
+Each author must also be of the collection type wherein you can only use the following keys:
 
 Key | Type | Required
 --- | ---- | --------
@@ -171,16 +171,16 @@ Class | Name
 ----- | ----
 MobileDevices | jungi.mobile_devices
 DesktopDevices | jungi.desktop_devices
-Link | jungi.link
+VirtualTheme | jungi.virtual_theme
 
 Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
-allows for dynamically registering new tags in much convenient way. You can read about a tag registry [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
+allows for dynamically registering tags in a much more convenient way. You can read about that [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
 
 **IMPORTANT**
 
 There is also one thing worthy to say here. If you're creating a standard theme which generally will be used for desktop 
-devices you must remember to define the `jungi.desktop_device` tag. In some cases this tag can be significant and it can 
-be useful when viewing information about a theme.
+devices you must remember to define the `jungi.desktop_device` tag. In some cases this tag can be very useful when viewing 
+information about a theme.
 
 #### Arguments
 
@@ -194,7 +194,7 @@ tags:
 
 #### Parameters usage
 
-Sometimes arguments can be very long and thus very hard to read, so to simplify you can use parameters.
+Sometimes arguments can be very long and thus, very hard to read, so in order to facilitate you can use parameters.
 
 ```yml
 tags:
