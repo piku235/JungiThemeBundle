@@ -137,7 +137,7 @@ Tag registry
 [Show the interface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/Registry/TagRegistryInterface.php)
 
 A tag registry is a place where you can obtain a full qualified class name of tag by passing only a tag name. The main 
-goal of a tag registry is an ability about registering new tags. Thanks to that theme mapping loaders are able to not only 
+goal of a tag registry is an ability about registering new tags - thanks to that theme mapping loaders are able to not only 
 use the built-in tags, but also to use tags created by you :)
 
 ### How to register a new tag?

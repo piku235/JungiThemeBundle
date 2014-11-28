@@ -28,8 +28,7 @@ Third Party Packages
 Examples
 --------
 
-* [JungiSimpleEnvironmentBundle](https://github.com/piku235/JungiSimpleEnvironmentBundle)
-* [JungiSimpleThemeBundle](https://github.com/piku235/JungiSimpleThemeBundle)
+* [JungiThemeBundleSandbox](https://github.com/piku235/JungiThemeBundleSandbox)
 
 Documentation
 -------------

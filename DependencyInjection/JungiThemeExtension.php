@@ -43,7 +43,7 @@ class JungiThemeExtension extends Extension
         $container->setParameter('jungi_theme.listener.holder.ignore_null_theme', $config['holder']['ignore_null_theme']);
 
         // Primary theme resolver conf
-        $this->configureThemeResolver('jungi_theme.resolver', 'primary', $config, $container);
+        $this->configureThemeResolver('jungi_theme.resolver.primary', 'primary', $config, $container);
 
         // Fallback theme resolver conf
         if ($config['resolver']['fallback']['enabled']) {

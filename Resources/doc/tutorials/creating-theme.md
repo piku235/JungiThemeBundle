@@ -4,16 +4,6 @@ Creating a theme
 The goal of this tutorial is to show you how from the scratch create a simple theme and how to use it. Let's assume that 
 we're gonna to create a responsive theme (RWD) which will be used on every page of our website.
 
-### Requirements
-
-Before you start I recommend you to read the following chapters if you haven't read them yet:
-
-* Themes overview,
-* Theme mappings,
-* Theme tags
-
-Thanks to them you will understand things which happens in this tutorial.
-
 ### Step 1: Create a bundle for the theme
 
 The first thing that we have to do is to create a "container" in which our theme will be placed. And the most suitable
