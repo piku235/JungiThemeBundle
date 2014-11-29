@@ -13,7 +13,7 @@ env:
   - SYMFONY_VERSION=dev-master
 
 install:
-  - composer require symfony/framework-bundle ${SYMFONY_VERSION}
+  - composer require symfony/framework-bundle:${SYMFONY_VERSION}
 
 notifications:
   email:
@@ -22,3 +22,4 @@ notifications:
 matrix:
   allow_failures:
     - php: hhvm
+    - env: SYMFONY_VERSION=dev-master
