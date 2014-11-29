@@ -23,11 +23,10 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
 use Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\FakeMetadataFactory;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\Constraints\FakeClassConstraint;
-use Symfony\Component\Validator\ConstraintValidatorFactory;
-use Symfony\Component\Validator\DefaultTranslator;
-use Symfony\Component\Validator\Validator;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * ThemeSelector Test Case
@@ -257,16 +256,19 @@ class ThemeSelectorTest extends TestCase
     /**
      * Returns the configured validator helper
      *
-     * @return Validator
+     * @return ValidatorInterface
      */
     private function getValidator()
     {
-        $validator = new Validator(new FakeMetadataFactory(), new ConstraintValidatorFactory(), new DefaultTranslator());
+        $metadataFactory = new FakeMetadataFactory();
+        $validator = Validation::createValidatorBuilder()
+            ->setMetadataFactory($metadataFactory)
+            ->getValidator();
 
         // Constraints for the ThemeInterface
         $metadata = new ClassMetadata('Jungi\Bundle\ThemeBundle\Core\ThemeInterface');
         $metadata->addConstraint(new FakeClassConstraint());
-        $validator->getMetadataFactory()->addMetadata($metadata);
+        $metadataFactory->addMetadata($metadata);
 
         return $validator;
     }

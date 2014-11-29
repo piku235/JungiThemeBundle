@@ -17,7 +17,7 @@ use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents;
 use Jungi\Bundle\ThemeBundle\Validation\ValidationUtils;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * ValidationListener

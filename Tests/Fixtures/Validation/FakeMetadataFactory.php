@@ -11,15 +11,15 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation;
 
-use Symfony\Component\Validator\Mapping\ClassMetadataFactory;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
 
 /**
  * FakeMetadataFactory with interface support
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class FakeMetadataFactory extends ClassMetadataFactory
+class FakeMetadataFactory extends LazyLoadingMetadataFactory
 {
     public function addMetadata(ClassMetadata $metadata)
     {

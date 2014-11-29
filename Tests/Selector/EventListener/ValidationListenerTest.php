@@ -18,9 +18,7 @@ use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\FakeMetadataFactory;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\Constraints\FakeClassConstraint;
-use Symfony\Component\Validator\Validator;
-use Symfony\Component\Validator\ConstraintValidatorFactory;
-use Symfony\Component\Validator\DefaultTranslator;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints;
 
@@ -57,7 +55,9 @@ class ValidationListenerTest extends TestCase
     protected function setUp()
     {
         $this->metadataFactory = new FakeMetadataFactory();
-        $validator = new Validator($this->metadataFactory, new ConstraintValidatorFactory(), new DefaultTranslator());
+        $validator = Validation::createValidatorBuilder()
+            ->setMetadataFactory($this->metadataFactory)
+            ->getValidator();
         $this->theme = new Theme(
             'footheme', 'path', $this->getMock('Jungi\Bundle\ThemeBundle\Information\ThemeInfo')
         );
