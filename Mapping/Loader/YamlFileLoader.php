@@ -77,12 +77,14 @@ class YamlFileLoader extends FileLoader
         $path = $this->locator->locate($file);
 
         if (!stream_is_local($path)) {
-            throw new \RuntimeException(sprintf('The "%s" file is not local.', $path));
+            throw new \RuntimeException(sprintf('The file "%s" must be a local resource.', $path));
         } elseif (!$this->supports($path)) {
             throw new \DomainException(sprintf('The given file "%s" is not supported.', $path));
+        } elseif (!is_readable($path)) {
+            throw new \RuntimeException(sprintf('The given file "%s" is not readable.', $path));
         }
 
-        $content = Yaml::parse($path, true);
+        $content = Yaml::parse(file_get_contents($path), true);
         if (null === $content) { // If is an empty file
 
             return;

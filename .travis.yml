@@ -4,15 +4,21 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - hhvm
 
 env:
-  - SYMFONY_VERSION=2.3.*
   - SYMFONY_VERSION=2.4.*
+  - SYMFONY_VERSION=2.5.*
+  - SYMFONY_VERSION=2.6.*
   - SYMFONY_VERSION=dev-master
 
 install:
-  - composer require symfony/framework-bundle:${SYMFONY_VERSION}
+  - composer require symfony/framework-bundle ${SYMFONY_VERSION}
 
 notifications:
   email:
     - piku235@gmail.com
+
+matrix:
+  allow_failures:
+    - php: hhvm
