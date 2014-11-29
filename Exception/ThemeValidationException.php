@@ -26,6 +26,26 @@ class ThemeValidationException extends \LogicException
     protected $violations;
 
     /**
+     * Creates a well formatted exception
+     *
+     * @param string                           $message    A message
+     * @param ConstraintViolationListInterface $violations Violations
+     *
+     * @return ThemeValidationException
+     */
+    public static function createWellFormatted($message, ConstraintViolationListInterface $violations)
+    {
+        $message = rtrim($message, '. ').'.';
+        foreach ($violations as $violation) {
+            $message .= $violation->getPropertyPath()
+                ? sprintf(' Property %s: %s', $violation->getPropertyPath(), $violation->getMessage())
+                : ' '.$violation->getMessage();
+        }
+
+        return new static($message, $violations);
+    }
+
+    /**
      * Constructor
      *
      * @param string                           $message    A message

@@ -108,7 +108,6 @@ class JungiThemeExtension extends Extension
             'Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent',
             'Jungi\Bundle\ThemeBundle\Selector\Event\DetailedResolvedThemeEvent',
             'Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener',
-            'Jungi\Bundle\ThemeBundle\Validation\ValidationUtils',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
             'Jungi\Bundle\ThemeBundle\Tag\VirtualTheme',

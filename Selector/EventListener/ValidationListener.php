@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Selector\EventListener;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents;
-use Jungi\Bundle\ThemeBundle\Validation\ValidationUtils;
+use Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -107,7 +107,7 @@ class ValidationListener implements EventSubscriberInterface
             $event->cancel();
 
             if (null !== $this->logger) {
-                $this->logger->warning(ValidationUtils::formatValidationMessage(
+                $this->logger->warning(ThemeValidationException::createWellFormatted(
                     sprintf('The theme "%s" will be invalidated due to failed validation.', $event->getTheme()->getName()),
                     $constraints
                 ));

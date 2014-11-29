@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
 
 /**
- * FakeMetadataFactory with interface support
+ * FakeMetadataFactory
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
