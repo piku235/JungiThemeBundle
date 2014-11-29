@@ -9,7 +9,6 @@ php:
 env:
   - SYMFONY_VERSION=2.5.*
   - SYMFONY_VERSION=2.6.*
-  - SYMFONY_VERSION=dev-master
 
 install:
   - composer require symfony/symfony:${SYMFONY_VERSION}
@@ -21,4 +20,3 @@ notifications:
 matrix:
   allow_failures:
     - php: hhvm
-    - env: SYMFONY_VERSION=dev-master
