@@ -56,25 +56,28 @@ The theme resolver could look like below:
 
 ```php
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserThemeResolver implements ThemeResolverInterface
 {
-    private $securityContext;
+    private $tokenStorage;
+    private $authChecker;
     private $defaultTheme;
 
-    public function __construct(SecurityContextInterface $securityContext, $defaultTheme = null)
+    public function __construct(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authChecker, $defaultTheme = null)
     {
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
+        $this->authChecker = $authChecker;
         $this->defaultTheme = $defaultTheme;
     }
 
     public function resolveThemeName(Request $request)
     {
-        $token = $this->securityContext->getToken();
-        if (!$token->isGranted(new Expression('is_authenticated()'))) {
+        $token = $this->tokenStorage->getToken();
+        if (!$this->authChecker->isGranted(new Expression('is_authenticated()'))) {
             return null;
         } 
         
@@ -89,8 +92,8 @@ class UserThemeResolver implements ThemeResolverInterface
     
     public function setThemeName($themeName, Request $request)
     {
-        $token = $this->securityContext->getToken();
-        if (!$token->isGranted(new Expression('is_authenticated()'))) {
+        $token = $this->tokenStorage->getToken();
+        if (!$this->authChecker->isGranted(new Expression('is_authenticated()'))) {
             throw new LogicException('You cannot change the theme when the user is not authenticated.');
         }
         

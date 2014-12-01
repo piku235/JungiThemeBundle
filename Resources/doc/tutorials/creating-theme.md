@@ -14,6 +14,9 @@ The first thing that we have to do is to create a "container" in which our theme
 src/
     Jungi/
         HeroThemeBundle/
+            DependencyInjection/
+                Configuration.php
+                JungiHeroThemeExtension.php
             Resources/
                 public/
                     js/
@@ -51,20 +54,10 @@ theme mapping for this theme can looks like below:
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping https://raw.githubusercontent.com/piku235/JungiThemeBundle/master/Mapping/Loader/schema/theme-1.0.xsd">
 
-    <parameters>
-        <parameter key="jungi_hero.mobile_systems" type="collection">
-            <parameter>iOS</parameter>
-            <parameter>AndroidOS</parameter>
-        </parameter>
-    </parameters>
-
     <themes>
         <theme name="jungi_hero" path="@JungiHeroThemeBundle/Resources/theme">
             <tags>
-                <tag name="jungi.mobile_devices">
-                    <argument>%jungi_hero.mobile_systems%</argument>
-                    <argument type="constant">jungi.mobile_devices::MOBILE</argument>
-                </tag>
+                <tag name="jungi.mobile_devices" />
                 <tag name="jungi.desktop_devices" />
             </tags>
             <info>
@@ -83,7 +76,7 @@ theme mapping for this theme can looks like below:
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
-                <property key="license" type="string">MIT</property>
+                <property key="license">MIT</property>
             </info>
         </theme>
     </themes>
@@ -128,8 +121,8 @@ And that's almost the end. After this step the theme should be available in a th
 
 ### Step 4: Set the theme for a theme resolver
 
-To set our theme to be visible on every page we'll use the `InMemoryThemeResolver`. We only have to set the theme name 
-and the type of this theme resolver in the configuration.
+To set our theme to be visible on every page we can use the `InMemoryThemeResolver`. We only have to set the theme name 
+and the type of theme resolver in the configuration.
 
 ```yaml
 # app/config/config.yml

@@ -61,6 +61,9 @@ class ValidationListener implements EventSubscriberInterface
     /**
      * Adds a suspect theme resolver
      *
+     * When they are suspect theme resolver only for them the validation
+     * will be performed
+     *
      * @param ThemeResolverInterface|string $class An object or a class name
      *
      * @return void
