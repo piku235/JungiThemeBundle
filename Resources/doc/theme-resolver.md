@@ -104,7 +104,7 @@ class UserThemeResolver implements ThemeResolverInterface
 }
 ```
 
-Now when we created our theme resolver a normal thing is we want to use it in a project. We must create a service
+Now when we have created the theme resolver a normal thing is we want to use it in our project. We must create a service
 for this theme resolver and activate it in the configuration. Assume that the service is called `jungi_theme.resolver.user`.
 Like mentioned in the installation steps to setup a theme resolver service we must to define the configuration like below:
 

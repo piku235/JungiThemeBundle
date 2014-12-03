@@ -28,7 +28,7 @@ Third Party Packages
 Sandbox
 -------
 
-You can play with the bundle by installing the [JungiThemeBundleSandbox](https://github.com/piku235/JungiThemeBundleSandbox).
+You can play with the bundle by installing this [sandbox](https://github.com/piku235/JungiThemeBundleSandbox).
 
 Documentation
 -------------

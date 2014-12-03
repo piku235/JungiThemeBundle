@@ -95,7 +95,7 @@ class Configuration implements ConfigurationInterface
     {
         $builder = new TreeBuilder();
         $rootNode = $builder->root('selector');
-        $investigatorNorm = function ($v) {
+        $resolverNorm = function ($v) {
             if (isset($v['suspects'])) {
                 array_walk($v['suspects'], function (&$class) {
                     if (false === strpos($class, '\\')) {
@@ -105,8 +105,6 @@ class Configuration implements ConfigurationInterface
                     if (!class_exists($class)) {
                         throw new \InvalidArgumentException(sprintf('The theme resolver "%s" can not be found.', $class));
                     }
-
-                    return $class;
                 });
             }
 
@@ -134,7 +132,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                     ->beforeNormalization()
                         ->always()
-                        ->then($investigatorNorm)
+                        ->then($resolverNorm)
                     ->end()
                 ->end()
             ->end();

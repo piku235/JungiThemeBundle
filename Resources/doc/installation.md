@@ -67,11 +67,7 @@ jungi_theme:
         primary:
             type: cookie
             arguments:
-                - lifetime: 3600 # time in sec
-                  path: /
-                  domain: ~
-                  secure: false
-                  httpOnly: true
+                - { lifetime: 3600, path: /, domain: ~, secure: false, httpOnly: true }
 ```
 
 ##### InMemoryThemeResolver
