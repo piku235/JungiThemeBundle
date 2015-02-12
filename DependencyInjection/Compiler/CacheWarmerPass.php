@@ -27,11 +27,12 @@ class CacheWarmerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        // @TODO: check cache warmer
         if (!$container->hasDefinition('templating.cache_warmer.template_paths')) {
             return;
         }
 
         $cacheWarmer = $container->getDefinition('templating.cache_warmer.template_paths');
-        $cacheWarmer->replaceArgument(0, new Reference('jungi_theme.cache_warmer.finder_chain'));
+        $cacheWarmer->replaceArgument(0, new Reference('jungi_theme.cache_warmer.composite_finder'));
     }
 }

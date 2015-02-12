@@ -22,8 +22,7 @@ use Symfony\Component\Validator\Constraint;
 class FakeClassConstraintValidator extends ConstraintValidator
 {
     /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\Validator\ConstraintValidatorInterface::validate()
+     * {@inheritdoc}
      */
     public function validate($value, Constraint $constraint)
     {

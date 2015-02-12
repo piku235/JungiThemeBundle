@@ -11,11 +11,12 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Templating;
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateNameParser;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
-use Jungi\Bundle\ThemeBundle\Tests\Fixtures\FakeThemeHolder;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
+use Symfony\Component\Templating\TemplateReference as MotherTemplateReference;
 
 /**
  * TemplateNameParserTest
@@ -30,7 +31,7 @@ class TemplateNameParserTest extends TestCase
     private $parser;
 
     /**
-     * @var FakeThemeHolder
+     * @var ThemeHolder
      */
     private $holder;
 
@@ -53,7 +54,7 @@ class TemplateNameParserTest extends TestCase
                 throw new \InvalidArgumentException();
             }));
 
-        $this->holder = new FakeThemeHolder();
+        $this->holder = new ThemeHolder();
         $this->holder->setTheme($this->createThemeMock('Foo'));
         $this->parser = new TemplateNameParser($this->holder, $kernel);
     }
@@ -71,39 +72,18 @@ class TemplateNameParserTest extends TestCase
     }
 
     /**
-     * @dataProvider getInvalidLogicalNames
-     *
-     * @expectedException \InvalidArgumentException
-     */
-    public function testOnInvalidName($name)
-    {
-        $this->parser->parse($name);
-    }
-
-    /**
      * Tests on an empty theme
      */
     public function testOnEmptyTheme()
     {
-        $this->holder->theme = null;
+        $ref = new \ReflectionObject($this->holder);
+        $prop = $ref->getProperty('theme');
+        $prop->setAccessible(true);
+        $prop->setValue($this->holder, null);
+
         $template = $this->parser->parse('FooBundle:Default:index.html.twig');
 
         $this->assertEquals($template, new BaseTemplateReference('FooBundle', 'Default', 'index', 'html', 'twig'));
-    }
-
-    /**
-     * The data provider
-     *
-     * @return array
-     */
-    public function getInvalidLogicalNames()
-    {
-        return array(
-            array('BarBundle:Post:index.html.php'),
-            array('FooBundle:Post:index'),
-            array('FooBundle:Post'),
-            array('FooBundle:Post:foo:bar'),
-        );
     }
 
     /**
@@ -118,6 +98,9 @@ class TemplateNameParserTest extends TestCase
             array('JungiTestBundle::index.html.twig', new TemplateReference(new BaseTemplateReference('JungiTestBundle', null, 'index', 'html', 'twig'), 'Foo')),
             array('::index.html.twig', new TemplateReference(new BaseTemplateReference(null, null, 'index', 'html', 'twig'), 'Foo')),
             array(':FooBundle:index.html.twig', new TemplateReference(new BaseTemplateReference(null, 'FooBundle', 'index', 'html', 'twig'), 'Foo')),
+            array('/path/to/section/name.php', new MotherTemplateReference('/path/to/section/name.php', 'php')),
+            array('name.twig', new MotherTemplateReference('name.twig', 'twig')),
+            array('name', new MotherTemplateReference('name')),
         );
     }
 }

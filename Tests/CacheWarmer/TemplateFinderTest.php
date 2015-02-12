@@ -11,25 +11,25 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\CacheWarmer;
 
-use Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder;
-use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
+use Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinder;
+use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * ThemeFinder Test Case
+ * TemplateFinder Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeFinderTest extends TestCase
+class TemplateFinderTest extends TestCase
 {
     public function testFind()
     {
-        $manager = new ThemeManager(array(
+        $registry = new ThemeRegistry(array(
             $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
             $this->createThemeMock('boo', __DIR__.'/Fixtures/BooThemeBundle/Resources/theme'),
         ));
-        $finder = new ThemeFinder($manager, new TemplateFilenameParser());
+        $finder = new TemplateFinder($registry, new TemplateFilenameParser());
         $references = $finder->findAllTemplates();
 
         $this->assertCount(6, $references);

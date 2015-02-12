@@ -11,25 +11,25 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\CacheWarmer;
 
-use Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinderChain;
-use Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder;
-use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
+use Jungi\Bundle\ThemeBundle\CacheWarmer\CompositeTemplateFinder;
+use Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinder;
+use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Tests\CacheWarmer\Fixtures\OrdinaryBundle\OrdinaryBundle;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder;
+use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder as sfTemplateFinder;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateFilenameParser as sfTemplateFilenameParser;
 
 /**
- * TemplateFinderChain Test Case
+ * CompositeTemplateFinder Test Case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class TemplateFinderChainTest extends TestCase
+class CompositeTemplateFinderTest extends TestCase
 {
     public function testFind()
     {
-        $manager = new ThemeManager(array(
+        $registry = new ThemeRegistry(array(
             $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
             $this->createThemeMock('boo', __DIR__.'/Fixtures/BooThemeBundle/Resources/theme'),
         ));
@@ -39,8 +39,8 @@ class TemplateFinderChainTest extends TestCase
             ->method('getBundles')
             ->will($this->returnValue(array('OrdinaryBundle' => new OrdinaryBundle())))
         ;
-        $chain = new TemplateFinderChain(array(new ThemeFinder($manager, new TemplateFilenameParser())));
-        $chain->addFinder(new TemplateFinder($kernel, new sfTemplateFilenameParser(), __DIR__.'/Fixtures/Resources'));
+        $chain = new CompositeTemplateFinder(array(new TemplateFinder($registry, new TemplateFilenameParser())));
+        $chain->addFinder(new sfTemplateFinder($kernel, new sfTemplateFilenameParser(), __DIR__.'/Fixtures/Resources'));
         $references = $chain->findAllTemplates();
 
         $this->assertCount(9, $references);

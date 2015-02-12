@@ -11,7 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
-use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollectionInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
@@ -20,16 +19,16 @@ use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-interface ThemeManagerInterface
+interface ThemeRegistryInterface
 {
     /**
-     * Adds a new theme
+     * Registers a new theme
      *
      * @param ThemeInterface $theme A theme
      *
      * @return void
      */
-    public function addTheme(ThemeInterface $theme);
+    public function registerTheme(ThemeInterface $theme);
 
     /**
      * Checks if a given theme exists
@@ -47,7 +46,7 @@ interface ThemeManagerInterface
      *
      * @return ThemeInterface
      *
-     * @throws ThemeNotFoundException If the theme can not be found
+     * @throws \Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException
      */
     public function getTheme($name);
 
@@ -59,7 +58,7 @@ interface ThemeManagerInterface
     public function getThemes();
 
     /**
-     * Returns the theme which have given tags
+     * Returns the theme which has given tags
      *
      * @param TagInterface|TagInterface[] $tags      A one tag or tags
      * @param string                      $condition A condition (optional)
@@ -69,7 +68,7 @@ interface ThemeManagerInterface
     public function findThemeWithTags($tags, $condition = TagCollectionInterface::COND_AND);
 
     /**
-     * Returns all themes which have given tags
+     * Returns all themes which has given tags
      *
      * @param TagInterface|TagInterface[] $tags      A one tag or tags
      * @param string                      $condition A condition (optional)

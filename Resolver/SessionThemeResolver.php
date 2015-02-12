@@ -31,7 +31,7 @@ class SessionThemeResolver implements ThemeResolverInterface
     public function resolveThemeName(Request $request)
     {
         if (!$request->hasSession()) {
-            return null;
+            return;
         }
 
         return $request->getSession()->get(self::SESSION_NAME);

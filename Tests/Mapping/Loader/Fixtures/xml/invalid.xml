@@ -32,7 +32,7 @@
         <theme name="foo_2" path="@JungiFooBundle/Resources/theme">
             <tags>
                 <tag name="jungi.own">
-                    <argument type="constant">Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL</argument>
+                    <argument type="constant">Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag::SPECIAL</argument>
                 </tag>
             </tags>
             <info>

@@ -15,11 +15,11 @@ use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollectionInterface;
 
 /**
- * ThemeManager is a simple implementation of the ThemeManagerInterface
+ * ThemeRegistry is a simple implementation of the ThemeRegistryInterface
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeManager implements ThemeManagerInterface
+class ThemeRegistry implements ThemeRegistryInterface
 {
     /**
      * @var ThemeInterface[]
@@ -35,16 +35,21 @@ class ThemeManager implements ThemeManagerInterface
     {
         $this->themes = array();
         foreach ($themes as $theme) {
-            $this->addTheme($theme);
+            $this->registerTheme($theme);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addTheme(ThemeInterface $theme)
+    public function registerTheme(ThemeInterface $theme)
     {
-        $this->themes[$theme->getName()] = $theme;
+        $name = $theme->getName();
+        if ($this->hasTheme($name)) {
+            throw new \RuntimeException(sprintf('There is already theme with the name "%s".', $name));
+        }
+
+        $this->themes[$name] = $theme;
     }
 
     /**
@@ -72,7 +77,7 @@ class ThemeManager implements ThemeManagerInterface
      */
     public function getThemes()
     {
-        return array_values($this->themes);
+        return $this->themes;
     }
 
     /**
@@ -90,7 +95,7 @@ class ThemeManager implements ThemeManagerInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**

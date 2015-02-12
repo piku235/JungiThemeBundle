@@ -8,29 +8,22 @@
         <parameter key="jungi_theme.mapping.loader.xml.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlFileLoader</parameter>
         <parameter key="jungi_theme.mapping.loader.yml.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader</parameter>
         <parameter key="jungi_theme.mapping.loader.php.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader</parameter>
-        <parameter key="jungi_theme.mapping.loader.helper.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper</parameter>
     </parameters>
 
     <services>
-        <service id="jungi_theme.mapping.loader.helper" class="%jungi_theme.mapping.loader.helper.class%" public="false">
-            <argument type="service" id="jungi_theme.tag.registry" />
-        </service>
         <service id="jungi_theme.mapping.loader.xml" class="%jungi_theme.mapping.loader.xml.class%">
-            <argument type="service" id="jungi_theme.manager" />
+            <argument type="service" id="jungi_theme.registry" />
+            <argument type="service" id="jungi_theme.tag.registry" />
             <argument type="service" id="file_locator" />
-            <argument type="service" id="jungi_theme.tag.factory" />
-            <argument type="service" id="jungi_theme.mapping.loader.helper" />
         </service>
         <service id="jungi_theme.mapping.loader.yml" class="%jungi_theme.mapping.loader.yml.class%">
-            <argument type="service" id="jungi_theme.manager" />
+            <argument type="service" id="jungi_theme.registry" />
+            <argument type="service" id="jungi_theme.tag.registry" />
             <argument type="service" id="file_locator" />
-            <argument type="service" id="jungi_theme.tag.factory" />
-            <argument type="service" id="jungi_theme.mapping.loader.helper" />
         </service>
         <service id="jungi_theme.mapping.loader.php" class="%jungi_theme.mapping.loader.php.class%">
-            <argument type="service" id="jungi_theme.manager" />
+            <argument type="service" id="jungi_theme.registry" />
             <argument type="service" id="file_locator" />
-            <argument type="service" id="jungi_theme.tag.factory" />
         </service>
     </services>
 </container>

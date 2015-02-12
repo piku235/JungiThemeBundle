@@ -40,7 +40,7 @@ interface ThemeInterface
      *
      * @return \Jungi\Bundle\ThemeBundle\Information\ThemeInfo
      */
-    public function getInformation();
+    public function getInfo();
 }
 ```
 

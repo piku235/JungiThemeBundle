@@ -15,6 +15,7 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser as BaseTemplateNameParser;
+use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
  * TemplateNameParser basically wraps a TemplateReferenceInterface instance with the TemplateReference
@@ -58,10 +59,11 @@ class TemplateNameParser extends BaseTemplateNameParser
         $theme = $this->holder->getTheme();
 
         // Use parent method if there is no theme
-        if (null === $theme) {
-            return parent::parse($name);
+        $parent = parent::parse($name);
+        if (null === $theme || !$parent instanceof BaseTemplateReference) {
+            return $parent;
         }
 
-        return $this->cache[$name] = new TemplateReference(parent::parse($name), $theme->getName());
+        return $this->cache[$name] = new TemplateReference($parent, $theme->getName());
     }
 }

@@ -11,10 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Selector\EventListener;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter;
 use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection;
-use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own;
+use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Jungi\Bundle\ThemeBundle\Tag;
@@ -33,23 +32,10 @@ class DeviceThemeFilterTest extends TestCase
     private $filter;
 
     /**
-     * @var ThemeInterface
-     */
-    private $desktopTheme;
-
-    /**
      * Set up
      */
     protected function setUp()
     {
-        $this->desktopTheme = $this->createThemeMock('footheme_desktop');
-        $this->desktopTheme
-            ->expects($this->any())
-            ->method('getTags')
-            ->will($this->returnValue(new TagCollection(array(
-                new Tag\DesktopDevices(),
-            ))));
-
         $this->filter = new DeviceThemeFilter(new MobileDetect());
     }
 
@@ -89,9 +75,16 @@ class DeviceThemeFilterTest extends TestCase
             ->will($this->returnValue(new TagCollection(array(
                 new Tag\MobileDevices(),
             ))));
+        $desktopTheme = $this->createThemeMock('footheme_desktop');
+        $desktopTheme
+            ->expects($this->any())
+            ->method('getTags')
+            ->will($this->returnValue(new TagCollection(array(
+                new Tag\DesktopDevices(),
+            ))));
 
         // Prepare and fire the method
-        $collection = new ThemeCollection(array($firstTheme, $secondTheme, $thirdTheme, $fourthTheme, $this->desktopTheme));
+        $collection = new ThemeCollection(array($firstTheme, $secondTheme, $thirdTheme, $fourthTheme, $desktopTheme));
         $this->filter->filter($collection, $this->createRequest($ua));
 
         // Assert
@@ -111,15 +104,13 @@ class DeviceThemeFilterTest extends TestCase
         $firstTheme
             ->expects($this->any())
             ->method('getTags')
-            ->will($this->returnValue(new TagCollection(array(
-                new Tag\VirtualTheme('test'),
-            ))));
+            ->will($this->returnValue(new TagCollection()));
         $secondTheme = $this->createThemeMock('footheme_second');
         $secondTheme
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new Own('foo'),
+                new FakeTag('foo'),
             ))));
 
         // Prepare and fire the method

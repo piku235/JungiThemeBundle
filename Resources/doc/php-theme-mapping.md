@@ -42,7 +42,7 @@ $theme = new Theme(
         $tagFactory->create('jungi.mobile_devices', array(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE))
     ))
 );
-$manager->addTheme($theme);
+$manager->registerTheme($theme);
 ```
 
 Getting Started
@@ -52,11 +52,11 @@ Each document has access to these variables:
 
 Variable | Class (default)
 -------- | ---------------
-$manager | Jungi\Bundle\ThemeBundle\Core\ThemeManager
+$manager | Jungi\Bundle\ThemeBundle\Core\ThemeRegistry
 $locator | Symfony\Component\HttpKernel\Config\FileLocator
 $tagFactory | Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory
 
-As you see to add your theme instance you'll use the method `addTheme` of the `$manager` variable. Thanks to the `$locator` 
+As you see to add your theme instance you'll use the method `registerTheme` of the `$manager` variable. Thanks to the `$locator` 
 you can use paths to a bundle. The `$tagFactory` allows you to create tags only by passing a tag name and arguments for 
 this tag. The simplest theme implementation which you can use is the `Jungi\Bundle\ThemeBundle\Core\Theme` class which is 
 described in the [Theme Overview](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)

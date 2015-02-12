@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
-use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own;
+use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag;
 use Jungi\Bundle\ThemeBundle\Tag;
 
 /**
@@ -73,19 +73,19 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
             new Theme('foo_1', __DIR__.'/Fixtures/FakeBundle', $info1, new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
-                new Own('test'),
+                new FakeTag('test'),
             ))),
             new Theme('foo_2', __DIR__.'/Fixtures/FakeBundle', $info, new TagCollection(array(
-                new Own(Own::SPECIAL),
+                new FakeTag(FakeTag::SPECIAL),
             ))),
             new Theme('foo_3', __DIR__.'/Fixtures/FakeBundle', $info, new TagCollection(array(
-                new Own(CONST_TEST),
+                new FakeTag(CONST_TEST),
             ))),
             new Theme('foo_4', __DIR__.'/Fixtures/FakeBundle', $info4),
         );
 
         foreach ($themes as $theme) {
-            $this->assertEquals($theme, $this->manager->getTheme($theme->getName()));
+            $this->assertEquals($theme, $this->registry->getTheme($theme->getName()));
         }
     }
 
@@ -106,10 +106,10 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
         $theme = new Theme('foo_1', __DIR__.'/Fixtures/FakeBundle', $ib->getThemeInfo(), new TagCollection(array(
             new Tag\DesktopDevices(),
             new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
-            new Own('test'),
+            new FakeTag('test'),
         )));
 
-        $this->assertEquals($theme, $this->manager->getTheme('foo_1'));
+        $this->assertEquals($theme, $this->registry->getTheme('foo_1'));
     }
 
     /**

@@ -92,7 +92,7 @@ class ThemeHolderListener implements EventSubscriberInterface
      *
      * @return void
      */
-    public function onChange(HttpThemeEvent $event)
+    public function onChangedTheme(HttpThemeEvent $event)
     {
         $this->holder->setTheme($event->getTheme());
     }
@@ -104,7 +104,7 @@ class ThemeHolderListener implements EventSubscriberInterface
     {
         return array(
             KernelEvents::CONTROLLER => array('onKernelController', -100), // should be the last
-            ThemeChangerEvents::POST_CHANGE => array('onChange'),
+            ThemeChangerEvents::CHANGED => array('onChangedTheme'),
         );
     }
 }

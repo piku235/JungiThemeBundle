@@ -11,8 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Exception;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameReferenceInterface;
-
 /**
  * ThemeNotFoundException
  *
@@ -28,25 +26,25 @@ class ThemeNotFoundException extends \RuntimeException
     /**
      * Constructor
      *
-     * @param string|ThemeNameReferenceInterface $theme    The not found theme name
+     * @param string $theme The not found theme name
      * @param string                             $message  A message (optional)
      * @param int                                $code     A code (optional)
      * @param \Exception                         $previous The previous exception (optional)
      */
     public function __construct($theme, $message = null, $code = 0, \Exception $previous = null)
     {
+        $this->theme = $theme;
         if (null === $message) {
             $message = sprintf('The theme "%s" can not be found.', $theme);
         }
 
-        $this->theme = $theme;
         parent::__construct($message, $code, $previous);
     }
 
     /**
      * Returns the not found theme name
      *
-     * @return string|ThemeNameReferenceInterface
+     * @return string
      */
     public function getThemeName()
     {

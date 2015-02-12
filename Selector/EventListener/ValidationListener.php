@@ -15,7 +15,6 @@ use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -32,11 +31,6 @@ class ValidationListener implements EventSubscriberInterface
     private $validator;
 
     /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @var array
      */
     private $suspects;
@@ -45,13 +39,11 @@ class ValidationListener implements EventSubscriberInterface
      * Constructor
      *
      * @param ValidatorInterface $validator A validator
-     * @param LoggerInterface    $logger    A logger (optional)
      * @param array              $suspects  Suspect theme resolvers (optional)
      */
-    public function __construct(ValidatorInterface $validator, LoggerInterface $logger = null, array $suspects = array())
+    public function __construct(ValidatorInterface $validator, array $suspects = array())
     {
         $this->validator = $validator;
-        $this->logger = $logger;
         $this->suspects = array();
         foreach ($suspects as $resolver) {
             $this->addSuspect($resolver);
@@ -92,13 +84,11 @@ class ValidationListener implements EventSubscriberInterface
      * @param ResolvedThemeEvent $event An event
      *
      * @return void
+     *
+     * @throws ThemeValidationException If the theme will not pass a validation
      */
     public function onResolvedTheme(ResolvedThemeEvent $event)
     {
-        if (!$event->canCancel()) {
-            return;
-        }
-
         // If is a trusted theme resolver, omit the validation
         if ($this->suspects && !in_array(get_class($event->getThemeResolver()), $this->suspects)) {
             return;
@@ -106,15 +96,10 @@ class ValidationListener implements EventSubscriberInterface
 
         $constraints = $this->validator->validate($event->getTheme());
         if (count($constraints)) {
-            // Invalidate the theme
-            $event->cancel();
-
-            if (null !== $this->logger) {
-                $this->logger->warning(ThemeValidationException::createWellFormatted(
-                    sprintf('The theme "%s" will be invalidated due to failed validation.', $event->getTheme()->getName()),
-                    $constraints
-                ));
-            }
+            throw ThemeValidationException::createWellFormatted(
+                sprintf('The theme "%s" will be invalidated due to failed validation.', $event->getTheme()->getName()),
+                $constraints
+            );
         }
     }
 
@@ -124,7 +109,7 @@ class ValidationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            ThemeSelectorEvents::RESOLVED_THEME => array('onResolvedTheme', -100),
+            ThemeSelectorEvents::RESOLVED => array('onResolvedTheme', -100),
         );
     }
 }

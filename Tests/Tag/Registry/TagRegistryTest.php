@@ -29,16 +29,17 @@ class TagRegistryTest extends TestCase
     {
         $tags = array(
             'jungi.mobile_devices' => '\Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'jungi.virtual_theme' => '\Jungi\Bundle\ThemeBundle\Tag\VirtualTheme',
             'jungi.desktop_devices' => '\Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
+            'jungi.fake' => '\Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag',
         );
-        $provider = new TagProvider($tags['jungi.desktop_devices']);
+        $provider = new TagProvider($tags['jungi.fake']);
         $registry = new TagRegistry();
-        $registry->register(array_slice($tags, 0, 2, true));
-        $registry->register($provider);
+        $registry->registerTag(array_slice($tags, 0, 2, true));
+        $registry->registerTag($provider);
 
+        $this->assertEquals($tags, $registry->getTags());
         foreach ($tags as $type => $class) {
-            $this->assertEquals($class, $registry->getTagClass($type));
+            $this->assertEquals($class, $registry->getTag($type));
         }
     }
 
@@ -50,8 +51,8 @@ class TagRegistryTest extends TestCase
     public function testOnNonExistentTagType()
     {
         $registry = new TagRegistry();
-        $registry->register('Jungi\Bundle\ThemeBundle\Tag\MobileDevices');
-        $registry->getTagClass('jungi.not_existent');
+        $registry->registerTag('Jungi\Bundle\ThemeBundle\Tag\MobileDevices');
+        $registry->getTag('jungi.not_existent');
     }
 
     /**
@@ -62,7 +63,7 @@ class TagRegistryTest extends TestCase
     public function testOnNonExistentClass()
     {
         $registry = new TagRegistry();
-        $registry->register('Jungi\Bundle\ThemeBundle\Tag\NotExistentTag');
+        $registry->registerTag('Jungi\Bundle\ThemeBundle\Tag\NotExistentTag');
     }
 
     /**
@@ -73,6 +74,6 @@ class TagRegistryTest extends TestCase
     public function testOnInvalidTagClass()
     {
         $registry = new TagRegistry();
-        $registry->register('Jungi\Bundle\ThemeBundle\Core\Theme');
+        $registry->registerTag('Jungi\Bundle\ThemeBundle\Core\Theme');
     }
 }

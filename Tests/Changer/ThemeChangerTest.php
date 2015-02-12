@@ -12,12 +12,10 @@
 namespace Jungi\Bundle\ThemeBundle\Tests;
 
 use Jungi\Bundle\ThemeBundle\Changer\ThemeChanger;
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameParser;
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameReference;
-use Jungi\Bundle\ThemeBundle\Matcher\StandardThemeMatcher;
+use Jungi\Bundle\ThemeBundle\Selector\ThemeSelector;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
-use Jungi\Bundle\ThemeBundle\Core\ThemeManager;
+use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\FakeThemeResolver;
 
 /**
@@ -38,9 +36,9 @@ class ThemeChangerTest extends TestCase
     private $holder;
 
     /**
-     * @var ThemeManager
+     * @var ThemeRegistry
      */
-    private $manager;
+    private $registry;
 
     /**
      * @var FakeThemeResolver
@@ -53,13 +51,16 @@ class ThemeChangerTest extends TestCase
     protected function setUp()
     {
         $this->resolver = new FakeThemeResolver('bootheme', false);
-        $this->manager = new ThemeManager(array(
+        $this->registry = new ThemeRegistry(array(
             $this->createThemeMock('footheme'),
             $this->createThemeMock('bootheme'),
         ));
-        $nameParser = new ThemeNameParser();
-        $matcher = new StandardThemeMatcher($this->manager, $nameParser);
-        $this->changer = new ThemeChanger($matcher, $nameParser, $this->resolver, new EventDispatcher());
+        $dispatcher = new EventDispatcher();
+        $this->changer = new ThemeChanger(
+            new ThemeSelector($this->registry, $dispatcher, $this->resolver),
+            $this->resolver,
+            $dispatcher
+        );
     }
 
     /**
@@ -80,8 +81,7 @@ class ThemeChangerTest extends TestCase
     {
         return array(
             array($this->createThemeMock('footheme'), 'footheme'),
-            array('footheme', 'footheme'),
-            array(new ThemeNameReference('bootheme'), 'bootheme'),
+            array('footheme', 'footheme')
         );
     }
 }

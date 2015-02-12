@@ -11,8 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
 
-use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
-
 /**
  * TagRegistry is a simple implementation of the TagRegistryInterface
  *
@@ -31,12 +29,12 @@ class TagRegistry implements TagRegistryInterface
      * @param string|TagProvider|array $class a TagProvider instance, a collection or a single fully
      *                                        qualified class name
      *
-     * @return TagInterface
+     * @return void
      *
      * @throws \RuntimeException         When the tag class is not exist
      * @throws \InvalidArgumentException When the given tag class does not implement the TagInterface
      */
-    public function register($class)
+    public function registerTag($class)
     {
         if ($class instanceof TagProvider) {
             $class = $class->dump();
@@ -66,7 +64,7 @@ class TagRegistry implements TagRegistryInterface
      *
      * @return boolean
      */
-    public function hasTagClass($name)
+    public function hasTag($name)
     {
         return isset($this->classes[$name]);
     }
@@ -80,9 +78,9 @@ class TagRegistry implements TagRegistryInterface
      *
      * @throws \InvalidArgumentException When a given tag name does not exists
      */
-    public function getTagClass($name)
+    public function getTag($name)
     {
-        if (!$this->hasTagClass($name)) {
+        if (!$this->hasTag($name)) {
             throw new \InvalidArgumentException(
                 sprintf('The given tag name "%s" was not registered.', $name)
             );
@@ -96,7 +94,7 @@ class TagRegistry implements TagRegistryInterface
      *
      * @return array
      */
-    public function getTagClasses()
+    public function getTags()
     {
         return $this->classes;
     }

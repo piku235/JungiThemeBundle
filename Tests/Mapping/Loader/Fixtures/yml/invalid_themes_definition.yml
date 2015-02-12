@@ -16,7 +16,7 @@ foo_1:
 foo_2:
     path: "@JungiFooBundle/Resources/theme"
     tags:
-        jungi.own: "const@Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own::SPECIAL"
+        jungi.own: "const@Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag::SPECIAL"
     info:
         name: A fancy theme
         authors: [ "%leading_author%" ]

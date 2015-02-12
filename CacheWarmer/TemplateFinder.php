@@ -12,22 +12,22 @@
 namespace Jungi\Bundle\ThemeBundle\CacheWarmer;
 
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
-use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
 use Symfony\Component\Finder\Finder;
 
 /**
- * ThemeFinder looks for all template paths in each theme
+ * TemplateFinder looks for all template paths at each registered theme
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeFinder implements TemplateFinderInterface
+class TemplateFinder implements TemplateFinderInterface
 {
     /**
-     * @var ThemeManagerInterface
+     * @var ThemeRegistryInterface
      */
-    private $manager;
+    private $registry;
 
     /**
      * @var TemplateFilenameParser
@@ -37,24 +37,24 @@ class ThemeFinder implements TemplateFinderInterface
     /**
      * Constructor
      *
-     * @param ThemeManagerInterface  $manager A theme manager
-     * @param TemplateFilenameParser $parser  A template name parser
+     * @param ThemeRegistryInterface $themeReg A theme registry
+     * @param TemplateFilenameParser $parser   A template name parser
      */
-    public function __construct(ThemeManagerInterface $manager, TemplateFilenameParser $parser)
+    public function __construct(ThemeRegistryInterface $themeReg, TemplateFilenameParser $parser)
     {
-        $this->manager = $manager;
+        $this->registry = $themeReg;
         $this->parser = $parser;
     }
 
     /**
      * Looks for all templates in each theme
      *
-     * @return array
+     * @return TemplateReference[]
      */
     public function findAllTemplates()
     {
         $result = array();
-        foreach ($this->manager->getThemes() as $theme) {
+        foreach ($this->registry->getThemes() as $theme) {
             $finder = new Finder();
             $finder
                 ->files()

@@ -21,7 +21,7 @@ interface ThemeInterface
     /**
      * Returns the unique theme name
      *
-     * A theme name should be as simple as possible so e.g. "footheme", "bar-theme"
+     * A theme name should be as simple as possible e.g. "footheme", "bar-theme"
      *
      * @return string
      */
@@ -40,11 +40,4 @@ interface ThemeInterface
      * @return string
      */
     public function getPath();
-
-    /**
-     * Returns the information about the theme
-     *
-     * @return \Jungi\Bundle\ThemeBundle\Information\ThemeInfo
-     */
-    public function getInformation();
 }

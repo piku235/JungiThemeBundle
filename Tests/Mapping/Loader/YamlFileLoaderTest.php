@@ -35,7 +35,7 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
         parent::setUp();
 
         $this->loader = new YamlFileLoader(
-            $this->manager,
+            $this->registry,
             new FileLocator($this->kernel, __DIR__.'/Fixtures/yml'),
             $this->tagFactory,
             new LoaderHelper($this->tagRegistry)

@@ -45,12 +45,12 @@ class MobileDevicesTest extends TestCase
     public function getMatchingTags()
     {
         return array(
+            array(new MobileDevices(), new MobileDevices()),
+            array(new MobileDevices(), new MobileDevices(array(), MobileDevices::TABLET)),
+            array(new MobileDevices(), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
             array(new MobileDevices('iOS'), new MobileDevices()),
             array(new MobileDevices('iOS'), new MobileDevices('iOS')),
             array(new MobileDevices('iOS'), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
-            array(new MobileDevices(), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
-            array(new MobileDevices(array('iOS', 'WindowsPhoneOS')), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
-            array(new MobileDevices(array('iOS', 'AndroidOS')), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
             array(new MobileDevices(array('AndroidOS', 'WindowsPhoneOS')), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
             array(new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS')), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
             array(new MobileDevices('iOS', MobileDevices::MOBILE), new MobileDevices()),
@@ -68,6 +68,7 @@ class MobileDevicesTest extends TestCase
     public function getNonMatchingTags()
     {
         return array(
+            array(new MobileDevices(array(), MobileDevices::MOBILE), new MobileDevices(array(), MobileDevices::TABLET)),
             array(new MobileDevices('iOS'), new MobileDevices('AndroidOS')),
             array(new MobileDevices('iOS', MobileDevices::TABLET), new MobileDevices('AndroidOS', MobileDevices::TABLET)),
             array(new MobileDevices('iOS'), new MobileDevices('AndroidOS', 'WindowsPhoneOS')),

@@ -35,7 +35,7 @@ class XmlFileLoaderTest extends AutomatedFileLoaderTest
         parent::setUp();
 
         $this->loader = new XmlFileLoader(
-            $this->manager,
+            $this->registry,
             new FileLocator($this->kernel, __DIR__.'/Fixtures/xml'),
             $this->tagFactory,
             new LoaderHelper($this->tagRegistry)

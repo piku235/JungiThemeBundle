@@ -14,16 +14,16 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
 /**
- * Own
+ * FakeTag
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class Own implements TagInterface
+class FakeTag implements TagInterface
 {
     /**
      * @var string
      */
-    const SPECIAL = 'test';
+    const SPECIAL = 'foo';
 
     /**
      * @var string
@@ -42,6 +42,6 @@ class Own implements TagInterface
 
     public static function getName()
     {
-        return 'jungi.own';
+        return 'jungi.fake';
     }
 }

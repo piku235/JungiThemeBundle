@@ -21,10 +21,10 @@ final class ThemeSelectorEvents
     /**
      * @var string
      */
-    const RESOLVED_THEME = 'jungi_theme.selector.resolved_theme';
+    const RESOLVED = 'jungi_theme.selector.resolved';
 
     /**
      * @var string
      */
-    const SELECTED_THEME = 'jungi_theme.selector.selected_theme';
+    const SELECTED = 'jungi_theme.selector.selected';
 }

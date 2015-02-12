@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader;
-use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own;
+use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Symfony\Component\HttpKernel\Config\FileLocator;
@@ -45,7 +45,7 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
         parent::setUp();
 
         $this->locator = new FileLocator($this->kernel, __DIR__.'/Fixtures/php');
-        $this->loader = new PhpFileLoader($this->manager, $this->locator, $this->tagFactory);
+        $this->loader = new PhpFileLoader($this->registry, $this->locator, $this->tagFactory);
     }
 
     /**
@@ -80,8 +80,8 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
             new TagCollection(array(
                 new Tag\DesktopDevices(),
                 new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE),
-                new Own('test'),
+                new FakeTag('test'),
             ))
-        ), $this->manager->getTheme('foo_1'));
+        ), $this->registry->getTheme('foo_1'));
     }
 }

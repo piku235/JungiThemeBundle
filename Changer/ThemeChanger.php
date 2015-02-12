@@ -11,12 +11,10 @@
 
 namespace Jungi\Bundle\ThemeBundle\Changer;
 
-use Jungi\Bundle\ThemeBundle\Changer\Event\ChangeThemeEvent;
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameParserInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameReferenceInterface;
+use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
-use Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcherInterface;
+use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -35,9 +33,9 @@ class ThemeChanger implements ThemeChangerInterface
     private $dispatcher;
 
     /**
-     * @var ThemeNameParserInterface
+     * @var ThemeSelectorInterface
      */
-    private $nameParser;
+    private $selector;
 
     /**
      * @var ThemeResolverInterface
@@ -45,53 +43,41 @@ class ThemeChanger implements ThemeChangerInterface
     private $resolver;
 
     /**
-     * @var ThemeMatcherInterface
-     */
-    private $matcher;
-
-    /**
      * Constructor
      *
-     * @param ThemeMatcherInterface    $matcher    A theme matcher
-     * @param ThemeNameParserInterface $nameParser A theme name parser
+     * @param ThemeSelectorInterface   $selector   A theme selector
      * @param ThemeResolverInterface   $resolver   A theme resolver
      * @param EventDispatcherInterface $dispatcher An event dispatcher
      */
-    public function __construct(ThemeMatcherInterface $matcher, ThemeNameParserInterface $nameParser, ThemeResolverInterface $resolver, EventDispatcherInterface $dispatcher)
+    public function __construct(ThemeSelectorInterface $selector, ThemeResolverInterface $resolver, EventDispatcherInterface $dispatcher)
     {
-        $this->matcher = $matcher;
-        $this->nameParser = $nameParser;
+        $this->selector = $selector;
         $this->dispatcher = $dispatcher;
         $this->resolver = $resolver;
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \InvalidArgumentException If the given theme does not implement the ThemeInterface
-     *                                   or the ThemeNameReferenceInterface
      */
-    public function change($themeName, Request $request)
+    public function change($theme, Request $request)
     {
-        if ($themeName instanceof ThemeInterface) {
-            $themeName = $this->nameParser->parse($themeName->getName());
-        } elseif (is_string($themeName)) {
-            $themeName = $this->nameParser->parse($themeName);
-        } elseif (!$themeName instanceof ThemeNameReferenceInterface) {
-            throw new \InvalidArgumentException('The theme must be a string, an instance of the "ThemeInterface" or the "ThemeNameReferenceInterface".');
+        if (is_string($theme)) {
+            $themeName = $theme;
+        } elseif ($theme instanceof ThemeInterface) {
+            $themeName = $theme->getName();
+        } else {
+            throw new \InvalidArgumentException(sprintf('The theme must be a theme name or a theme instance of the "ThemeInterface".'));
         }
 
-        // Theme
-        $theme = $this->matcher->match($themeName, $request);
-
-        // Dispatch the event
-        $event = new ChangeThemeEvent($themeName, $theme, $request);
-        $this->dispatcher->dispatch(ThemeChangerEvents::PRE_CHANGE, $event);
-
         // Apply
-        $this->resolver->setThemeName((string) $themeName, $request);
+        $this->resolver->setThemeName($themeName, $request);
+
+        // Theme
+        if (is_string($theme)) {
+            $theme = $this->selector->select($request);
+        }
 
         // Dispatch the event
-        $this->dispatcher->dispatch(ThemeChangerEvents::POST_CHANGE, $event);
+        $this->dispatcher->dispatch(ThemeChangerEvents::CHANGED, new HttpThemeEvent($theme, $request));
     }
 }

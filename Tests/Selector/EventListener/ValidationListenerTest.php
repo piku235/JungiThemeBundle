@@ -14,7 +14,6 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Selector\EventListener;
 use Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\FakeMetadataFactory;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\Constraints\FakeClassConstraint;
@@ -40,11 +39,6 @@ class ValidationListenerTest extends TestCase
     private $metadataFactory;
 
     /**
-     * @var Theme
-     */
-    private $theme;
-
-    /**
      * @var ResolvedThemeEvent
      */
     private $event;
@@ -58,20 +52,31 @@ class ValidationListenerTest extends TestCase
         $validator = Validation::createValidatorBuilder()
             ->setMetadataFactory($this->metadataFactory)
             ->getValidator();
-        $this->theme = new Theme(
-            'footheme', 'path', $this->getMock('Jungi\Bundle\ThemeBundle\Information\ThemeInfo')
-        );
         $this->listener = new ValidationListener($validator);
         $this->event = new ResolvedThemeEvent(
-            $this->theme->getName(),
-            $this->theme,
+            $this->createThemeMock('footheme', 'path'),
             new InMemoryThemeResolver('footheme'),
             $this->getMock('Symfony\Component\HttpFoundation\Request')
         );
     }
 
     /**
+     * Tests the failed validation
+     *
+     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException
+     */
+    public function testFailedValidation()
+    {
+        $this->setupFailedValidation();
+
+        // Execute
+        $this->listener->onResolvedTheme($this->event);
+    }
+
+    /**
      * Tests the validation when it should be executed
+     *
+     * @expectedException \Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException
      */
     public function testSuspectResolvers()
     {
@@ -79,26 +84,20 @@ class ValidationListenerTest extends TestCase
         $this->listener->addSuspect(new InMemoryThemeResolver());
 
         // Execute
-        $this->prepareFailedValidation();
+        $this->setupFailedValidation();
         $this->listener->onResolvedTheme($this->event);
-
-        // Assert
-        $this->assertNull($this->event->getTheme());
     }
 
     /**
-     * Tests the validation when it shouldn't be executed
+     * Tests the validation when it should not be executed
      */
     public function testTrustedResolvers()
     {
         $this->listener->addSuspect('Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver');
 
         // Execute
-        $this->prepareFailedValidation();
+        $this->setupFailedValidation();
         $this->listener->onResolvedTheme($this->event);
-
-        // Check
-        $this->assertSame($this->theme, $this->event->getTheme());
     }
 
     /**
@@ -112,49 +111,9 @@ class ValidationListenerTest extends TestCase
 
         // Execute
         $this->listener->onResolvedTheme($this->event);
-
-        // Check
-        $this->assertSame($this->theme, $this->event->getTheme());
     }
 
-    /**
-     * Tests the failed validation
-     */
-    public function testFailedValidation()
-    {
-        $this->prepareFailedValidation();
-
-        // Execute
-        $this->listener->onResolvedTheme($this->event);
-
-        // Check
-        $this->assertNull($this->event->getTheme());
-    }
-
-    /**
-     * Tests the ValidationListener when the clearing theme in an event is disabled
-     */
-    public function testWhenClearThemeIsDisabled()
-    {
-        $metadata = new ClassMetadata('Jungi\Bundle\ThemeBundle\Core\ThemeInterface');
-        $metadata->addConstraint(new FakeClassConstraint());
-        $metadata->addGetterConstraint('name', new Constraints\EqualTo('footheme_boo'));
-        $this->metadataFactory->addMetadata($metadata);
-
-        $event = new ResolvedThemeEvent(
-            $this->theme->getName(),
-            $this->theme,
-            $this->getMock('Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface'),
-            $this->getMock('Symfony\Component\HttpFoundation\Request'),
-            false
-        );
-        $this->listener->onResolvedTheme($event);
-
-        // Check
-        $this->assertNotNull($event->getTheme());
-    }
-
-    private function prepareFailedValidation()
+    private function setupFailedValidation()
     {
         $metadata = new ClassMetadata('Jungi\Bundle\ThemeBundle\Core\ThemeInterface');
         $metadata->addConstraint(new FakeClassConstraint());

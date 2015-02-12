@@ -65,63 +65,10 @@ class JungiThemeExtension extends Extension
             $container->setParameter('jungi_theme.selector.listener.validation.suspects', $config['selector']['validation_listener']['suspects']);
         }
 
-        // Theme matcher service
-        $container->setAlias('jungi_theme.matcher', $config['matcher']['id']);
-
         // Device theme filter
-        if (!$config['matcher']['virtual']['device_filter']) {
+        if (!$config['matcher']['device_filter']) {
             $container->removeDefinition('jungi_theme.matcher.filter.device');
         }
-
-        // Class cache
-        $this->addClassesToCompile(array(
-            'Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinderChain',
-            'Jungi\Bundle\ThemeBundle\CacheWarmer\ThemeFinder',
-            'Jungi\Bundle\ThemeBundle\Core\MobileDetect',
-            'Jungi\Bundle\ThemeBundle\Core\Theme',
-            'Jungi\Bundle\ThemeBundle\Core\ThemeManager',
-            'Jungi\Bundle\ThemeBundle\Core\ThemeNameReference',
-            'Jungi\Bundle\ThemeBundle\Core\ThemeNameParser',
-            'Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence',
-            'Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssenceBuilder',
-            'Jungi\Bundle\ThemeBundle\Information\Author',
-            'Jungi\Bundle\ThemeBundle\Changer\ThemeChanger',
-            'Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents',
-            'Jungi\Bundle\ThemeBundle\Changer\Event\ChangeThemeEvent',
-            'Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent',
-            'Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener',
-            'Jungi\Bundle\ThemeBundle\Mapping\Loader\FileLoader',
-            'Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader',
-            'Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader',
-            'Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper',
-            'Jungi\Bundle\ThemeBundle\Matcher\ChainThemeMatcher',
-            'Jungi\Bundle\ThemeBundle\Matcher\StandardThemeMatcher',
-            'Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher',
-            'Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter',
-            'Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection',
-            'Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver',
-            'Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver',
-            'Jungi\Bundle\ThemeBundle\Resolver\SessionThemeResolver',
-            'Jungi\Bundle\ThemeBundle\Resolver\EventListener\ThemeResolverListener',
-            'Jungi\Bundle\ThemeBundle\Selector\ThemeSelector',
-            'Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents',
-            'Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent',
-            'Jungi\Bundle\ThemeBundle\Selector\Event\DetailedResolvedThemeEvent',
-            'Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener',
-            'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\VirtualTheme',
-            'Jungi\Bundle\ThemeBundle\Tag\TagCollection',
-            'Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory',
-            'Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry',
-            'Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider',
-            'Jungi\Bundle\ThemeBundle\Helper\DeviceHelper',
-            'Jungi\Bundle\ThemeBundle\Twig\Extension\DeviceExtension',
-            'Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser',
-            'Jungi\Bundle\ThemeBundle\Templating\TemplateNameParser',
-            'Jungi\Bundle\ThemeBundle\Templating\TemplateReference',
-            'Jungi\Bundle\ThemeBundle\Templating\Loader\TemplateLocator',
-        ));
     }
 
     protected function configureThemeResolver($id, $for, $config, ContainerBuilder $container)

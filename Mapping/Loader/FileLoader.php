@@ -11,44 +11,36 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactoryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
 
 /**
- * FileLoader is a basic class for loading themes from mapping documents to a ThemeManagerInterface instance
+ * FileLoader is a basic class for loading themes from mapping documents to a ThemeRegistryInterface instance
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 abstract class FileLoader
 {
     /**
-     * @var ThemeManagerInterface
-     */
-    protected $themeManager;
-
-    /**
      * @var FileLocatorInterface
      */
     protected $locator;
 
     /**
-     * @var TagFactoryInterface
+     * @var ThemeRegistryInterface
      */
-    protected $tagFactory;
+    protected $themeRegistry;
 
     /**
      * Constructor
      *
-     * @param ThemeManagerInterface $themeManager A theme manager
-     * @param FileLocatorInterface  $locator      A file locator
-     * @param TagFactoryInterface   $factory      A tag factory
+     * @param ThemeRegistryInterface $themeReg A theme registry
+     * @param FileLocatorInterface $locator A file locator
      */
-    public function __construct(ThemeManagerInterface $themeManager, FileLocatorInterface $locator, TagFactoryInterface $factory)
+    public function __construct(ThemeRegistryInterface $themeReg, FileLocatorInterface $locator)
     {
+        $this->themeRegistry = $themeReg;
         $this->locator = $locator;
-        $this->themeManager = $themeManager;
-        $this->tagFactory = $factory;
     }
 
     /**
@@ -57,8 +49,6 @@ abstract class FileLoader
      * @param string $file A file
      *
      * @return void
-     *
-     * @throws \DomainException When the file is not supported by FileLoader
      */
     abstract public function load($file);
 

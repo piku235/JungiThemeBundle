@@ -11,12 +11,11 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector;
 
-use Jungi\Bundle\ThemeBundle\Selector\Exception\InvalidatedThemeException;
+use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
-use Jungi\Bundle\ThemeBundle\Matcher\ThemeMatcherInterface;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\DetailedResolvedThemeEvent;
-use Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException;
 use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,11 +23,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * ThemeSelector basically uses a theme resolver to get the appropriate theme for the request
- *
- * But not only the theme resolver decides which theme will be used, a resolved theme can be easily changed
- * in the ResolvedThemeEvent. If there will be some problem with a resolved theme from the primary resolver
- * then the fallback resolver (if set) will be used to get the theme. Otherwise the ThemeSelector will end by throwing
- * an exception.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -50,143 +44,95 @@ class ThemeSelector implements ThemeSelectorInterface
     private $resolver;
 
     /**
-     * @var ThemeMatcherInterface
+     * @var ThemeRegistryInterface
      */
-    private $matcher;
+    private $registry;
 
     /**
      * Constructor
      *
-     * @param ThemeMatcherInterface    $matcher    A theme matcher
+     * @param ThemeRegistryInterface   $registry   A theme registry
      * @param EventDispatcherInterface $dispatcher An event dispatcher
      * @param ThemeResolverInterface   $resolver   A theme resolver
      * @param ThemeResolverInterface   $fallback   A fallback theme resolver (optional)
      */
-    public function __construct(ThemeMatcherInterface $matcher, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
+    public function __construct(ThemeRegistryInterface $registry, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
     {
         $this->dispatcher = $dispatcher;
-        $this->matcher = $matcher;
+        $this->registry = $registry;
         $this->resolver = $resolver;
         $this->fallback = $fallback;
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function select(Request $request)
-    {
-        // Match the theme
-        $theme = $this->matchTheme($request);
-
-        // Dispatch the event
-        $event = new HttpThemeEvent($theme, $request);
-        $this->dispatcher->dispatch(ThemeSelectorEvents::SELECTED_THEME, $event);
-
-        // If everything is ok, return the theme
-        return $theme;
-    }
-
-    /**
-     * Matches the theme for a given Request
+     * Selects an appropriate theme fora given Request
      *
      * If everything will go well a theme obtained from the primary theme resolver
      * will be returned otherwise a theme from the fallback theme resolver will be
      * returned
      *
-     * @param Request $request A Request
+     * @param Request $request A request instance
      *
      * @return ThemeInterface
      *
      * @throws \Exception If occurs
      */
-    private function matchTheme(Request $request)
+    public function select(Request $request)
     {
         try {
-            $theme = $this->getPrimaryTheme($request);
+            $theme = $this->getTheme($this->resolver->resolveThemeName($request), $request);
+
+            // Dispatch the event
+            $event = new DetailedResolvedThemeEvent(
+                DetailedResolvedThemeEvent::PRIMARY_RESOLVER,
+                $theme,
+                $this->resolver,
+                $request
+            );
+            $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED, $event);
         } catch (\Exception $e) {
             // Use a fallback theme?
             if (null === $this->fallback) {
                 throw $e;
             }
 
-            $theme = $this->getFallbackTheme($request);
+            $theme = $this->getTheme($this->fallback->resolveThemeName($request), $request);
+
+            // Dispatch the event
+            $event = new DetailedResolvedThemeEvent(
+                DetailedResolvedThemeEvent::FALLBACK_RESOLVER,
+                $theme,
+                $this->fallback,
+                $request
+            );
+            $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED, $event);
         }
 
+        // Dispatch the event
+        $event = new HttpThemeEvent($theme, $request);
+        $this->dispatcher->dispatch(ThemeSelectorEvents::SELECTED, $event);
+
+        // If everything is ok, return the theme
         return $theme;
     }
 
     /**
-     * Returns the standard matched theme for a given request
+     * Returns the theme instance for a given theme name
      *
-     * Additionally the theme is validated if the validator was set
-     *
-     * @param Request $request A Request instance
+     * @param string  $themeName A theme name
+     * @param Request $request   A Request instance
      *
      * @return ThemeInterface
      *
-     * @throws ThemeValidationException  When the validation will fail
-     * @throws NullThemeException        When the theme resolver returns null
-     * @throws InvalidatedThemeException If the NullResolvedThemeEvent will invalidate the theme
+     * @throws NullThemeException     When the theme name is null which means a theme resolver does
+     *                                not have any theme
      */
-    private function getPrimaryTheme(Request $request)
+    private function getTheme($themeName, Request $request)
     {
-        if (null === $themeName = $this->resolver->resolveThemeName($request)) {
+        if (null === $themeName) {
             throw new NullThemeException(sprintf('The theme for the request "%s" can not be found.', $request->getPathInfo()));
         }
 
-        // Theme
-        $theme = $this->matcher->match($themeName, $request);
-
-        // Dispatch the event
-        $event = new DetailedResolvedThemeEvent(
-            DetailedResolvedThemeEvent::PRIMARY_RESOLVER,
-            $themeName,
-            $theme,
-            $this->resolver,
-            $request
-        );
-        $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED_THEME, $event);
-
-        // Check if the theme is still in the event
-        if (null === $theme = $event->getTheme()) {
-            throw new InvalidatedThemeException(sprintf('The theme "%s" for the request "%s" has been invalidated.', $themeName, $request->getPathInfo()));
-        }
-
-        return $theme;
-    }
-
-    /**
-     * Returns the fallback theme for a given request
-     *
-     * @param Request $request A Request instance
-     *
-     * @return ThemeInterface
-     *
-     * @throws \RuntimeException  If the fallback theme resolver was not set
-     * @throws NullThemeException When the theme resolver will return null
-     */
-    private function getFallbackTheme(Request $request)
-    {
-        if (null === $this->fallback) {
-            throw new \RuntimeException('The fallback theme resolver was not set.');
-        } elseif (null === $themeName = $this->fallback->resolveThemeName($request)) {
-            throw new NullThemeException(sprintf('The fallback theme for the request "%s" can not be found.', $request->getPathInfo()));
-        }
-
-        // Theme
-        $theme = $this->matcher->match($themeName, $request);
-
-        // Dispatch the event
-        $event = new DetailedResolvedThemeEvent(
-            DetailedResolvedThemeEvent::FALLBACK_RESOLVER,
-            $themeName,
-            $theme,
-            $this->fallback,
-            $request,
-            false
-        );
-        $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED_THEME, $event);
-
-        return $event->getTheme();
+        return $this->registry->getTheme($themeName);
     }
 }

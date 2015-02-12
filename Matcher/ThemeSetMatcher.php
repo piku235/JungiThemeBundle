@@ -11,14 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Matcher;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameReference;
-use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
-use Jungi\Bundle\ThemeBundle\Exception\UnsupportedException;
 use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeFilterInterface;
-use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Core\ThemeNameParserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -28,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class VirtualThemeMatcher implements ThemeMatcherInterface
+class ThemeSetMatcher implements ThemeSetMatcherInterface
 {
     /**
      * @var ThemeFilterInterface[]
@@ -36,26 +30,12 @@ class VirtualThemeMatcher implements ThemeMatcherInterface
     protected $filters;
 
     /**
-     * @var ThemeNameParserInterface
-     */
-    protected $nameParser;
-
-    /**
-     * @var ThemeManagerInterface
-     */
-    protected $manager;
-
-    /**
      * Constructor
      *
-     * @param ThemeManagerInterface    $manager    A theme manager
-     * @param ThemeNameParserInterface $nameParser A theme name parser
-     * @param ThemeFilterInterface[]   $filters    A theme filter
+     * @param ThemeFilterInterface[] $filters Theme filters
      */
-    public function __construct(ThemeManagerInterface $manager, ThemeNameParserInterface $nameParser, array $filters = array())
+    public function __construct(array $filters = array())
     {
-        $this->manager = $manager;
-        $this->nameParser = $nameParser;
         $this->filters = array();
         foreach ($filters as $filter) {
             $this->addFilter($filter);
@@ -77,16 +57,16 @@ class VirtualThemeMatcher implements ThemeMatcherInterface
     /**
      * {@inheritdoc}
      *
-     * @throws UnsupportedException If the given theme name is not supported
+     * @throws \InvalidArgumentException If the given themes array is empty
+     * @throws \RuntimeException         When there is no matching theme
+     * @throws \RuntimeException         When there is more than one matching theme
      */
-    public function match($themeName, Request $request)
+    public function match(array $themes, Request $request)
     {
-        $themeName = $this->nameParser->parse($themeName);
-        $themes = $this->manager->findThemesWithTags(new Tag\VirtualTheme($themeName->getName()));
         $count = count($themes);
         switch ($count) {
             case 0:
-                throw new ThemeNotFoundException($themeName);
+                throw new \InvalidArgumentException('The theme set cannot be empty.');
             case 1:
                 return reset($themes);
         }
@@ -105,20 +85,10 @@ class VirtualThemeMatcher implements ThemeMatcherInterface
                 return $collection->first();
             case 0:
                 // not passed
-                throw new \RuntimeException(sprintf('There is no matching theme for the theme name "%s".', $themeName));
+                throw new \RuntimeException('There is no matching theme for the given theme set.');
             default:
                 // not passed
-                throw new \RuntimeException(sprintf('There is more than one matching theme for the theme name "%s".', $themeName));
+                throw new \RuntimeException('There is more than one matching theme for the given themes set.');
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($themeName)
-    {
-        $themeName = $this->nameParser->parse($themeName);
-
-        return $themeName instanceof ThemeNameReference && $themeName->isVirtual();
     }
 }

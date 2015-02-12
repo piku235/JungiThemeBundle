@@ -19,13 +19,23 @@ namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
 interface TagRegistryInterface
 {
     /**
+     * Registers a tag class or tag classes
+     *
+     * @param string|TagProvider|array $class fully qualified class name, collection or
+     *                                        TagProvider instance
+     *
+     * @return void
+     */
+    public function registerTag($class);
+
+    /**
      * Checks if a given tag name has the registered class
      *
      * @param string $name A tag name
      *
      * @return bool
      */
-    public function hasTagClass($name);
+    public function hasTag($name);
 
     /**
      * Gets the full qualified class name of a given tag name
@@ -34,12 +44,12 @@ interface TagRegistryInterface
      *
      * @return string
      */
-    public function getTagClass($name);
+    public function getTag($name);
 
     /**
      * Returns all registered tag classes
      *
      * @return array
      */
-    public function getTagClasses();
+    public function getTags();
 }

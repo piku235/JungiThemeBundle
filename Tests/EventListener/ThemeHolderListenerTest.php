@@ -11,8 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\EventListener;
 
-use Jungi\Bundle\ThemeBundle\Changer\Event\ChangeThemeEvent;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
+use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
 use Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener;
 use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
@@ -77,11 +77,10 @@ class ThemeHolderListenerTest extends TestCase
         $this->listener = new ThemeHolderListener($this->holder, $selector, false);
     }
 
-    public function testOnChange()
+    public function testOnChangedTheme()
     {
         $theme = $this->createThemeMock('footheme');
-        $event = new ChangeThemeEvent('footheme', $theme, $this->createDesktopRequest());
-        $this->listener->onChange($event);
+        $this->listener->onChangedTheme(new HttpThemeEvent($theme, $this->createDesktopRequest()));
 
         $this->assertSame($theme, $this->holder->getTheme());
     }

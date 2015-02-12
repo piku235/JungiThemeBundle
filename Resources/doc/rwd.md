@@ -109,7 +109,7 @@ $ib
     ->setLicense('MIT')
     ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'));
 
-$manager->addTheme(new Theme(
+$manager->registerTheme(new Theme(
     'foo',
     $locator->locate('@JungiFooBundle/Resources/theme'),
     $ib->getThemeInfo(),

@@ -27,18 +27,12 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
      * Constructor
      *
      * @param TagInterface[] $tags Tags (optional)
-     *
-     * @throws \InvalidArgumentException If one of tags is not a Tag instance
      */
     public function __construct(array $tags = array())
     {
         $this->tags = array();
         foreach ($tags as $tag) {
-            if (!$tag instanceof TagInterface) {
-                throw new \InvalidArgumentException('The one of tags is not a Tag instance.');
-            }
-
-            $this->tags[$tag->getName()] = $tag;
+            $this->add($tag);
         }
     }
 
@@ -58,6 +52,14 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     public function count()
     {
         return count($this->tags);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function add(TagInterface $tag)
+    {
+        $this->tags[$tag->getName()] = $tag;
     }
 
     /**
@@ -148,5 +150,23 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
                     implode(', ', array(self::COND_OR, self::COND_AND))
                 ));
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function merge(TagCollectionInterface $collection)
+    {
+        foreach ($collection as $tag) {
+            $this->add($tag);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAll()
+    {
+        return $this->tags;
     }
 }

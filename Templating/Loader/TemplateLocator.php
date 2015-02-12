@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Templating\Loader;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator as BaseTemplateLocator;
 use Symfony\Component\Templating\TemplateReferenceInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeManagerInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 
@@ -27,20 +27,20 @@ use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 class TemplateLocator extends BaseTemplateLocator
 {
     /**
-     * @var ThemeManagerInterface
+     * @var ThemeRegistryInterface
      */
-    private $manager;
+    private $registry;
 
     /**
      * Constructor
      *
-     * @param ThemeManagerInterface $manager  A theme manager
-     * @param FileLocatorInterface  $locator  A FileLocatorInterface instance
-     * @param string                $cacheDir The cache path (optional)
+     * @param ThemeRegistryInterface $registry A theme registry
+     * @param FileLocatorInterface   $locator  A FileLocatorInterface instance
+     * @param string                 $cacheDir The cache path (optional)
      */
-    public function __construct(ThemeManagerInterface $manager, FileLocatorInterface $locator, $cacheDir = null)
+    public function __construct(ThemeRegistryInterface $registry, FileLocatorInterface $locator, $cacheDir = null)
     {
-        $this->manager = $manager;
+        $this->registry = $registry;
 
         parent::__construct($locator, $cacheDir);
     }
@@ -67,8 +67,6 @@ class TemplateLocator extends BaseTemplateLocator
             throw new \InvalidArgumentException("The template must be an instance of the TemplateReferenceInterface.");
         }
 
-        // I used here checking for a cache entry
-        // only for performance purposes
         $key = $this->getCacheKey($template);
         if (isset($this->cache[$key])) {
             return $this->cache[$key];
@@ -76,7 +74,7 @@ class TemplateLocator extends BaseTemplateLocator
 
         if ($template instanceof TemplateReference) {
             try {
-                $theme = $this->manager->getTheme($template->get('theme'));
+                $theme = $this->registry->getTheme($template->get('theme'));
                 $path = $theme->getPath().'/'.$template->getPath();
 
                 return $this->cache[$key] = $this->locator->locate($path);

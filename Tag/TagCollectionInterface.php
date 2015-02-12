@@ -29,6 +29,15 @@ interface TagCollectionInterface extends \Countable, \Traversable
     const COND_OR = 'or';
 
     /**
+     * Adds a new tag
+     *
+     * @param TagInterface $tag A tag
+     *
+     * @return void
+     */
+    public function add(TagInterface $tag);
+
+    /**
      * Returns a tag by tag name
      *
      * @param string $name A tag name
@@ -87,4 +96,20 @@ interface TagCollectionInterface extends \Countable, \Traversable
      * @throws \InvalidArgumentException If the given condition is incorrect
      */
     public function containsSet(array $tags, $condition = self::COND_AND);
+
+    /**
+     * Merges an another tag collection with the current collection
+     *
+     * @param TagCollectionInterface $collection A tag collection
+     *
+     * @return void
+     */
+    public function merge(TagCollectionInterface $collection);
+
+    /**
+     * Returns all tags
+     *
+     * @return TagInterface[]
+     */
+    public function getAll();
 }

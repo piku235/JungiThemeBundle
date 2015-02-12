@@ -17,77 +17,80 @@
     <xs:element name="theme-mapping">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="parameters" type="Parameters" minOccurs="0" />
-                <xs:element name="themes" type="Themes" />
+                <xs:element name="parameters" type="parameters" minOccurs="0" />
+                <xs:element name="themes" type="themes" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="Parameter" mixed="true">
+    <xs:complexType name="parameter" mixed="true">
         <xs:sequence>
-            <xs:element name="parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="parameter" type="parameter" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
-        <xs:attribute name="type" type="ArgumentType" />
+        <xs:attribute name="type" type="argument-type" />
         <xs:attribute name="key" type="xs:string" />
     </xs:complexType>
 
-    <xs:complexType name="Parameters">
+    <xs:complexType name="parameters">
         <xs:sequence>
-            <xs:element name="parameter" type="Parameter" maxOccurs="unbounded" />
+            <xs:element name="parameter" type="parameter" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="Themes">
-        <xs:sequence>
-            <xs:element name="theme" type="Theme" maxOccurs="unbounded" />
+    <xs:complexType name="themes">
+        <xs:sequence maxOccurs="unbounded">
+            <xs:element name="theme" type="theme" minOccurs="0" />
+            <xs:element name="virtual-theme" type="virtual-theme" minOccurs="0" />
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="Theme">
+    <xs:complexType name="theme">
         <xs:all>
-            <xs:element name="tags" type="Tags" minOccurs="0" />
-            <xs:element name="info" type="Information" />
+            <xs:element name="tags" type="tags" minOccurs="0" />
         </xs:all>
         <xs:attribute name="name" type="xs:string" use="required" />
         <xs:attribute name="path" type="xs:string" use="required" />
     </xs:complexType>
 
-    <xs:complexType name="Property" mixed="true">
-        <xs:sequence>
-            <xs:element name="property" type="Property" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-        <xs:attribute name="type" type="ArgumentType" />
-        <xs:attribute name="key" type="xs:string" />
+    <xs:complexType name="virtual-theme">
+        <xs:all>
+            <xs:element name="themes" type="virtual-theme_themes" minOccurs="0" />
+        </xs:all>
+        <xs:attribute name="name" type="xs:string" use="required" />
     </xs:complexType>
 
-    <xs:complexType name="Information">
+    <xs:complexType name="virtual-theme_themes">
         <xs:sequence>
-            <xs:element name="property" type="Property" maxOccurs="unbounded" />
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="Tags">
-        <xs:sequence>
-            <xs:element name="tag" type="Tag" maxOccurs="unbounded" />
+            <xs:element name="ref" type="theme-reference" maxOccurs="unbounded" />
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="Tag" mixed="true">
+    <xs:complexType name="theme-reference">
+        <xs:attribute name="theme" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="tags">
         <xs:sequence>
-            <xs:element name="argument" type="Argument" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="tag" type="tag" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="tag" mixed="true">
+        <xs:sequence>
+            <xs:element name="argument" type="argument" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="name" type="xs:string" use="required" />
     </xs:complexType>
 
-    <xs:complexType name="Argument" mixed="true">
+    <xs:complexType name="argument" mixed="true">
         <xs:sequence>
-            <xs:element name="argument" type="Argument" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="argument" type="argument" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
-        <xs:attribute name="type" type="ArgumentType" />
+        <xs:attribute name="type" type="argument-type" />
         <xs:attribute name="key" type="xs:string" />
     </xs:complexType>
 
-    <xs:simpleType name="ArgumentType">
+    <xs:simpleType name="argument-type">
         <xs:restriction base="xs:string">
             <xs:enumeration value="collection" />
             <xs:enumeration value="constant" />
