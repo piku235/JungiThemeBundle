@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\CacheWarmer;
 
+use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
@@ -54,7 +55,18 @@ class TemplateFinder implements TemplateFinderInterface
     public function findAllTemplates()
     {
         $result = array();
+        $themes = array();
+        // Fetch all themes
         foreach ($this->registry->getThemes() as $theme) {
+            if ($theme instanceof VirtualThemeInterface) {
+                $themes = array_merge($themes, $theme->getThemes());
+            } else {
+                $themes[] = $theme;
+            }
+        }
+
+        //
+        foreach ($themes as $theme) {
             $finder = new Finder();
             $finder
                 ->files()

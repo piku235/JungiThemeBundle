@@ -13,6 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\CacheWarmer;
 
 use Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinder;
 use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
+use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
@@ -25,19 +26,30 @@ class TemplateFinderTest extends TestCase
 {
     public function testFind()
     {
+        $virtualTheme = new VirtualTheme('virtual', array(
+            $this->createThemeMock('virtual_foo', __DIR__.'/Fixtures/VirtualThemeBundle/Resources/theme/mobile'),
+            $this->createThemeMock('virtual_boo', __DIR__.'/Fixtures/VirtualThemeBundle/Resources/theme/desktop'),
+        ));
         $registry = new ThemeRegistry(array(
             $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
             $this->createThemeMock('boo', __DIR__.'/Fixtures/BooThemeBundle/Resources/theme'),
+            $virtualTheme
         ));
         $finder = new TemplateFinder($registry, new TemplateFilenameParser());
         $references = $finder->findAllTemplates();
 
-        $this->assertCount(6, $references);
+        $this->assertCount(12, $references);
         $this->assertContains('foo#BooBundle:Default:index.html.twig', $references);
         $this->assertContains('foo#BooBundle::navigation.html.twig', $references);
         $this->assertContains('foo#::layout.html.twig', $references);
         $this->assertContains('foo#BooBundle::this.is.an.interesting.template.html.twig', $references);
         $this->assertContains('boo#BooBundle::navigation.html.twig', $references);
         $this->assertContains('boo#::this.is.an.interesting.template.html.twig', $references);
+        $this->assertContains('boo#BooBundle::navigation.html.twig', $references);
+        $this->assertContains('boo#::this.is.an.interesting.template.html.twig', $references);
+        $this->assertContains('virtual_foo#BooBundle::navigation.html.twig', $references);
+        $this->assertContains('virtual_foo#::layout.html.twig', $references);
+        $this->assertContains('virtual_boo#BooBundle::navigation.html.twig', $references);
+        $this->assertContains('virtual_boo#::layout.html.twig', $references);
     }
 }

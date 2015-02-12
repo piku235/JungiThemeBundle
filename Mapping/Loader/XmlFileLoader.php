@@ -139,7 +139,7 @@ class XmlFileLoader extends GenericFileLoader
             $definition = new TagDefinition();
             $definition->setName($tag->getAttribute('name'));
             $arguments = $this->getElementsAsPhp($tag, 'argument');
-            if (!$arguments) {
+            if (!$arguments && $tag->nodeValue) {
                 $arguments = array($tag->nodeValue);
             }
             $definition->setArguments($arguments);
