@@ -70,20 +70,17 @@ class ThemeBuilder
     /**
      * Adds a theme definition
      *
-     * @param string                                 $name       A theme name
-     * @param ThemeDefinition|VirtualThemeDefinition $definition A theme definition
+     * @param string          $name       A theme name
+     * @param ThemeDefinition $definition A theme definition
      *
      * @return void
      *
-     * @throws \InvalidArgumentException If the given theme definition is invalid
-     * @throws \RuntimeException         If there is a theme definition under the same name
+     * @throws \RuntimeException If there is a theme definition under the same name
      */
-    public function addThemeDefinition($name, $definition)
+    public function addThemeDefinition($name, ThemeDefinition $definition)
     {
         if ($this->hasThemeDefinition($name)) {
             throw new \RuntimeException(sprintf('There is already registered theme definition under the name "%s".', $name));
-        } elseif (!$definition instanceof ThemeDefinition && !$definition instanceof VirtualThemeDefinition) {
-            throw new \InvalidArgumentException(sprintf('The acceptable theme definitions are only "ThemeDefinition" and "VirtualThemeDefinition".'));
         }
 
         $this->themeDefinitions[$name] = $definition;
@@ -104,7 +101,7 @@ class ThemeBuilder
      *
      * @param string $name A theme name
      *
-     * @return VirtualThemeDefinition|ThemeDefinition|null Null if the theme doesn't exist
+     * @return ThemeDefinition|null Null if the theme doesn't exist
      *
      * @throws \RuntimeException
      */
@@ -120,7 +117,7 @@ class ThemeBuilder
     /**
      * Returns the all registered theme definitions
      *
-     * @return VirtualThemeDefinition[]|ThemeDefinition[]
+     * @return ThemeDefinition[]
      */
     public function getThemeDefinitions()
     {
@@ -237,7 +234,11 @@ class ThemeBuilder
                 $themes[] = $loadedThemes[$refThemeName];
             }
 
-            $loadedThemes[$themeName] = new VirtualTheme($themeName, $themes);
+            $loadedThemes[$themeName] = new VirtualTheme(
+                $themeName,
+                $themes,
+                $this->processTagDefinitions($definition->getTags())
+            );
         }
 
         // Register loaded themes

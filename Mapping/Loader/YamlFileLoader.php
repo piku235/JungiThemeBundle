@@ -12,6 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
+use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\TagDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeBuilder;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
@@ -109,6 +110,7 @@ class YamlFileLoader extends GenericFileLoader
         }
 
         $def = new VirtualThemeDefinition();
+        $this->parseTags($themeName, $specification, $def, $file);
         foreach ($specification['themes'] as $theme) {
             $def->addThemeReference($theme);
         }
@@ -139,7 +141,7 @@ class YamlFileLoader extends GenericFileLoader
             ));
         }
 
-        $def = new ThemeDefinition();
+        $def = new StandardThemeDefinition();
         $def->setPath($specification['path']);
         $this->parseTags($themeName, $specification, $def, $file);
 

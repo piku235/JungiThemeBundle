@@ -53,9 +53,10 @@
     </xs:complexType>
 
     <xs:complexType name="virtual-theme">
-        <xs:all>
+        <xs:sequence maxOccurs="unbounded">
+            <xs:element name="tags" type="tags" minOccurs="0" />
             <xs:element name="themes" type="virtual-theme_themes" minOccurs="0" />
-        </xs:all>
+        </xs:sequence>
         <xs:attribute name="name" type="xs:string" use="required" />
     </xs:complexType>
 

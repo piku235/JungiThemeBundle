@@ -16,7 +16,7 @@ namespace Jungi\Bundle\ThemeBundle\Mapping;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class VirtualThemeDefinition
+class VirtualThemeDefinition extends ThemeDefinition
 {
     /**
      * @var array

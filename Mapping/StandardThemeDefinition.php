@@ -12,41 +12,30 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 /**
- * ThemeDefinition
+ * StandardThemeDefinition
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-abstract class ThemeDefinition
+class StandardThemeDefinition extends ThemeDefinition
 {
     /**
-     * @var TagDefinition[]
+     * @var string
      */
-    protected $tags = array();
+    protected $path;
 
     /**
      * {@inheritdoc}
      */
-    public function setTags(array $tags)
+    public function setPath($path)
     {
-        $this->tags = array();
-        foreach ($tags as $tag) {
-            $this->addTag($tag);
-        }
+        $this->path = $path;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addTag(TagDefinition $definition)
+    public function getPath()
     {
-        $this->tags[] = $definition;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTags()
-    {
-        return $this->tags;
+        return $this->path;
     }
 }

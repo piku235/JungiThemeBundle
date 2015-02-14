@@ -12,6 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
+use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\TagDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeBuilder;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
@@ -92,7 +93,7 @@ class XmlFileLoader extends GenericFileLoader
      */
     private function parseStandardTheme(\DOMElement $elm, ThemeBuilder $builder, $context)
     {
-        $definition = new ThemeDefinition();
+        $definition = new StandardThemeDefinition();
         $definition->setPath($elm->getAttribute('path'));
         $this->parseTags($elm, $definition, $context);
 
@@ -113,6 +114,7 @@ class XmlFileLoader extends GenericFileLoader
     private function parseVirtualTheme(\DOMElement $elm, ThemeBuilder $builder, $context)
     {
         $definition = new VirtualThemeDefinition();
+        $this->parseTags($elm, $definition, $context);
         foreach ($context->xpath->query('mapping:themes/mapping:ref', $elm) as $ref) {
             /* @var \DOMElement $ref */
 

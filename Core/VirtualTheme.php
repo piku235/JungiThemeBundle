@@ -11,6 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
+use Jungi\Bundle\ThemeBundle\Tag\TagCollectionInterface;
+use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
+
 /**
  * VirtualTheme is a representation of themes which are aggregated with this virtual theme
  *
@@ -34,19 +37,26 @@ class VirtualTheme implements VirtualThemeInterface
     protected $themes;
 
     /**
+     * @var TagCollectionInterface
+     */
+    protected $tags;
+
+    /**
      * Constructor
      *
      * @param string           $name   An unique theme name
      * @param ThemeInterface[] $themes Themes that belongs to the virtual theme
+     * @param TagCollectionInterface $tags Tags (optional)
      *
      * @throws \InvalidArgumentException If one of the given themes is not an instance of
      *                                   the ThemeInterface
      * @throws \RuntimeException         When in the children themes there is an another virtual theme
      */
-    public function __construct($name, array $themes)
+    public function __construct($name, array $themes, TagCollectionInterface $tags = null)
     {
         $this->name = $name;
         $this->decorated = null;
+        $this->tags = $tags ?: new TagCollection();
 
         foreach ($themes as $theme) {
             if (!$theme instanceof ThemeInterface) {
@@ -99,16 +109,10 @@ class VirtualTheme implements VirtualThemeInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \RuntimeException When the real theme is not set
      */
     public function getTags()
     {
-        if (!$this->decorated) {
-            throw new \RuntimeException('The tags cannot be returned, because the decorated theme is not set.');
-        }
-
-        return $this->decorated->getTags();
+        return $this->tags;
     }
 
     /**
