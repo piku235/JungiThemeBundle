@@ -38,18 +38,12 @@ class TemplateFinderTest extends TestCase
         $finder = new TemplateFinder($registry, new TemplateFilenameParser());
         $references = $finder->findAllTemplates();
 
-        $this->assertCount(12, $references);
+        $this->assertCount(6, $references);
         $this->assertContains('foo#BooBundle:Default:index.html.twig', $references);
         $this->assertContains('foo#BooBundle::navigation.html.twig', $references);
-        $this->assertContains('foo#::layout.html.twig', $references);
         $this->assertContains('foo#BooBundle::this.is.an.interesting.template.html.twig', $references);
+        $this->assertContains('foo#::layout.html.twig', $references);
         $this->assertContains('boo#BooBundle::navigation.html.twig', $references);
         $this->assertContains('boo#::this.is.an.interesting.template.html.twig', $references);
-        $this->assertContains('boo#BooBundle::navigation.html.twig', $references);
-        $this->assertContains('boo#::this.is.an.interesting.template.html.twig', $references);
-        $this->assertContains('virtual_foo#BooBundle::navigation.html.twig', $references);
-        $this->assertContains('virtual_foo#::layout.html.twig', $references);
-        $this->assertContains('virtual_boo#BooBundle::navigation.html.twig', $references);
-        $this->assertContains('virtual_boo#::layout.html.twig', $references);
     }
 }

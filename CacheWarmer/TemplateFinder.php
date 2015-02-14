@@ -55,17 +55,13 @@ class TemplateFinder implements TemplateFinderInterface
     public function findAllTemplates()
     {
         $result = array();
-        $themes = array();
-        // Fetch all themes
-        foreach ($this->registry->getThemes() as $theme) {
-            if ($theme instanceof VirtualThemeInterface) {
-                $themes = array_merge($themes, $theme->getThemes());
-            } else {
-                $themes[] = $theme;
-            }
-        }
 
-        //
+        // Ignore virtual themes
+        // @TODO: add support for virtual themes
+        $themes = array_filter($this->registry->getThemes(), function($theme) {
+            return !$theme instanceof VirtualThemeInterface;
+        });
+
         foreach ($themes as $theme) {
             $finder = new Finder();
             $finder
