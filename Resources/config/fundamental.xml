@@ -11,7 +11,7 @@
         <parameter key="jungi_theme.holder.default.class">Jungi\Bundle\ThemeBundle\Core\ThemeHolder</parameter>
         <parameter key="jungi_theme.mobile_detect.class">Jungi\Bundle\ThemeBundle\Core\MobileDetect</parameter>
         <parameter key="jungi_theme.selector.class">Jungi\Bundle\ThemeBundle\Selector\ThemeSelector</parameter>
-        <parameter key="jungi_theme.matcher.set.class">Jungi\Bundle\ThemeBundle\Matcher\ThemeSetMatcher</parameter>
+        <parameter key="jungi_theme.matcher.virtual.class">Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher</parameter>
         <parameter key="jungi_theme.matcher.filter.device.class">Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter</parameter>
         <parameter key="jungi_theme.changer.class">Jungi\Bundle\ThemeBundle\Changer\ThemeChanger</parameter>
         <parameter key="jungi_theme.tag.factory.class">Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory</parameter>
@@ -47,7 +47,7 @@
             <argument type="service" id="jungi_theme.templating.filename_parser" />
         </service>
         <service id="jungi_theme.registry" class="%jungi_theme.registry.class%" />
-        <service id="jungi_theme.matcher.set" class="%jungi_theme.matcher.set.class%" />
+        <service id="jungi_theme.matcher.virtual" class="%jungi_theme.matcher.virtual.class%" />
         <service id="jungi_theme.matcher.filter.device" class="%jungi_theme.matcher.filter.device.class%">
             <tag name="jungi_theme.filter" />
             <argument type="service" id="jungi_theme.mobile_detect" />

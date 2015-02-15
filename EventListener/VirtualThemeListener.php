@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\EventListener;
 use Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents;
 use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
-use Jungi\Bundle\ThemeBundle\Matcher\ThemeSetMatcherInterface;
+use Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcherInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -28,16 +28,16 @@ use Symfony\Component\HttpFoundation\Request;
 class VirtualThemeListener implements EventSubscriberInterface
 {
     /**
-     * @var ThemeSetMatcherInterface
+     * @var VirtualThemeMatcherInterface
      */
     private $matcher;
 
     /**
      * Constructor
      *
-     * @param ThemeSetMatcherInterface $matcher A theme set matcher
+     * @param VirtualThemeMatcherInterface $matcher A virtual theme matcher
      */
-    public function __construct(ThemeSetMatcherInterface $matcher)
+    public function __construct(VirtualThemeMatcherInterface $matcher)
     {
         $this->matcher = $matcher;
     }
@@ -78,6 +78,6 @@ class VirtualThemeListener implements EventSubscriberInterface
 
     private function handle(VirtualThemeInterface $theme, Request $request)
     {
-        $theme->setDecoratedTheme($this->matcher->match($theme->getThemes(), $request));
+        $theme->setDecoratedTheme($this->matcher->match($theme, $request));
     }
 }

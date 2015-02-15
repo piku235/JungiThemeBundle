@@ -12,6 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Matcher;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
+use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -20,15 +21,15 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-interface ThemeSetMatcherInterface
+interface VirtualThemeMatcherInterface
 {
     /**
      * Matches an appropriate theme from a given theme set
      *
-     * @param ThemeInterface[] $themes  Themes
+     * @param VirtualThemeInterface $theme A virtual theme
      * @param Request          $request A Request instance
      *
      * @return ThemeInterface
      */
-    public function match(array $themes, Request $request);
+    public function match(VirtualThemeInterface $theme, Request $request);
 }

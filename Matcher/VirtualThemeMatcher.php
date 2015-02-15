@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Matcher;
 
+use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeFilterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeSetMatcher implements ThemeSetMatcherInterface
+class VirtualThemeMatcher implements VirtualThemeMatcherInterface
 {
     /**
      * @var ThemeFilterInterface[]
@@ -61,8 +62,9 @@ class ThemeSetMatcher implements ThemeSetMatcherInterface
      * @throws \RuntimeException         When there is no matching theme
      * @throws \RuntimeException         When there is more than one matching theme
      */
-    public function match(array $themes, Request $request)
+    public function match(VirtualThemeInterface $theme, Request $request)
     {
+        $themes = $theme->getThemes();
         $count = count($themes);
         switch ($count) {
             case 0:

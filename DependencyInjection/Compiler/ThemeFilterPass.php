@@ -27,11 +27,11 @@ class ThemeFilterPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('jungi_theme.matcher.set')) {
+        if (!$container->hasDefinition('jungi_theme.matcher.virtual')) {
             return;
         }
 
-        $definition = $container->getDefinition('jungi_theme.matcher.set');
+        $definition = $container->getDefinition('jungi_theme.matcher.virtual');
         foreach ($container->findTaggedServiceIds('jungi_theme.filter') as $id => $attrs) {
             $definition->addMethodCall('addFilter', array(new Reference($id)));
         }

@@ -6,10 +6,10 @@ refers to an existing theme, but how you'll see it's not sufficient though. When
 not know which of them will be matched, because it depends on a device which has sent the request. With the solution comes 
 a theme matcher which is responsible for matching a theme instance based on a theme name and the request.
 
-A theme matcher implements the `Jungi\Bundle\ThemeBundle\Matcher\ThemeSetMatcherInterface`.
+A theme matcher implements the `Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcherInterface`.
 
 ```php
-interface ThemeSetMatcherInterface
+interface VirtualThemeMatcherInterface
 {
     /**
      * Checks whether a given theme name is supported by the matcher
@@ -42,10 +42,10 @@ StandardThemeMatcher
 This matcher is very simple and it's used to match an appropriate theme instance based only on a given theme name, so for 
 the theme name "footheme" the theme matcher will match a theme instance with the "footheme" name.
 
-ThemeSetMatcher
+VirtualThemeMatcher
 -------------------
 
-[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Matcher/ThemeSetMatcher.php)
+[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Matcher/VirtualThemeMatcher.php)
 
 In comparison with the previous one this theme matcher is more complex. As the name says it handles virtual theme
 names. A virtual theme name is preceded by the character "@" and it refers to a theme that doesn't really exist. To say 
