@@ -95,6 +95,14 @@ class VirtualTheme implements VirtualThemeInterface
 
     /**
      * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
      *
      * @throws \RuntimeException When the real theme is not set
      */

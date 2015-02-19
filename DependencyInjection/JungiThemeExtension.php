@@ -43,11 +43,11 @@ class JungiThemeExtension extends Extension
         $container->setParameter('jungi_theme.listener.holder.ignore_null_theme', $config['holder']['ignore_null_theme']);
 
         // Primary theme resolver conf
-        $this->configureThemeResolver('jungi_theme.resolver.primary', 'primary', $config, $container);
+        $this->processThemeResolver('jungi_theme.resolver.primary', 'primary', $config, $container);
 
         // Fallback theme resolver conf
-        if ($config['resolver']['fallback']['enabled']) {
-            $this->configureThemeResolver('jungi_theme.fallback_resolver', 'fallback', $config, $container);
+        if (isset($config['resolver']['fallback'])) {
+            $this->processThemeResolver('jungi_theme.resolver.fallback', 'fallback', $config, $container);
         }
 
         // Theme holder conf
@@ -71,35 +71,30 @@ class JungiThemeExtension extends Extension
         }
     }
 
-    protected function configureThemeResolver($id, $for, $config, ContainerBuilder $container)
+    protected function processThemeResolver($id, $for, $config, ContainerBuilder $container)
     {
-        $resolver = $config['resolver'][$for];
-        if ($resolver['type'] != 'service') {
-            $arguments = $resolver['arguments'] ? (array) $resolver['arguments'] : array();
-            switch ($resolver['type']) {
+        list($type, $resolver) = each($config['resolver'][$for]);
+        if ($type != 'id') {
+            switch ($type) {
                 case 'in_memory':
-                    $class = 'InMemoryThemeResolver';
+                    $definition = new Definition('Jungi\\Bundle\\ThemeBundle\\Resolver\\InMemoryThemeResolver');
+                    $definition->addArgument($resolver);
                     break;
                 case 'cookie':
-                    $class = 'CookieThemeResolver';
+                    $definition = new Definition('Jungi\\Bundle\\ThemeBundle\\Resolver\\CookieThemeResolver');
+                    $definition->addArgument($resolver);
                     break;
                 case 'session':
-                    $class = 'SessionThemeResolver';
+                    $definition = new Definition('Jungi\\Bundle\\ThemeBundle\\Resolver\\SessionThemeResolver');
                     break;
                 default:
                     throw new \InvalidArgumentException('Not supported type.');
             }
 
-            // Class
-            $resolverClass = 'Jungi\\Bundle\\ThemeBundle\\Resolver\\'.$class;
-
-            // Definition
-            $definition = new Definition($resolverClass, $arguments);
-
             // Append the definition
             $container->setDefinition($id, $definition);
         } else {
-            $container->setAlias($id, $resolver['id']);
+            $container->setAlias($id, $resolver);
         }
     }
 }

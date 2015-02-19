@@ -12,16 +12,17 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * The virtual theme is basically an emulator of the real theme
+ * The virtual theme is basically a container of standard themes where
+ * only one of them will be used
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface VirtualThemeInterface extends ThemeInterface
 {
     /**
-     * Sets a parent theme which will be used by the virtual theme
+     * Sets a theme which will be used by the virtual theme
      *
-     * @param ThemeInterface $parent A parent theme
+     * @param ThemeInterface $parent A theme
      *
      * @return void
      */

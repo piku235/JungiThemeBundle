@@ -62,7 +62,7 @@
             <argument type="service" id="jungi_theme.registry" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="jungi_theme.resolver" />
-            <argument type="service" id="jungi_theme.fallback_resolver" on-invalid="null" />
+            <argument type="service" id="jungi_theme.resolver.fallback" on-invalid="null" />
         </service>
         <!-- Aliases -->
         <service id="jungi_theme.resolver" alias="jungi_theme.resolver.primary" />

@@ -65,9 +65,12 @@ it's responsible for standard cookie options.
 jungi_theme:
     resolver:
         primary:
-            type: cookie
-            arguments:
-                - { lifetime: 3600, path: /, domain: ~, secure: false, httpOnly: true }
+            cookie:
+                lifetime: 3600
+                path: /
+                domain: ~
+                secure: false
+                httpOnly: true
 ```
 
 ##### InMemoryThemeResolver
@@ -82,8 +85,7 @@ resolver.
 jungi_theme:
     resolver:
         primary:
-            type: in_memory
-            arguments: foo_theme # a theme name
+            in_memory: foo_theme # a theme name
 ```
 
 ##### SessionThemeResolver
@@ -96,7 +98,7 @@ The SessionThemeResolver uses the session mechanism for holding the theme name. 
 jungi_theme:
     resolver:
         primary:
-            type: session
+            session: ~
 ```
 
 ##### Theme resolver service

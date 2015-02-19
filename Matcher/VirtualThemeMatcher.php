@@ -17,9 +17,7 @@ use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeFilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * The class is used to match a virtual theme name to an appropriate theme instance
- *
- * It supports only ThemeNameReference instances
+ * The class matches an appropriate theme for a given virtual theme
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

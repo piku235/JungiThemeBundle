@@ -9,64 +9,72 @@ jungi_theme:
     holder:
 
         # theme holder service id
-        id: jungi_theme.holder.default
+        id:                   jungi_theme.holder.default
 
         # whether to ignore the situation when the theme selector will not match any theme for the request.
-        ignore_null_theme: true
+        ignore_null_theme:    true
 
     # theme matcher configuration
     matcher:
 
-        # theme matcher service id
-        id: jungi_theme.matcher.chain
+        # use the device theme filter
+        device_filter:        true
 
-        # virtual theme matcher configuration
-        virtual:
-
-            # use the device theme filter
-            device_filter: true
-            
     # theme selector configuration
     selector:
 
         # theme selector service id
-        id: ~
+        id:                   ~
 
         # theme validation listener configuration
         validation_listener:
-            enabled: false
+            enabled:              false
 
             # a list of theme resolvers which should be validated
-            suspects: []
+            suspects:             []
 
     # general theme resolver configuration
-    resolver: # Required
+    resolver:             # Required
 
         # fallback theme resolver configuration
         fallback:
-            enabled: false
 
-            # theme resolver service id
-            id: ~
+            # cookie theme resolver
+            cookie:
+                lifetime:             2592000
+                path:                 /
+                domain:               ~
+                secure:               false
+                httpOnly:             true
 
-            # a type of theme resolver
-            type: ~ # One of "in_memory"; "cookie"; "service"; "session"
+            # in memory theme resolver
+            in_memory:            ~
 
-            # arguments to be passed to the theme resolver
-            arguments: []
+            # session theme resolver
+            session:              ~
+
+            # theme resolver service
+            id:                   ~
 
         # theme resolver configuration
-        primary: # Required
+        primary:              # Required
 
-            # theme resolver service id
-            id: ~
+            # cookie theme resolver
+            cookie:
+                lifetime:             2592000
+                path:                 /
+                domain:               ~
+                secure:               false
+                httpOnly:             true
 
-            # a type of theme resolver
-            type: ~ # One of "in_memory"; "cookie"; "service"; "session"
+            # in memory theme resolver
+            in_memory:            ~
 
-            # arguments to be passed to the theme resolver
-            arguments: []
+            # session theme resolver
+            session:              ~
 
+            # theme resolver service
+            id:                   ~
 ```
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

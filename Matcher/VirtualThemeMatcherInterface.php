@@ -17,14 +17,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * All implementations are responsible for matching an appropriate theme instance based on
- * a given theme set
+ * a given virtual theme
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface VirtualThemeMatcherInterface
 {
     /**
-     * Matches an appropriate theme from a given theme set
+     * Matches an appropriate theme for a given virtual theme
      *
      * @param VirtualThemeInterface $theme A virtual theme
      * @param Request          $request A Request instance

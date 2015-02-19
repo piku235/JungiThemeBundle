@@ -140,8 +140,8 @@ class Configuration implements ConfigurationInterface
             ->isRequired()
             ->info('general theme resolver configuration')
             ->children()
-                ->append($this->addFallbackThemeResolverNode())
                 ->append($this->addPrimaryThemeResolverNode())
+                ->append($this->addFallbackThemeResolverNode())
             ->end();
 
         return $rootNode;
@@ -154,7 +154,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->info('fallback theme resolver configuration')
-            ->canBeEnabled();
+            ->canBeUnset();
 
         $this->configureThemeResolverNode($rootNode, true);
 
@@ -175,58 +175,68 @@ class Configuration implements ConfigurationInterface
         return $rootNode;
     }
 
-    protected function configureThemeResolverNode(ArrayNodeDefinition $node, $enabledCheck = false)
+    protected function configureThemeResolverNode(ArrayNodeDefinition $node)
     {
-        $node
-            ->fixXmlConfig('argument')
-            ->children()
-                ->scalarNode('id')
-                    ->cannotBeEmpty()
-                    ->info('theme resolver service id')
-                ->end()
-                ->enumNode('type')
-                    ->values(array('in_memory', 'cookie', 'service', 'session'))
-                    ->info('a type of theme resolver')
-                ->end()
-                ->arrayNode('arguments')
-                    ->info('arguments to be passed to the theme resolver')
-                    ->cannotBeEmpty()
-                    ->prototype('variable')->end()
-                    ->beforeNormalization()
-                        ->ifString()
-                        ->then(function ($v) {
-                            return array($v);
-                        })
-                    ->end()
-                ->end()
-            ->end()
+        $selfNode = $node
             ->beforeNormalization()
                 ->ifString()
                 ->then(function ($v) {
-                    return array('id' => $v);
+                    return array(
+                        'id' => $v
+                    );
                 })
             ->end()
-            ->beforeNormalization()
-                ->ifTrue(function ($v) {
-                    return isset($v['id']) && !isset($v['type']);
-                })
-                ->then(function ($v) {
-                    $v['type'] = 'service';
+            ->children();
+        $resolvers = array('cookie', 'service', 'in_memory', 'session');
 
-                    return $v;
-                })
+        // Cookie
+        $selfNode
+            ->arrayNode('cookie')
+                ->info('cookie theme resolver')
+                ->canBeUnset()
+                ->children()
+                    ->integerNode('lifetime')->defaultValue(2592000)->end()
+                    ->scalarNode('path')->defaultValue('/')->end()
+                    ->scalarNode('domain')->end()
+                    ->booleanNode('secure')->defaultFalse()->end()
+                    ->booleanNode('httpOnly')->defaultTrue()->end()
+                ->end()
+            ->end();
+
+        // InMemory
+        $selfNode
+            ->scalarNode('in_memory')
+                ->info('in memory theme resolver')
+                ->cannotBeEmpty()
+            ->end();
+
+        // Session
+        $selfNode
+            ->booleanNode('session')
+                ->info('session theme resolver')
+                ->validate()
+                    ->ifTrue(function ($v) {
+                        return $v === false;
+                    })
+                    ->thenUnset()
+                ->end()
+            ->end();
+
+        // Service
+        $selfNode
+            ->scalarNode('id')
+                ->info('theme resolver service')
+                ->cannotBeEmpty()
+            ->end();
+
+        // Validation
+        $selfNode
             ->end()
             ->validate()
-                ->ifTrue(function ($v) use ($enabledCheck) {
-                    return (!$enabledCheck || isset($v['enabled'])) && !isset($v['id']) && !isset($v['type']);
+                ->ifTrue(function ($v) use($resolvers) {
+                    return count($v) > 1;
                 })
-                ->thenInvalid('At least you must specify "id" or "type" attribute.')
-            ->end()
-            ->validate()
-                ->ifTrue(function ($v) use ($enabledCheck) {
-                    return (!$enabledCheck || isset($v['enabled'])) && isset($v['id']) && isset($v['type']) && $v['type'] != 'service';
-                })
-                ->thenInvalid('For the "id" attribute the only acceptable value for the "type" attribute is "service" and this value is not required.')
+                ->thenInvalid('You cannot use more than one theme resolver.')
             ->end();
     }
 }

@@ -14,6 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Mapping;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
+use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
@@ -190,21 +191,25 @@ class ThemeBuilder
     /**
      * Builds themes depending on the contained theme definitions
      *
-     * @return ThemeRegistry
+     * @param ThemeRegistryInterface $registry A theme registry
+     *
+     * @return void
      */
-    public function build()
+    public function build(ThemeRegistryInterface $registry)
     {
-        $ignoredThemes = array();
-        /* @var ThemeDefinition[] $standardThemes */
+        $relations = array();
+        /* @var StandardThemeDefinition[] $standardThemes */
         $standardThemes = array();
         /* @var VirtualThemeDefinition[] $virtualThemes */
         $virtualThemes = array();
-        /* @var ThemeInterface[] $loadedThemes */
-        $loadedThemes = array();
 
-        // Filter themes
+        // Separate themes
         foreach ($this->themeDefinitions as $name => $definition) {
             if ($definition instanceof VirtualThemeDefinition) {
+                foreach ($definition->getThemeReferences() as $refThemeName) {
+                    $relations[$refThemeName] = $name;
+                }
+
                 $virtualThemes[$name] = $definition;
             } else {
                 $standardThemes[$name] = $definition;
@@ -213,11 +218,13 @@ class ThemeBuilder
 
         // Creates standard themes
         foreach ($standardThemes as $themeName => $definition) {
-            $loadedThemes[$themeName] = new Theme(
+            $virtualTheme = isset($relations[$themeName]) ? $relations[$themeName] : null;
+            $registry->registerTheme(new Theme(
                 $themeName,
                 $this->locator->locate($definition->getPath()),
-                $this->processTagDefinitions($definition->getTags())
-            );
+                $this->processTagDefinitions($definition->getTags()),
+                $virtualTheme
+            ), !$virtualTheme);
         }
 
         // Creates virtual themes
@@ -230,28 +237,15 @@ class ThemeBuilder
                 }
 
                 // Push the theme
-                $ignoredThemes[] = $refThemeName;
-                $themes[] = $loadedThemes[$refThemeName];
+                $themes[] = $registry->getTheme($refThemeName);
             }
 
-            $loadedThemes[$themeName] = new VirtualTheme(
+            $registry->registerTheme(new VirtualTheme(
                 $themeName,
                 $themes,
                 $this->processTagDefinitions($definition->getTags())
-            );
+            ));
         }
-
-        // Register loaded themes
-        $themeReg = new ThemeRegistry();
-        foreach ($loadedThemes as $theme) {
-            if (in_array($theme->getName(), $ignoredThemes)) {
-                continue;
-            }
-
-            $themeReg->registerTheme($theme);
-        }
-
-        return $themeReg;
     }
 
     /**

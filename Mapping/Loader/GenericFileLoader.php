@@ -59,16 +59,12 @@ abstract class GenericFileLoader extends FileLoader
 
         // Register created themes to global theme registry
         try {
-            $registry = $builder->build();
+            $builder->build($this->themeRegistry);
         } catch (\Exception $e) {
             throw new RuntimeException(sprintf(
                 'The problem occurred while building themes from the file "%s", see the previous exception for more details.',
                 $path
             ), null, $e);
-        }
-
-        foreach ($registry->getThemes() as $theme) {
-            $this->themeRegistry->registerTheme($theme);
         }
     }
 

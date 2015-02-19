@@ -22,6 +22,11 @@ use Jungi\Bundle\ThemeBundle\Tag\TagCollectionInterface;
 class ThemeRegistry implements ThemeRegistryInterface
 {
     /**
+     * @var array
+     */
+    private $nonpublic;
+
+    /**
      * @var ThemeInterface[]
      */
     protected $themes;
@@ -31,8 +36,9 @@ class ThemeRegistry implements ThemeRegistryInterface
      *
      * @param ThemeInterface[] $themes Themes (optional)
      */
-    public function __construct($themes = array())
+    public function __construct(array $themes = array())
     {
+        $this->nonpublic = array();
         $this->themes = array();
         foreach ($themes as $theme) {
             $this->registerTheme($theme);
@@ -42,7 +48,7 @@ class ThemeRegistry implements ThemeRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function registerTheme(ThemeInterface $theme)
+    public function registerTheme(ThemeInterface $theme, $public = true)
     {
         $name = $theme->getName();
         if ($this->hasTheme($name)) {
@@ -50,6 +56,9 @@ class ThemeRegistry implements ThemeRegistryInterface
         }
 
         $this->themes[$name] = $theme;
+        if (!$public) {
+            $this->nonpublic[] = $name;
+        }
     }
 
     /**
@@ -83,19 +92,33 @@ class ThemeRegistry implements ThemeRegistryInterface
     /**
      * {@inheritdoc}
      */
+    public function getPublicThemes()
+    {
+        $nonpublic = &$this->nonpublic;
+        return array_filter($this->themes, function($theme) use($nonpublic) {
+            return !in_array($theme->getName(), $nonpublic);
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findThemeWithTags($tags, $condition = TagCollectionInterface::COND_AND)
     {
         if (!is_array($tags)) {
             $tags = array($tags);
         }
 
-        foreach ($this->themes as $theme) {
+        foreach ($this->themes as $name => $theme) {
+            if (in_array($name, $this->nonpublic)) {
+                continue;
+            }
             if ($theme->getTags()->containsSet($tags, $condition)) {
                 return $theme;
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -108,7 +131,10 @@ class ThemeRegistry implements ThemeRegistryInterface
         }
 
         $result = array();
-        foreach ($this->themes as $theme) {
+        foreach ($this->themes as $name => $theme) {
+            if (in_array($name, $this->nonpublic)) {
+                continue;
+            }
             if ($theme->getTags()->containsSet($tags, $condition)) {
                 $result[] = $theme;
             }

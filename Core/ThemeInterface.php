@@ -40,4 +40,11 @@ interface ThemeInterface
      * @return string
      */
     public function getPath();
+
+    /**
+     * Returns the parent theme name
+     *
+     * @return string|null Null if does not have a parent theme
+     */
+    public function getParent();
 }

@@ -42,12 +42,14 @@ class Theme implements ThemeInterface
      * @param string        $name An unique theme name
      * @param string        $path A path to theme resources
      * @param TagCollectionInterface $tags A tag collection (optional)
+     * @param string        $parent A parent theme name (optional)
      */
-    public function __construct($name, $path, TagCollectionInterface $tags = null)
+    public function __construct($name, $path, TagCollectionInterface $tags = null, $parent = null)
     {
         $this->name = $name;
         $this->path = $path;
         $this->tags = $tags ?: new TagCollection();
+        $this->parent = $parent;
     }
 
     /**
@@ -72,6 +74,14 @@ class Theme implements ThemeInterface
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**
