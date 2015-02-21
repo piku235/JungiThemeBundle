@@ -36,29 +36,12 @@ jungi_theme:
     # general theme resolver configuration
     resolver:             # Required
 
-        # fallback theme resolver configuration
-        fallback:
-
-            # cookie theme resolver
-            cookie:
-                lifetime:             2592000
-                path:                 /
-                domain:               ~
-                secure:               false
-                httpOnly:             true
-
-            # in memory theme resolver
-            in_memory:            ~
-
-            # session theme resolver
-            session:              ~
-
-            # theme resolver service
-            id:                   ~
-
         # theme resolver configuration
         primary:              # Required
 
+            # theme resolver service
+            id:                   ~
+
             # cookie theme resolver
             cookie:
                 lifetime:             2592000
@@ -73,8 +56,25 @@ jungi_theme:
             # session theme resolver
             session:              ~
 
+        # fallback theme resolver configuration
+        fallback:
+
             # theme resolver service
             id:                   ~
+
+            # cookie theme resolver
+            cookie:
+                lifetime:             2592000
+                path:                 /
+                domain:               ~
+                secure:               false
+                httpOnly:             true
+
+            # in memory theme resolver
+            in_memory:            ~
+
+            # session theme resolver
+            session:              ~
 ```
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

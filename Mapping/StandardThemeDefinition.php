@@ -21,7 +21,7 @@ class StandardThemeDefinition extends ThemeDefinition
     /**
      * @var string
      */
-    protected $path;
+    private $path;
 
     /**
      * {@inheritdoc}

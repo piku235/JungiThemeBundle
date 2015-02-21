@@ -127,9 +127,9 @@ class XmlFileLoader extends GenericFileLoader
     /**
      * Parses a theme tags from a given DOM element
      *
-     * @param \DOMElement     $elm   A DOM element
-     * @param ThemeDefinition $theme A theme definition
-     * @param object       $context Context
+     * @param \DOMElement     $elm     A DOM element
+     * @param ThemeDefinition $theme   A theme definition
+     * @param object          $context Context
      *
      * @return void
      */

@@ -182,12 +182,18 @@ class Configuration implements ConfigurationInterface
                 ->ifString()
                 ->then(function ($v) {
                     return array(
-                        'id' => $v
+                        'id' => $v,
                     );
                 })
             ->end()
             ->children();
-        $resolvers = array('cookie', 'service', 'in_memory', 'session');
+
+        // Service
+        $selfNode
+            ->scalarNode('id')
+            ->info('theme resolver service')
+            ->cannotBeEmpty()
+            ->end();
 
         // Cookie
         $selfNode
@@ -222,18 +228,11 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end();
 
-        // Service
-        $selfNode
-            ->scalarNode('id')
-                ->info('theme resolver service')
-                ->cannotBeEmpty()
-            ->end();
-
         // Validation
         $selfNode
             ->end()
             ->validate()
-                ->ifTrue(function ($v) use($resolvers) {
+                ->ifTrue(function ($v) {
                     return count($v) > 1;
                 })
                 ->thenInvalid('You cannot use more than one theme resolver.')

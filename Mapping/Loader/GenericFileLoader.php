@@ -47,7 +47,7 @@ abstract class GenericFileLoader extends FileLoader
      * {@inheritdoc}
      *
      * @throws \InvalidArgumentException If a file is not readable
-     * @throws \RuntimeException If an exception will be thrown while building themes
+     * @throws \RuntimeException         If an exception will be thrown while building themes
      */
     public function load($file)
     {

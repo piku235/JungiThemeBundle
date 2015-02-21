@@ -58,7 +58,7 @@ class TemplateFinder implements TemplateFinderInterface
 
         // Ignore virtual themes
         // @TODO: add support for virtual themes
-        $themes = array_filter($this->registry->getThemes(), function($theme) {
+        $themes = array_filter($this->registry->getThemes(), function ($theme) {
             return !$theme instanceof VirtualThemeInterface;
         });
 

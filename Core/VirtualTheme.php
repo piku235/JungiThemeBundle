@@ -44,9 +44,9 @@ class VirtualTheme implements VirtualThemeInterface
     /**
      * Constructor
      *
-     * @param string           $name   An unique theme name
-     * @param ThemeInterface[] $themes Themes that belongs to the virtual theme
-     * @param TagCollectionInterface $tags Tags (optional)
+     * @param string                 $name   An unique theme name
+     * @param ThemeInterface[]       $themes Themes that belongs to the virtual theme
+     * @param TagCollectionInterface $tags   Tags (optional)
      *
      * @throws \InvalidArgumentException If one of the given themes is not an instance of
      *                                   the ThemeInterface
@@ -98,7 +98,7 @@ class VirtualTheme implements VirtualThemeInterface
      */
     public function getParent()
     {
-        return null;
+        return;
     }
 
     /**

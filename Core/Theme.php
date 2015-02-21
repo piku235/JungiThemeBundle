@@ -39,10 +39,10 @@ class Theme implements ThemeInterface
     /**
      * Constructor
      *
-     * @param string        $name An unique theme name
-     * @param string        $path A path to theme resources
-     * @param TagCollectionInterface $tags A tag collection (optional)
-     * @param string        $parent A parent theme name (optional)
+     * @param string                 $name   An unique theme name
+     * @param string                 $path   A path to theme resources
+     * @param TagCollectionInterface $tags   A tag collection (optional)
+     * @param string                 $parent A parent theme name (optional)
      */
     public function __construct($name, $path, TagCollectionInterface $tags = null, $parent = null)
     {

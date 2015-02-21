@@ -71,7 +71,7 @@ class YamlFileLoader extends GenericFileLoader
     private function parseThemes(array $content, ThemeBuilder $builder, $file)
     {
         foreach ($content['themes'] as $themeName => $specification) {
-            if (!empty($specification['virtual'])) {
+            if (!empty($specification['is_virtual'])) {
                 $this->parseVirtualTheme($themeName, $specification, $builder, $file);
             } else {
                 $this->parseStandardTheme($themeName, $specification, $builder, $file);

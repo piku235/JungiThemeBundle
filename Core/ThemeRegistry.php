@@ -48,7 +48,7 @@ class ThemeRegistry implements ThemeRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function registerTheme(ThemeInterface $theme, $public = true)
+    public function registerTheme(ThemeInterface $theme)
     {
         $name = $theme->getName();
         if ($this->hasTheme($name)) {
@@ -56,9 +56,6 @@ class ThemeRegistry implements ThemeRegistryInterface
         }
 
         $this->themes[$name] = $theme;
-        if (!$public) {
-            $this->nonpublic[] = $name;
-        }
     }
 
     /**
@@ -92,17 +89,6 @@ class ThemeRegistry implements ThemeRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function getPublicThemes()
-    {
-        $nonpublic = &$this->nonpublic;
-        return array_filter($this->themes, function($theme) use($nonpublic) {
-            return !in_array($theme->getName(), $nonpublic);
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findThemeWithTags($tags, $condition = TagCollectionInterface::COND_AND)
     {
         if (!is_array($tags)) {
@@ -118,7 +104,7 @@ class ThemeRegistry implements ThemeRegistryInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**

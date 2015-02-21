@@ -33,7 +33,7 @@ class TemplateFinderTest extends TestCase
         $registry = new ThemeRegistry(array(
             $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
             $this->createThemeMock('boo', __DIR__.'/Fixtures/BooThemeBundle/Resources/theme'),
-            $virtualTheme
+            $virtualTheme,
         ));
         $finder = new TemplateFinder($registry, new TemplateFilenameParser());
         $references = $finder->findAllTemplates();

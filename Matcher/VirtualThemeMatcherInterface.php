@@ -26,8 +26,8 @@ interface VirtualThemeMatcherInterface
     /**
      * Matches an appropriate theme for a given virtual theme
      *
-     * @param VirtualThemeInterface $theme A virtual theme
-     * @param Request          $request A Request instance
+     * @param VirtualThemeInterface $theme   A virtual theme
+     * @param Request               $request A Request instance
      *
      * @return ThemeInterface
      */

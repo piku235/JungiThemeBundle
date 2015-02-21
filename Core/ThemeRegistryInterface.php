@@ -24,12 +24,11 @@ interface ThemeRegistryInterface
     /**
      * Registers a new theme
      *
-     * @param ThemeInterface $theme  A theme
-     * @param bool           $public Is a public theme? (optional)
+     * @param ThemeInterface $theme A theme
      *
      * @return void
      */
-    public function registerTheme(ThemeInterface $theme, $public = true);
+    public function registerTheme(ThemeInterface $theme);
 
     /**
      * Checks if a given theme exists
@@ -57,13 +56,6 @@ interface ThemeRegistryInterface
      * @return ThemeInterface[]
      */
     public function getThemes();
-
-    /**
-     * Returns all public themes
-     *
-     * @return ThemeInterface[]
-     */
-    public function getPublicThemes();
 
     /**
      * Returns the theme which has given tags

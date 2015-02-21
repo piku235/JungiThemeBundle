@@ -12,7 +12,6 @@
 namespace Jungi\Bundle\ThemeBundle\Selector;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
-use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\DetailedResolvedThemeEvent;
@@ -124,8 +123,8 @@ class ThemeSelector implements ThemeSelectorInterface
      *
      * @return ThemeInterface
      *
-     * @throws NullThemeException     When the theme name is null which means a theme resolver does
-     *                                not have any theme
+     * @throws NullThemeException When the theme name is null which means a theme resolver does
+     *                            not have any theme
      */
     private function getTheme($themeName, Request $request)
     {

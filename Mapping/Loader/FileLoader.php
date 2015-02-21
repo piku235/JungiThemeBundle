@@ -35,7 +35,7 @@ abstract class FileLoader
      * Constructor
      *
      * @param ThemeRegistryInterface $themeReg A theme registry
-     * @param FileLocatorInterface $locator A file locator
+     * @param FileLocatorInterface   $locator  A file locator
      */
     public function __construct(ThemeRegistryInterface $themeReg, FileLocatorInterface $locator)
     {

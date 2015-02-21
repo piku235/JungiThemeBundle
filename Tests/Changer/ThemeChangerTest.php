@@ -81,7 +81,7 @@ class ThemeChangerTest extends TestCase
     {
         return array(
             array($this->createThemeMock('footheme'), 'footheme'),
-            array('footheme', 'footheme')
+            array('footheme', 'footheme'),
         );
     }
 }

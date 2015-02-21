@@ -46,10 +46,7 @@ class TemplateLocator extends BaseTemplateLocator
     }
 
     /**
-     * Returns a full path for a given theme or a template file
-     *
-     * If TemplateReference instance is given or a path to a given
-     * theme file can not be found it uses parent locate method
+     * Returns a full path for a given template file
      *
      * @param TemplateReferenceInterface $template    A template
      * @param string                     $currentPath Unused
@@ -57,8 +54,7 @@ class TemplateLocator extends BaseTemplateLocator
      *
      * @return string
      *
-     * @throws \RuntimeException         When the theme from a TemplateReference instance is not exist
-     *                                   in the theme manager
+     * @throws \RuntimeException         When the theme from a TemplateReference instance does not exist
      * @throws \InvalidArgumentException If the given $template is not an instance of the TemplateReferenceInterface
      */
     public function locate($template, $currentPath = null, $first = true)
