@@ -58,7 +58,7 @@ class VirtualThemeListener implements EventSubscriberInterface
     public function onChangedTheme(HttpThemeEvent $event)
     {
         $theme = $event->getTheme();
-        if (!$theme instanceof VirtualThemeInterface || null !== $theme->getDecoratedTheme()) {
+        if (!$theme instanceof VirtualThemeInterface || null !== $theme->getPointedTheme()) {
             return;
         }
 
@@ -78,6 +78,6 @@ class VirtualThemeListener implements EventSubscriberInterface
 
     private function handle(VirtualThemeInterface $theme, Request $request)
     {
-        $theme->setDecoratedTheme($this->matcher->match($theme, $request));
+        $theme->setPointedTheme($this->matcher->match($theme, $request));
     }
 }

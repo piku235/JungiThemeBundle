@@ -29,7 +29,7 @@ class VirtualTheme implements VirtualThemeInterface
     /**
      * @var ThemeInterface
      */
-    protected $decorated;
+    protected $pointed;
 
     /**
      * @var ThemeInterface[]
@@ -55,7 +55,7 @@ class VirtualTheme implements VirtualThemeInterface
     public function __construct($name, array $themes, TagCollectionInterface $tags = null)
     {
         $this->name = $name;
-        $this->decorated = null;
+        $this->pointed = null;
         $this->tags = $tags ?: new TagCollection();
 
         foreach ($themes as $theme) {
@@ -72,17 +72,17 @@ class VirtualTheme implements VirtualThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setDecoratedTheme(ThemeInterface $parent)
+    public function setPointedTheme(ThemeInterface $pointed)
     {
-        $this->decorated = $parent;
+        $this->pointed = $pointed;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDecoratedTheme()
+    public function getPointedTheme()
     {
-        return $this->decorated;
+        return $this->pointed;
     }
 
     /**
@@ -108,11 +108,11 @@ class VirtualTheme implements VirtualThemeInterface
      */
     public function getPath()
     {
-        if (!$this->decorated) {
+        if (!$this->pointed) {
             throw new \RuntimeException('The path cannot be returned, because the decorated theme is not set.');
         }
 
-        return $this->decorated->getPath();
+        return $this->pointed->getPath();
     }
 
     /**

@@ -22,18 +22,18 @@ interface VirtualThemeInterface extends ThemeInterface
     /**
      * Sets a theme which will be used by the virtual theme
      *
-     * @param ThemeInterface $parent A theme
+     * @param ThemeInterface $pointed A theme
      *
      * @return void
      */
-    public function setDecoratedTheme(ThemeInterface $parent);
+    public function setPointedTheme(ThemeInterface $pointed);
 
     /**
      * Returns the parent theme
      *
      * @return ThemeInterface
      */
-    public function getDecoratedTheme();
+    public function getPointedTheme();
 
     /**
      * Returns the themes that belongs to the virtual theme

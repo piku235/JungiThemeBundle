@@ -12,7 +12,6 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistryInterface;
@@ -171,7 +170,7 @@ class ThemeBuilder
     public function getParameter($name)
     {
         if (!$this->hasParameter($name)) {
-            return;
+            return null;
         }
 
         return $this->parameters[$name];
@@ -193,22 +192,19 @@ class ThemeBuilder
      * @param ThemeRegistryInterface $registry A theme registry
      *
      * @return void
-     *
-     * @throws \LogicException When the virtual definition has references to an another
-     *                         virtual theme
      */
     public function build(ThemeRegistryInterface $registry)
     {
-        $relations = array();
         /* @var StandardThemeDefinition[] $standardThemes */
-        $standardThemes = array();
         /* @var VirtualThemeDefinition[] $virtualThemes */
+        $themeReferences = array();
+        $relations = array();
+        $standardThemes = array();
         $virtualThemes = array();
-        /* @var ThemeInterface[] $loadedThemes */
-        $loadedThemes = array();
 
-        // Separate themes
+        // Validate themes and separate them
         foreach ($this->themeDefinitions as $name => $definition) {
+            $this->validateThemeDefinition($name, $definition);
             if ($definition instanceof VirtualThemeDefinition) {
                 foreach ($definition->getThemeReferences() as $refThemeName) {
                     $relations[$refThemeName] = $name;
@@ -223,7 +219,7 @@ class ThemeBuilder
         // Creates standard themes
         foreach ($standardThemes as $themeName => $definition) {
             $virtualTheme = isset($relations[$themeName]) ? $relations[$themeName] : null;
-            $loadedThemes[$themeName] = $theme = new Theme(
+            $theme = new Theme(
                 $themeName,
                 $this->locator->locate($definition->getPath()),
                 $this->processTagDefinitions($definition->getTags()),
@@ -231,30 +227,50 @@ class ThemeBuilder
             );
             // The theme will be only pushed to registry when
             // it has not got any parent theme (virtual)
-            if (!$virtualTheme) {
+            if ($virtualTheme) {
+                if (!isset($themeReferences[$virtualTheme])) {
+                    $themeReferences[$virtualTheme] = array();
+                }
+
+                $themeReferences[$virtualTheme][] = $theme;
+            } else {
                 $registry->registerTheme($theme);
             }
         }
 
         // Creates virtual themes
         foreach ($virtualThemes as $themeName => $definition) {
-            $themes = array();
-            foreach ($definition->getThemeReferences() as $refThemeName) {
-                // Validate
-                $themeDef = $this->getThemeDefinition($refThemeName);
-                if ($themeDef instanceof VirtualThemeDefinition) {
-                    throw new \LogicException(sprintf('Referencing to virtual themes is not allowed.'));
-                }
-
-                // Push the theme
-                $themes[] = $loadedThemes[$refThemeName];
-            }
-
             $registry->registerTheme(new VirtualTheme(
                 $themeName,
-                $themes,
+                $themeReferences[$themeName],
                 $this->processTagDefinitions($definition->getTags())
             ));
+        }
+    }
+
+    /**
+     * Validates a given theme definition
+     *
+     * @param string          $themeName  A theme name
+     * @param ThemeDefinition $definition A theme definition
+     *
+     * @return void
+     *
+     * @throws \LogicException When the virtual definition has references to an another
+     *                         virtual theme
+     */
+    private function validateThemeDefinition($themeName, ThemeDefinition $definition)
+    {
+        if ($definition instanceof VirtualThemeDefinition) {
+            foreach ($definition->getThemeReferences() as $refThemeName) {
+                $themeDef = $this->getThemeDefinition($refThemeName);
+                if ($themeDef instanceof VirtualThemeDefinition) {
+                    throw new \LogicException(sprintf(
+                        'Referencing to virtual themes is not allowed. Encountered at the theme "%s".',
+                        $themeName
+                    ));
+                }
+            }
         }
     }
 
@@ -288,7 +304,6 @@ class ThemeBuilder
         $reflection = $this->tagReflections[$name];
         if ($args = $definition->getArguments()) {
             array_walk_recursive($args, array($this, 'replaceArgument'));
-
             return $reflection->newInstanceArgs($args);
         }
 
