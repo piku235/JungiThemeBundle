@@ -14,8 +14,8 @@ namespace Jungi\Bundle\ThemeBundle\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * The implemented classes are responsible for determining the theme name from the request.
- * Theme resolvers also allows for changing the stored theme name for the request.
+ * The implemented classes are responsible for determining a theme name for the request.
+ * Theme resolvers also allows for changing the stored theme name in the request.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

@@ -33,9 +33,12 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->append($this->addThemeHolderNode())
-                ->append($this->addThemeMatcherNode())
                 ->append($this->addThemeSelectorNode())
                 ->append($this->addThemeResolverNode())
+                ->arrayNode('tags')
+                    ->info('list of tag classes that will be registered')
+                    ->prototype('scalar')->cannotBeEmpty()->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
@@ -51,30 +54,12 @@ class Configuration implements ConfigurationInterface
             ->info('theme holder configuration')
             ->children()
                 ->scalarNode('id')
+                    ->info('symfony service id')
                     ->defaultValue('jungi_theme.holder.default')
-                    ->info('theme holder service id')
                 ->end()
                 ->booleanNode('ignore_null_theme')
+                    ->info('whether to ignore a situation when the theme selector will not match any theme for the request.')
                     ->defaultTrue()
-                    ->info('whether to ignore the situation when the theme selector will not match any theme for the request.')
-                ->end()
-            ->end();
-
-        return $rootNode;
-    }
-
-    protected function addThemeMatcherNode()
-    {
-        $builder = new TreeBuilder();
-        $rootNode = $builder->root('matcher');
-
-        $rootNode
-            ->addDefaultsIfNotSet()
-            ->info('theme matcher configuration')
-            ->children()
-                ->booleanNode('device_filter')
-                    ->defaultTrue()
-                    ->info('use the device theme filter')
                 ->end()
             ->end();
 
@@ -106,8 +91,8 @@ class Configuration implements ConfigurationInterface
             ->info('theme selector configuration')
             ->children()
                 ->scalarNode('id')
+                    ->info('symfony service id')
                     ->cannotBeEmpty()
-                    ->info('theme selector service id')
                 ->end()
                 ->arrayNode('validation_listener')
                 ->info('theme validation listener configuration')
@@ -140,8 +125,31 @@ class Configuration implements ConfigurationInterface
             ->isRequired()
             ->info('general theme resolver configuration')
             ->children()
+                ->append($this->addVirtualThemeResolverNode())
                 ->append($this->addPrimaryThemeResolverNode())
                 ->append($this->addFallbackThemeResolverNode())
+            ->end();
+
+        return $rootNode;
+    }
+
+    protected function addVirtualThemeResolverNode()
+    {
+        $builder = new TreeBuilder();
+        $rootNode = $builder->root('virtual');
+
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->info('virtual theme resolver configuration')
+            ->children()
+                ->scalarNode('id')
+                    ->info('symfony service id')
+                    ->cannotBeEmpty()
+                ->end()
+                ->booleanNode('device_filter')
+                    ->info('use the device theme filter')
+                    ->defaultTrue()
+                ->end()
             ->end();
 
         return $rootNode;
@@ -191,7 +199,7 @@ class Configuration implements ConfigurationInterface
         // Service
         $selfNode
             ->scalarNode('id')
-            ->info('theme resolver service')
+            ->info('symfony service id')
             ->cannotBeEmpty()
             ->end();
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Matcher\Filter;
+namespace Jungi\Bundle\ThemeBundle\Resolver\Filter;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Tag;

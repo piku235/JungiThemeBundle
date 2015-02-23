@@ -9,31 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Tests\Matcher;
+namespace Jungi\Bundle\ThemeBundle\Tests\Resolver;
 
 use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
-use Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter;
-use Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher;
-use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Matcher\Filter\FakeThemeFilter;
+use Jungi\Bundle\ThemeBundle\Resolver\Filter\DeviceThemeFilter;
+use Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolver;
+use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\Filter\FakeThemeFilter;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * VirtualThemeMatcherTest
+ * VirtualThemeResolverTest
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class VirtualThemeMatcherTest extends TestCase
+class VirtualThemeResolverTest extends TestCase
 {
     /**
-     * @var VirtualThemeMatcher
+     * @var VirtualThemeResolver
      */
     private $matcher;
 
     protected function setUp()
     {
-        $this->matcher = new VirtualThemeMatcher(array(new DeviceThemeFilter(new MobileDetect())));
+        $this->matcher = new VirtualThemeResolver(array(new DeviceThemeFilter(new MobileDetect())));
         $this->matcher->addFilter(new FakeThemeFilter());
     }
 
@@ -48,7 +48,7 @@ class VirtualThemeMatcherTest extends TestCase
             ))));
         $virtual = new VirtualTheme('foo', array($barTheme));
 
-        $this->assertSame($barTheme, $this->matcher->match($virtual, $this->createDesktopRequest()));
+        $this->assertSame($barTheme, $this->matcher->resolveTheme($virtual, $this->createDesktopRequest()));
     }
 
     /**
@@ -56,7 +56,7 @@ class VirtualThemeMatcherTest extends TestCase
      */
     public function testOnEmptySet()
     {
-        $this->matcher->match(new VirtualTheme('foo', array()), $this->createDesktopRequest());
+        $this->matcher->resolveTheme(new VirtualTheme('foo', array()), $this->createDesktopRequest());
     }
 
     public function testOnValidMatch()
@@ -86,7 +86,7 @@ class VirtualThemeMatcherTest extends TestCase
 
         foreach ($this->getVirtualThemeMatches() as $args) {
             list($matchTheme, $request) = $args;
-            $this->assertEquals($matchTheme, $this->matcher->match($virtual, $request)->getName());
+            $this->assertEquals($matchTheme, $this->matcher->resolveTheme($virtual, $request)->getName());
         }
     }
 
@@ -116,7 +116,7 @@ class VirtualThemeMatcherTest extends TestCase
         $virtual = new VirtualTheme('foo', array($desktopTheme, $mobileTheme1, $mobileTheme2));
 
         try {
-            $this->matcher->match($virtual, $this->createMobileRequest());
+            $this->matcher->resolveTheme($virtual, $this->createMobileRequest());
         } catch (\RuntimeException $e) {
             $this->assertStringStartsWith('There is more than one matching theme', $e->getMessage());
 
@@ -152,7 +152,7 @@ class VirtualThemeMatcherTest extends TestCase
         $virtual = new VirtualTheme('foo', array($desktop1, $desktop2, $desktop3));
 
         try {
-            $this->matcher->match($virtual, $this->createMobileRequest());
+            $this->matcher->resolveTheme($virtual, $this->createMobileRequest());
         } catch (\RuntimeException $e) {
             $this->assertStringStartsWith('There is no matching theme', $e->getMessage());
 

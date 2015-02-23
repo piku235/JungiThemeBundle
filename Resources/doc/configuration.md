@@ -8,22 +8,16 @@ jungi_theme:
     # theme holder configuration
     holder:
 
-        # theme holder service id
+        # symfony service id
         id:                   jungi_theme.holder.default
 
-        # whether to ignore the situation when the theme selector will not match any theme for the request.
+        # whether to ignore a situation when the theme selector will not match any theme for the request.
         ignore_null_theme:    true
-
-    # theme matcher configuration
-    matcher:
-
-        # use the device theme filter
-        device_filter:        true
 
     # theme selector configuration
     selector:
 
-        # theme selector service id
+        # symfony service id
         id:                   ~
 
         # theme validation listener configuration
@@ -36,10 +30,19 @@ jungi_theme:
     # general theme resolver configuration
     resolver:             # Required
 
+        # virtual theme resolver configuration
+        virtual:
+
+            # symfony service id
+            id:                   ~
+
+            # use the device theme filter
+            device_filter:        true
+
         # theme resolver configuration
         primary:              # Required
 
-            # theme resolver service
+            # symfony service id
             id:                   ~
 
             # cookie theme resolver
@@ -59,7 +62,7 @@ jungi_theme:
         # fallback theme resolver configuration
         fallback:
 
-            # theme resolver service
+            # symfony service id
             id:                   ~
 
             # cookie theme resolver
@@ -75,6 +78,9 @@ jungi_theme:
 
             # session theme resolver
             session:              ~
+
+    # list of tag classes that will be registered
+    tags:                 []
 ```
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

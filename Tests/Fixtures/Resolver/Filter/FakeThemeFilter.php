@@ -1,9 +1,9 @@
 <?php
 
-namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Matcher\Filter;
+namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\Filter;
 
-use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection;
-use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeFilterInterface;
+use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeCollection;
+use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeFilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

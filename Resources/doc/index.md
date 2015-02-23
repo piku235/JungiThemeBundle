@@ -15,10 +15,10 @@ Basics
 
 What is a theme, how it works and what is related with it you will learn from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md).
 
-Generally the chapter speaks about:
+Generally the chapter talks about:
 
 * Theme
-* ThemeInfo
+* VirtualTheme
 * Themes locations
 * Template naming and locations
 * Overriding bundle templates
@@ -99,6 +99,5 @@ Advanced
 --------
 
 * [Theme resolver](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md)
-* [Theme matcher](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-matcher.md)
 * [Theme selector](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-selector.md)
 * [Configuration reference](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md)

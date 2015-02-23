@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory;
-use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry;
+use Jungi\Bundle\ThemeBundle\Tag\Registry\SimpleTagRegistry;
 
 /**
  * AbstractFileLoader Test Case
@@ -35,12 +35,7 @@ abstract class AbstractFileLoaderTest extends TestCase
     protected $kernel;
 
     /**
-     * @var TagFactory
-     */
-    protected $tagFactory;
-
-    /**
-     * @var TagRegistry
+     * @var SimpleTagRegistry
      */
     protected $tagRegistry;
 
@@ -50,13 +45,11 @@ abstract class AbstractFileLoaderTest extends TestCase
     protected function setUp()
     {
         $this->registry = new ThemeRegistry();
-        $this->tagRegistry = new TagRegistry();
-        $this->tagRegistry->register(array(
+        $this->tagRegistry = new SimpleTagRegistry(array(
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
             'Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own',
         ));
-        $this->tagFactory = new TagFactory($this->tagRegistry);
         $this->kernel = $this->getMock('Symfony\Component\HttpKernel\KernelInterface');
         $this->kernel
             ->expects($this->any())

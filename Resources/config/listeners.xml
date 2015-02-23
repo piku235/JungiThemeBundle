@@ -24,7 +24,7 @@
         </service>
         <service id="jungi_theme.listener.virtual_theme" class="%jungi_theme.listener.virtual_theme.class%">
             <tag name="kernel.event_subscriber" />
-            <argument type="service" id="jungi_theme.matcher.virtual" />
+            <argument type="service" id="jungi_theme.resolver.virtual" />
         </service>
         <service id="jungi_theme.selector.listener.validation" class="%jungi_theme.selector.listener.validation.class%">
             <tag name="kernel.event_subscriber" />

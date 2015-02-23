@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Matcher\Filter;
+namespace Jungi\Bundle\ThemeBundle\Resolver\Filter;
 
 use Symfony\Component\HttpFoundation\Request;
 

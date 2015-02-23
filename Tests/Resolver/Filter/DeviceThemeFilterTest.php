@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Tests\Selector\EventListener;
+namespace Jungi\Bundle\ThemeBundle\Tests\Resolver\Filter;
 
-use Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter;
-use Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeCollection;
+use Jungi\Bundle\ThemeBundle\Resolver\Filter\DeviceThemeFilter;
+use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Core\MobileDetect;

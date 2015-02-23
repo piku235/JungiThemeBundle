@@ -58,6 +58,7 @@ class JungiThemeExtension extends Extension
         $loader->load('listeners.xml');
 
         // Register tag classes
+        $this->registerTag($config['tags']);
         $tagRegDef = $container->getDefinition('jungi_theme.tag.registry');
         $tagRegDef->replaceArgument(0, $this->tagClasses);
 
@@ -88,8 +89,8 @@ class JungiThemeExtension extends Extension
         }
 
         // Device theme filter
-        if (!$config['matcher']['device_filter']) {
-            $container->removeDefinition('jungi_theme.matcher.filter.device');
+        if (!$config['resolver']['virtual']['device_filter']) {
+            $container->removeDefinition('jungi_theme.resolver.filter.device');
         }
     }
 
@@ -114,7 +115,7 @@ class JungiThemeExtension extends Extension
             $reflection = new \ReflectionClass($child);
             if (!$reflection->implementsInterface('Jungi\Bundle\ThemeBundle\Tag\TagInterface')) {
                 throw new \InvalidArgumentException(
-                    sprintf('The given tag class "%s" must implement the interface "Jungi\Bundle\ThemeBundle\Tag\TagInterface".', $child)
+                    sprintf('The given class "%s" is not a tag. All tags must implement the "Jungi\Bundle\ThemeBundle\Tag\TagInterface".', $child)
                 );
             }
 

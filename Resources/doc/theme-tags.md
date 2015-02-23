@@ -73,7 +73,7 @@ The usage of each tags depends on a theme mapping that you'll choose. For exampl
 chapter and also they were used with the **VirtualTheme** in the [AWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md) chapter.
 
 If you're curious how exactly tags works, you can see it by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/Filter/DeviceThemeFilterTest.php)
-and [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/VirtualThemeMatcherTest.php).
+and [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Matcher/VirtualThemeResolverTest.php).
 
 Creating tag
 ------------

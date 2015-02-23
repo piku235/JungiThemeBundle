@@ -12,11 +12,11 @@
 namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
 
 /**
- * TagRegistry is a simple implementation of the TagRegistryInterface
+ * SimpleTagRegistry is a simple implementation of the TagRegistryInterface
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class TagRegistry implements TagRegistryInterface
+class SimpleTagRegistry implements TagRegistryInterface
 {
     /**
      * @var array
