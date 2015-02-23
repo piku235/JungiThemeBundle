@@ -11,7 +11,7 @@
         <parameter key="jungi_theme.holder.default.class">Jungi\Bundle\ThemeBundle\Core\ThemeHolder</parameter>
         <parameter key="jungi_theme.mobile_detect.class">Jungi\Bundle\ThemeBundle\Core\MobileDetect</parameter>
         <parameter key="jungi_theme.selector.class">Jungi\Bundle\ThemeBundle\Selector\ThemeSelector</parameter>
-        <parameter key="jungi_theme.resolver.virtual.class">Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeMatcher</parameter>
+        <parameter key="jungi_theme.resolver.virtual.class">Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolver</parameter>
         <parameter key="jungi_theme.resolver.filter.device.class">Jungi\Bundle\ThemeBundle\Resolver\Filter\DeviceThemeFilter</parameter>
         <parameter key="jungi_theme.changer.class">Jungi\Bundle\ThemeBundle\Changer\ThemeChanger</parameter>
     </parameters>

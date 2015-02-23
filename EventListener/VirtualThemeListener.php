@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\EventListener;
 use Jungi\Bundle\ThemeBundle\Changer\ThemeChangerEvents;
 use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Jungi\Bundle\ThemeBundle\Event\HttpThemeEvent;
-use Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcherInterface;
+use Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\ResolvedThemeEvent;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -28,18 +28,18 @@ use Symfony\Component\HttpFoundation\Request;
 class VirtualThemeListener implements EventSubscriberInterface
 {
     /**
-     * @var VirtualThemeMatcherInterface
+     * @var VirtualThemeResolverInterface
      */
-    private $matcher;
+    private $resolver;
 
     /**
      * Constructor
      *
-     * @param VirtualThemeMatcherInterface $matcher A virtual theme matcher
+     * @param VirtualThemeResolverInterface $resolver A virtual theme resolver
      */
-    public function __construct(VirtualThemeMatcherInterface $matcher)
+    public function __construct(VirtualThemeResolverInterface $resolver)
     {
-        $this->matcher = $matcher;
+        $this->resolver = $resolver;
     }
 
     /**
@@ -78,6 +78,6 @@ class VirtualThemeListener implements EventSubscriberInterface
 
     private function handle(VirtualThemeInterface $theme, Request $request)
     {
-        $theme->setPointedTheme($this->matcher->match($theme, $request));
+        $theme->setPointedTheme($this->resolver->resolveTheme($theme, $request));
     }
 }
