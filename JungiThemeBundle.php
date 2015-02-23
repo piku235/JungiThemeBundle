@@ -33,4 +33,12 @@ class JungiThemeBundle extends Bundle
         $container->addCompilerPass(new TagProviderPass());
         $container->addCompilerPass(new ThemeFilterPass());
     }
+
+    /**
+     * Performs boot on the bundle container extension
+     */
+    public function boot()
+    {
+        $this->getContainerExtension()->boot($this->container);
+    }
 }

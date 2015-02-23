@@ -26,8 +26,7 @@ class TagRegistry implements TagRegistryInterface
     /**
      * Registers a tag class or tag classes
      *
-     * @param string|TagProvider|array $class a TagProvider instance, a collection or a single fully
-     *                                        qualified class name
+     * @param string|array $class a collection or a single fully qualified class name
      *
      * @return void
      *
@@ -36,10 +35,6 @@ class TagRegistry implements TagRegistryInterface
      */
     public function registerTag($class)
     {
-        if ($class instanceof TagProvider) {
-            $class = $class->dump();
-        }
-
         foreach ((array) $class as $child) {
             $child = '\\'.ltrim($child, '\\');
             if (!class_exists($child)) {

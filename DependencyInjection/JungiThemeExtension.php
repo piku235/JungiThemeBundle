@@ -11,8 +11,10 @@
 
 namespace Jungi\Bundle\ThemeBundle\DependencyInjection;
 
+use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
@@ -25,16 +27,35 @@ use Symfony\Component\DependencyInjection\Loader;
 class JungiThemeExtension extends Extension
 {
     /**
+     * @var TagRegistry
+     */
+    private $tagRegistry;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tagRegistry = new TagRegistry();
+        $this->tagRegistry->registerTag(array(
+            'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
+            'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices'
+        ));
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        // Config
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        // Services
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('templating.xml');
         $loader->load('fundamental.xml');
+        $loader->load('templating.xml');
         $loader->load('extensions.xml');
         $loader->load('mappings.xml');
         $loader->load('listeners.xml');
@@ -69,6 +90,33 @@ class JungiThemeExtension extends Extension
         if (!$config['matcher']['device_filter']) {
             $container->removeDefinition('jungi_theme.matcher.filter.device');
         }
+    }
+
+    /**
+     * Sets to a container the tag registry
+     *
+     * @param ContainerInterface $container A container
+     *
+     * @return void
+     */
+    public function boot(ContainerInterface $container)
+    {
+        $container->set('jungi_theme.tag.registry', $this->tagRegistry);
+    }
+
+    /**
+     * Registers a tag class or tag classes
+     *
+     * @param string|array $class a collection or a single fully qualified class name
+     *
+     * @return void
+     *
+     * @throws \RuntimeException         When the tag class is not exist
+     * @throws \InvalidArgumentException When the given tag class does not implement the TagInterface
+     */
+    public function registerTag($class)
+    {
+        $this->tagRegistry->registerTag($class);
     }
 
     protected function processThemeResolver($id, $for, $config, ContainerBuilder $container)

@@ -14,26 +14,16 @@
         <parameter key="jungi_theme.matcher.virtual.class">Jungi\Bundle\ThemeBundle\Matcher\VirtualThemeMatcher</parameter>
         <parameter key="jungi_theme.matcher.filter.device.class">Jungi\Bundle\ThemeBundle\Matcher\Filter\DeviceThemeFilter</parameter>
         <parameter key="jungi_theme.changer.class">Jungi\Bundle\ThemeBundle\Changer\ThemeChanger</parameter>
-        <parameter key="jungi_theme.tag.factory.class">Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory</parameter>
-        <parameter key="jungi_theme.tag.registry.class">Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry</parameter>
-        <parameter key="jungi_theme.tag.registry.provider.class">Jungi\Bundle\ThemeBundle\Tag\Registry\TagProvider</parameter>
-        <parameter key="jungi_theme.tag.classes" type="collection">
-            <parameter>Jungi\Bundle\ThemeBundle\Tag\MobileDevices</parameter>
-            <parameter>Jungi\Bundle\ThemeBundle\Tag\DesktopDevices</parameter>
-        </parameter>
     </parameters>
 
     <services>
+        <!--
+        <service id="jungi_theme.tag.registry" class="Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry">
+            <argument />
+        </service> -->
+        <service id="jungi_theme.tag.registry" synthetic="true" />
         <service id="jungi_theme.mobile_detect" class="%jungi_theme.mobile_detect.class%">
             <argument type="service" id="request_stack" />
-        </service>
-        <service id="jungi_theme.tag.registry" class="%jungi_theme.tag.registry.class%">
-            <call method="registerTag">
-                <argument>%jungi_theme.tag.classes%</argument>
-            </call>
-        </service>
-        <service id="jungi_theme.tag.factory" class="%jungi_theme.tag.factory.class%">
-            <argument type="service" id="jungi_theme.tag.registry" />
         </service>
         <service id="jungi_theme.holder.default" class="%jungi_theme.holder.default.class%" />
         <service id="jungi_theme.cache_warmer.composite_finder" class="%jungi_theme.cache_warmer.composite_finder.class%" public="false">
