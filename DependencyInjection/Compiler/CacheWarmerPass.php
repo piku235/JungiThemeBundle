@@ -27,7 +27,6 @@ class CacheWarmerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        // @TODO: check cache warmer
         if (!$container->hasDefinition('templating.cache_warmer.template_paths')) {
             return;
         }

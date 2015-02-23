@@ -11,10 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\DependencyInjection;
 
-use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
@@ -27,17 +25,16 @@ use Symfony\Component\DependencyInjection\Loader;
 class JungiThemeExtension extends Extension
 {
     /**
-     * @var TagRegistry
+     * @var array
      */
-    private $tagRegistry;
+    private $tagClasses;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->tagRegistry = new TagRegistry();
-        $this->tagRegistry->registerTag(array(
+        $this->registerTag(array(
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices'
         ));
@@ -59,6 +56,10 @@ class JungiThemeExtension extends Extension
         $loader->load('extensions.xml');
         $loader->load('mappings.xml');
         $loader->load('listeners.xml');
+
+        // Register tag classes
+        $tagRegDef = $container->getDefinition('jungi_theme.tag.registry');
+        $tagRegDef->replaceArgument(0, $this->tagClasses);
 
         // Ignore null themes
         $container->setParameter('jungi_theme.listener.holder.ignore_null_theme', $config['holder']['ignore_null_theme']);
@@ -93,18 +94,6 @@ class JungiThemeExtension extends Extension
     }
 
     /**
-     * Sets to a container the tag registry
-     *
-     * @param ContainerInterface $container A container
-     *
-     * @return void
-     */
-    public function boot(ContainerInterface $container)
-    {
-        $container->set('jungi_theme.tag.registry', $this->tagRegistry);
-    }
-
-    /**
      * Registers a tag class or tag classes
      *
      * @param string|array $class a collection or a single fully qualified class name
@@ -116,7 +105,21 @@ class JungiThemeExtension extends Extension
      */
     public function registerTag($class)
     {
-        $this->tagRegistry->registerTag($class);
+        foreach ((array) $class as $child) {
+            $child = '\\'.ltrim($child, '\\');
+            if (!class_exists($child)) {
+                throw new \RuntimeException(sprintf('The tag with the class "%s" is not exist.', $child));
+            }
+
+            $reflection = new \ReflectionClass($child);
+            if (!$reflection->implementsInterface('Jungi\Bundle\ThemeBundle\Tag\TagInterface')) {
+                throw new \InvalidArgumentException(
+                    sprintf('The given tag class "%s" must implement the interface "Jungi\Bundle\ThemeBundle\Tag\TagInterface".', $child)
+                );
+            }
+
+            $this->tagClasses[$reflection->getMethod('getName')->invoke(null)] = $child;
+        }
     }
 
     protected function processThemeResolver($id, $for, $config, ContainerBuilder $container)

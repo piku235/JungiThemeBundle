@@ -24,32 +24,13 @@ class TagRegistry implements TagRegistryInterface
     protected $classes = array();
 
     /**
-     * Registers a tag class or tag classes
+     * Constructor
      *
-     * @param string|array $class a collection or a single fully qualified class name
-     *
-     * @return void
-     *
-     * @throws \RuntimeException         When the tag class is not exist
-     * @throws \InvalidArgumentException When the given tag class does not implement the TagInterface
+     * @param array $classes Tag classes
      */
-    public function registerTag($class)
+    public function __construct(array $classes)
     {
-        foreach ((array) $class as $child) {
-            $child = '\\'.ltrim($child, '\\');
-            if (!class_exists($child)) {
-                throw new \RuntimeException(sprintf('The tag with the class "%s" is not exist.', $child));
-            }
-
-            $reflection = new \ReflectionClass($child);
-            if (!$reflection->implementsInterface('Jungi\Bundle\ThemeBundle\Tag\TagInterface')) {
-                throw new \InvalidArgumentException(
-                    sprintf('The given tag class "%s" must implement the interface "Jungi\Bundle\ThemeBundle\Tag\TagInterface".', $child)
-                );
-            }
-
-            $this->classes[$reflection->getMethod('getName')->invoke(null)] = $child;
-        }
+        $this->classes = $classes;
     }
 
     /**

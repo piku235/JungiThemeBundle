@@ -17,11 +17,9 @@
     </parameters>
 
     <services>
-        <!--
         <service id="jungi_theme.tag.registry" class="Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistry">
-            <argument />
-        </service> -->
-        <service id="jungi_theme.tag.registry" synthetic="true" />
+            <argument /> <!-- tag classes -->
+        </service>
         <service id="jungi_theme.mobile_detect" class="%jungi_theme.mobile_detect.class%">
             <argument type="service" id="request_stack" />
         </service>
