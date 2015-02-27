@@ -36,6 +36,7 @@ class JungiThemeExtension extends Extension
     {
         $this->registerTag(array(
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
+            'Jungi\Bundle\ThemeBundle\Tag\TabletDevices',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices'
         ));
     }
