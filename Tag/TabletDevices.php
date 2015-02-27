@@ -12,17 +12,17 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * MobileDevices tag represents themes designed for mobile only devices (without tablet)
+ * TabletDevices represents themes that are suitable for tablet only devices
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class MobileDevices extends AbstractMobileDevices
+class TabletDevices extends AbstractMobileDevices
 {
     /**
      * {@inheritdoc}
      */
     public static function getName()
     {
-        return 'jungi.mobile_devices';
+        return 'jungi.tablet_devices';
     }
 }

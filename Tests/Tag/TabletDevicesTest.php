@@ -17,11 +17,11 @@ use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Tag\MobileDevices;
 
 /**
- * MobileDevices tag test case
+ * TabletDevicesTest tag test case
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class MobileDevicesTest extends TestCase
+class TabletDevicesTest extends TestCase
 {
     /**
      * @dataProvider getMatchingTags
@@ -47,13 +47,13 @@ class MobileDevicesTest extends TestCase
     public function getMatchingTags()
     {
         return array(
-            array(new MobileDevices(), new MobileDevices()),
-            array(new MobileDevices(), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
-            array(new MobileDevices('iOS'), new MobileDevices()),
-            array(new MobileDevices('iOS'), new MobileDevices('iOS')),
-            array(new MobileDevices('iOS'), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
-            array(new MobileDevices(array('AndroidOS', 'WindowsPhoneOS')), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
-            array(new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS')), new MobileDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
+            array(new TabletDevices(), new TabletDevices()),
+            array(new TabletDevices(), new TabletDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
+            array(new TabletDevices('iOS'), new TabletDevices()),
+            array(new TabletDevices('iOS'), new TabletDevices('iOS')),
+            array(new TabletDevices('iOS'), new TabletDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
+            array(new TabletDevices(array('AndroidOS', 'WindowsPhoneOS')), new TabletDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
+            array(new TabletDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS')), new TabletDevices(array('iOS', 'AndroidOS', 'WindowsPhoneOS'))),
         );
     }
 
@@ -64,8 +64,8 @@ class MobileDevicesTest extends TestCase
     {
         return array(
             array(new MobileDevices(), new TabletDevices()),
-            array(new MobileDevices('iOS'), new MobileDevices('AndroidOS')),
-            array(new MobileDevices('iOS'), new MobileDevices('AndroidOS', 'WindowsPhoneOS')),
+            array(new TabletDevices('iOS'), new TabletDevices('AndroidOS')),
+            array(new TabletDevices('iOS'), new TabletDevices('AndroidOS', 'WindowsPhoneOS')),
             array(new MobileDevices('iOS'), new TabletDevices(array('iOS', 'WindowsPhoneOS'))),
         );
     }

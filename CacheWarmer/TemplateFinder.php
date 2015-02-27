@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\CacheWarmer;
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
@@ -58,6 +59,7 @@ class TemplateFinder implements TemplateFinderInterface
 
         // Ignore virtual themes
         // @TODO: add support for virtual themes
+        /* @var ThemeInterface[] $themes */
         $themes = array_filter($this->registry->getThemes(), function ($theme) {
             return !$theme instanceof VirtualThemeInterface;
         });
