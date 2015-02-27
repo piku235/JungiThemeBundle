@@ -48,15 +48,24 @@ class DeviceThemeFilter implements ThemeFilterInterface
 
         // Get the tag for match
         if ($this->mobileDetect->isMobile()) { // Is a mobile or a tablet device?
-            $tag = new Tag\MobileDevices(
-                $this->mobileDetect->detectOS(),
-                $this->mobileDetect->isTablet() ? Tag\MobileDevices::TABLET : Tag\MobileDevices::MOBILE
-            );
+            if ($this->mobileDetect->isTablet()) {
+                $tag = new Tag\TabletDevices(
+                    $this->mobileDetect->detectOS()
+                );
+            } else {
+                $tag = new Tag\MobileDevices(
+                    $this->mobileDetect->detectOS()
+                );
+            }
         } else {
             $tag = new Tag\DesktopDevices();
         }
 
-        $supported = array(Tag\DesktopDevices::getName(), Tag\MobileDevices::getName());
+        $supported = array(
+            Tag\DesktopDevices::getName(),
+            Tag\MobileDevices::getName(),
+            Tag\TabletDevices::getName()
+        );
         foreach ($themes as $theme) {
             /* @var ThemeInterface $theme */
             $tags = $theme->getTags();

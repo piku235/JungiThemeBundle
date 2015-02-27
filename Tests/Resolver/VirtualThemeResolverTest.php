@@ -73,14 +73,14 @@ class VirtualThemeResolverTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new Tag\TagCollection(array(
-                new Tag\MobileDevices(array(), Tag\MobileDevices::MOBILE),
+                new Tag\MobileDevices(),
             ))));
         $tabletTheme = $this->createThemeMock('footheme_tablet');
         $tabletTheme
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new Tag\TagCollection(array(
-                new Tag\MobileDevices(array(), Tag\MobileDevices::TABLET),
+                new Tag\TabletDevices(),
             ))));
         $virtual = new VirtualTheme('foo', array($desktopTheme, $mobileTheme, $tabletTheme));
 
@@ -105,6 +105,7 @@ class VirtualThemeResolverTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new Tag\TagCollection(array(
                 new Tag\MobileDevices(),
+                new Tag\TabletDevices(),
             ))));
         $mobileTheme2 = $this->createThemeMock('footheme_mobile2');
         $mobileTheme2
@@ -112,6 +113,7 @@ class VirtualThemeResolverTest extends TestCase
             ->method('getTags')
             ->will($this->returnValue(new Tag\TagCollection(array(
                 new Tag\MobileDevices(),
+                new Tag\TabletDevices(),
             ))));
         $virtual = new VirtualTheme('foo', array($desktopTheme, $mobileTheme1, $mobileTheme2));
 
