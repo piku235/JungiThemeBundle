@@ -30,7 +30,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     /**
      * @var string
      */
-    const ATTR_CHANGES = '_jungi_theme_changes';
+    const ATTR_MODIFIED = '_jungi_theme_modified';
 
     /**
      * @var array
@@ -67,7 +67,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     public function setThemeName($themeName, Request $request)
     {
         $request->cookies->set(self::COOKIE_NAME, $themeName);
-        $request->attributes->set(self::ATTR_CHANGES, true);
+        $request->attributes->set(self::ATTR_MODIFIED, true);
     }
 
     /**
@@ -76,7 +76,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     public function writeResponse(Request $request, Response $response)
     {
         // Check if there were any changes in the request
-        if (!$request->attributes->get(self::ATTR_CHANGES)) {
+        if (!$request->attributes->get(self::ATTR_MODIFIED)) {
             return;
         }
 

@@ -12,7 +12,6 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
-use Jungi\Bundle\ThemeBundle\Tag\TagCollectionInterface;
 
 /**
  * Theme is a simple implementation of the ThemeInterface
@@ -39,12 +38,12 @@ class Theme implements ThemeInterface
     /**
      * Constructor
      *
-     * @param string                 $name   An unique theme name
-     * @param string                 $path   A path to theme resources
-     * @param TagCollectionInterface $tags   A tag collection (optional)
-     * @param string                 $parent A parent theme name (optional)
+     * @param string        $name   An unique theme name
+     * @param string        $path   A path to theme resources
+     * @param TagCollection $tags   A tag collection (optional)
+     * @param string        $parent A parent theme name (optional)
      */
-    public function __construct($name, $path, TagCollectionInterface $tags = null, $parent = null)
+    public function __construct($name, $path, TagCollection $tags = null, $parent = null)
     {
         $this->name = $name;
         $this->path = $path;

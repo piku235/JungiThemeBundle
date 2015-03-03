@@ -11,8 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Resolver;
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
-use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeFilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -56,7 +56,7 @@ class VirtualThemeResolver implements VirtualThemeResolverInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \InvalidArgumentException If the given themes array is empty
+     * @throws \InvalidArgumentException If the given virtual theme has not got any themes
      * @throws \RuntimeException         When there is no matching theme
      * @throws \RuntimeException         When there is more than one matching theme
      */
@@ -66,12 +66,12 @@ class VirtualThemeResolver implements VirtualThemeResolverInterface
         $count = count($themes);
         switch ($count) {
             case 0:
-                throw new \InvalidArgumentException('The theme set cannot be empty.');
+                throw new \InvalidArgumentException('A theme collection cannot be empty.');
             case 1:
-                return reset($themes);
+                return $themes->first();
         }
 
-        $collection = new ThemeCollection($themes);
+        $collection = new ThemeCollection($themes->all());
         foreach ($this->filters as $filter) {
             $filter->filter($collection, $request);
             if (1 === $count = count($collection)) {

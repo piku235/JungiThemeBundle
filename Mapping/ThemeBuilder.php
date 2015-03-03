@@ -170,7 +170,7 @@ class ThemeBuilder
     public function getParameter($name)
     {
         if (!$this->hasParameter($name)) {
-            return null;
+            return;
         }
 
         return $this->parameters[$name];
@@ -304,6 +304,7 @@ class ThemeBuilder
         $reflection = $this->tagReflections[$name];
         if ($args = $definition->getArguments()) {
             array_walk_recursive($args, array($this, 'replaceArgument'));
+
             return $reflection->newInstanceArgs($args);
         }
 

@@ -11,7 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
-use Jungi\Bundle\ThemeBundle\Tag\TagCollectionInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
@@ -32,41 +31,37 @@ class VirtualTheme implements VirtualThemeInterface
     protected $pointed;
 
     /**
-     * @var ThemeInterface[]
+     * @var FrozenThemeCollection
      */
     protected $themes;
 
     /**
-     * @var TagCollectionInterface
+     * @var TagCollection
      */
     protected $tags;
 
     /**
      * Constructor
      *
-     * @param string                 $name   An unique theme name
-     * @param ThemeInterface[]       $themes Themes that belongs to the virtual theme
-     * @param TagCollectionInterface $tags   Tags (optional)
+     * @param string           $name   An unique theme name
+     * @param ThemeInterface[] $themes Themes that belongs to the virtual theme
+     * @param TagCollection    $tags   Tags (optional)
      *
-     * @throws \InvalidArgumentException If one of the given themes is not an instance of
-     *                                   the ThemeInterface
-     * @throws \RuntimeException         When in the children themes there is an another virtual theme
+     * @throws \RuntimeException When in the children themes there is an another virtual theme
      */
-    public function __construct($name, array $themes, TagCollectionInterface $tags = null)
+    public function __construct($name, array $themes, TagCollection $tags = null)
     {
         $this->name = $name;
         $this->pointed = null;
         $this->tags = $tags ?: new TagCollection();
 
         foreach ($themes as $theme) {
-            if (!$theme instanceof ThemeInterface) {
-                throw new \InvalidArgumentException('The theme must be an instance of the "ThemeInterface".');
-            } elseif ($theme instanceof VirtualThemeInterface) {
+            if ($theme instanceof VirtualThemeInterface) {
                 throw new \RuntimeException(sprintf('You cannot attach a virtual theme to an another virtual theme.'));
             }
         }
 
-        $this->themes = $themes;
+        $this->themes = new FrozenThemeCollection($themes);
     }
 
     /**
@@ -124,9 +119,7 @@ class VirtualTheme implements VirtualThemeInterface
     }
 
     /**
-     * Returns the themes that belongs to the virtual theme
-     *
-     * @return ThemeInterface[]
+     * {@inheritdoc}
      */
     public function getThemes()
     {

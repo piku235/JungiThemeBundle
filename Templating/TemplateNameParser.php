@@ -12,6 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Templating;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface;
+use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser as BaseTemplateNameParser;
@@ -64,6 +65,12 @@ class TemplateNameParser extends BaseTemplateNameParser
             return $parent;
         }
 
-        return $this->cache[$name] = new TemplateReference($parent, $theme->getName());
+        if ($theme instanceof VirtualThemeInterface) {
+            $reference = new VirtualTemplateReference($parent, $theme, $theme->getPointedTheme());
+        } else {
+            $reference = new TemplateReference($parent, $theme->getName());
+        }
+
+        return $this->cache[$name] = $reference;
     }
 }

@@ -11,7 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Templating\Loader;
 
+use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
+use Jungi\Bundle\ThemeBundle\Templating\VirtualTemplateReference;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator as BaseTemplateLocator;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
@@ -68,20 +70,33 @@ class TemplateLocator extends BaseTemplateLocator
             return $this->cache[$key];
         }
 
-        if ($template instanceof TemplateReference) {
-            try {
-                $theme = $this->registry->getTheme($template->get('theme'));
-                $path = $theme->getPath().'/'.$template->getPath();
-
-                return $this->cache[$key] = $this->locator->locate($path);
-            } catch (ThemeNotFoundException $e) {
-                throw new \RuntimeException('The theme locator could not finish his job, see the previous exception.', null, $e);
-            } catch (\Exception $e) {
-                // Theme file is not exist, instead use the TemplateReferenceInterface instance path
-                return parent::locate($template->getOrigin(), $currentPath, $first);
-            }
+        if (!$template instanceof TemplateReference) {
+            return parent::locate($template, $currentPath, $first);
         }
 
-        return parent::locate($template, $currentPath, $first);
+        try {
+            $theme = $this->registry->getTheme($template->get('theme'));
+            if ($template instanceof VirtualTemplateReference) {
+                if (!$theme instanceof VirtualThemeInterface) {
+                    throw new \RuntimeException(sprintf('Bad reference'));
+                }
+
+                $childTheme = $theme->getThemes()->get($template->get('pointed_theme'));
+                $themePath = $childTheme->getPath();
+            } elseif ($theme instanceof VirtualThemeInterface && null === $theme->getPointedTheme()) {
+                throw new \RuntimeException(sprintf('Virtual theme is not pointing to any theme.'));
+            } else {
+                $themePath = $theme->getPath();
+            }
+
+            $path = $themePath.'/'.$template->getPath();
+
+            return $this->cache[$key] = $this->locator->locate($path);
+        } catch (ThemeNotFoundException $e) {
+            throw new \RuntimeException('The theme locator could not finish his job, see the previous exception.', null, $e);
+        } catch (\Exception $e) {
+            // Theme file is not exist, instead use the TemplateReferenceInterface instance path
+            return parent::locate($template->getOrigin(), $currentPath, $first);
+        }
     }
 }

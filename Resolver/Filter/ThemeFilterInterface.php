@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Resolver\Filter;
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

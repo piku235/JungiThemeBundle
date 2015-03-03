@@ -14,7 +14,6 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\SimpleTagRegistry;
 
 /**

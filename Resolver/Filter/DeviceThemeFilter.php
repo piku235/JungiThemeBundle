@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Resolver\Filter;
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
@@ -64,13 +65,13 @@ class DeviceThemeFilter implements ThemeFilterInterface
         $supported = array(
             Tag\DesktopDevices::getName(),
             Tag\MobileDevices::getName(),
-            Tag\TabletDevices::getName()
+            Tag\TabletDevices::getName(),
         );
         foreach ($themes as $theme) {
             /* @var ThemeInterface $theme */
             $tags = $theme->getTags();
-            if ($tags->hasSet($supported, Tag\TagCollectionInterface::COND_OR) && !$tags->contains($tag)) {
-                $themes->remove($theme);
+            if ($tags->hasSet($supported, Tag\TagCollection::COND_OR) && !$tags->contains($tag)) {
+                $themes->remove($theme->getName());
             }
         }
     }

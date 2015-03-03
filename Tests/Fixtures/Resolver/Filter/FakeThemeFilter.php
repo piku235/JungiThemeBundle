@@ -2,7 +2,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\Filter;
 
-use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeCollection;
+use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeFilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -42,7 +42,7 @@ class FakeThemeFilter implements ThemeFilterInterface
     {
         foreach ($themes as $theme) {
             if ($this->removeAll || in_array($theme->getName(), $this->remove)) {
-                $themes->remove($theme);
+                $themes->remove($theme->getName());
             }
         }
     }

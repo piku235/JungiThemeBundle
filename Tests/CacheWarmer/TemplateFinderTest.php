@@ -27,8 +27,8 @@ class TemplateFinderTest extends TestCase
     public function testFind()
     {
         $virtualTheme = new VirtualTheme('virtual', array(
-            $this->createThemeMock('virtual_foo', __DIR__.'/Fixtures/VirtualThemeBundle/Resources/theme/mobile'),
-            $this->createThemeMock('virtual_boo', __DIR__.'/Fixtures/VirtualThemeBundle/Resources/theme/desktop'),
+            $this->createThemeMock('foo', __DIR__.'/Fixtures/VirtualThemeBundle/Resources/theme/mobile'),
+            $this->createThemeMock('boo', __DIR__.'/Fixtures/VirtualThemeBundle/Resources/theme/desktop'),
         ));
         $registry = new ThemeRegistry(array(
             $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
@@ -38,12 +38,18 @@ class TemplateFinderTest extends TestCase
         $finder = new TemplateFinder($registry, new TemplateFilenameParser());
         $references = $finder->findAllTemplates();
 
-        $this->assertCount(6, $references);
+        $this->assertCount(12, $references);
         $this->assertContains('foo#BooBundle:Default:index.html.twig', $references);
         $this->assertContains('foo#BooBundle::navigation.html.twig', $references);
         $this->assertContains('foo#BooBundle::this.is.an.interesting.template.html.twig', $references);
         $this->assertContains('foo#::layout.html.twig', $references);
         $this->assertContains('boo#BooBundle::navigation.html.twig', $references);
         $this->assertContains('boo#::this.is.an.interesting.template.html.twig', $references);
+        $this->assertContains('virtual.foo#::layout.html.twig', $references);
+        $this->assertContains('virtual.foo#BooBundle::navigation.html.twig', $references);
+        $this->assertContains('virtual.foo#BooBundle::this.is.an.interesting.template.html.twig', $references);
+        $this->assertContains('virtual.foo#BooBundle:Default:index.html.twig', $references);
+        $this->assertContains('virtual.boo#::layout.html.twig', $references);
+        $this->assertContains('virtual.boo#BooBundle::navigation.html.twig', $references);
     }
 }

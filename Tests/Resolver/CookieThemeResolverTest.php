@@ -13,8 +13,8 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Resolver;
 
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Resolver\CookieThemeResolver;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * CookieThemeResolver Test Case
@@ -71,16 +71,8 @@ class CookieThemeResolverTest extends TestCase
         $this->resolver->setThemeName('footheme_new', $request);
         $this->resolver->writeResponse($request, $response);
 
-        $cookies = $response->headers->getCookies();
-        $this->assertContains(new Cookie(
-            CookieThemeResolver::COOKIE_NAME,
-            'footheme_new',
-            time() + $this->options['lifetime'],
-            $this->options['path'],
-            $this->options['domain'],
-            $this->options['secure'],
-            $this->options['httpOnly']
-        ), $cookies, '', false, false);
+        $cookies = $response->headers->getCookies(ResponseHeaderBag::COOKIES_ARRAY);
+        $this->assertTrue(isset($cookies['fooweb.com']['/foo'][CookieThemeResolver::COOKIE_NAME]));
     }
 
     /**

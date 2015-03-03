@@ -16,8 +16,18 @@ namespace Jungi\Bundle\ThemeBundle\Tag;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class TagCollection implements \IteratorAggregate, TagCollectionInterface
+class TagCollection implements \IteratorAggregate
 {
+    /**
+     * @var string
+     */
+    const COND_AND = 'and';
+
+    /**
+     * @var string
+     */
+    const COND_OR = 'or';
+
     /**
      * @var TagInterface[]
      */
@@ -55,7 +65,11 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Adds a new tag
+     *
+     * @param TagInterface $tag A tag
+     *
+     * @return void
      */
     public function add(TagInterface $tag)
     {
@@ -63,7 +77,13 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Returns a tag by tag name
+     *
+     * @param string $name A tag name
+     *
+     * @return TagInterface
+     *
+     * @throws \RuntimeException When there is no tag with a given tag name
      */
     public function get($name)
     {
@@ -75,7 +95,14 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Checks if a given tag name exists
+     *
+     * Be careful, because this method ONLY looks for a given tag name
+     * and it does not check if the tag is EQUAL to a found tag
+     *
+     * @param string $name A tag name
+     *
+     * @return bool
      */
     public function has($name)
     {
@@ -83,7 +110,15 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * The same as method "has" with the difference that it can
+     * iterate over given tag names
+     *
+     * @param array  $names     Tag names
+     * @param string $condition A condition (optional)
+     *
+     * @return bool
+     *
+     * @throws \InvalidArgumentException If the given condition is incorrect
      */
     public function hasSet(array $names, $condition = self::COND_AND)
     {
@@ -114,7 +149,13 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Checks if a given tag or collection of tags exists and if they are EQUAL to the found tags
+     *
+     * @param TagInterface $tag A tag
+     *
+     * @return bool
+     *
+     * @throws \InvalidArgumentException If the given tag or tags has bad type
      */
     public function contains(TagInterface $tag)
     {
@@ -122,7 +163,15 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * The same as method "contains" with the difference that it can
+     * iterate over given tags
+     *
+     * @param array  $tags      Tags
+     * @param string $condition A condition (optional)
+     *
+     * @return bool
+     *
+     * @throws \InvalidArgumentException If the given condition is incorrect
      */
     public function containsSet(array $tags, $condition = self::COND_AND)
     {
@@ -153,9 +202,13 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Merges an another tag collection with the current collection
+     *
+     * @param TagCollection $collection A tag collection
+     *
+     * @return void
      */
-    public function merge(TagCollectionInterface $collection)
+    public function merge(TagCollection $collection)
     {
         foreach ($collection as $tag) {
             $this->add($tag);
@@ -163,9 +216,27 @@ class TagCollection implements \IteratorAggregate, TagCollectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Removes a given tag from the collection
+     *
+     * @param string $name A tag name
+     *
+     * @return void
      */
-    public function getAll()
+    public function remove($name)
+    {
+        if (!$this->has($name)) {
+            return;
+        }
+
+        unset($this->tags[$name]);
+    }
+
+    /**
+     * Returns all tags
+     *
+     * @return TagInterface[]
+     */
+    public function all()
     {
         return $this->tags;
     }

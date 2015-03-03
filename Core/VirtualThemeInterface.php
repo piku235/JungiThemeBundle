@@ -36,9 +36,9 @@ interface VirtualThemeInterface extends ThemeInterface
     public function getPointedTheme();
 
     /**
-     * Returns the themes that belongs to the virtual theme
+     * Returns the local theme registry of the virtual theme
      *
-     * @return ThemeInterface[]
+     * @return ThemeCollection
      */
     public function getThemes();
 }
