@@ -66,7 +66,7 @@ class TemplateNameParser extends BaseTemplateNameParser
         }
 
         if ($theme instanceof VirtualThemeInterface) {
-            $reference = new VirtualTemplateReference($parent, $theme, $theme->getPointedTheme());
+            $reference = new VirtualTemplateReference($parent, $theme->getName(), $theme->getPointedTheme()->getName());
         } else {
             $reference = new TemplateReference($parent, $theme->getName());
         }
