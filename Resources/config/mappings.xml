@@ -11,18 +11,15 @@
     </parameters>
 
     <services>
-        <service id="jungi_theme.mapping.loader.xml" class="%jungi_theme.mapping.loader.xml.class%">
-            <argument type="service" id="jungi_theme.registry" />
+        <service id="jungi_theme.mapping.loader.xml" class="%jungi_theme.mapping.loader.xml.class%" public="false">
             <argument type="service" id="jungi_theme.tag.registry" />
             <argument type="service" id="file_locator" />
         </service>
-        <service id="jungi_theme.mapping.loader.yml" class="%jungi_theme.mapping.loader.yml.class%">
-            <argument type="service" id="jungi_theme.registry" />
+        <service id="jungi_theme.mapping.loader.yml" class="%jungi_theme.mapping.loader.yml.class%" public="false">
             <argument type="service" id="jungi_theme.tag.registry" />
             <argument type="service" id="file_locator" />
         </service>
-        <service id="jungi_theme.mapping.loader.php" class="%jungi_theme.mapping.loader.php.class%">
-            <argument type="service" id="jungi_theme.registry" />
+        <service id="jungi_theme.mapping.loader.php" class="%jungi_theme.mapping.loader.php.class%" public="false">
             <argument type="service" id="file_locator" />
         </service>
     </services>

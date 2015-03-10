@@ -17,14 +17,14 @@ use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * DeviceHelperTest Test Case
+ * DeviceHelperTest Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class DeviceHelperTest extends TestCase
 {
     /**
-     * Tests the isMobile
+     * Tests the isMobile.
      */
     public function testMobile()
     {
@@ -38,7 +38,7 @@ class DeviceHelperTest extends TestCase
     }
 
     /**
-     * Tests the isTablet
+     * Tests the isTablet.
      */
     public function testTablet()
     {
@@ -52,7 +52,7 @@ class DeviceHelperTest extends TestCase
     }
 
     /**
-     * Tests the isDesktop
+     * Tests the isDesktop.
      */
     public function testDesktop()
     {
@@ -66,7 +66,7 @@ class DeviceHelperTest extends TestCase
     }
 
     /**
-     * Tests the isDevice
+     * Tests the isDevice.
      */
     public function testDevice()
     {

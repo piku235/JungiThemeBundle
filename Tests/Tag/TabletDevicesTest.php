@@ -17,7 +17,7 @@ use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Tag\MobileDevices;
 
 /**
- * TabletDevicesTest tag test case
+ * TabletDevicesTest tag test case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -42,7 +42,7 @@ class TabletDevicesTest extends TestCase
     }
 
     /**
-     * Data provider
+     * Data provider.
      */
     public function getMatchingTags()
     {
@@ -58,7 +58,7 @@ class TabletDevicesTest extends TestCase
     }
 
     /**
-     * Data provider
+     * Data provider.
      */
     public function getNonMatchingTags()
     {

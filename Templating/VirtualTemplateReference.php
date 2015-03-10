@@ -14,14 +14,14 @@ namespace Jungi\Bundle\ThemeBundle\Templating;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
- * VirtualTemplateReference
+ * VirtualTemplateReference.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class VirtualTemplateReference extends TemplateReference
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param BaseTemplateReference $template     A template reference
      * @param string                $theme        A theme name
@@ -35,7 +35,7 @@ class VirtualTemplateReference extends TemplateReference
     }
 
     /**
-     * Returns the logical name
+     * Returns the logical name.
      *
      * @return string
      */

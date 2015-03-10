@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 /**
- * Constant
+ * Constant.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,7 +24,7 @@ class Constant
     private $value;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $const A constant
      */
@@ -34,7 +34,7 @@ class Constant
     }
 
     /**
-     * Returns the value of the constant
+     * Returns the value of the constant.
      *
      * @return string
      */

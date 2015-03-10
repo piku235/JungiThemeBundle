@@ -11,13 +11,31 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
+use Symfony\Component\Config\FileLocatorInterface;
+
 /**
- * PhpFileLoader is responsible for creating theme instances from a php mapping file
+ * PhpFileLoader is responsible for creating theme instances from a php mapping file.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class PhpFileLoader extends FileLoader
+class PhpFileLoader implements LoaderInterface
 {
+    /**
+     * @var FileLocatorInterface
+     */
+    private $locator;
+
+    /**
+     * Constructor.
+     *
+     * @param FileLocatorInterface $locator A file locator
+     */
+    public function __construct(FileLocatorInterface $locator)
+    {
+        $this->locator = $locator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +46,8 @@ class PhpFileLoader extends FileLoader
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \UnexpectedValueException When a included file returns a wrong collection
      */
     public function load($file)
     {
@@ -35,9 +55,16 @@ class PhpFileLoader extends FileLoader
 
         // Vars available for mapping file
         $locator = $this->locator;
-        $registry = $this->themeRegistry;
 
         // Include
-        include $path;
+        $collection = include $path;
+        if (!$collection instanceof ThemeCollection) {
+            throw new \UnexpectedValueException(sprintf(
+                'Expected to receive a ThemeCollection instance from the file "%s".',
+                $path
+            ));
+        }
+
+        return $collection;
     }
 }

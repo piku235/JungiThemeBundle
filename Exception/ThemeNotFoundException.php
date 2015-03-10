@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Exception;
 
 /**
- * ThemeNotFoundException
+ * ThemeNotFoundException.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,9 +24,9 @@ class ThemeNotFoundException extends \RuntimeException
     private $theme;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param string     $theme    The not found theme name
+     * @param string     $theme    A not found theme name
      * @param string     $message  A message (optional)
      * @param int        $code     A code (optional)
      * @param \Exception $previous The previous exception (optional)
@@ -42,7 +42,7 @@ class ThemeNotFoundException extends \RuntimeException
     }
 
     /**
-     * Returns the not found theme name
+     * Returns the not found theme name.
      *
      * @return string
      */

@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Changer;
 
 /**
- * Theme changer events
+ * Theme changer events.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

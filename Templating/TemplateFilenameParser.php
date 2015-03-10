@@ -15,7 +15,7 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
- * TemplateFilenameParser
+ * TemplateFilenameParser.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

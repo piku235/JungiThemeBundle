@@ -12,14 +12,14 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * FrozenThemeCollection
+ * FrozenThemeCollection.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class FrozenThemeCollection extends ThemeCollection
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeInterface[] $themes Themes (optional)
      */

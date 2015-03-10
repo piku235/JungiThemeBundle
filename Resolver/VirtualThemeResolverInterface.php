@@ -16,14 +16,14 @@ use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Implementations job is resolve an appropriate theme for a given virtual theme and a request
+ * Implementations job is resolve an appropriate theme for a given virtual theme and a request.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface VirtualThemeResolverInterface
 {
     /**
-     * Resolved an appropriate theme for a given virtual theme
+     * Resolved an appropriate theme for a given virtual theme.
      *
      * @param VirtualThemeInterface $theme   A virtual theme
      * @param Request               $request A Request instance

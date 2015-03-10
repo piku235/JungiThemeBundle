@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
 
 /**
  * CompositeTemplateFinder is a collection of TemplateFinderInterface instances
- * and its job is to get all template paths of each template finder
+ * and its job is to get all template paths of each template finder.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -27,7 +27,7 @@ class CompositeTemplateFinder implements TemplateFinderInterface
     protected $finders;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param TemplateFinderInterface[] $finders Template finders (optional)
      */
@@ -40,11 +40,9 @@ class CompositeTemplateFinder implements TemplateFinderInterface
     }
 
     /**
-     * Adds a template finder
+     * Adds a template finder.
      *
      * @param TemplateFinderInterface $finder A template finder
-     *
-     * @return void
      */
     public function addFinder(TemplateFinderInterface $finder)
     {
@@ -52,7 +50,7 @@ class CompositeTemplateFinder implements TemplateFinderInterface
     }
 
     /**
-     * Find all the templates in each TemplateFinderInterface instance
+     * Find all the templates in each TemplateFinderInterface instance.
      *
      * @return array
      */

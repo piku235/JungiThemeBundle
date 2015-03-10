@@ -17,7 +17,7 @@ use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\SimpleTagRegistry;
 
 /**
- * AbstractFileLoader Test Case
+ * AbstractFileLoader Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

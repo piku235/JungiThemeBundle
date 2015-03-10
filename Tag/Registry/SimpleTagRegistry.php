@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
 
 /**
- * SimpleTagRegistry is a simple implementation of the TagRegistryInterface
+ * SimpleTagRegistry is a simple implementation of the TagRegistryInterface.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,7 +24,7 @@ class SimpleTagRegistry implements TagRegistryInterface
     protected $classes = array();
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $classes Tag classes
      */
@@ -34,7 +34,7 @@ class SimpleTagRegistry implements TagRegistryInterface
     }
 
     /**
-     * Checks if a given tag name has the registered class
+     * Checks if a given tag name has the registered class.
      *
      * @param string $name A tag name
      *
@@ -46,7 +46,7 @@ class SimpleTagRegistry implements TagRegistryInterface
     }
 
     /**
-     * Gets the class of a given tag name
+     * Gets the class of a given tag name.
      *
      * @param string $name A tag name
      *
@@ -66,7 +66,7 @@ class SimpleTagRegistry implements TagRegistryInterface
     }
 
     /**
-     * Returns all registered tag classes
+     * Returns all registered tag classes.
      *
      * @return array
      */

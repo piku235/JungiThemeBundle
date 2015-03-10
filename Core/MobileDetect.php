@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * MobileDetect only extends the Mobile_Detect class and fits it for the symfony environment
+ * MobileDetect only extends the Mobile_Detect class and fits it for the symfony environment.
  *
  * @author      Current authors: Serban Ghita <serbanghita@gmail.com>, Nick Ilyin <nick.ilyin@gmail.com>
  *              Original author: Victor Stanciu <vic.stanciu@gmail.com>
@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class MobileDetect extends \Mobile_Detect
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param RequestStack $requestStack A RequestStack (optional)
      */
@@ -38,7 +38,7 @@ class MobileDetect extends \Mobile_Detect
     }
 
     /**
-     * Useless for the symfony
+     * Useless for the symfony.
      *
      * @deprecated
      */
@@ -48,7 +48,7 @@ class MobileDetect extends \Mobile_Detect
     }
 
     /**
-     * Useless for the symfony
+     * Useless for the symfony.
      *
      * @deprecated
      */
@@ -58,11 +58,9 @@ class MobileDetect extends \Mobile_Detect
     }
 
     /**
-     * Handles a given Request
+     * Handles a given Request.
      *
      * @param Request $request A request
-     *
-     * @return void
      */
     public function handleRequest(Request $request)
     {
@@ -77,7 +75,7 @@ class MobileDetect extends \Mobile_Detect
     }
 
     /**
-     * Detects an operating system (OS)
+     * Detects an operating system (OS).
      *
      * @return string|false False if no match
      */

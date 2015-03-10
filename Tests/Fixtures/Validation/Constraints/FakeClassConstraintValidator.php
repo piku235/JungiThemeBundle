@@ -15,7 +15,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * FakeClassConstraintValidator
+ * FakeClassConstraintValidator.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

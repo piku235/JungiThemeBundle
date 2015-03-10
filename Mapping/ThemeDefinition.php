@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 /**
- * ThemeDefinition
+ * ThemeDefinition.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

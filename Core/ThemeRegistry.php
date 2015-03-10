@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Core;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
- * ThemeRegistry is a simple implementation of the ThemeRegistryInterface
+ * ThemeRegistry is a simple implementation of the ThemeRegistryInterface.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -26,7 +26,7 @@ class ThemeRegistry implements ThemeRegistryInterface
     protected $themes;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeInterface[] $themes Themes (optional)
      */

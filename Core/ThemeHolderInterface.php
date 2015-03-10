@@ -19,18 +19,16 @@ namespace Jungi\Bundle\ThemeBundle\Core;
 interface ThemeHolderInterface
 {
     /**
-     * Returns the current theme
+     * Returns the current theme.
      *
      * @return ThemeInterface|null Null if the theme was not set
      */
     public function getTheme();
 
     /**
-     * Sets the current theme
+     * Sets the current theme.
      *
      * @param ThemeInterface $theme A theme
-     *
-     * @return void
      */
     public function setTheme(ThemeInterface $theme);
 }

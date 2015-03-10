@@ -20,7 +20,7 @@ use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * VirtualThemeResolverTest
+ * VirtualThemeResolverTest.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Templating;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
- * TemplateReference
+ * TemplateReference.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -31,7 +31,7 @@ class TemplateReference extends BaseTemplateReference
     protected $origin;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param BaseTemplateReference $template A template reference
      * @param string                $theme    A theme name
@@ -43,7 +43,7 @@ class TemplateReference extends BaseTemplateReference
     }
 
     /**
-     * Returns the origin template reference
+     * Returns the origin template reference.
      *
      * @return BaseTemplateReference
      */
@@ -53,7 +53,7 @@ class TemplateReference extends BaseTemplateReference
     }
 
     /**
-     * Returns the path to the theme template
+     * Returns the path to the theme template.
      *
      * @return string
      */
@@ -72,7 +72,7 @@ class TemplateReference extends BaseTemplateReference
     }
 
     /**
-     * Returns the logical name
+     * Returns the logical name.
      *
      * @return string
      */

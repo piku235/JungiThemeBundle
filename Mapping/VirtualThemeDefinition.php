@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 /**
- * VirtualThemeDefinition
+ * VirtualThemeDefinition.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,11 +24,9 @@ class VirtualThemeDefinition extends ThemeDefinition
     private $themeReferences = array();
 
     /**
-     * Adds a theme reference
+     * Adds a theme reference.
      *
      * @param string $themeName A referenced theme name
-     *
-     * @return void
      */
     public function addThemeReference($themeName)
     {
@@ -36,7 +34,7 @@ class VirtualThemeDefinition extends ThemeDefinition
     }
 
     /**
-     * Returns the theme references
+     * Returns the theme references.
      *
      * @return array
      */

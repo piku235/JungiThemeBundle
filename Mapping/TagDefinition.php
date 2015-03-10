@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 /**
- * TagDefinition
+ * TagDefinition.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

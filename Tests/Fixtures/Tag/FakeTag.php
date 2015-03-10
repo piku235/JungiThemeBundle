@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
 /**
- * FakeTag
+ * FakeTag.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

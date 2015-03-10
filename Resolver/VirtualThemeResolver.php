@@ -17,7 +17,7 @@ use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeFilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * The class matches an appropriate theme for a given virtual theme
+ * The class matches an appropriate theme for a given virtual theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -29,7 +29,7 @@ class VirtualThemeResolver implements VirtualThemeResolverInterface
     protected $filters;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeFilterInterface[] $filters Theme filters
      */
@@ -42,11 +42,9 @@ class VirtualThemeResolver implements VirtualThemeResolverInterface
     }
 
     /**
-     * Adds a theme filter
+     * Adds a theme filter.
      *
      * @param ThemeFilterInterface $filter A theme filter
-     *
-     * @return void
      */
     public function addFilter(ThemeFilterInterface $filter)
     {

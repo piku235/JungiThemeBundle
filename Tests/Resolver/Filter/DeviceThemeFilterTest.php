@@ -20,7 +20,7 @@ use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
- * DeviceThemeFilter Test Case
+ * DeviceThemeFilter Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -32,7 +32,7 @@ class DeviceThemeFilterTest extends TestCase
     private $filter;
 
     /**
-     * Set up
+     * Set up.
      */
     protected function setUp()
     {
@@ -40,7 +40,7 @@ class DeviceThemeFilterTest extends TestCase
     }
 
     /**
-     * Tests the filter on various devices and operating systems
+     * Tests the filter on various devices and operating systems.
      *
      * @dataProvider getDevicesWithThemes
      */
@@ -97,7 +97,7 @@ class DeviceThemeFilterTest extends TestCase
     }
 
     /**
-     * Tests the filter when there're themes without supported tags
+     * Tests the filter when there're themes without supported tags.
      */
     public function testOnNonSupportedThemes()
     {
@@ -124,7 +124,7 @@ class DeviceThemeFilterTest extends TestCase
     }
 
     /**
-     * Data provider
+     * Data provider.
      *
      * @return array
      */

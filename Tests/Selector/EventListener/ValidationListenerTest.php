@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints;
 
 /**
- * ValidationListenerTest Test Case
+ * ValidationListenerTest Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -44,7 +44,7 @@ class ValidationListenerTest extends TestCase
     private $event;
 
     /**
-     * Set up
+     * Set up.
      */
     protected function setUp()
     {
@@ -61,7 +61,7 @@ class ValidationListenerTest extends TestCase
     }
 
     /**
-     * Tests the failed validation
+     * Tests the failed validation.
      *
      * @expectedException \Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException
      */
@@ -74,7 +74,7 @@ class ValidationListenerTest extends TestCase
     }
 
     /**
-     * Tests the validation when it should be executed
+     * Tests the validation when it should be executed.
      *
      * @expectedException \Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException
      */
@@ -89,7 +89,7 @@ class ValidationListenerTest extends TestCase
     }
 
     /**
-     * Tests the validation when it should not be executed
+     * Tests the validation when it should not be executed.
      */
     public function testTrustedResolvers()
     {
@@ -101,7 +101,7 @@ class ValidationListenerTest extends TestCase
     }
 
     /**
-     * Tests the succeed validation
+     * Tests the succeed validation.
      */
     public function testSucceedValidation()
     {

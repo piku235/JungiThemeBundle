@@ -18,7 +18,7 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
- * TemplateLocator Test Case
+ * TemplateLocator Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -38,7 +38,7 @@ class TemplateLocatorTest extends TestCase
     }
 
     /**
-     * Tests on valid theme reference
+     * Tests on valid theme reference.
      */
     public function testValidThemeReference()
     {
@@ -56,7 +56,8 @@ class TemplateLocatorTest extends TestCase
     }
 
     /**
-     * Tests when a given theme is not exist
+     * Tests when a given theme is not exist.
+     *
      * @expectedException \RuntimeException
      */
     public function testWhenThemeIsNotExist()
@@ -69,7 +70,7 @@ class TemplateLocatorTest extends TestCase
 
     /**
      * Tests on missing theme files
-     * Should be used the parent locate()
+     * Should be used the parent locate().
      */
     public function testMissingThemeFiles()
     {

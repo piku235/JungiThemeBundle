@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
- * CacheWarmerPass
+ * CacheWarmerPass.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
@@ -20,11 +20,11 @@ use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 
 /**
- * ThemeBuilder
+ * ThemeBuilder.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeBuilder
+final class ThemeBuilder
 {
     /**
      * @var \ReflectionObject[]
@@ -52,7 +52,7 @@ class ThemeBuilder
     private $parameters;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param TagRegistryInterface $tagReg  A tag registry
      * @param FileLocatorInterface $locator A file locator
@@ -67,12 +67,10 @@ class ThemeBuilder
     }
 
     /**
-     * Adds a theme definition
+     * Adds a theme definition.
      *
      * @param string          $name       A theme name
      * @param ThemeDefinition $definition A theme definition
-     *
-     * @return void
      *
      * @throws \RuntimeException If there is a theme definition under the same name
      */
@@ -96,7 +94,7 @@ class ThemeBuilder
     }
 
     /**
-     * Returns the given theme definition
+     * Returns the given theme definition.
      *
      * @param string $name A theme name
      *
@@ -114,7 +112,7 @@ class ThemeBuilder
     }
 
     /**
-     * Returns the all registered theme definitions
+     * Returns the all registered theme definitions.
      *
      * @return ThemeDefinition[]
      */
@@ -124,11 +122,9 @@ class ThemeBuilder
     }
 
     /**
-     * Sets parameters
+     * Sets parameters.
      *
      * @param array $params Parameters
-     *
-     * @return void
      */
     public function setParameters(array $params)
     {
@@ -136,12 +132,10 @@ class ThemeBuilder
     }
 
     /**
-     * Sets a parameter
+     * Sets a parameter.
      *
      * @param string $name  A name
      * @param mixed  $value A value
-     *
-     * @return void
      */
     public function setParameter($name, $value)
     {
@@ -149,7 +143,7 @@ class ThemeBuilder
     }
 
     /**
-     * Checks if a given parameter exists
+     * Checks if a given parameter exists.
      *
      * @param string $name A name
      *
@@ -161,7 +155,7 @@ class ThemeBuilder
     }
 
     /**
-     * Returns the parameter value
+     * Returns the parameter value.
      *
      * @param string $name A name
      *
@@ -177,7 +171,7 @@ class ThemeBuilder
     }
 
     /**
-     * Returns the all parameters
+     * Returns the all parameters.
      *
      * @return array
      */
@@ -187,13 +181,11 @@ class ThemeBuilder
     }
 
     /**
-     * Builds themes depending on the contained theme definitions
+     * Builds themes depending on the contained theme definitions.
      *
-     * @param ThemeRegistryInterface $registry A theme registry
-     *
-     * @return void
+     * @return ThemeCollection
      */
-    public function build(ThemeRegistryInterface $registry)
+    public function build()
     {
         /* @var StandardThemeDefinition[] $standardThemes */
         /* @var VirtualThemeDefinition[] $virtualThemes */
@@ -201,6 +193,7 @@ class ThemeBuilder
         $relations = array();
         $standardThemes = array();
         $virtualThemes = array();
+        $result = new ThemeCollection();
 
         // Validate themes and separate them
         foreach ($this->themeDefinitions as $name => $definition) {
@@ -234,27 +227,27 @@ class ThemeBuilder
 
                 $themeReferences[$virtualTheme][] = $theme;
             } else {
-                $registry->registerTheme($theme);
+                $result->add($theme);
             }
         }
 
         // Creates virtual themes
         foreach ($virtualThemes as $themeName => $definition) {
-            $registry->registerTheme(new VirtualTheme(
+            $result->add(new VirtualTheme(
                 $themeName,
                 $themeReferences[$themeName],
                 $this->processTagDefinitions($definition->getTags())
             ));
         }
+
+        return $result;
     }
 
     /**
-     * Validates a given theme definition
+     * Validates a given theme definition.
      *
      * @param string          $themeName  A theme name
      * @param ThemeDefinition $definition A theme definition
-     *
-     * @return void
      *
      * @throws \LogicException When the virtual definition has references to an another
      *                         virtual theme
@@ -313,8 +306,6 @@ class ThemeBuilder
 
     /**
      * @param string &$arg An argument
-     *
-     * @return void
      */
     private function replaceArgument(&$arg)
     {
@@ -326,7 +317,7 @@ class ThemeBuilder
     }
 
     /**
-     * Resolved the real value of a given parameter reference
+     * Resolved the real value of a given parameter reference.
      *
      * @param string $paramName A parameter name
      *
@@ -344,7 +335,7 @@ class ThemeBuilder
     }
 
     /**
-     * Resolves the value of a given constant
+     * Resolves the value of a given constant.
      *
      * @param Constant $const A constant
      *

@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * MobileDevices tag represents themes designed for mobile only devices (without tablet)
+ * MobileDevices tag represents themes designed for mobile only devices (without tablet).
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

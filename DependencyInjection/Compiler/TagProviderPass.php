@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
- * TagProviderPass
+ * TagProviderPass.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

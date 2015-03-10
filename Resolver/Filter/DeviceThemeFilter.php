@@ -18,7 +18,7 @@ use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * The main goal of this filter is the best theme match for a device that sent the request
+ * The main goal of this filter is the best theme match for a device that sent the request.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -30,7 +30,7 @@ class DeviceThemeFilter implements ThemeFilterInterface
     private $mobileDetect;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param MobileDetect $mobileDetect A mobile detect instance
      */

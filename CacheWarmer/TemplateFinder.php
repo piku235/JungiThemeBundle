@@ -21,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
 use Symfony\Component\Finder\Finder;
 
 /**
- * TemplateFinder looks for all template paths at each registered theme
+ * TemplateFinder looks for all template paths at each registered theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -38,7 +38,7 @@ class TemplateFinder implements TemplateFinderInterface
     private $parser;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeRegistryInterface $themeReg A theme registry
      * @param TemplateFilenameParser $parser   A template name parser
@@ -50,7 +50,7 @@ class TemplateFinder implements TemplateFinderInterface
     }
 
     /**
-     * Looks for all templates in each theme
+     * Looks for all templates in each theme.
      *
      * @return TemplateReference[]
      */

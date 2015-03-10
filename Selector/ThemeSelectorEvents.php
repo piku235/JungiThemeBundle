@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Selector;
 
 /**
- * ThemeSelectorEvents is a basic class which holds all theme selector events
+ * ThemeSelectorEvents is a basic class which holds all theme selector events.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

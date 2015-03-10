@@ -16,19 +16,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Theme resolvers which implements this interface will be able to write theme changes done
- * in the request to the response
+ * in the request to the response.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface ResponseWriterInterface
 {
     /**
-     * Writes theme changes done in a given Request to a given Response
+     * Writes theme changes done in a given Request to a given Response.
      *
      * @param Request  $request  A Request instance
      * @param Response $response A Response instance
-     *
-     * @return void
      */
     public function writeResponse(Request $request, Response $response);
 }

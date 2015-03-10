@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Selector\Exception;
 
 /**
- * NullThemeException
+ * NullThemeException.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

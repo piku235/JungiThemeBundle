@@ -11,36 +11,38 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeBuilder;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 /**
- * GenericFileLoader
+ * GenericFileLoader.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-abstract class GenericFileLoader extends FileLoader
+abstract class GenericFileLoader implements LoaderInterface
 {
+    /**
+     * @var FileLocatorInterface
+     */
+    private $locator;
+
     /**
      * @var TagRegistryInterface
      */
     private $tagRegistry;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param ThemeRegistryInterface $themeReg A theme registry
-     * @param TagRegistryInterface   $tagReg   A tag registry
-     * @param FileLocatorInterface   $locator  A file locator
+     * @param TagRegistryInterface $tagReg  A tag registry
+     * @param FileLocatorInterface $locator A file locator
      */
-    public function __construct(ThemeRegistryInterface $themeReg, TagRegistryInterface $tagReg, FileLocatorInterface $locator)
+    public function __construct(TagRegistryInterface $tagReg, FileLocatorInterface $locator)
     {
         $this->tagRegistry = $tagReg;
-
-        parent::__construct($themeReg, $locator);
+        $this->locator = $locator;
     }
 
     /**
@@ -57,9 +59,9 @@ abstract class GenericFileLoader extends FileLoader
         // Loads the file
         $this->doLoad($path, $builder);
 
-        // Register created themes to global theme registry
+        // Build a theme collection from definitions
         try {
-            $builder->build($this->themeRegistry);
+            return $builder->build();
         } catch (\Exception $e) {
             throw new RuntimeException(sprintf(
                 'The problem occurred while building themes from the file "%s", see the previous exception for more details.',
@@ -69,7 +71,7 @@ abstract class GenericFileLoader extends FileLoader
     }
 
     /**
-     * Creates a new theme builder instance
+     * Creates a new theme builder instance.
      *
      * @return ThemeBuilder
      */
@@ -79,12 +81,10 @@ abstract class GenericFileLoader extends FileLoader
     }
 
     /**
-     * Performs the main load action
+     * Performs the main load action.
      *
      * @param string       $path    A file path
      * @param ThemeBuilder $builder A theme builder
-     *
-     * @return void
      */
     abstract protected function doLoad($path, ThemeBuilder $builder);
 }

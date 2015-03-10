@@ -21,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder as sfTemplateFinde
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateFilenameParser as sfTemplateFilenameParser;
 
 /**
- * CompositeTemplateFinder Test Case
+ * CompositeTemplateFinder Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

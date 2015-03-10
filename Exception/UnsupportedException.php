@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Exception;
 
 /**
- * UnsupportedException
+ * UnsupportedException.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

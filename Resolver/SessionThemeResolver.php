@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * The SessionThemeResolver uses session mechanism for storing the theme name
+ * The SessionThemeResolver uses session mechanism for storing the theme name.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

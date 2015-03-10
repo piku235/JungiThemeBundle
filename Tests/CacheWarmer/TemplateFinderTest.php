@@ -18,7 +18,7 @@ use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * TemplateFinder Test Case
+ * TemplateFinder Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

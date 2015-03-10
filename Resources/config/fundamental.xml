@@ -34,6 +34,15 @@
             <argument type="service" id="jungi_theme.registry" />
             <argument type="service" id="jungi_theme.templating.filename_parser" />
         </service>
+        <service id="jungi_theme.automatic_loader" class="Jungi\Bundle\ThemeBundle\Core\AutomaticLoader">
+            <argument />
+            <argument type="collection">
+                <argument key="xml" type="service" id="jungi_theme.mapping.loader.xml" />
+                <argument key="yml" type="service" id="jungi_theme.mapping.loader.yml" />
+                <argument key="php" type="service" id="jungi_theme.mapping.loader.php" />
+            </argument>
+            <argument type="service" id="jungi_theme.registry" />
+        </service>
         <service id="jungi_theme.registry" class="%jungi_theme.registry.class%" />
         <service id="jungi_theme.resolver.virtual" class="%jungi_theme.resolver.virtual.class%" />
         <service id="jungi_theme.resolver.filter.device" class="%jungi_theme.resolver.filter.device.class%">

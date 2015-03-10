@@ -23,7 +23,7 @@ namespace Jungi\Bundle\ThemeBundle\Tag;
 interface TagInterface
 {
     /**
-     * Checks if a given tag is equal
+     * Checks if a given tag is equal.
      *
      * @param TagInterface $tag A tag
      *
@@ -32,7 +32,7 @@ interface TagInterface
     public function isEqual(TagInterface $tag);
 
     /**
-     * Gets the tag name
+     * Gets the tag name.
      *
      * The returned name should be in the following notation: "vendor.tag_type" e.g. "jungi.mobile_devices".
      * This notation prevents from replacing tags by different vendors

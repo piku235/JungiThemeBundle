@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * ThemeHolderListener
+ * ThemeHolderListener.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -43,7 +43,7 @@ class ThemeHolderListener implements EventSubscriberInterface
     private $ignoreNullTheme;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeHolderInterface   $holder          A theme holder
      * @param ThemeSelectorInterface $selector        A theme selector
@@ -58,11 +58,9 @@ class ThemeHolderListener implements EventSubscriberInterface
     }
 
     /**
-     * Handles an event in aim to get the theme for the current request
+     * Handles an event in aim to get the theme for the current request.
      *
      * @param FilterControllerEvent $event An event
-     *
-     * @return void
      *
      * @throws NullThemeException
      */
@@ -86,11 +84,9 @@ class ThemeHolderListener implements EventSubscriberInterface
     }
 
     /**
-     * Handles the change theme event
+     * Handles the change theme event.
      *
      * @param HttpThemeEvent $event An event
-     *
-     * @return void
      */
     public function onChangedTheme(HttpThemeEvent $event)
     {

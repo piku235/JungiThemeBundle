@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Helper\DeviceHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * DeviceExtension
+ * DeviceExtension.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -27,7 +27,7 @@ class DeviceExtension extends \Twig_Extension
     private $container;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ContainerInterface $container A symfony container
      */
@@ -50,7 +50,7 @@ class DeviceExtension extends \Twig_Extension
     }
 
     /**
-     * Checks if the request has been sent by mobile device
+     * Checks if the request has been sent by mobile device.
      *
      * @return boolean
      */
@@ -60,7 +60,7 @@ class DeviceExtension extends \Twig_Extension
     }
 
     /**
-     * Checks if the request has been sent by tablet device
+     * Checks if the request has been sent by tablet device.
      *
      * @return boolean
      */
@@ -70,7 +70,7 @@ class DeviceExtension extends \Twig_Extension
     }
 
     /**
-     * Checks if the request has been sent by desktop device
+     * Checks if the request has been sent by desktop device.
      *
      * @return boolean
      */
@@ -80,7 +80,7 @@ class DeviceExtension extends \Twig_Extension
     }
 
     /**
-     * Checks if the request has been sent by a given device
+     * Checks if the request has been sent by a given device.
      *
      * @param string $device A device
      *
@@ -102,7 +102,7 @@ class DeviceExtension extends \Twig_Extension
     }
 
     /**
-     * Returns the mobile detect instance
+     * Returns the mobile detect instance.
      *
      * @return DeviceHelper
      */

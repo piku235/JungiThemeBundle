@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * The main configuration of the JungiThemeBundle
+ * The main configuration of the JungiThemeBundle.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -31,10 +31,13 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('jungi_theme');
 
         $rootNode
+            ->fixXmlConfig('mapping')
             ->children()
+                ->append($this->addThemeRegistryNode())
                 ->append($this->addThemeHolderNode())
                 ->append($this->addThemeSelectorNode())
                 ->append($this->addThemeResolverNode())
+                ->append($this->addThemeMappingsNode())
                 ->arrayNode('tags')
                     ->info('list of tag classes that will be registered')
                     ->prototype('scalar')->cannotBeEmpty()->end()
@@ -42,6 +45,47 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         return $treeBuilder;
+    }
+
+    protected function addThemeMappingsNode()
+    {
+        $builder = new TreeBuilder();
+        $rootNode = $builder->root('mappings');
+
+        $rootNode
+            ->info('list of theme mapping files')
+            ->prototype('array')
+                ->children()
+                    ->scalarNode('type')
+                        ->cannotBeEmpty()
+                        ->defaultNull()
+                    ->end()
+                    ->scalarNode('resource')
+                        ->cannotBeEmpty()
+                        ->isRequired()
+                    ->end()
+                ->end()
+            ->end();
+
+        return $rootNode;
+    }
+
+    protected function addThemeRegistryNode()
+    {
+        $builder = new TreeBuilder();
+        $rootNode = $builder->root('registry');
+
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->info('theme registry configuration')
+            ->children()
+                ->scalarNode('id')
+                    ->info('symfony service id')
+                    ->cannotBeEmpty()
+                ->end()
+            ->end();
+
+        return $rootNode;
     }
 
     protected function addThemeHolderNode()
@@ -55,6 +99,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('id')
                     ->info('symfony service id')
+                    ->cannotBeEmpty()
                     ->defaultValue('jungi_theme.holder.default')
                 ->end()
                 ->booleanNode('ignore_null_theme')

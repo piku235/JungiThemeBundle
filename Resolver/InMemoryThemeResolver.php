@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Resolver;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * This class can be used as the default theme resolver
+ * This class can be used as the default theme resolver.
  *
  * As the class name says the theme name is stored in a memory space shared by variable
  *
@@ -33,7 +33,7 @@ class InMemoryThemeResolver implements ThemeResolverInterface
     private $fixed;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $theme A theme name (optional if $fixed var is true)
      * @param bool   $fixed Is a fixed? (optional)

@@ -38,7 +38,7 @@ class CookieThemeResolver implements ThemeResolverInterface, ResponseWriterInter
     private $options;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options Options about storing the cookie (optional)
      */

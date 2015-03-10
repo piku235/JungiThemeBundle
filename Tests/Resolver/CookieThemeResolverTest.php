@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
- * CookieThemeResolver Test Case
+ * CookieThemeResolver Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -34,7 +34,7 @@ class CookieThemeResolverTest extends TestCase
     private $options;
 
     /**
-     * Set up
+     * Set up.
      */
     protected function setUp()
     {
@@ -49,7 +49,7 @@ class CookieThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests resolve theme name method
+     * Tests resolve theme name method.
      */
     public function testResolveThemeName()
     {
@@ -62,7 +62,7 @@ class CookieThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests writes to the response when they were theme changes
+     * Tests writes to the response when they were theme changes.
      */
     public function testWriteResponseOnChanges()
     {
@@ -76,7 +76,7 @@ class CookieThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests writes to the response when they were not any theme changes
+     * Tests writes to the response when they were not any theme changes.
      */
     public function testWriteResponseOnNoChanges()
     {

@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * FakeClassConstraint
+ * FakeClassConstraint.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

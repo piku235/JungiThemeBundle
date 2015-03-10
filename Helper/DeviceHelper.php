@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * DeviceHelper
+ * DeviceHelper.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -27,11 +27,9 @@ class DeviceHelper extends Helper
     private $mobileDetect;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param MobileDetect $mobileDetect A mobile detect instance
-     *
-     * @return void
      */
     public function __construct(MobileDetect $mobileDetect)
     {
@@ -39,7 +37,7 @@ class DeviceHelper extends Helper
     }
 
     /**
-     * Checks if the request has been sent by mobile device
+     * Checks if the request has been sent by mobile device.
      *
      * @return boolean
      */
@@ -49,7 +47,7 @@ class DeviceHelper extends Helper
     }
 
     /**
-     * Checks if the request has been sent by tablet device
+     * Checks if the request has been sent by tablet device.
      *
      * @return boolean
      */
@@ -59,7 +57,7 @@ class DeviceHelper extends Helper
     }
 
     /**
-     * Checks if the request has been sent by desktop device
+     * Checks if the request has been sent by desktop device.
      *
      * @return boolean
      */
@@ -69,7 +67,7 @@ class DeviceHelper extends Helper
     }
 
     /**
-     * Checks if the request has been sent by a given device
+     * Checks if the request has been sent by a given device.
      *
      * @param string $device A device
      *
@@ -81,7 +79,7 @@ class DeviceHelper extends Helper
     }
 
     /**
-     * Returns the name of this helper
+     * Returns the name of this helper.
      *
      * @return string
      */

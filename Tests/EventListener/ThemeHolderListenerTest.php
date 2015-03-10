@@ -18,7 +18,7 @@ use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * ThemeHolderListener Test Case
+ * ThemeHolderListener Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

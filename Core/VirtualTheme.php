@@ -11,10 +11,11 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
+use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
- * VirtualTheme is a representation of themes which are aggregated with this virtual theme
+ * VirtualTheme is a representation of themes which are aggregated with this virtual theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -23,12 +24,12 @@ class VirtualTheme implements VirtualThemeInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $pointed;
 
     /**
-     * @var ThemeInterface
+     * @var string
      */
-    protected $pointed;
+    protected $name;
 
     /**
      * @var FrozenThemeCollection
@@ -41,7 +42,7 @@ class VirtualTheme implements VirtualThemeInterface
     protected $tags;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string           $name   An unique theme name
      * @param ThemeInterface[] $themes Themes that belongs to the virtual theme
@@ -67,9 +68,18 @@ class VirtualTheme implements VirtualThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setPointedTheme(ThemeInterface $pointed)
+    public function setPointedTheme(ThemeInterface $theme)
     {
-        $this->pointed = $pointed;
+        $themeName = $theme->getName();
+        if (!$this->themes->has($themeName)) {
+            throw new ThemeNotFoundException($themeName, sprintf(
+                'The theme "%s" not belongs to the virtual theme "%s".',
+                $themeName,
+                $this->name
+            ));
+        }
+
+        $this->pointed = $themeName;
     }
 
     /**
@@ -77,7 +87,11 @@ class VirtualTheme implements VirtualThemeInterface
      */
     public function getPointedTheme()
     {
-        return $this->pointed;
+        if ($this->pointed) {
+            return $this->themes->get($this->pointed);
+        }
+
+        return;
     }
 
     /**
@@ -99,7 +113,7 @@ class VirtualTheme implements VirtualThemeInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \RuntimeException When the real theme is not set
+     * @throws \RuntimeException When the pointed theme is not set
      */
     public function getPath()
     {
@@ -107,7 +121,7 @@ class VirtualTheme implements VirtualThemeInterface
             throw new \RuntimeException('The path cannot be returned, because the decorated theme is not set.');
         }
 
-        return $this->pointed->getPath();
+        return $this->getPointedTheme()->getPath();
     }
 
     /**
@@ -119,7 +133,9 @@ class VirtualTheme implements VirtualThemeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Returns the theme collection of the virtual theme.
+     *
+     * @return FrozenThemeCollection
      */
     public function getThemes()
     {
@@ -127,7 +143,7 @@ class VirtualTheme implements VirtualThemeInterface
     }
 
     /**
-     * The string representation
+     * The string representation.
      *
      * @return string
      */

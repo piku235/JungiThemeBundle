@@ -16,7 +16,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 
 /**
- * HttpThemeEvent is a basic http theme event
+ * HttpThemeEvent is a basic http theme event.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -33,7 +33,7 @@ class HttpThemeEvent extends Event
     protected $theme;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeInterface $theme   A theme
      * @param Request        $request A Request object
@@ -45,7 +45,7 @@ class HttpThemeEvent extends Event
     }
 
     /**
-     * Returns the request object
+     * Returns the request object.
      *
      * @return Request
      */
@@ -55,7 +55,7 @@ class HttpThemeEvent extends Event
     }
 
     /**
-     * Returns the theme
+     * Returns the theme.
      *
      * @return ThemeInterface
      */

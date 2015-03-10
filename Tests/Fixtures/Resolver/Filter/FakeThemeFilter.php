@@ -7,7 +7,7 @@ use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeFilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * FakeThemeFilter
+ * FakeThemeFilter.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,11 +24,9 @@ class FakeThemeFilter implements ThemeFilterInterface
     private $remove = array();
 
     /**
-     * Adds a theme name which will be removed during filtering
+     * Adds a theme name which will be removed during filtering.
      *
      * @param string $name A theme name
-     *
-     * @return void
      */
     public function remove($name)
     {

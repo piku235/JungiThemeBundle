@@ -21,7 +21,7 @@ use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
 /**
- * PhpFileLoader Test Case
+ * PhpFileLoader Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -38,7 +38,7 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
     private $locator;
 
     /**
-     * Set up
+     * Set up.
      */
     protected function setUp()
     {
@@ -57,7 +57,7 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
     }
 
     /**
-     * Tests file load
+     * Tests file load.
      */
     public function testFull()
     {

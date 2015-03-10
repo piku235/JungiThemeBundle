@@ -11,32 +11,34 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
+use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
+
 /**
- * The virtual theme is basically a container of standard themes where
- * only one of them will be used
+ * A virtual theme is basically a container of standard themes where only one
+ * of them will be used.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface VirtualThemeInterface extends ThemeInterface
 {
     /**
-     * Sets a theme which will be used by the virtual theme
+     * Sets a theme which will be used by the virtual theme.
      *
      * @param ThemeInterface $pointed A theme
      *
-     * @return void
+     * @throws ThemeNotFoundException If the given theme not belongs to the virtual theme
      */
     public function setPointedTheme(ThemeInterface $pointed);
 
     /**
-     * Returns the parent theme
+     * Returns the parent theme.
      *
      * @return ThemeInterface
      */
     public function getPointedTheme();
 
     /**
-     * Returns the local theme registry of the virtual theme
+     * Returns the local theme registry of the virtual theme.
      *
      * @return ThemeCollection
      */

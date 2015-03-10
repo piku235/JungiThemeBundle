@@ -16,7 +16,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
 /**
- * YamlFileLoader Test Case
+ * YamlFileLoader Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -28,7 +28,7 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
     private $loader;
 
     /**
-     * Set up
+     * Set up.
      */
     protected function setUp()
     {
@@ -68,7 +68,7 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
     }
 
     /**
-     * Invalid theme mappings
+     * Invalid theme mappings.
      *
      * @return array
      */
@@ -84,11 +84,9 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
     }
 
     /**
-     * Loads the given file
+     * Loads the given file.
      *
      * @param string $file A file without ext
-     *
-     * @return void
      */
     protected function loadFile($file)
     {

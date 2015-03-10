@@ -20,7 +20,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * YamlFileLoader is responsible for creating theme instances from a yaml mapping file
+ * YamlFileLoader is responsible for creating theme instances from a yaml mapping file.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -31,17 +31,15 @@ class YamlFileLoader extends GenericFileLoader
      */
     public function supports($file)
     {
-        return pathinfo($file, PATHINFO_EXTENSION) == 'yml';
+        return 'yml' == pathinfo($file, PATHINFO_EXTENSION);
     }
 
     /**
-     * Processes parameters
+     * Processes parameters.
      *
      * @param array        $content A file content
      * @param ThemeBuilder $builder A theme builder
      * @param string       $file    A theme mapping file
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException If parameters key is not of array type
      */
@@ -60,13 +58,11 @@ class YamlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Parses themes
+     * Parses themes.
      *
      * @param array        $content A configuration file content
      * @param ThemeBuilder $builder A theme builder
      * @param string       $file    A theme mapping file
-     *
-     * @return void
      */
     private function parseThemes(array $content, ThemeBuilder $builder, $file)
     {
@@ -80,14 +76,12 @@ class YamlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Parses a virtual theme
+     * Parses a virtual theme.
      *
      * @param string       $themeName     A theme name
      * @param array        $specification A theme specification
      * @param ThemeBuilder $builder       A theme builder
      * @param string       $file          A theme mapping file
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException If the path key or/and the info key is missing
      * @throws \InvalidArgumentException If some keys are unrecognized
@@ -119,14 +113,12 @@ class YamlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Parses a theme
+     * Parses a theme.
      *
      * @param string       $themeName     A theme name
      * @param array        $specification A theme specification
      * @param ThemeBuilder $builder       A theme builder
      * @param string       $file          A theme mapping file
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException If the path key is missing
      */
@@ -149,14 +141,12 @@ class YamlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Parses tags specification
+     * Parses tags specification.
      *
      * @param string          $themeName       A theme name
      * @param array           $specification   A specification
      * @param ThemeDefinition $themeDefinition A theme definition
      * @param string          $file            A theme mapping file
-     *
-     * @return void
      */
     private function parseTags($themeName, array $specification, ThemeDefinition $themeDefinition, $file)
     {
@@ -184,11 +174,9 @@ class YamlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Replaces a given argument by its proper php value
+     * Replaces a given argument by its proper php value.
      *
      * @param string &$argument An argument
-     *
-     * @return void
      */
     private function replaceValue(&$argument)
     {
@@ -199,12 +187,10 @@ class YamlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Validates an entire mapping file
+     * Validates an entire mapping file.
      *
      * @param mixed  $content YAML file content
      * @param string $file    A mapping file
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException When themes node is not defined
      * @throws \UnexpectedValueException When a content from the YAML file returns other data type than array

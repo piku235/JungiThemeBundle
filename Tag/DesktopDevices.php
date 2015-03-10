@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * DesktopDevices identifies themes designed for desktop devices
+ * DesktopDevices identifies themes designed for desktop devices.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

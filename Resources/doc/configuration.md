@@ -5,6 +5,12 @@ Configuration
 # app/config/config.yml
 jungi_theme:
 
+    # theme registry configuration
+    registry:
+
+        # symfony service id
+        id:                   ~
+
     # theme holder configuration
     holder:
 
@@ -78,6 +84,11 @@ jungi_theme:
 
             # session theme resolver
             session:              ~
+
+    # list of theme mapping files
+    mappings:
+        type:                 null
+        resource:             ~ # Required
 
     # list of tag classes that will be registered
     tags:                 []

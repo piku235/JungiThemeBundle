@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
@@ -30,10 +30,16 @@ class JungiThemeExtension extends Extension
     private $tagClasses;
 
     /**
-     * Constructor
+     * @var array
+     */
+    private $mappingFiles;
+
+    /**
+     * Constructor.
      */
     public function __construct()
     {
+        $this->mappingFiles = array();
         $this->registerTag(array(
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
             'Jungi\Bundle\ThemeBundle\Tag\TabletDevices',
@@ -58,6 +64,15 @@ class JungiThemeExtension extends Extension
         $loader->load('mappings.xml');
         $loader->load('listeners.xml');
 
+        // Register theme mapping files
+        $mappingFiles = $this->mappingFiles;
+        foreach ($config['mappings'] as $mapping) {
+            $mappingFiles[] = array($mapping['resource'], $mapping['type']);
+        }
+
+        $factoryDef = $container->getDefinition('jungi_theme.automatic_loader');
+        $factoryDef->replaceArgument(0, $mappingFiles);
+
         // Register tag classes
         $this->registerTag($config['tags']);
         $tagRegDef = $container->getDefinition('jungi_theme.tag.registry');
@@ -72,6 +87,11 @@ class JungiThemeExtension extends Extension
         // Fallback theme resolver conf
         if (isset($config['resolver']['fallback'])) {
             $this->processThemeResolver('jungi_theme.resolver.fallback', 'fallback', $config, $container);
+        }
+
+        // Theme registry conf
+        if (isset($config['registry']['id'])) {
+            $container->setAlias('jungi_theme.registry', $config['registry']['id']);
         }
 
         // Theme holder conf
@@ -96,11 +116,20 @@ class JungiThemeExtension extends Extension
     }
 
     /**
-     * Registers a tag class or tag classes
+     * Registers a theme mapping file to load.
+     *
+     * @param string $file A theme mapping file
+     * @param string $type A type of theme mapping file (optional)
+     */
+    public function registerMappingFile($file, $type = null)
+    {
+        $this->mappingFiles[] = array($file, $type);
+    }
+
+    /**
+     * Registers a tag class or tag classes.
      *
      * @param string|array $class a collection or a single fully qualified class name
-     *
-     * @return void
      *
      * @throws \RuntimeException         When the tag class is not exist
      * @throws \InvalidArgumentException When the given tag class does not implement the TagInterface

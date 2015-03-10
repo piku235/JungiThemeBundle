@@ -22,7 +22,7 @@ use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 
 /**
  * TemplateLocator returns a full path to a theme resource if exists, otherwise it will use
- * the locate method of the TemplateLocator class for return
+ * the locate method of the TemplateLocator class for return.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -34,7 +34,7 @@ class TemplateLocator extends BaseTemplateLocator
     private $registry;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeRegistryInterface $registry A theme registry
      * @param FileLocatorInterface   $locator  A FileLocatorInterface instance
@@ -48,7 +48,7 @@ class TemplateLocator extends BaseTemplateLocator
     }
 
     /**
-     * Returns a full path for a given template file
+     * Returns a full path for a given template file.
      *
      * @param TemplateReferenceInterface $template    A template
      * @param string                     $currentPath Unused

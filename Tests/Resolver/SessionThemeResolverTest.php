@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 /**
- * SessionThemeResolverTest
+ * SessionThemeResolverTest.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -36,7 +36,7 @@ class SessionThemeResolverTest extends TestCase
     private $request;
 
     /**
-     * Set up
+     * Set up.
      */
     protected function setUp()
     {
@@ -46,7 +46,7 @@ class SessionThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests when the request has set theme in the session
+     * Tests when the request has set theme in the session.
      */
     public function testOnStandardRequest()
     {
@@ -58,7 +58,7 @@ class SessionThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests when the request does not have a session
+     * Tests when the request does not have a session.
      */
     public function testWhenThereIsNoSession()
     {
@@ -70,7 +70,7 @@ class SessionThemeResolverTest extends TestCase
     }
 
     /**
-     * Tests in the opposite from testOnRequestWithTheme
+     * Tests in the opposite from testOnRequestWithTheme.
      */
     public function testOnMessyRequest()
     {

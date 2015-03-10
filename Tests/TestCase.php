@@ -14,14 +14,14 @@ namespace Jungi\Bundle\ThemeBundle\Tests;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * TestCase
+ * TestCase.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Creates the simple mobile request
+     * Creates the simple mobile request.
      *
      * @return Request
      */
@@ -31,7 +31,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates the simple tablet request
+     * Creates the simple tablet request.
      *
      * @return Request
      */
@@ -41,7 +41,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates the simple desktop request
+     * Creates the simple desktop request.
      *
      * @return Request
      */
@@ -51,7 +51,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates the request
+     * Creates the request.
      *
      * @param string $ua A user agent
      *
@@ -65,7 +65,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates the theme mock with a given name
+     * Creates the theme mock with a given name.
      *
      * @param string $name A theme name
      * @param string $path A theme resource dir (optional)
@@ -88,7 +88,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns the Mock of Symfony\Component\Config\FileLocator
+     * Returns the Mock of Symfony\Component\Config\FileLocator.
      *
      * @return \Symfony\Component\Config\FileLocator
      */

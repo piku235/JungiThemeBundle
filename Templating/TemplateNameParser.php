@@ -33,7 +33,7 @@ class TemplateNameParser extends BaseTemplateNameParser
     private $holder;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeHolderInterface $holder A theme holder
      * @param KernelInterface      $kernel A KernelInterface instance
@@ -66,11 +66,7 @@ class TemplateNameParser extends BaseTemplateNameParser
         }
 
         if ($theme instanceof VirtualThemeInterface) {
-            $reference = new VirtualTemplateReference(
-                $parent,
-                $theme->getName(),
-                $theme->getPointedTheme()->getName()
-            );
+            $reference = new VirtualTemplateReference($parent, $theme, $theme->getPointedTheme());
         } else {
             $reference = new TemplateReference($parent, $theme->getName());
         }

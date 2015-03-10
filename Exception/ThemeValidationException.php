@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Exception;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
- * ThemeValidationException
+ * ThemeValidationException.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -26,7 +26,7 @@ class ThemeValidationException extends \LogicException
     protected $violations;
 
     /**
-     * Creates a well formatted exception
+     * Creates a well formatted exception.
      *
      * @param string                           $message    A message
      * @param ConstraintViolationListInterface $violations Violations
@@ -46,7 +46,7 @@ class ThemeValidationException extends \LogicException
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string                           $message    A message
      * @param ConstraintViolationListInterface $violations Violations
@@ -61,7 +61,7 @@ class ThemeValidationException extends \LogicException
     }
 
     /**
-     * Returns the errors
+     * Returns the errors.
      *
      * @return array
      */

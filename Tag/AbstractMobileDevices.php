@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * AbstractMobileDevices
+ * AbstractMobileDevices.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -24,7 +24,7 @@ abstract class AbstractMobileDevices implements TagInterface
     protected $systems;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string|array $systems Operating systems (optional)
      *                              Operating systems should be the same as in the MobileDetect class
@@ -35,7 +35,7 @@ abstract class AbstractMobileDevices implements TagInterface
     }
 
     /**
-     * Returns the operating systems
+     * Returns the operating systems.
      *
      * @return array
      */

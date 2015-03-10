@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateR
 use Symfony\Component\Templating\TemplateReference as MotherTemplateReference;
 
 /**
- * TemplateNameParserTest
+ * TemplateNameParserTest.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -36,9 +36,7 @@ class TemplateNameParserTest extends TestCase
     private $holder;
 
     /**
-     * Sets up the environment
-     *
-     * @return void
+     * Sets up the environment.
      */
     protected function setUp()
     {
@@ -60,7 +58,7 @@ class TemplateNameParserTest extends TestCase
     }
 
     /**
-     * Tests the parse method with valid examples
+     * Tests the parse method with valid examples.
      *
      * @dataProvider getValidLogicalNames
      */
@@ -72,7 +70,7 @@ class TemplateNameParserTest extends TestCase
     }
 
     /**
-     * Tests on an empty theme
+     * Tests on an empty theme.
      */
     public function testOnEmptyTheme()
     {
@@ -87,7 +85,7 @@ class TemplateNameParserTest extends TestCase
     }
 
     /**
-     * The data provider
+     * The data provider.
      *
      * @return array
      */

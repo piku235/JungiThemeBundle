@@ -19,7 +19,7 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\FakeThemeResolver;
 
 /**
- * ThemeChanger Test Case
+ * ThemeChanger Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

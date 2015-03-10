@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * VirtualThemeListener
+ * VirtualThemeListener.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -33,7 +33,7 @@ class VirtualThemeListener implements EventSubscriberInterface
     private $resolver;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param VirtualThemeResolverInterface $resolver A virtual theme resolver
      */

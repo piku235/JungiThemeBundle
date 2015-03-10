@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Core;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
- * Theme is a simple implementation of the ThemeInterface
+ * Theme is a simple implementation of the ThemeInterface.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -36,7 +36,7 @@ class Theme implements ThemeInterface
     protected $tags;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string        $name   An unique theme name
      * @param string        $path   A path to theme resources
@@ -84,7 +84,7 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * The string representation
+     * The string representation.
      *
      * @return string
      */

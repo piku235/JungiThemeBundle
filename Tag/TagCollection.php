@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * TagCollection provides features for flexible operations on theme tags
+ * TagCollection provides features for flexible operations on theme tags.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -34,7 +34,7 @@ class TagCollection implements \IteratorAggregate
     protected $tags;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param TagInterface[] $tags Tags (optional)
      */
@@ -47,7 +47,7 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Returns the iterator with all tags in the collection
+     * Returns the iterator with all tags in the collection.
      *
      * @return \ArrayIterator
      */
@@ -65,11 +65,9 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Adds a new tag
+     * Adds a new tag.
      *
      * @param TagInterface $tag A tag
-     *
-     * @return void
      */
     public function add(TagInterface $tag)
     {
@@ -77,7 +75,7 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Returns a tag by tag name
+     * Returns a tag by tag name.
      *
      * @param string $name A tag name
      *
@@ -95,7 +93,7 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Checks if a given tag name exists
+     * Checks if a given tag name exists.
      *
      * Be careful, because this method ONLY looks for a given tag name
      * and it does not check if the tag is EQUAL to a found tag
@@ -111,7 +109,7 @@ class TagCollection implements \IteratorAggregate
 
     /**
      * The same as method "has" with the difference that it can
-     * iterate over given tag names
+     * iterate over given tag names.
      *
      * @param array  $names     Tag names
      * @param string $condition A condition (optional)
@@ -149,7 +147,7 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Checks if a given tag or collection of tags exists and if they are EQUAL to the found tags
+     * Checks if a given tag or collection of tags exists and if they are EQUAL to the found tags.
      *
      * @param TagInterface $tag A tag
      *
@@ -164,7 +162,7 @@ class TagCollection implements \IteratorAggregate
 
     /**
      * The same as method "contains" with the difference that it can
-     * iterate over given tags
+     * iterate over given tags.
      *
      * @param array  $tags      Tags
      * @param string $condition A condition (optional)
@@ -202,11 +200,9 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Merges an another tag collection with the current collection
+     * Merges an another tag collection with the current collection.
      *
      * @param TagCollection $collection A tag collection
-     *
-     * @return void
      */
     public function merge(TagCollection $collection)
     {
@@ -216,11 +212,9 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Removes a given tag from the collection
+     * Removes a given tag from the collection.
      *
      * @param string $name A tag name
-     *
-     * @return void
      */
     public function remove($name)
     {
@@ -232,7 +226,7 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Returns all tags
+     * Returns all tags.
      *
      * @return TagInterface[]
      */

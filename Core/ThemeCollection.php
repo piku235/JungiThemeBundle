@@ -16,7 +16,7 @@ use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
 /**
- * ThemeCollection
+ * ThemeCollection.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -28,7 +28,7 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     protected $themes;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeInterface[] $themes Themes (optional)
      */
@@ -57,7 +57,7 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Returns the first theme in the collection
+     * Returns the first theme in the collection.
      *
      * @return ThemeInterface|null
      */
@@ -84,6 +84,14 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     public function has($themeName)
     {
         return isset($this->themes[$themeName]);
+    }
+
+    /**
+     *
+     */
+    public function contains(ThemeInterface $theme)
+    {
+        return $this->has($theme->getName());
     }
 
     /**
@@ -119,7 +127,7 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Returns the theme which has given tags
+     * Returns the theme which has given tags.
      *
      * @param TagInterface|TagInterface[] $tags      A one tag or tags
      * @param string                      $condition A condition (optional)
@@ -138,11 +146,11 @@ class ThemeCollection implements \IteratorAggregate, \Countable
             }
         }
 
-        return null;
+        return;
     }
 
     /**
-     * Returns all themes which has given tags
+     * Returns all themes which has given tags.
      *
      * @param TagInterface|TagInterface[] $tags      A one tag or tags
      * @param string                      $condition A condition (optional)

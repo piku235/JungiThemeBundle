@@ -43,7 +43,7 @@ class ThemeChanger implements ThemeChangerInterface
     private $resolver;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeSelectorInterface   $selector   A theme selector
      * @param ThemeResolverInterface   $resolver   A theme resolver

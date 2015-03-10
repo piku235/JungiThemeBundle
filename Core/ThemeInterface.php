@@ -12,14 +12,14 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * The basic theme interface
+ * The basic theme interface.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface ThemeInterface
 {
     /**
-     * Returns the unique theme name
+     * Returns the unique theme name.
      *
      * A theme name should be as simple as possible e.g. "footheme", "bar-theme"
      *
@@ -28,21 +28,21 @@ interface ThemeInterface
     public function getName();
 
     /**
-     * Returns the theme tag collection
+     * Returns the theme tag collection.
      *
      * @return \Jungi\Bundle\ThemeBundle\Tag\TagCollection
      */
     public function getTags();
 
     /**
-     * Returns the absolute path to the theme directory
+     * Returns the absolute path to the theme directory.
      *
      * @return string
      */
     public function getPath();
 
     /**
-     * Returns the parent theme name
+     * Returns the parent theme name.
      *
      * @return string|null Null if does not have a parent theme
      */

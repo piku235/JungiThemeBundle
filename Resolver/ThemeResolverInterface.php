@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 interface ThemeResolverInterface
 {
     /**
-     * Returns the appropriate theme name for a given request
+     * Returns the appropriate theme name for a given request.
      *
      * @param Request $request A request instance
      *
@@ -31,12 +31,10 @@ interface ThemeResolverInterface
     public function resolveThemeName(Request $request);
 
     /**
-     * Sets the theme for a given request
+     * Sets the theme for a given request.
      *
      * @param string  $themeName The theme name
      * @param Request $request   A request instance
-     *
-     * @return void
      */
     public function setThemeName($themeName, Request $request);
 }

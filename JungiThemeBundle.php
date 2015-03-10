@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * The jungi theme bundle
+ * The jungi theme bundle.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -29,8 +29,18 @@ class JungiThemeBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
+        parent::build($container);
+
         $container->addCompilerPass(new CacheWarmerPass());
         $container->addCompilerPass(new TagProviderPass());
         $container->addCompilerPass(new ThemeFilterPass());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function boot()
+    {
+        $this->container->get('jungi_theme.automatic_loader')->load();
     }
 }

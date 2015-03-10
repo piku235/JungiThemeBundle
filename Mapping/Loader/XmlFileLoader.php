@@ -20,7 +20,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Symfony\Component\Config\Util\XmlUtils;
 
 /**
- * XmlFileLoader is responsible for creating theme instances from a xml mapping file
+ * XmlFileLoader is responsible for creating theme instances from a xml mapping file.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -36,17 +36,15 @@ class XmlFileLoader extends GenericFileLoader
      */
     public function supports($file)
     {
-        return pathinfo($file, PATHINFO_EXTENSION) == 'xml';
+        return 'xml' == pathinfo($file, PATHINFO_EXTENSION);
     }
 
     /**
-     * Parses parameters from a DOM document
+     * Parses parameters from a DOM document.
      *
      * @param \DOMElement  $elm     DOM element
      * @param ThemeBuilder $builder A theme builder
      * @param object       $context Context
-     *
-     * @return void
      */
     private function parseParameters(\DOMElement $elm, ThemeBuilder $builder, $context)
     {
@@ -54,13 +52,11 @@ class XmlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Parses themes from a DOM document
+     * Parses themes from a DOM document.
      *
      * @param \DOMElement  $elm     DOM element
      * @param ThemeBuilder $builder A theme builder
      * @param object       $context Context
-     *
-     * @return void
      */
     private function parseThemes(\DOMElement $elm, ThemeBuilder $builder, $context)
     {
@@ -81,13 +77,11 @@ class XmlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Parses a theme element from a DOM document
+     * Parses a theme element from a DOM document.
      *
      * @param \DOMElement  $elm     A DOM element
      * @param ThemeBuilder $builder A theme builder
      * @param object       $context Context
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException If a theme node has some missing attributes
      */
@@ -101,13 +95,11 @@ class XmlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Parses a theme element from a DOM document
+     * Parses a theme element from a DOM document.
      *
      * @param \DOMElement  $elm     A DOM element
      * @param ThemeBuilder $builder A theme builder
      * @param object       $context Context
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException If a theme node has some missing attributes
      */
@@ -125,13 +117,11 @@ class XmlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Parses a theme tags from a given DOM element
+     * Parses a theme tags from a given DOM element.
      *
      * @param \DOMElement     $elm     A DOM element
      * @param ThemeDefinition $theme   A theme definition
      * @param object          $context Context
-     *
-     * @return void
      */
     private function parseTags(\DOMElement $elm, ThemeDefinition $theme, $context)
     {
@@ -151,7 +141,7 @@ class XmlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Returns elements with a proper php value
+     * Returns elements with a proper php value.
      *
      * @param \DOMElement $elm  A DOM element
      * @param string      $name Child element name
@@ -175,7 +165,7 @@ class XmlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Returns arguments to the proper php values
+     * Returns arguments to the proper php values.
      *
      * @param \DOMElement $elm  A DOM element
      * @param string      $name Child element name
@@ -222,7 +212,7 @@ class XmlFileLoader extends GenericFileLoader
     }
 
     /**
-     * Loads a xml file data
+     * Loads a xml file data.
      *
      * @param string $file A file
      *

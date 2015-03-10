@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * ValidationListener
+ * ValidationListener.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -36,7 +36,7 @@ class ValidationListener implements EventSubscriberInterface
     private $suspects;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ValidatorInterface $validator A validator
      * @param array              $suspects  Suspect theme resolvers (optional)
@@ -51,14 +51,12 @@ class ValidationListener implements EventSubscriberInterface
     }
 
     /**
-     * Adds a suspect theme resolver
+     * Adds a suspect theme resolver.
      *
      * When they are suspect theme resolver only for them the validation
      * will be performed
      *
      * @param ThemeResolverInterface|string $class An object or a class name
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException When the $class argument will be wrong
      */
@@ -79,11 +77,9 @@ class ValidationListener implements EventSubscriberInterface
     }
 
     /**
-     * Validates the theme from an event
+     * Validates the theme from an event.
      *
      * @param ResolvedThemeEvent $event An event
-     *
-     * @return void
      *
      * @throws ThemeValidationException If the theme will not pass a validation
      */

@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * ThemeSelector basically uses a theme resolver to get the appropriate theme for the request
+ * ThemeSelector basically uses a theme resolver to get the appropriate theme for the request.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -48,7 +48,7 @@ class ThemeSelector implements ThemeSelectorInterface
     private $registry;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeRegistryInterface   $registry   A theme registry
      * @param EventDispatcherInterface $dispatcher An event dispatcher
@@ -64,7 +64,7 @@ class ThemeSelector implements ThemeSelectorInterface
     }
 
     /**
-     * Selects an appropriate theme fora given Request
+     * Selects an appropriate theme fora given Request.
      *
      * If everything will go well a theme obtained from the primary theme resolver
      * will be returned otherwise a theme from the fallback theme resolver will be
@@ -116,7 +116,7 @@ class ThemeSelector implements ThemeSelectorInterface
     }
 
     /**
-     * Returns the theme instance for a given theme name
+     * Returns the theme instance for a given theme name.
      *
      * @param string  $themeName A theme name
      * @param Request $request   A Request instance

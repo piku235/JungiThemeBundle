@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * ThemeSelector Test Case
+ * ThemeSelector Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -54,7 +54,7 @@ class ThemeSelectorTest extends TestCase
     private $resolver;
 
     /**
-     * Set up
+     * Set up.
      */
     protected function setUp()
     {
@@ -75,7 +75,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests the fallback functionality when a theme has been invalidated
+     * Tests the fallback functionality when a theme has been invalidated.
      */
     public function testFallbackOnInvalidatedTheme()
     {
@@ -100,7 +100,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests the fallback functionality when a real theme is not exist
+     * Tests the fallback functionality when a real theme is not exist.
      */
     public function testFallbackOnEmptyTheme()
     {
@@ -122,7 +122,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests the fallback functionality when a real theme is not exist
+     * Tests the fallback functionality when a real theme is not exist.
      */
     public function testFallbackOnNonExistingTheme()
     {
@@ -144,7 +144,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests the fallback functionality when a real theme is exist
+     * Tests the fallback functionality when a real theme is exist.
      */
     public function testFallbackOnExistingTheme()
     {
@@ -165,7 +165,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests on an empty theme name
+     * Tests on an empty theme name.
      *
      * @expectedException \Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException
      */
@@ -183,7 +183,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests the behaviour in situations when a theme has been invalidated e.g. by validation process
+     * Tests the behaviour in situations when a theme has been invalidated e.g. by validation process.
      *
      * @expectedException \Jungi\Bundle\ThemeBundle\Exception\ThemeValidationException
      */
@@ -198,7 +198,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests on an existing theme
+     * Tests on an existing theme.
      */
     public function testOnExistingTheme()
     {
@@ -209,7 +209,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests on an empty theme name
+     * Tests on an empty theme name.
      *
      * @expectedException \Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException
      */
@@ -222,7 +222,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Tests on a bad request
+     * Tests on a bad request.
      *
      * @expectedException \Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException
      */
@@ -235,7 +235,7 @@ class ThemeSelectorTest extends TestCase
     }
 
     /**
-     * Returns the configured validator helper
+     * Returns the configured validator helper.
      *
      * @return ValidatorInterface
      */

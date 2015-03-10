@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * TabletDevices represents themes that are suitable for tablet only devices
+ * TabletDevices represents themes that are suitable for tablet only devices.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

@@ -15,23 +15,21 @@ use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
 /**
- * Classes that implements this interface manages all themes in the system
+ * Classes that implements this interface manages all themes in the system.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface ThemeRegistryInterface
 {
     /**
-     * Registers a new theme
+     * Registers a new theme.
      *
      * @param ThemeInterface $theme A theme
-     *
-     * @return void
      */
     public function registerTheme(ThemeInterface $theme);
 
     /**
-     * Checks if a given theme exists
+     * Checks if a given theme exists.
      *
      * @param string $name A theme name
      *
@@ -40,7 +38,7 @@ interface ThemeRegistryInterface
     public function hasTheme($name);
 
     /**
-     * Returns the theme by name
+     * Returns the theme by name.
      *
      * @param string $name A theme name
      *
@@ -51,14 +49,14 @@ interface ThemeRegistryInterface
     public function getTheme($name);
 
     /**
-     * Returns all themes
+     * Returns all themes.
      *
      * @return ThemeInterface[]
      */
     public function getThemes();
 
     /**
-     * Returns the theme which has given tags
+     * Returns the theme which has given tags.
      *
      * @param TagInterface|TagInterface[] $tags      A one tag or tags
      * @param string                      $condition A condition (optional)
@@ -68,7 +66,7 @@ interface ThemeRegistryInterface
     public function findThemeWithTags($tags, $condition = TagCollection::COND_AND);
 
     /**
-     * Returns all themes which has given tags
+     * Returns all themes which has given tags.
      *
      * @param TagInterface|TagInterface[] $tags      A one tag or tags
      * @param string                      $condition A condition (optional)

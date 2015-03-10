@@ -16,7 +16,7 @@ use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * DetailedResolvedThemeEvent
+ * DetailedResolvedThemeEvent.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -38,7 +38,7 @@ class DetailedResolvedThemeEvent extends ResolvedThemeEvent
     protected $resolverType;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string                 $resolverType A theme resolver type
      * @param ThemeInterface         $theme        A theme
@@ -65,7 +65,7 @@ class DetailedResolvedThemeEvent extends ResolvedThemeEvent
     }
 
     /**
-     * Checks whether the theme in the event was resolved by given theme resolver type
+     * Checks whether the theme in the event was resolved by given theme resolver type.
      *
      * @param string $type A theme resolver type
      *
@@ -77,7 +77,7 @@ class DetailedResolvedThemeEvent extends ResolvedThemeEvent
     }
 
     /**
-     * Returns the theme resolver type
+     * Returns the theme resolver type.
      *
      * @return string
      */

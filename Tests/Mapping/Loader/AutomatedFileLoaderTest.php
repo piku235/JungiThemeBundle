@@ -19,7 +19,7 @@ use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag;
 use Jungi\Bundle\ThemeBundle\Tag;
 
 /**
- * AbstractFileLoader Test Case
+ * AbstractFileLoader Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -122,7 +122,7 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
     }
 
     /**
-     * Invalid theme mappings
+     * Invalid theme mappings.
      *
      * @return array
      */
@@ -139,11 +139,9 @@ abstract class AutomatedFileLoaderTest extends AbstractFileLoaderTest
     }
 
     /**
-     * Loads the given file
+     * Loads the given file.
      *
      * @param string $file A file without ext
-     *
-     * @return void
      */
     abstract protected function loadFile($file);
 }

@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * ThemeResolverListener
+ * ThemeResolverListener.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -30,7 +30,7 @@ class ThemeResolverListener implements EventSubscriberInterface
     private $resolver;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ThemeResolverInterface $resolver A theme resolver
      */
@@ -41,11 +41,9 @@ class ThemeResolverListener implements EventSubscriberInterface
 
     /**
      * Saves theme changes done in the request only when the theme resolver
-     * implements the ResponseWriterInterface
+     * implements the ResponseWriterInterface.
      *
      * @param FilterResponseEvent $event An event
-     *
-     * @return void
      */
     public function onKernelResponse(FilterResponseEvent $event)
     {
