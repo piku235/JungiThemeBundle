@@ -17,8 +17,7 @@ What is a theme, how it works and what is related with it you will learn from [h
 
 Generally the chapter talks about:
 
-* Theme
-* VirtualTheme
+* Standard and virtual theme
 * Themes locations
 * Template naming and locations
 * Overriding bundle templates

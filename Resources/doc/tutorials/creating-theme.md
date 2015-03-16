@@ -58,26 +58,9 @@ theme mapping for this theme can looks like below:
         <theme name="jungi_hero" path="@JungiHeroThemeBundle/Resources/theme">
             <tags>
                 <tag name="jungi.mobile_devices" />
+                <tag name="jungi.tablet_devices" />
                 <tag name="jungi.desktop_devices" />
             </tags>
-            <info>
-                <property key="authors" type="collection">
-                    <property type="collection">
-                        <property key="name">piku235</property>
-                        <property key="email">piku235@gmail.com</property>
-                        <property key="homepage">www.foo.com</property>
-                    </property>
-                    <property type="collection">
-                        <property key="name">piku234</property>
-                        <property key="email">foo@gmail.com</property>
-                        <property key="homepage">www.boo.com</property>
-                    </property>
-                </property>
-                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
-                <property key="version">1.0.0</property>
-                <property key="name">A fancy theme</property>
-                <property key="license">MIT</property>
-            </info>
         </theme>
     </themes>
 
@@ -89,8 +72,8 @@ We can save this theme mapping file into `Resources/config` as `theme.xml`.
 ### Step 3: Loading the created theme mapping file
 
 Now that the JungiThemeBundle could notice our theme we must load the created theme mapping file. We can achieve that by
-using a theme mapping loader which will load all themes contained in a theme mapping file to a theme manager. We're gonna 
-to use the xml theme mapping loader in the method `boot` of the bundle.
+using a theme mapping loader which will load all themes contained in a theme mapping file to a theme manager. We can do 
+that in the method `build` of bundle. 
 
 Finally the bundle class should looks like below:
 
@@ -99,6 +82,8 @@ Finally the bundle class should looks like below:
 // src/Jungi/HeroThemeBundle/JungiHeroThemeBundle.php
 namespace Jungi\HeroThemeBundle;
 
+use Jungi\Bundle\ThemeBundle\DependencyInjection\JungiThemeExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -109,28 +94,26 @@ class JungiHeroThemeBundle extends Bundle
 	/**
 	 * {@inheritdoc}
 	 */
-	public function boot()
+	public function build(ContainerBuilder $builder)
 	{
-	    $loader = $this->container->get('jungi_theme.mapping.loader.xml');
-	    $loader->load(__DIR__ . '/Resources/config/theme.xml');
+	    $ext = $builder->getExtension('jungi_theme');
+        $ext->registerMappingFile(__DIR__.'/Resources/config/theme.xml');
 	}
 }
 ```
 
-And that's almost the end. After this step the theme should be available in a theme manager.
+And that's almost the end. After this step the theme should be available in a theme registry.
 
 ### Step 4: Set the theme for a theme resolver
 
-To set our theme to be visible on every page we can use the `InMemoryThemeResolver`. We only have to set the theme name 
-and the type of theme resolver in the configuration.
+To set our theme to be visible on every page we can use the `InMemoryThemeResolver`. We only have to set the theme name.
 
 ```yaml
 # app/config/config.yml
 jungi_theme:
     resolver:
         primary:
-            type: in_memory
-            arguments: jungi_hero
+            in_memory: jungi_hero
 ```
 
 That's all. From now on the theme should be visible on every page. Thanks for your attention and have a nice further fun 

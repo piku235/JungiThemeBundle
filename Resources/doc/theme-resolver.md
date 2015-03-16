@@ -49,8 +49,8 @@ Creating theme resolver
 -----------------------
 
 I will show you how to create a theme resolver on the example. Let's say that we're creating a theme resolver whose task
-will be to return a theme chose by user. If the user hasn't chosen any theme then a default theme for users will be 
-returned. However the user can be not authenticated, then lets say that the theme resolver will return null in this case.
+will be to return a theme chose by user. If the user hasn't chosen any theme then a default theme will be returned. 
+However the user can be not authenticated, so lets say that the theme resolver will return null in this case.
 
 The theme resolver could look like below:
 
@@ -58,7 +58,6 @@ The theme resolver could look like below:
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserThemeResolver implements ThemeResolverInterface
@@ -77,13 +76,13 @@ class UserThemeResolver implements ThemeResolverInterface
     public function resolveThemeName(Request $request)
     {
         $token = $this->tokenStorage->getToken();
-        if (!$this->authChecker->isGranted(new Expression('is_authenticated()'))) {
+        if (!$this->authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             return null;
         } 
         
         /* @var UserWithTheme $user */
         $user = $token->getUser();
-        if ($themeName = $user->getName()) {
+        if ($themeName = $user->getThemeName()) {
             return $themeName;
         }
         
@@ -93,7 +92,7 @@ class UserThemeResolver implements ThemeResolverInterface
     public function setThemeName($themeName, Request $request)
     {
         $token = $this->tokenStorage->getToken();
-        if (!$this->authChecker->isGranted(new Expression('is_authenticated()'))) {
+        if (!$this->authChecker->isGranted('IS_AUTHENTICATED_FULLY'))) {
             throw new LogicException('You cannot change the theme when the user is not authenticated.');
         }
         
@@ -125,6 +124,6 @@ jungi_theme:
         primary: jungi_theme.resolver.user
 ```
 
-And that's all, after this step our theme resolver should be normally working.
+And that's all, after this step our theme resolver should be working as expected.
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

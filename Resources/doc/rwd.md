@@ -1,23 +1,24 @@
 Responsive Web Design (RWD)
 ===========================
 
-To create a responsive theme you have only to choose the appropriate theme mapping and define inside this theme mapping
-document a theme with two tags below:
+To create a responsive theme you have only to choose the appropriate theme mapping and define inside it a theme with these
+following tags:
 
 * [MobileDevices](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#mobiledevices)
+* [TabletDevices](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tabletdevices)
 * [DesktopDevices](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#desktopdevices)
 
-And that's all, thanks to these tags the JungiThemeBundle will notice that the theme will be used for mobile devices and
-desktop devices. Additionally you can use this advantage for searching and obtaining an information about a theme.
+And that's all, thanks to these tags the JungiThemeBundle will notice that the theme will be used for mobile, tablet and 
+desktop devices. Additionally you can use this advantage for seeking and obtaining an information about a theme.
 
 **INFO**
 
-> Even a theme without any tags can be selected for a dispatched request if there wasn't any previous theme match
+> Even a theme without any tags can be selected for a dispatched request if there wasn't any previous theme match.
 
 Example
 -------
 
-I know that introduction can be insufficient so I will demonstrate creating a responsive theme on the example.
+I know that introduction can be insufficient, so I will demonstrate creating a responsive theme on the example.
 
 ### XML
 
@@ -29,34 +30,19 @@ I know that introduction can be insufficient so I will demonstrate creating a re
                xsi:schemaLocation="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping https://raw.githubusercontent.com/piku235/JungiThemeBundle/master/Mapping/Loader/schema/theme-1.0.xsd">
 
     <parameters>
-        <parameter key="authors" type="collection">
-            <parameter type="collection">
-                <parameter key="name">piku235</parameter>
-                <parameter key="email">piku235@gmail.com</parameter>
-                <parameter key="homepage">www.foo.com</parameter>
-            </parameter>
+        <parameter key="mobile_systems" type="collection">
+            <parameter>iOS</parameter>
+            <parameter>AndroidOS</parameter>
         </parameter>
     </parameters>
 
     <themes>
         <theme name="foo" path="@JungiFooBundle/Resources/theme">
             <tags>
-                <tag name="jungi.mobile_devices">
-                    <argument type="collection">
-                        <argument>iOS</argument>
-                        <argument>AndroidOS</argument>
-                    </argument>
-                    <argument type="constant">jungi.mobile_devices::MOBILE</argument>
-                </tag>
+                <tag name="jungi.mobile_devices">%mobile_systems%</tag>
+                <tag name="jungi.tablet_devices">%mobile_systems%</tag>
                 <tag name="jungi.desktop_devices" />
             </tags>
-            <info>
-                <property key="authors">%authors%</property>
-                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
-                <property key="version">1.0.0</property>
-                <property key="name">A fancy theme</property>
-                <property key="license">MIT</property>
-            </info>
         </theme>
     </themes>
     
@@ -69,23 +55,15 @@ I know that introduction can be insufficient so I will demonstrate creating a re
 ```yml
 # FooBundle/Resources/config/theme.yml
 parameters:
-    authors:
-        - { name: piku235, email: piku235@gmail.com, homepage: www.foo.com }
-    foo.mobile_systems: [ iOS, AndroidOS ]
-    foo.mobile_device: "const@jungi.mobile_devices::MOBILE"
+    mobile_systems: [ iOS, AndroidOS ]
 
 themes:
     foo:
         path: "@JungiFooBundle/Resources/theme"
         tags:
             jungi.desktop_devices: ~
-            jungi.mobile_devices: [ "%foo.mobile_systems%", "%foo.mobile_device%" ]
-        info:
-            authors: "%authors%"
-            name: A fancy theme
-            version: 1.0.0
-            license: MIT
-            description: <i>foo desc</i>
+            jungi.mobile_devices: %mobile_systems%
+            jungi.tablet_devices: %mobile_systems%
 
 ```
 
@@ -95,35 +73,28 @@ themes:
 <?php
 // FooBundle/Resources/config/theme.php
 
+use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
-use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
-$ib = ThemeInfoEssence::createBuilder();
-$ib
-    ->setName('A fancy theme')
-    ->setDescription('<i>foo desc</i>')
-    ->setVersion('1.0.0')
-    ->setLicense('MIT')
-    ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'));
-
-$manager->registerTheme(new Theme(
+$collection = new ThemeCollection();
+$collection->add(new Theme(
     'foo',
     $locator->locate('@JungiFooBundle/Resources/theme'),
-    $ib->getThemeInfo(),
     new TagCollection(array(
         new Tag\DesktopDevices(),
-        new Tag\MobileDevices(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)
+        new Tag\MobileDevices(array('iOS', 'AndroidOS')),
+        new Tag\TabletDevices(array('iOS', 'AndroidOS'))
     ))
 ));
 
+return $collection;
 ```
 
 Summary
 -------
 
-To see how your responsive theme works, load the created theme mapping file and set the theme name to a theme resolver.
+To see how your responsive theme works, load the created theme mapping file and set the theme name to the theme resolver.
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

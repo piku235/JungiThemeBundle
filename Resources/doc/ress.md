@@ -1,9 +1,9 @@
 Responsive + Server-Side (RESS)
 -------------------------------
 
-Just like I said in the main documentation the RESS is nothing else than RWD. So to create a theme you must follow the
-same steps like in the [RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md) chapter. In
-this chapter I will show the tools which are the main goal of the RESS.
+Just like it was mentioned in the main documentation the RESS is nothing else than RWD. Thus, to create a theme you must 
+follow the same steps like in the [RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md) 
+chapter. This chapter talks about the tools which are the main goal of the RESS.
 
 DeviceHelper
 ------------

@@ -90,8 +90,7 @@ jungi_theme:
 
 ##### SessionThemeResolver
 
-The SessionThemeResolver uses the session mechanism for holding the theme name. It doesn't take any arguments, so the
-`arguments` doesn't must be provided.
+The SessionThemeResolver uses the session mechanism for holding the theme name. It doesn't take any arguments.
 
 ```yaml
 # app/config/config.yml
