@@ -5,22 +5,39 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="jungi_theme.mapping.loader.xml.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlFileLoader</parameter>
-        <parameter key="jungi_theme.mapping.loader.yml.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader</parameter>
-        <parameter key="jungi_theme.mapping.loader.php.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader</parameter>
+        <parameter key="jungi_theme.mapping.dumper.class">Jungi\Bundle\ThemeBundle\Mapping\Dumper\PhpDumper</parameter>
+        <parameter key="jungi_theme.mapping.definition_registry.class">Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry</parameter>
+        <parameter key="jungi_theme.mapping.processor.class">Jungi\Bundle\ThemeBundle\Mapping\Processor\Processor</parameter>
+        <parameter key="jungi_theme.mapping.processor.worker.parameter.class">Jungi\Bundle\ThemeBundle\Mapping\Processor\ParameterWorker</parameter>
+        <parameter key="jungi_theme.mapping.processor.worker.virtual_theme.class">Jungi\Bundle\ThemeBundle\Mapping\Processor\VirtualThemeWorker</parameter>
+        <parameter key="jungi_theme.mapping.loader.xml_definition.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlDefinitionLoader</parameter>
+        <parameter key="jungi_theme.mapping.loader.yml_definition.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlDefinitionLoader</parameter>
+        <parameter key="jungi_theme.mapping.loader.php_definition.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpDefinitionLoader</parameter>
     </parameters>
 
     <services>
-        <service id="jungi_theme.mapping.loader.xml" class="%jungi_theme.mapping.loader.xml.class%" public="false">
-            <argument type="service" id="jungi_theme.tag.registry" />
+        <service id="jungi_theme.mapping.dumper" class="%jungi_theme.mapping.dumper.class%" public="false">
+            <argument type="service" id="jungi_theme.tag.class_registry" />
+        </service>
+        <service id="jungi_theme.mapping.definition_registry" class="%jungi_theme.mapping.definition_registry.class%" public="false" />
+        <service id="jungi_theme.mapping.processor" class="%jungi_theme.mapping.processor.class%" public="false">
+            <call method="addWorker">
+                <argument type="service" id="jungi_theme.mapping.processor.worker.parameter" />
+            </call>
+            <call method="addWorker">
+                <argument type="service" id="jungi_theme.mapping.processor.worker.virtual_theme" />
+            </call>
+        </service>
+        <service id="jungi_theme.mapping.processor.worker.parameter" class="%jungi_theme.mapping.processor.worker.parameter.class%" public="false" />
+        <service id="jungi_theme.mapping.processor.worker.virtual_theme" class="%jungi_theme.mapping.processor.worker.virtual_theme.class%" public="false" />
+
+        <service id="jungi_theme.mapping.loader.definition" abstract="true">
+            <argument type="service" id="jungi_theme.mapping.processor" />
+            <argument type="service" id="jungi_theme.mapping.definition_registry" />
             <argument type="service" id="file_locator" />
         </service>
-        <service id="jungi_theme.mapping.loader.yml" class="%jungi_theme.mapping.loader.yml.class%" public="false">
-            <argument type="service" id="jungi_theme.tag.registry" />
-            <argument type="service" id="file_locator" />
-        </service>
-        <service id="jungi_theme.mapping.loader.php" class="%jungi_theme.mapping.loader.php.class%" public="false">
-            <argument type="service" id="file_locator" />
-        </service>
+        <service id="jungi_theme.mapping.loader.xml_definition" class="%jungi_theme.mapping.loader.xml_definition.class%" parent="jungi_theme.mapping.loader.definition" public="false" />
+        <service id="jungi_theme.mapping.loader.yml_definition" class="%jungi_theme.mapping.loader.yml_definition.class%" parent="jungi_theme.mapping.loader.definition" public="false" />
+        <service id="jungi_theme.mapping.loader.php_definition" class="%jungi_theme.mapping.loader.php_definition.class%" parent="jungi_theme.mapping.loader.definition" public="false" />
     </services>
 </container>

@@ -32,6 +32,6 @@ class CacheWarmerPass implements CompilerPassInterface
         }
 
         $cacheWarmer = $container->getDefinition('templating.cache_warmer.template_paths');
-        $cacheWarmer->replaceArgument(0, new Reference('jungi_theme.cache_warmer.composite_finder'));
+        $cacheWarmer->replaceArgument(0, new Reference('jungi_theme.cache_warmer.chain_finder'));
     }
 }

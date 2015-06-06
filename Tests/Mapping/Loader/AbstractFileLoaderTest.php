@@ -11,10 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSource;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Tag\Registry\SimpleTagRegistry;
+use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistry;
 
 /**
  * AbstractFileLoader Test Case.
@@ -24,7 +23,7 @@ use Jungi\Bundle\ThemeBundle\Tag\Registry\SimpleTagRegistry;
 abstract class AbstractFileLoaderTest extends TestCase
 {
     /**
-     * @var ThemeRegistry
+     * @var ThemeSource
      */
     protected $registry;
 
@@ -34,7 +33,7 @@ abstract class AbstractFileLoaderTest extends TestCase
     protected $kernel;
 
     /**
-     * @var SimpleTagRegistry
+     * @var TagClassRegistry
      */
     protected $tagRegistry;
 
@@ -43,8 +42,8 @@ abstract class AbstractFileLoaderTest extends TestCase
      */
     protected function setUp()
     {
-        $this->registry = new ThemeRegistry();
-        $this->tagRegistry = new SimpleTagRegistry(array(
+        $this->registry = new ThemeSource();
+        $this->tagRegistry = new TagClassRegistry(array(
             'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
             'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
             'Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Own',

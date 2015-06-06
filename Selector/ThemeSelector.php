@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Selector;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSourceInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface;
 use Jungi\Bundle\ThemeBundle\Selector\Event\DetailedResolvedThemeEvent;
@@ -43,22 +43,22 @@ class ThemeSelector implements ThemeSelectorInterface
     private $resolver;
 
     /**
-     * @var ThemeRegistryInterface
+     * @var ThemeSourceInterface
      */
-    private $registry;
+    private $source;
 
     /**
      * Constructor.
      *
-     * @param ThemeRegistryInterface   $registry   A theme registry
+     * @param ThemeSourceInterface     $source     A theme source
      * @param EventDispatcherInterface $dispatcher An event dispatcher
      * @param ThemeResolverInterface   $resolver   A theme resolver
      * @param ThemeResolverInterface   $fallback   A fallback theme resolver (optional)
      */
-    public function __construct(ThemeRegistryInterface $registry, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
+    public function __construct(ThemeSourceInterface $source, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
     {
         $this->dispatcher = $dispatcher;
-        $this->registry = $registry;
+        $this->source = $source;
         $this->resolver = $resolver;
         $this->fallback = $fallback;
     }
@@ -132,6 +132,6 @@ class ThemeSelector implements ThemeSelectorInterface
             throw new NullThemeException(sprintf('The theme for the request "%s" can not be found.', $request->getPathInfo()));
         }
 
-        return $this->registry->getTheme($themeName);
+        return $this->source->getTheme($themeName);
     }
 }

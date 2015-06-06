@@ -11,37 +11,21 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
-use Symfony\Component\Config\FileLocatorInterface;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
  * PhpFileLoader is responsible for creating theme instances from a php mapping file.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class PhpFileLoader implements LoaderInterface
+class PhpDefinitionLoader extends AbstractDefinitionLoader
 {
-    /**
-     * @var FileLocatorInterface
-     */
-    private $locator;
-
-    /**
-     * Constructor.
-     *
-     * @param FileLocatorInterface $locator A file locator
-     */
-    public function __construct(FileLocatorInterface $locator)
-    {
-        $this->locator = $locator;
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function supports($file)
+    public function supports($file, $type = null)
     {
-        return 'php' == pathinfo($file, PATHINFO_EXTENSION);
+        return 'php' == pathinfo($file, PATHINFO_EXTENSION) || 'php' === $type;
     }
 
     /**
@@ -49,22 +33,22 @@ class PhpFileLoader implements LoaderInterface
      *
      * @throws \UnexpectedValueException When a included file returns a wrong collection
      */
-    public function load($file)
+    protected function doLoad($file)
     {
         $path = $this->locator->locate($file);
 
         // Vars available for mapping file
-        $locator = $this->locator;
+        $loader = $this;
 
-        // Include
-        $collection = include $path;
-        if (!$collection instanceof ThemeCollection) {
+        // Require
+        $registry = require $path;
+        if (!$registry instanceof ThemeDefinitionRegistryInterface) {
             throw new \UnexpectedValueException(sprintf(
-                'Expected to receive a ThemeCollection instance from the file "%s".',
+                'Expected to receive a ThemeDefinitionRegistryInterface instance from the file "%s".',
                 $path
             ));
         }
 
-        return $collection;
+        return $registry;
     }
 }

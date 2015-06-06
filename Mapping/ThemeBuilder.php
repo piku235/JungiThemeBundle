@@ -14,17 +14,17 @@ namespace Jungi\Bundle\ThemeBundle\Mapping;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
-use Jungi\Bundle\ThemeBundle\Tag\Registry\TagRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Information\Author;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
-use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
-use Symfony\Component\Config\FileLocatorInterface;
 
 /**
  * ThemeBuilder.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-final class ThemeBuilder
+class ThemeBuilder
 {
     /**
      * @var \ReflectionObject[]
@@ -32,14 +32,9 @@ final class ThemeBuilder
     private $tagReflections;
 
     /**
-     * @var TagRegistryInterface
+     * @var TagClassRegistryInterface
      */
     private $tagRegistry;
-
-    /**
-     * @var FileLocatorInterface
-     */
-    private $locator;
 
     /**
      * @var ThemeDefinition[]
@@ -54,130 +49,14 @@ final class ThemeBuilder
     /**
      * Constructor.
      *
-     * @param TagRegistryInterface $tagReg  A tag registry
-     * @param FileLocatorInterface $locator A file locator
+     * @param TagClassRegistryInterface $tagReg A tag registry
      */
-    public function __construct(TagRegistryInterface $tagReg, FileLocatorInterface $locator)
+    public function __construct(TagClassRegistryInterface $tagReg)
     {
         $this->themeDefinitions = array();
         $this->parameters = array();
         $this->tagReflections = array();
         $this->tagRegistry = $tagReg;
-        $this->locator = $locator;
-    }
-
-    /**
-     * Adds a theme definition.
-     *
-     * @param string          $name       A theme name
-     * @param ThemeDefinition $definition A theme definition
-     *
-     * @throws \RuntimeException If there is a theme definition under the same name
-     */
-    public function addThemeDefinition($name, ThemeDefinition $definition)
-    {
-        if ($this->hasThemeDefinition($name)) {
-            throw new \RuntimeException(sprintf('There is already registered theme definition under the name "%s".', $name));
-        }
-
-        $this->themeDefinitions[$name] = $definition;
-    }
-
-    /**
-     * @param string $name A theme name
-     *
-     * @return bool
-     */
-    public function hasThemeDefinition($name)
-    {
-        return isset($this->themeDefinitions[$name]);
-    }
-
-    /**
-     * Returns the given theme definition.
-     *
-     * @param string $name A theme name
-     *
-     * @return ThemeDefinition|null Null if the theme doesn't exist
-     *
-     * @throws \RuntimeException When the given theme definition does not exist
-     */
-    public function getThemeDefinition($name)
-    {
-        if (!isset($this->themeDefinitions[$name])) {
-            throw new \RuntimeException(sprintf('The theme definition "%s" can not be found.', $name));
-        }
-
-        return $this->themeDefinitions[$name];
-    }
-
-    /**
-     * Returns the all registered theme definitions.
-     *
-     * @return ThemeDefinition[]
-     */
-    public function getThemeDefinitions()
-    {
-        return $this->themeDefinitions;
-    }
-
-    /**
-     * Sets parameters.
-     *
-     * @param array $params Parameters
-     */
-    public function setParameters(array $params)
-    {
-        $this->parameters = $params;
-    }
-
-    /**
-     * Sets a parameter.
-     *
-     * @param string $name  A name
-     * @param mixed  $value A value
-     */
-    public function setParameter($name, $value)
-    {
-        $this->parameters[$name] = $value;
-    }
-
-    /**
-     * Checks if a given parameter exists.
-     *
-     * @param string $name A name
-     *
-     * @return bool
-     */
-    public function hasParameter($name)
-    {
-        return array_key_exists($name, $this->parameters);
-    }
-
-    /**
-     * Returns the parameter value.
-     *
-     * @param string $name A name
-     *
-     * @return mixed Null if it doesn't exist
-     */
-    public function getParameter($name)
-    {
-        if (!$this->hasParameter($name)) {
-            return;
-        }
-
-        return $this->parameters[$name];
-    }
-
-    /**
-     * Returns the all parameters.
-     *
-     * @return array
-     */
-    public function getParameters()
-    {
-        return $this->parameters;
     }
 
     /**
@@ -189,7 +68,6 @@ final class ThemeBuilder
     {
         /* @var StandardThemeDefinition[] $standardThemes */
         /* @var VirtualThemeDefinition[] $virtualThemes */
-        $themeReferences = array();
         $relations = array();
         $standardThemes = array();
         $virtualThemes = array();
@@ -197,13 +75,21 @@ final class ThemeBuilder
 
         // Validate themes and separate them
         foreach ($this->themeDefinitions as $name => $definition) {
-            $this->validateThemeDefinition($name, $definition);
             if ($definition instanceof VirtualThemeDefinition) {
-                foreach ($definition->getThemeReferences() as $refThemeName) {
-                    $relations[$refThemeName] = $name;
-                }
-
                 $virtualThemes[$name] = $definition;
+
+                // Validate
+                foreach ($definition->getThemeReferences() as $childTheme) {
+                    if (isset($relations[$childTheme])) {
+                        throw new \LogicException(sprintf(
+                            'The theme "%s" is currently attached to the virtual theme "%s". You cannot attach the same theme
+                            to several virtual themes.',
+                            $relations[$childTheme]
+                        ));
+                    }
+
+                    $relations[$childTheme] = $name;
+                }
             } else {
                 $standardThemes[$name] = $definition;
             }
@@ -211,159 +97,129 @@ final class ThemeBuilder
 
         // Creates standard themes
         foreach ($standardThemes as $themeName => $definition) {
-            $virtualTheme = isset($relations[$themeName]) ? $relations[$themeName] : null;
-            $theme = new Theme(
-                $themeName,
-                $this->locator->locate($definition->getPath()),
-                $this->processTagDefinitions($definition->getTags()),
-                $virtualTheme
-            );
-            // The theme will be only pushed to registry when
+            $definition->setParent(isset($relations[$themeName]) ? $relations[$themeName] : null);
+            // The theme will be only pushed to collection when
             // it has not got any parent theme (virtual)
-            if ($virtualTheme) {
-                if (!isset($themeReferences[$virtualTheme])) {
-                    $themeReferences[$virtualTheme] = array();
-                }
-
-                $themeReferences[$virtualTheme][] = $theme;
-            } else {
-                $result->add($theme);
+            if (!$definition->getParent()) {
+                $result->add($this->createStandardTheme($themeName, $definition));
             }
         }
 
         // Creates virtual themes
         foreach ($virtualThemes as $themeName => $definition) {
-            $result->add(new VirtualTheme(
-                $themeName,
-                $themeReferences[$themeName],
-                $this->processTagDefinitions($definition->getTags())
-            ));
+            $result->add($this->createVirtualTheme($themeName, $definition));
         }
 
         return $result;
     }
 
     /**
-     * Validates a given theme definition.
+     * Creates a standard theme from a given theme definition.
      *
-     * @param string          $themeName  A theme name
-     * @param ThemeDefinition $definition A theme definition
+     * @param string                  $themeName  A theme name
+     * @param StandardThemeDefinition $definition A definition
      *
-     * @throws \LogicException When the virtual definition has references to an another
-     *                         virtual theme
+     * @return Theme
      */
-    private function validateThemeDefinition($themeName, ThemeDefinition $definition)
+    private function createStandardTheme($themeName, StandardThemeDefinition $definition)
     {
-        if ($definition instanceof VirtualThemeDefinition) {
-            foreach ($definition->getThemeReferences() as $refThemeName) {
-                $themeDef = $this->getThemeDefinition($refThemeName);
-                if ($themeDef instanceof VirtualThemeDefinition) {
-                    throw new \LogicException(sprintf(
-                        'Referencing to virtual themes is not allowed. Encountered at the theme "%s".',
-                        $themeName
-                    ));
-                }
-            }
-        }
+        return new Theme(
+            $themeName,
+            $this->locator->locate($definition->getPath()),
+            $this->createThemeInfo($definition->getInformation()),
+            $this->createTags($definition->getTags())
+        );
     }
 
     /**
-     * @param TagDefinition[] $definitions
+     * Creates a virtual theme from a given theme definition.
+     *
+     * @param string                 $themeName  A theme name
+     * @param VirtualThemeDefinition $definition A definition
+     *
+     * @return VirtualTheme
+     */
+    private function createVirtualTheme($themeName, VirtualThemeDefinition $definition)
+    {
+        $themes = array();
+        foreach ($definition->getThemeReferences() as $refThemeName) {
+            $themeDef = $this->getThemeDefinition($refThemeName);
+            if (!$themeDef instanceof StandardThemeDefinition) {
+                throw new \LogicException(sprintf(
+                    'Virtual themes can consists only of standard themes. Encountered in the theme "%s".',
+                    $themeName
+                ));
+            }
+
+            $themes[] = $this->createStandardTheme($refThemeName, $themeDef);
+        }
+
+        return new VirtualTheme(
+            $themeName,
+            $themes,
+            $this->createThemeInfo($definition->getInformation()),
+            $this->createTags($definition->getTags())
+        );
+    }
+
+    /**
+     * Creates tags from given tag definitions.
+     *
+     * @param Tag[] $definitions Definitions
      *
      * @return TagCollection
      */
-    private function processTagDefinitions(array $definitions)
+    private function createTags(array $definitions)
     {
         $tags = new TagCollection();
         foreach ($definitions as $definition) {
-            $tags->add($this->processTagDefinition($definition));
+            $name = $definition->getName();
+            if (!isset($this->tagReflections[$name])) {
+                $this->tagReflections[$name] = new \ReflectionClass($this->tagRegistry->getTagClass($name));
+            }
+
+            $reflection = $this->tagReflections[$name];
+            if ($args = $definition->getArguments()) {
+                array_walk_recursive($args, array($this, 'replaceArgument'));
+                $tag = $reflection->newInstanceArgs($args);
+            } else {
+                $tag = $reflection->newInstance();
+            }
+
+            $tags->add($tag);
         }
 
         return $tags;
     }
 
     /**
-     * @param TagDefinition $definition
+     * Creates a ThemeInfo instance based on given definition.
      *
-     * @return TagInterface
+     * @param ThemeInfo $definition A definition
+     *
+     * @return ThemeInfoEssence
      */
-    private function processTagDefinition(TagDefinition $definition)
+    protected function createThemeInfo(ThemeInfo $definition = null)
     {
-        $name = $definition->getName();
-        if (!isset($this->tagReflections[$name])) {
-            $this->tagReflections[$name] = new \ReflectionClass($this->tagRegistry->getTag($name));
-        }
-
-        $reflection = $this->tagReflections[$name];
-        if ($args = $definition->getArguments()) {
-            array_walk_recursive($args, array($this, 'replaceArgument'));
-
-            return $reflection->newInstanceArgs($args);
-        }
-
-        return $reflection->newInstance();
-    }
-
-    /**
-     * @param string &$arg An argument
-     */
-    private function replaceArgument(&$arg)
-    {
-        if ($arg instanceof Constant) {
-            $arg = $this->resolveConstant($arg);
-        } elseif (preg_match('/^%([^\s%]+)%$/', $arg, $matches)) {
-            $arg = $this->resolveParameter($matches[1]);
-        }
-    }
-
-    /**
-     * Resolved the real value of a given parameter reference.
-     *
-     * @param string $paramName A parameter name
-     *
-     * @return mixed
-     *
-     * @throws \RuntimeException When the given parameter does not exist
-     */
-    private function resolveParameter($paramName)
-    {
-        if (!$this->hasParameter($paramName)) {
-            throw new \RuntimeException(sprintf('The parameter "%s" can not be found.', $paramName));
-        }
-
-        return $this->getParameter($paramName);
-    }
-
-    /**
-     * Resolves the value of a given constant.
-     *
-     * @param Constant $const A constant
-     *
-     * @return mixed
-     *
-     * @throws \InvalidArgumentException When the constant is wrong or not found
-     */
-    private function resolveConstant(Constant $const)
-    {
-        $val = $const->getValue();
-        if (defined($val)) {
-            return constant($val);
-        }
-
-        // Is the constant located in a class or a tag type?
-        if (false !== $pos = strrpos($val, '::')) {
-            // A class or a tag type
-            $location = substr($val, 0, $pos);
-            if (false !== strpos($location, '.')) { // Is the location of a tag?
-                $location = $this->tagRegistry->getTag($location);
+        $builder = ThemeInfoEssence::createBuilder();
+        if (null !== $definition) {
+            if ($definition->hasProperty('name')) {
+                $builder->setName($definition->getProperty('name'));
             }
-
-            $realConst = $location.substr($val, $pos);
-            if (defined($realConst)) {
-                return constant($realConst);
+            if ($definition->hasProperty('description')) {
+                $builder->setDescription($definition->getProperty('description'));
+            }
+            if ($definition->hasProperty('authors')) {
+                foreach ($definition->getProperty('authors') as $author) {
+                    $builder->addAuthor(new Author(
+                        $author['name'],
+                        $author['email'],
+                        isset($author['homepage']) ? $author['homepage'] : null
+                    ));
+                }
             }
         }
 
-        throw new \InvalidArgumentException(sprintf('The constant "%s" is wrong or it can not be found.', $val));
+        return $builder->getThemeInfo();
     }
 }

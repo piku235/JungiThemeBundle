@@ -16,7 +16,7 @@ use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
 use Jungi\Bundle\ThemeBundle\Templating\VirtualTemplateReference;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator as BaseTemplateLocator;
 use Symfony\Component\Templating\TemplateReferenceInterface;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSourceInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 
@@ -29,20 +29,20 @@ use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 class TemplateLocator extends BaseTemplateLocator
 {
     /**
-     * @var ThemeRegistryInterface
+     * @var ThemeSourceInterface
      */
-    private $registry;
+    private $source;
 
     /**
      * Constructor.
      *
-     * @param ThemeRegistryInterface $registry A theme registry
-     * @param FileLocatorInterface   $locator  A FileLocatorInterface instance
-     * @param string                 $cacheDir The cache path (optional)
+     * @param ThemeSourceInterface $source   A theme source
+     * @param FileLocatorInterface $locator  A FileLocatorInterface instance
+     * @param string               $cacheDir The cache path (optional)
      */
-    public function __construct(ThemeRegistryInterface $registry, FileLocatorInterface $locator, $cacheDir = null)
+    public function __construct(ThemeSourceInterface $source, FileLocatorInterface $locator, $cacheDir = null)
     {
-        $this->registry = $registry;
+        $this->source = $source;
 
         parent::__construct($locator, $cacheDir);
     }
@@ -62,7 +62,7 @@ class TemplateLocator extends BaseTemplateLocator
     public function locate($template, $currentPath = null, $first = true)
     {
         if (!$template instanceof TemplateReferenceInterface) {
-            throw new \InvalidArgumentException("The template must be an instance of the TemplateReferenceInterface.");
+            throw new \InvalidArgumentException('The template must be an instance of the TemplateReferenceInterface.');
         }
 
         $key = $this->getCacheKey($template);
@@ -75,7 +75,7 @@ class TemplateLocator extends BaseTemplateLocator
         }
 
         try {
-            $theme = $this->registry->getTheme($template->get('theme'));
+            $theme = $this->source->getTheme($template->get('theme'));
             if ($template instanceof VirtualTemplateReference) {
                 if (!$theme instanceof VirtualThemeInterface) {
                     throw new \RuntimeException(sprintf('Bad reference'));

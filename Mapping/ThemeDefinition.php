@@ -19,12 +19,19 @@ namespace Jungi\Bundle\ThemeBundle\Mapping;
 abstract class ThemeDefinition
 {
     /**
-     * @var TagDefinition[]
+     * @var Tag[]
      */
     protected $tags = array();
 
     /**
-     * {@inheritdoc}
+     * @var ThemeInfo
+     */
+    protected $info;
+
+    /**
+     * @param array $tags
+     *
+     * @return ThemeDefinition
      */
     public function setTags(array $tags)
     {
@@ -32,21 +39,47 @@ abstract class ThemeDefinition
         foreach ($tags as $tag) {
             $this->addTag($tag);
         }
+
+        return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @param Tag $definition
+     *
+     * @return ThemeDefinition
      */
-    public function addTag(TagDefinition $definition)
+    public function addTag(Tag $definition)
     {
         $this->tags[] = $definition;
+
+        return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @return Tag[]
      */
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * @param ThemeInfo $definition
+     *
+     * @return ThemeDefinition
+     */
+    public function setInformation(ThemeInfo $definition)
+    {
+        $this->info = $definition;
+
+        return $this;
+    }
+
+    /**
+     * @return ThemeInfo
+     */
+    public function getInformation()
+    {
+        return $this->info;
     }
 }

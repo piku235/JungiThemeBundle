@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\CacheWarmer;
 use Jungi\Bundle\ThemeBundle\Core\ThemeInterface;
 use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSourceInterface;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
 use Jungi\Bundle\ThemeBundle\Templating\VirtualTemplateReference;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
@@ -28,7 +28,7 @@ use Symfony\Component\Finder\Finder;
 class TemplateFinder implements TemplateFinderInterface
 {
     /**
-     * @var ThemeRegistryInterface
+     * @var ThemeSourceInterface
      */
     private $registry;
 
@@ -40,10 +40,10 @@ class TemplateFinder implements TemplateFinderInterface
     /**
      * Constructor.
      *
-     * @param ThemeRegistryInterface $themeReg A theme registry
+     * @param ThemeSourceInterface   $themeReg A theme registry
      * @param TemplateFilenameParser $parser   A template name parser
      */
-    public function __construct(ThemeRegistryInterface $themeReg, TemplateFilenameParser $parser)
+    public function __construct(ThemeSourceInterface $themeReg, TemplateFilenameParser $parser)
     {
         $this->registry = $themeReg;
         $this->parser = $parser;

@@ -70,13 +70,13 @@ class JungiThemeExtension extends Extension
             $mappingFiles[] = array($mapping['resource'], $mapping['type']);
         }
 
-        $factoryDef = $container->getDefinition('jungi_theme.automatic_loader');
+        $factoryDef = $container->getDefinition('jungi_theme.initializer');
         $factoryDef->replaceArgument(0, $mappingFiles);
 
         // Register tag classes
         $this->registerTag($config['tags']);
-        $tagRegDef = $container->getDefinition('jungi_theme.tag.registry');
-        $tagRegDef->replaceArgument(0, $this->tagClasses);
+        $tagClassRegistry = $container->getDefinition('jungi_theme.tag.class_registry');
+        $tagClassRegistry->replaceArgument(0, $this->tagClasses);
 
         // Ignore null themes
         $container->setParameter('jungi_theme.listener.holder.ignore_null_theme', $config['holder']['ignore_null_theme']);
@@ -90,8 +90,8 @@ class JungiThemeExtension extends Extension
         }
 
         // Theme registry conf
-        if (isset($config['registry']['id'])) {
-            $container->setAlias('jungi_theme.registry', $config['registry']['id']);
+        if (isset($config['source']['id'])) {
+            $container->setAlias('jungi_theme.source', $config['source']['id']);
         }
 
         // Theme holder conf

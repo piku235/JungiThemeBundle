@@ -37,6 +37,20 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="property" mixed="true">
+        <xs:sequence>
+            <xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="type" type="argument-type" />
+        <xs:attribute name="key" type="xs:string" />
+    </xs:complexType>
+
+    <xs:complexType name="information">
+        <xs:sequence maxOccurs="unbounded">
+            <xs:element name="property" type="property" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:complexType name="themes">
         <xs:sequence maxOccurs="unbounded">
             <xs:element name="theme" type="theme" minOccurs="0" />
@@ -45,17 +59,19 @@
     </xs:complexType>
 
     <xs:complexType name="theme">
-        <xs:all>
+        <xs:sequence>
             <xs:element name="tags" type="tags" minOccurs="0" />
-        </xs:all>
+            <xs:element name="info" type="information" minOccurs="0" />
+        </xs:sequence>
         <xs:attribute name="name" type="xs:string" use="required" />
         <xs:attribute name="path" type="xs:string" use="required" />
     </xs:complexType>
 
     <xs:complexType name="virtual-theme">
         <xs:sequence maxOccurs="unbounded">
+            <xs:element name="themes" type="virtual-theme_themes" />
             <xs:element name="tags" type="tags" minOccurs="0" />
-            <xs:element name="themes" type="virtual-theme_themes" minOccurs="0" />
+            <xs:element name="info" type="information" minOccurs="0" />
         </xs:sequence>
         <xs:attribute name="name" type="xs:string" use="required" />
     </xs:complexType>

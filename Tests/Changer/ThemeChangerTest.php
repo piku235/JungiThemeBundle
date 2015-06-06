@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Changer\ThemeChanger;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelector;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Jungi\Bundle\ThemeBundle\Core\ThemeHolder;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSource;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Resolver\FakeThemeResolver;
 
 /**
@@ -36,7 +36,7 @@ class ThemeChangerTest extends TestCase
     private $holder;
 
     /**
-     * @var ThemeRegistry
+     * @var ThemeSource
      */
     private $registry;
 
@@ -51,7 +51,7 @@ class ThemeChangerTest extends TestCase
     protected function setUp()
     {
         $this->resolver = new FakeThemeResolver('bootheme', false);
-        $this->registry = new ThemeRegistry(array(
+        $this->registry = new ThemeSource(array(
             $this->createThemeMock('footheme'),
             $this->createThemeMock('bootheme'),
         ));

@@ -11,6 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfo;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
@@ -36,19 +38,24 @@ class Theme implements ThemeInterface
     protected $tags;
 
     /**
+     * @var ThemeInfo
+     */
+    protected $info;
+
+    /**
      * Constructor.
      *
-     * @param string        $name   An unique theme name
-     * @param string        $path   A path to theme resources
-     * @param TagCollection $tags   A tag collection (optional)
-     * @param string        $parent A parent theme name (optional)
+     * @param string        $name An unique theme name
+     * @param string        $path A path to theme resources
+     * @param ThemeInfo     $info An information instance (optional)
+     * @param TagCollection $tags A tag collection (optional)
      */
-    public function __construct($name, $path, TagCollection $tags = null, $parent = null)
+    public function __construct($name, $path, ThemeInfo $info = null, TagCollection $tags = null)
     {
         $this->name = $name;
         $this->path = $path;
+        $this->info = $info ?: ThemeInfoEssence::createBuilder()->getThemeInfo();
         $this->tags = $tags ?: new TagCollection();
-        $this->parent = $parent;
     }
 
     /**
@@ -78,9 +85,9 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getInformation()
     {
-        return $this->parent;
+        return $this->info;
     }
 
     /**

@@ -11,9 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\CacheWarmer;
 
-use Jungi\Bundle\ThemeBundle\CacheWarmer\CompositeTemplateFinder;
+use Jungi\Bundle\ThemeBundle\CacheWarmer\ChainTemplateFinder;
 use Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinder;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSource;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Tests\CacheWarmer\Fixtures\OrdinaryBundle\OrdinaryBundle;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
@@ -29,7 +29,7 @@ class CompositeTemplateFinderTest extends TestCase
 {
     public function testFind()
     {
-        $registry = new ThemeRegistry(array(
+        $registry = new ThemeSource(array(
             $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
             $this->createThemeMock('boo', __DIR__.'/Fixtures/BooThemeBundle/Resources/theme'),
         ));
@@ -39,7 +39,7 @@ class CompositeTemplateFinderTest extends TestCase
             ->method('getBundles')
             ->will($this->returnValue(array('OrdinaryBundle' => new OrdinaryBundle())))
         ;
-        $chain = new CompositeTemplateFinder(array(new TemplateFinder($registry, new TemplateFilenameParser())));
+        $chain = new ChainTemplateFinder(array(new TemplateFinder($registry, new TemplateFilenameParser())));
         $chain->addFinder(new sfTemplateFinder($kernel, new sfTemplateFilenameParser(), __DIR__.'/Fixtures/Resources'));
         $references = $chain->findAllTemplates();
 

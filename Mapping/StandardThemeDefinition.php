@@ -24,15 +24,33 @@ class StandardThemeDefinition extends ThemeDefinition
     private $path;
 
     /**
-     * {@inheritdoc}
+     * Constructor.
+     *
+     * @param string $path A path (optional)
+     * @param Tag[]  $tags Tag definitions (optional)
+     */
+    public function __construct($path = null, array $tags = array())
+    {
+        $this->path = $path;
+        foreach ($tags as $tag) {
+            $this->addTag($tag);
+        }
+    }
+
+    /**
+     * @param $path
+     *
+     * @return StandardThemeDefinition
      */
     public function setPath($path)
     {
         $this->path = $path;
+
+        return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @return null|string
      */
     public function getPath()
     {

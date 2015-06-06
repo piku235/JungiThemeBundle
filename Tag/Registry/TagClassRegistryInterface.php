@@ -16,7 +16,7 @@ namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-interface TagRegistryInterface
+interface TagClassRegistryInterface
 {
     /**
      * Checks if a given tag name has the registered class.
@@ -25,7 +25,7 @@ interface TagRegistryInterface
      *
      * @return bool
      */
-    public function hasTag($name);
+    public function hasTagClass($name);
 
     /**
      * Gets the full qualified class name of a given tag name.
@@ -34,12 +34,12 @@ interface TagRegistryInterface
      *
      * @return string
      */
-    public function getTag($name);
+    public function getTagClass($name);
 
     /**
      * Returns all registered tag classes.
      *
      * @return array
      */
-    public function getTags();
+    public function getTagClasses();
 }

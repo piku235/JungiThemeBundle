@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpFileLoader;
+use Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpDefinitionLoader;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
@@ -28,7 +28,7 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
 class PhpFileLoaderTest extends AbstractFileLoaderTest
 {
     /**
-     * @var PhpFileLoader
+     * @var PhpDefinitionLoader
      */
     private $loader;
 
@@ -45,7 +45,7 @@ class PhpFileLoaderTest extends AbstractFileLoaderTest
         parent::setUp();
 
         $this->locator = new FileLocator($this->kernel, __DIR__.'/Fixtures/php');
-        $this->loader = new PhpFileLoader($this->registry, $this->locator, $this->tagFactory);
+        $this->loader = new PhpDefinitionLoader($this->registry, $this->locator, $this->tagFactory);
     }
 
     /**

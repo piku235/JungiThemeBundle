@@ -11,21 +11,17 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
-
 /**
- * Interface for loading themes from specified resource.
+ * Interface for loading theme definitions from specified resource.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-interface LoaderInterface
+interface DefinitionLoaderInterface
 {
     /**
-     * Loads themes from a given resource.
+     * Loads theme definitions from a given resource.
      *
      * @param string $resource A resource
-     *
-     * @return ThemeCollection
      */
     public function load($resource);
 
@@ -33,8 +29,9 @@ interface LoaderInterface
      * Checks if a given resource is supported.
      *
      * @param string $resource A resource
+     * @param string $type     A resource type (optional)
      *
      * @return bool
      */
-    public function supports($resource);
+    public function supports($resource, $type = null);
 }

@@ -42,9 +42,9 @@ interface ThemeInterface
     public function getPath();
 
     /**
-     * Returns the parent theme name.
+     * Returns the information about the theme.
      *
-     * @return string|null Null if does not have a parent theme
+     * @return \Jungi\Bundle\ThemeBundle\Information\ThemeInfo
      */
-    public function getParent();
+    public function getInformation();
 }

@@ -33,7 +33,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->fixXmlConfig('mapping')
             ->children()
-                ->append($this->addThemeRegistryNode())
+                ->append($this->addThemeSourceNode())
                 ->append($this->addThemeHolderNode())
                 ->append($this->addThemeSelectorNode())
                 ->append($this->addThemeResolverNode())
@@ -70,14 +70,14 @@ class Configuration implements ConfigurationInterface
         return $rootNode;
     }
 
-    protected function addThemeRegistryNode()
+    protected function addThemeSourceNode()
     {
         $builder = new TreeBuilder();
-        $rootNode = $builder->root('registry');
+        $rootNode = $builder->root('source');
 
         $rootNode
             ->addDefaultsIfNotSet()
-            ->info('theme registry configuration')
+            ->info('theme source configuration')
             ->children()
                 ->scalarNode('id')
                     ->info('symfony service id')

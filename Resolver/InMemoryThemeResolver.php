@@ -28,7 +28,7 @@ class InMemoryThemeResolver implements ThemeResolverInterface
     private $theme;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $fixed;
 

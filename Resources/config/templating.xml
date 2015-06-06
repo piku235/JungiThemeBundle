@@ -17,7 +17,7 @@
             <argument type="service" id="kernel" />
         </service>
         <service id="jungi_theme.templating.locator" class="%jungi_theme.templating.locator.class%" public="false">
-            <argument type="service" id="jungi_theme.registry" />
+            <argument type="service" id="jungi_theme.source" />
             <argument type="service" id="file_locator" />
             <argument>%kernel.cache_dir%</argument>
         </service>

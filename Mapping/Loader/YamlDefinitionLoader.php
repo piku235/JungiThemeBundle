@@ -12,65 +12,88 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
+use Jungi\Bundle\ThemeBundle\Mapping\Container;
+use Jungi\Bundle\ThemeBundle\Mapping\Processor\ProcessorInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
-use Jungi\Bundle\ThemeBundle\Mapping\TagDefinition;
-use Jungi\Bundle\ThemeBundle\Mapping\ThemeBuilder;
+use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfo;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
-use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\Yaml\Parser as YamlParser;
 
 /**
  * YamlFileLoader is responsible for creating theme instances from a yaml mapping file.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class YamlFileLoader extends GenericFileLoader
+class YamlDefinitionLoader extends AbstractDefinitionLoader
 {
+    /**
+     * @var YamlParser
+     */
+    private $parser;
+
+    /**
+     * Constructor.
+     *
+     * @param ProcessorInterface               $processor A processor
+     * @param ThemeDefinitionRegistryInterface $registry  A theme definition registry
+     * @param FileLocatorInterface             $locator   A file locator
+     */
+    public function __construct(ProcessorInterface $processor, ThemeDefinitionRegistryInterface $registry, FileLocatorInterface $locator)
+    {
+        $this->parser = new YamlParser();
+
+        parent::__construct($processor, $registry, $locator);
+    }
+
     /**
      * {@inheritdoc}
      */
-    public function supports($file)
+    public function supports($file, $type = null)
     {
-        return 'yml' == pathinfo($file, PATHINFO_EXTENSION);
+        return 'yml' == pathinfo($file, PATHINFO_EXTENSION) || 'yml' === $type;
     }
 
     /**
      * Processes parameters.
      *
-     * @param array        $content A file content
-     * @param ThemeBuilder $builder A theme builder
-     * @param string       $file    A theme mapping file
+     * @param array         $content A file content
+     * @param LoaderContext $context A loader context
      *
      * @throws \InvalidArgumentException If parameters key is not of array type
      */
-    private function parseParameters(array $content, ThemeBuilder $builder, $file)
+    private function parseParameters(array $content, LoaderContext $context)
     {
         if (isset($content['parameters'])) {
             if (!is_array($content['parameters'])) {
                 throw new \InvalidArgumentException(sprintf(
                     'The "parameters" key should must be an array in the file "%s".',
-                    $file
+                    $context->getResource()
                 ));
             }
 
-            $builder->setParameters($content['parameters']);
+            /** @var \Jungi\Bundle\ThemeBundle\Mapping\ContainerInterface $container */
+            $container = $context->getRegistry();
+            $container->setParameters($content['parameters']);
         }
     }
 
     /**
      * Parses themes.
      *
-     * @param array        $content A configuration file content
-     * @param ThemeBuilder $builder A theme builder
-     * @param string       $file    A theme mapping file
+     * @param array         $content A configuration file content
+     * @param LoaderContext $context A loader context
      */
-    private function parseThemes(array $content, ThemeBuilder $builder, $file)
+    private function parseThemes(array $content, LoaderContext $context)
     {
         foreach ($content['themes'] as $themeName => $specification) {
             if (!empty($specification['is_virtual'])) {
-                $this->parseVirtualTheme($themeName, $specification, $builder, $file);
+                $this->parseVirtualTheme($themeName, $specification, $context);
             } else {
-                $this->parseStandardTheme($themeName, $specification, $builder, $file);
+                $this->parseStandardTheme($themeName, $specification, $context);
             }
         }
     }
@@ -78,87 +101,115 @@ class YamlFileLoader extends GenericFileLoader
     /**
      * Parses a virtual theme.
      *
-     * @param string       $themeName     A theme name
-     * @param array        $specification A theme specification
-     * @param ThemeBuilder $builder       A theme builder
-     * @param string       $file          A theme mapping file
+     * @param string        $themeName     A theme name
+     * @param array         $specification A theme specification
+     * @param LoaderContext $context       A loader context
      *
      * @throws \InvalidArgumentException If the path key or/and the info key is missing
      * @throws \InvalidArgumentException If some keys are unrecognized
      */
-    private function parseVirtualTheme($themeName, array $specification, ThemeBuilder $builder, $file)
+    private function parseVirtualTheme($themeName, array $specification, LoaderContext $context)
     {
         // Validation
         if (!isset($specification['themes'])) {
             throw new \InvalidArgumentException(sprintf(
                 'The "themes" key is missing for the theme "%s" specification in the file "%s".',
                 $themeName,
-                $file
+                $context->getResource()
             ));
         } elseif (!is_array($specification['themes'])) {
             throw new \InvalidArgumentException(sprintf(
                 'The "themes" key at the theme "%s" must be an array in the file "%s".',
                 $themeName,
-                $file
+                $context->getResource()
             ));
         }
 
         $def = new VirtualThemeDefinition();
-        $this->parseTags($themeName, $specification, $def, $file);
+        $this->parseInfo($themeName, $specification, $def, $context);
+        $this->parseTags($themeName, $specification, $def, $context);
         foreach ($specification['themes'] as $theme) {
             $def->addThemeReference($theme);
         }
 
-        $builder->addThemeDefinition($themeName, $def);
+        $context->getRegistry()->registerThemeDefinition($themeName, $def);
     }
 
     /**
      * Parses a theme.
      *
-     * @param string       $themeName     A theme name
-     * @param array        $specification A theme specification
-     * @param ThemeBuilder $builder       A theme builder
-     * @param string       $file          A theme mapping file
+     * @param string        $themeName     A theme name
+     * @param array         $specification A theme specification
+     * @param LoaderContext $context       A loader context
      *
      * @throws \InvalidArgumentException If the path key is missing
      */
-    private function parseStandardTheme($themeName, array $specification, ThemeBuilder $builder, $file)
+    private function parseStandardTheme($themeName, array $specification, LoaderContext $context)
     {
         // Validation
         if (!isset($specification['path'])) {
             throw new \InvalidArgumentException(sprintf(
                 'The "path" key is missing for the theme "%s" in the file "%s".',
                 $themeName,
-                $file
+                $context->getResource()
             ));
         }
 
         $def = new StandardThemeDefinition();
         $def->setPath($specification['path']);
-        $this->parseTags($themeName, $specification, $def, $file);
+        $this->parseInfo($themeName, $specification, $def, $context);
+        $this->parseTags($themeName, $specification, $def, $context);
 
-        $builder->addThemeDefinition($themeName, $def);
+        $context->getRegistry()->registerThemeDefinition($themeName, $def);
+    }
+
+    /**
+     * Parses a theme info from a given DOM element.
+     *
+     * @param string          $themeName     A theme name
+     * @param array           $specification A specification
+     * @param ThemeDefinition $themeDef      A theme definition
+     * @param LoaderContext   $context       A loader context
+     */
+    private function parseInfo($themeName, array $specification, ThemeDefinition $themeDef, LoaderContext $context)
+    {
+        if (!isset($specification['info'])) {
+            return;
+        }
+        if (!is_array($specification['info'])) {
+            throw new \InvalidArgumentException(sprintf(
+                'The "info" key at the theme "%s" must be an array in the file "%s".',
+                $themeName,
+                $context->getResource()
+            ));
+        }
+
+        $definition = new ThemeInfo();
+        foreach ($specification['info'] as $property => $value) {
+            $definition->setProperty($property, $value);
+        }
+
+        $themeDef->setInformation($definition);
     }
 
     /**
      * Parses tags specification.
      *
-     * @param string          $themeName       A theme name
-     * @param array           $specification   A specification
-     * @param ThemeDefinition $themeDefinition A theme definition
-     * @param string          $file            A theme mapping file
+     * @param string          $themeName     A theme name
+     * @param array           $specification A specification
+     * @param ThemeDefinition $themeDef      A theme definition
+     * @param LoaderContext   $context       A loader context
      */
-    private function parseTags($themeName, array $specification, ThemeDefinition $themeDefinition, $file)
+    private function parseTags($themeName, array $specification, ThemeDefinition $themeDef, LoaderContext $context)
     {
         if (!isset($specification['tags'])) {
             return;
         }
-
         if (!is_array($specification['tags'])) {
             throw new \InvalidArgumentException(sprintf(
                 'The "tags" key at the theme "%s" must be an array in the file "%s".',
                 $themeName,
-                $file
+                $context->getResource()
             ));
         }
 
@@ -166,10 +217,10 @@ class YamlFileLoader extends GenericFileLoader
             $args = (array) $args;
             array_walk_recursive($args, array($this, 'replaceValue'));
 
-            $def = new TagDefinition();
+            $def = new Tag();
             $def->setName($tagName);
             $def->setArguments($args);
-            $themeDefinition->addTag($def);
+            $themeDef->addTag($def);
         }
     }
 
@@ -209,25 +260,29 @@ class YamlFileLoader extends GenericFileLoader
      *
      * @throws \InvalidArgumentException If the given file is not readable
      */
-    protected function doLoad($path, ThemeBuilder $builder)
+    protected function doLoad($path)
     {
         if (!is_readable($path)) {
             throw new \InvalidArgumentException(sprintf('The given file "%s" is not readable.', $path));
         }
 
-        $content = Yaml::parse(file_get_contents($path), true);
-        if (null === $content) { // If is an empty file
-
+        $content = $this->parser->parse(file_get_contents($path));
+        if (null === $content) { // If the file is empty
             return;
         }
+
+        // Context
+        $context = new LoaderContext($path, new Container());
 
         // Validate a mapping file
         $this->validate($content, $path);
 
         // Parameters
-        $this->parseParameters($content, $builder, $path);
+        $this->parseParameters($content, $context);
 
         // Themes
-        $this->parseThemes($content, $builder, $path);
+        $this->parseThemes($content, $context);
+
+        return $context->getRegistry();
     }
 }

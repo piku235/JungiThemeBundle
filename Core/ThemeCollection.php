@@ -67,7 +67,9 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
+     * Adds a theme.
      *
+     * @param ThemeInterface $theme A theme
      */
     public function add(ThemeInterface $theme)
     {
@@ -79,7 +81,11 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
+     * Checks if a given theme exists.
      *
+     * @param string $themeName A theme name
+     *
+     * @return bool
      */
     public function has($themeName)
     {
@@ -87,7 +93,11 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
+     * Checks if a given theme instance exists in the collection.
      *
+     * @param ThemeInterface $theme A theme
+     *
+     * @return bool
      */
     public function contains(ThemeInterface $theme)
     {
@@ -95,7 +105,11 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
+     * Returns the theme by given name.
      *
+     * @param string $themeName A theme name
+     *
+     * @return ThemeInterface
      */
     public function get($themeName)
     {
@@ -107,7 +121,9 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
+     * Removes a theme by given name.
      *
+     * @param string $themeName A theme name
      */
     public function remove($themeName)
     {
@@ -119,6 +135,8 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
+     * Returns the all theme instances.
+     *
      * @return ThemeInterface[]
      */
     public function all()
@@ -145,8 +163,6 @@ class ThemeCollection implements \IteratorAggregate, \Countable
                 return $theme;
             }
         }
-
-        return;
     }
 
     /**

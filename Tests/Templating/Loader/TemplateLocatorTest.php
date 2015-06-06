@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Templating\Loader;
 use Jungi\Bundle\ThemeBundle\Templating\Loader\TemplateLocator;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateReference;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSource;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateReference;
 
 /**
@@ -25,16 +25,16 @@ use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateR
 class TemplateLocatorTest extends TestCase
 {
     /**
-     * @var ThemeRegistry
+     * @var ThemeSource
      */
-    private $registry;
+    private $source;
 
     /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
-        $this->registry = new ThemeRegistry(array($this->createThemeMock('Foo', '/foo/theme/path')));
+        $this->source = new ThemeSource(array($this->createThemeMock('Foo', '/foo/theme/path')));
     }
 
     /**
@@ -50,7 +50,7 @@ class TemplateLocatorTest extends TestCase
             ->method('locate')
             ->will($this->returnArgument(0));
 
-        $locator = new TemplateLocator($this->registry, $fileLocator);
+        $locator = new TemplateLocator($this->source, $fileLocator);
 
         $this->assertEquals('/foo/theme/path/bundle/controller/name.format.engine', $locator->locate($template));
     }
@@ -63,7 +63,7 @@ class TemplateLocatorTest extends TestCase
     public function testWhenThemeIsNotExist()
     {
         $template = new TemplateReference(new BaseTemplateReference('bundle', 'controller', 'name', 'format', 'engine'), 'NonExist');
-        $locator = new TemplateLocator($this->registry, $this->getFileLocator());
+        $locator = new TemplateLocator($this->source, $this->getFileLocator());
 
         $locator->locate($template);
     }
@@ -88,7 +88,7 @@ class TemplateLocatorTest extends TestCase
                 }
             }));
 
-        $locator = new TemplateLocator($this->registry, $fileLocator);
+        $locator = new TemplateLocator($this->source, $fileLocator);
 
         $this->assertEquals('/path/to/template', $locator->locate($template));
     }
@@ -108,7 +108,7 @@ class TemplateLocatorTest extends TestCase
             ->with($template->getPath())
             ->will($this->returnValue('/path/to/template'));
 
-        $locator = new TemplateLocator($this->registry, $fileLocator);
+        $locator = new TemplateLocator($this->source, $fileLocator);
 
         $this->assertEquals('/path/to/template', $locator->locate($template));
     }
@@ -129,7 +129,7 @@ class TemplateLocatorTest extends TestCase
             ->method('locate')
             ->will($this->throwException(new \InvalidArgumentException($errorMessage)));
 
-        $locator = new TemplateLocator($this->registry, $fileLocator);
+        $locator = new TemplateLocator($this->source, $fileLocator);
 
         try {
             $locator->locate($template);
@@ -149,7 +149,7 @@ class TemplateLocatorTest extends TestCase
      */
     public function testThrowsAnExceptionWhenTemplateIsNotATemplateReferenceInterface()
     {
-        $locator = new TemplateLocator($this->registry, $this->getFileLocator());
+        $locator = new TemplateLocator($this->source, $this->getFileLocator());
         $locator->locate('template');
     }
 }

@@ -39,7 +39,7 @@ class DeviceHelper extends Helper
     /**
      * Checks if the request has been sent by mobile device.
      *
-     * @return boolean
+     * @return bool
      */
     public function isMobile()
     {
@@ -49,7 +49,7 @@ class DeviceHelper extends Helper
     /**
      * Checks if the request has been sent by tablet device.
      *
-     * @return boolean
+     * @return bool
      */
     public function isTablet()
     {
@@ -59,7 +59,7 @@ class DeviceHelper extends Helper
     /**
      * Checks if the request has been sent by desktop device.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDesktop()
     {
@@ -71,7 +71,7 @@ class DeviceHelper extends Helper
      *
      * @param string $device A device
      *
-     * @return boolean
+     * @return bool
      */
     public function isDevice($device)
     {

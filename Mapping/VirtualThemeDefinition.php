@@ -21,25 +21,70 @@ class VirtualThemeDefinition extends ThemeDefinition
     /**
      * @var array
      */
-    private $themeReferences = array();
+    private $references;
 
     /**
-     * Adds a theme reference.
-     *
-     * @param string $themeName A referenced theme name
+     * @var ThemeDefinition[]
      */
-    public function addThemeReference($themeName)
+    private $themes;
+
+    /**
+     * Constructor.
+     *
+     * @param array $themeRefs A theme references (optional)
+     * @param array $tags      Tag definitions (optional)
+     */
+    public function __construct(array $themeRefs = array(), array $tags = array())
     {
-        $this->themeReferences[] = $themeName;
+        $this->themes = array();
+        $this->references = $themeRefs;
+        foreach ($tags as $tag) {
+            $this->addTag($tag);
+        }
     }
 
     /**
-     * Returns the theme references.
+     * Adds a child theme reference.
+     *
+     * @param string $reference A theme reference
+     *
+     * @return VirtualThemeDefinition
+     */
+    public function addThemeReference($reference)
+    {
+        $this->references[] = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Returns the child theme references.
      *
      * @return array
      */
     public function getThemeReferences()
     {
-        return $this->themeReferences;
+        return $this->references;
+    }
+
+    /**
+     * Adds a child theme definition.
+     *
+     * @param string          $name       A theme name
+     * @param ThemeDefinition $definition A theme definition
+     */
+    public function addTheme($name, ThemeDefinition $definition)
+    {
+        $this->themes[$name] = $definition;
+    }
+
+    /**
+     * Returns the all theme definitions.
+     *
+     * @return ThemeDefinition[]
+     */
+    public function getThemes()
+    {
+        return $this->themes;
     }
 }

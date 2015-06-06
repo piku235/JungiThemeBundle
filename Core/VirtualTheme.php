@@ -12,6 +12,8 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfo;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
@@ -42,18 +44,25 @@ class VirtualTheme implements VirtualThemeInterface
     protected $tags;
 
     /**
+     * @var ThemeInfo
+     */
+    protected $info;
+
+    /**
      * Constructor.
      *
      * @param string           $name   An unique theme name
      * @param ThemeInterface[] $themes Themes that belongs to the virtual theme
+     * @param ThemeInfo        $info   An information instance (optional)
      * @param TagCollection    $tags   Tags (optional)
      *
      * @throws \RuntimeException When in the children themes there is an another virtual theme
      */
-    public function __construct($name, array $themes, TagCollection $tags = null)
+    public function __construct($name, array $themes, ThemeInfo $info = null, TagCollection $tags = null)
     {
         $this->name = $name;
         $this->pointed = null;
+        $this->info = $info ?: ThemeInfoEssence::createBuilder()->getThemeInfo();
         $this->tags = $tags ?: new TagCollection();
 
         foreach ($themes as $theme) {
@@ -104,14 +113,6 @@ class VirtualTheme implements VirtualThemeInterface
 
     /**
      * {@inheritdoc}
-     */
-    public function getParent()
-    {
-        return;
-    }
-
-    /**
-     * {@inheritdoc}
      *
      * @throws \RuntimeException When the pointed theme is not set
      */
@@ -140,6 +141,14 @@ class VirtualTheme implements VirtualThemeInterface
     public function getThemes()
     {
         return $this->themes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getInformation()
+    {
+        return $this->info;
     }
 
     /**

@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper;
-use Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlFileLoader;
+use Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlDefinitionLoader;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
 /**
@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
 class XmlFileLoaderTest extends AutomatedFileLoaderTest
 {
     /**
-     * @var XmlFileLoader
+     * @var XmlDefinitionLoader
      */
     private $loader;
 
@@ -34,7 +34,7 @@ class XmlFileLoaderTest extends AutomatedFileLoaderTest
     {
         parent::setUp();
 
-        $this->loader = new XmlFileLoader(
+        $this->loader = new XmlDefinitionLoader(
             $this->registry,
             new FileLocator($this->kernel, __DIR__.'/Fixtures/xml'),
             $this->tagFactory,

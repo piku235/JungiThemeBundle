@@ -52,7 +52,7 @@ class DeviceExtension extends \Twig_Extension
     /**
      * Checks if the request has been sent by mobile device.
      *
-     * @return boolean
+     * @return bool
      */
     public function isMobile()
     {
@@ -62,7 +62,7 @@ class DeviceExtension extends \Twig_Extension
     /**
      * Checks if the request has been sent by tablet device.
      *
-     * @return boolean
+     * @return bool
      */
     public function isTablet()
     {
@@ -72,7 +72,7 @@ class DeviceExtension extends \Twig_Extension
     /**
      * Checks if the request has been sent by desktop device.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDesktop()
     {
@@ -84,7 +84,7 @@ class DeviceExtension extends \Twig_Extension
      *
      * @param string $device A device
      *
-     * @return boolean
+     * @return bool
      */
     public function isDevice($device)
     {

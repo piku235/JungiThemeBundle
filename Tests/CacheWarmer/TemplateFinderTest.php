@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\CacheWarmer;
 
 use Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinder;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSource;
 use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
 use Jungi\Bundle\ThemeBundle\Templating\TemplateFilenameParser;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
@@ -30,7 +30,7 @@ class TemplateFinderTest extends TestCase
             $this->createThemeMock('foo', __DIR__.'/Fixtures/VirtualThemeBundle/Resources/theme/mobile'),
             $this->createThemeMock('boo', __DIR__.'/Fixtures/VirtualThemeBundle/Resources/theme/desktop'),
         ));
-        $registry = new ThemeRegistry(array(
+        $registry = new ThemeSource(array(
             $this->createThemeMock('foo', __DIR__.'/Fixtures/FooThemeBundle/Resources/theme'),
             $this->createThemeMock('boo', __DIR__.'/Fixtures/BooThemeBundle/Resources/theme'),
             $virtualTheme,

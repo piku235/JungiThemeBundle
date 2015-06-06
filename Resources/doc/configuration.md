@@ -3,10 +3,11 @@ Configuration
 
 ```yaml
 # app/config/config.yml
+# Default configuration for "JungiThemeBundle"
 jungi_theme:
 
-    # theme registry configuration
-    registry:
+    # theme source configuration
+    source:
 
         # symfony service id
         id:                   ~

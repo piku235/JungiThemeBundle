@@ -14,11 +14,11 @@ namespace Jungi\Bundle\ThemeBundle\Core;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
- * ThemeRegistry is a simple implementation of the ThemeRegistryInterface.
+ * ThemeSource is a simple implementation of the ThemeSourceInterface.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeRegistry implements ThemeRegistryInterface
+class ThemeSource implements ThemeSourceInterface
 {
     /**
      * @var ThemeCollection
@@ -38,7 +38,7 @@ class ThemeRegistry implements ThemeRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function registerTheme(ThemeInterface $theme)
+    public function addTheme(ThemeInterface $theme)
     {
         $this->themes->add($theme);
     }

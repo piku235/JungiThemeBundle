@@ -14,10 +14,10 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Selector;
 use Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener;
 use Jungi\Bundle\ThemeBundle\Selector\ThemeSelector;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSourceInterface;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Core\ThemeRegistry;
+use Jungi\Bundle\ThemeBundle\Core\ThemeSource;
 use Jungi\Bundle\ThemeBundle\Resolver\InMemoryThemeResolver;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Validation\FakeMetadataFactory;
 use Symfony\Component\Validator\Constraints;
@@ -39,9 +39,9 @@ class ThemeSelectorTest extends TestCase
     private $selector;
 
     /**
-     * @var ThemeRegistryInterface
+     * @var ThemeSourceInterface
      */
-    private $registry;
+    private $source;
 
     /**
      * @var EventDispatcher
@@ -67,11 +67,11 @@ class ThemeSelectorTest extends TestCase
             ))));
 
         $this->eventDispatcher = new EventDispatcher();
-        $this->registry = new ThemeRegistry(array(
+        $this->source = new ThemeSource(array(
             $theme,
         ));
         $this->resolver = new InMemoryThemeResolver('footheme', false);
-        $this->selector = new ThemeSelector($this->registry, $this->eventDispatcher, $this->resolver);
+        $this->selector = new ThemeSelector($this->source, $this->eventDispatcher, $this->resolver);
     }
 
     /**
@@ -83,7 +83,7 @@ class ThemeSelectorTest extends TestCase
         $this->eventDispatcher->addSubscriber(new ValidationListener($this->getValidator()));
 
         // Add the default theme
-        $this->registry->registerTheme($this->createThemeMock('default'));
+        $this->source->addTheme($this->createThemeMock('default'));
 
         // Prepare the request
         $request = $this->createDesktopRequest();
@@ -105,7 +105,7 @@ class ThemeSelectorTest extends TestCase
     public function testFallbackOnEmptyTheme()
     {
         // Default theme
-        $this->registry->registerTheme($this->createThemeMock('default'));
+        $this->source->addTheme($this->createThemeMock('default'));
 
         // Prepare the request
         $request = $this->createDesktopRequest();
@@ -127,7 +127,7 @@ class ThemeSelectorTest extends TestCase
     public function testFallbackOnNonExistingTheme()
     {
         // Default theme
-        $this->registry->registerTheme($this->createThemeMock('default'));
+        $this->source->addTheme($this->createThemeMock('default'));
 
         // Prepare the request
         $request = $this->createDesktopRequest();
@@ -149,7 +149,7 @@ class ThemeSelectorTest extends TestCase
     public function testFallbackOnExistingTheme()
     {
         // Default theme
-        $this->registry->registerTheme($this->createThemeMock('default'));
+        $this->source->addTheme($this->createThemeMock('default'));
 
         // Prepare the request
         $request = $this->createDesktopRequest();

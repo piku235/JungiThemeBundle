@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper;
-use Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlFileLoader;
+use Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlDefinitionLoader;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
 /**
@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
 class YamlFileLoaderTest extends AutomatedFileLoaderTest
 {
     /**
-     * @var YamlFileLoader
+     * @var YamlDefinitionLoader
      */
     private $loader;
 
@@ -34,7 +34,7 @@ class YamlFileLoaderTest extends AutomatedFileLoaderTest
     {
         parent::setUp();
 
-        $this->loader = new YamlFileLoader(
+        $this->loader = new YamlDefinitionLoader(
             $this->registry,
             new FileLocator($this->kernel, __DIR__.'/Fixtures/yml'),
             $this->tagFactory,
