@@ -13,6 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
 use Jungi\Bundle\ThemeBundle\Mapping\Container;
+use Jungi\Bundle\ThemeBundle\Mapping\Reference;
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
@@ -106,7 +107,10 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
         foreach ($context->xpath('mapping:themes/mapping:ref', $elm) as $ref) {
             /* @var \DOMElement $ref */
 
-            $definition->addThemeReference($ref->getAttribute('theme'));
+            $definition->addThemeReference(new Reference(
+                $ref->getAttribute('theme'),
+                $ref->getAttribute('as')
+            ));
         }
 
         $context->getRegistry()->registerThemeDefinition($elm->getAttribute('name'), $definition);

@@ -84,6 +84,7 @@
 
     <xs:complexType name="theme-reference">
         <xs:attribute name="theme" type="xs:string" use="required" />
+        <xs:attribute name="as" type="xs:string" use="optional" />
     </xs:complexType>
 
     <xs:complexType name="tags">

@@ -45,11 +45,12 @@ class Processor implements ProcessorInterface
             }
 
             // Move referenced theme definitions to a corresponding virtual theme
-            foreach ($theme->getThemeReferences() as $referencedTheme) {
-                $theme->addTheme($referencedTheme, $registry->getThemeDefinition($referencedTheme));
+            foreach ($theme->getThemeReferences() as $reference) {
+                $name = $reference->getAlias() ?: $reference->getThemeName();
+                $theme->addTheme($name, $registry->getThemeDefinition($reference->getThemeName()));
 
                 // As a theme belongs now to the virtual theme we do not need it in the registry
-                $registry->removeThemeDefinition($referencedTheme);
+                $registry->removeThemeDefinition($reference->getThemeName());
             }
 
             // Validate

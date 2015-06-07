@@ -19,7 +19,7 @@ namespace Jungi\Bundle\ThemeBundle\Mapping;
 class VirtualThemeDefinition extends ThemeDefinition
 {
     /**
-     * @var array
+     * @var Reference[]
      */
     private $references;
 
@@ -31,13 +31,17 @@ class VirtualThemeDefinition extends ThemeDefinition
     /**
      * Constructor.
      *
-     * @param array $themeRefs A theme references (optional)
+     * @param Reference[] $themeRefs A theme references (optional)
      * @param array $tags      Tag definitions (optional)
      */
     public function __construct(array $themeRefs = array(), array $tags = array())
     {
         $this->themes = array();
-        $this->references = $themeRefs;
+        $this->references = array();
+
+        foreach ($themeRefs as $reference) {
+            $this->addThemeReference($reference);
+        }
         foreach ($tags as $tag) {
             $this->addTag($tag);
         }
@@ -46,11 +50,11 @@ class VirtualThemeDefinition extends ThemeDefinition
     /**
      * Adds a child theme reference.
      *
-     * @param string $reference A theme reference
+     * @param Reference $reference A theme reference
      *
      * @return VirtualThemeDefinition
      */
-    public function addThemeReference($reference)
+    public function addThemeReference(Reference $reference)
     {
         $this->references[] = $reference;
 
@@ -60,7 +64,7 @@ class VirtualThemeDefinition extends ThemeDefinition
     /**
      * Returns the child theme references.
      *
-     * @return array
+     * @return Reference[]
      */
     public function getThemeReferences()
     {

@@ -14,6 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
 use Jungi\Bundle\ThemeBundle\Mapping\Container;
 use Jungi\Bundle\ThemeBundle\Mapping\Processor\ProcessorInterface;
+use Jungi\Bundle\ThemeBundle\Mapping\Reference;
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
@@ -107,6 +108,7 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
      *
      * @throws \InvalidArgumentException If the path key or/and the info key is missing
      * @throws \InvalidArgumentException If some keys are unrecognized
+     * @throws \InvalidArgumentException If the key "theme" is missing for a theme reference
      */
     private function parseVirtualTheme($themeName, array $specification, LoaderContext $context)
     {
@@ -129,7 +131,20 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
         $this->parseInfo($themeName, $specification, $def, $context);
         $this->parseTags($themeName, $specification, $def, $context);
         foreach ($specification['themes'] as $theme) {
-            $def->addThemeReference($theme);
+            // It is an extended version?
+            if (is_array($theme)) {
+                if (!isset($theme['theme'])) {
+                    throw new \InvalidArgumentException(sprintf(
+                        'There is missing key "theme" for a theme reference under the theme "%s" in the file "%s".',
+                        $themeName,
+                        $context->getResource()
+                    ));
+                }
+
+                $def->addThemeReference(new Reference($theme['theme'], isset($theme['as']) ? $theme['as'] : null));
+            } else {
+                $def->addThemeReference(new Reference($theme));
+            }
         }
 
         $context->getRegistry()->registerThemeDefinition($themeName, $def);
