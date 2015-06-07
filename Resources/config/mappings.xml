@@ -8,8 +8,6 @@
         <parameter key="jungi_theme.mapping.dumper.class">Jungi\Bundle\ThemeBundle\Mapping\Dumper\PhpDumper</parameter>
         <parameter key="jungi_theme.mapping.definition_registry.class">Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry</parameter>
         <parameter key="jungi_theme.mapping.processor.class">Jungi\Bundle\ThemeBundle\Mapping\Processor\Processor</parameter>
-        <parameter key="jungi_theme.mapping.processor.worker.parameter.class">Jungi\Bundle\ThemeBundle\Mapping\Processor\ParameterWorker</parameter>
-        <parameter key="jungi_theme.mapping.processor.worker.virtual_theme.class">Jungi\Bundle\ThemeBundle\Mapping\Processor\VirtualThemeWorker</parameter>
         <parameter key="jungi_theme.mapping.loader.xml_definition.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlDefinitionLoader</parameter>
         <parameter key="jungi_theme.mapping.loader.yml_definition.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlDefinitionLoader</parameter>
         <parameter key="jungi_theme.mapping.loader.php_definition.class">Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpDefinitionLoader</parameter>
@@ -20,16 +18,7 @@
             <argument type="service" id="jungi_theme.tag.class_registry" />
         </service>
         <service id="jungi_theme.mapping.definition_registry" class="%jungi_theme.mapping.definition_registry.class%" public="false" />
-        <service id="jungi_theme.mapping.processor" class="%jungi_theme.mapping.processor.class%" public="false">
-            <call method="addWorker">
-                <argument type="service" id="jungi_theme.mapping.processor.worker.parameter" />
-            </call>
-            <call method="addWorker">
-                <argument type="service" id="jungi_theme.mapping.processor.worker.virtual_theme" />
-            </call>
-        </service>
-        <service id="jungi_theme.mapping.processor.worker.parameter" class="%jungi_theme.mapping.processor.worker.parameter.class%" public="false" />
-        <service id="jungi_theme.mapping.processor.worker.virtual_theme" class="%jungi_theme.mapping.processor.worker.virtual_theme.class%" public="false" />
+        <service id="jungi_theme.mapping.processor" class="%jungi_theme.mapping.processor.class%" public="false" />
 
         <service id="jungi_theme.mapping.loader.definition" abstract="true">
             <argument type="service" id="jungi_theme.mapping.processor" />
