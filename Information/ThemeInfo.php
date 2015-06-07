@@ -62,14 +62,4 @@ abstract class ThemeInfo
     {
         return $this->description;
     }
-
-    /**
-     * Represents the info object.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getName();
-    }
 }

@@ -15,6 +15,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfo;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
 
@@ -57,6 +58,8 @@ use Jungi\Bundle\ThemeBundle\Core\ThemeSource;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Information\Author;
 
 \$source = new ThemeSource();
 $themes
@@ -89,7 +92,7 @@ EOFILE;
 new VirtualTheme(
     '$name',
 $themes,
-    null,
+{$this->dumpThemeInfo($definition)},
 {$this->dumpTags($definition)}
 )
 EOVTHEME;
@@ -101,10 +104,45 @@ EOVTHEME;
 new Theme(
     '$name',
     \$locator->locate('{$definition->getPath()}'),
-    null,
+{$this->dumpThemeInfo($definition)},
 {$this->dumpTags($definition)}
 )
 EOSTHEME;
+    }
+
+    private function dumpThemeInfo(ThemeDefinition $definition)
+    {
+        if (null === $information = $definition->getInformation()) {
+            return $this->prependTab('null', 1);
+        }
+
+        $methods = array();
+        if ($information->hasProperty('name')) {
+            $methods[] = sprintf('->setName(\'%s\')', $information->getProperty('name'));
+        }
+        if ($information->hasProperty('description')) {
+            $methods[] = sprintf('->setDescription(\'%s\')', $information->getProperty('description'));
+        }
+        if ($information->hasProperty('authors')) {
+            foreach ($information->getProperty('authors') as $author) {
+                $args = array(
+                    "'{$author['name']}'",
+                    "'{$author['email']}'",
+                );
+                if (isset($author['homepage'])) {
+                    $args[] = "'{$author['homepage']}'";
+                }
+
+                $methods[] = sprintf('->addAuthor(new Author(%s))', implode(', ', $args));
+            }
+        }
+
+        $methods[] = '->getThemeInfo()';
+        $methods = $this->prependTab(implode("\n", $methods), 2);
+        return <<< EOINFO
+    ThemeInfoEssence::createBuilder()
+$methods
+EOINFO;
     }
 
     private function dumpTags(ThemeDefinition $definition)

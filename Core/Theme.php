@@ -89,14 +89,4 @@ class Theme implements ThemeInterface
     {
         return $this->info;
     }
-
-    /**
-     * The string representation.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
-    }
 }
