@@ -77,7 +77,7 @@ abstract class AbstractDefinitionLoader implements DefinitionLoaderInterface
             }
         } catch (\Exception $e) {
             throw new RuntimeException(sprintf(
-                'A problem occurred while building themes from the file "%s", see the previous exception for more details.',
+                'A problem occurred while processing themes from the file "%s", see the previous exception for more details.',
                 $path
             ), null, $e);
         }

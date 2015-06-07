@@ -36,9 +36,13 @@ class Processor implements ProcessorInterface
      * Processes virtual theme definitions
      *
      * @param ThemeDefinitionRegistryInterface $registry
+     *
+     * @throws \LogicException When one theme is attached to many virtual themes
+     * @throws \LogicException If virtual theme is referenced by another virtual theme
      */
     private function processVirtualThemes(ThemeDefinitionRegistryInterface $registry)
     {
+        $usedReferences = array();
         foreach ($registry->getThemeDefinitions() as $themeName => $theme) {
             if (!$theme instanceof VirtualThemeDefinition) {
                 continue;
@@ -46,11 +50,20 @@ class Processor implements ProcessorInterface
 
             // Move referenced theme definitions to a corresponding virtual theme
             foreach ($theme->getThemeReferences() as $reference) {
+                if (isset($usedReferences[$reference->getThemeName()])) {
+                    throw new \LogicException(sprintf(
+                        'The theme "%s" is currently attached to the virtual theme "%s". You cannot attach the same theme to several virtual themes.',
+                        $reference->getThemeName(),
+                        $usedReferences[$reference->getThemeName()]
+                    ));
+                }
+
                 $name = $reference->getAlias() ?: $reference->getThemeName();
                 $theme->addTheme($name, $registry->getThemeDefinition($reference->getThemeName()));
 
                 // As a theme belongs now to the virtual theme we do not need it in the registry
                 $registry->removeThemeDefinition($reference->getThemeName());
+                $usedReferences[$reference->getThemeName()] = $themeName;
             }
 
             // Validate
