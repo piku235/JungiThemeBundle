@@ -80,7 +80,7 @@ class UserThemeResolver implements ThemeResolverInterface
             return null;
         } 
         
-        /* @var UserWithTheme $user */
+        /** @var UserWithTheme $user */
         $user = $token->getUser();
         if ($themeName = $user->getThemeName()) {
             return $themeName;

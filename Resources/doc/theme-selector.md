@@ -1,9 +1,9 @@
 Theme selector
 ==============
 
-Basically a theme selector doesn't differ much from a theme resolver. The difference between them is that a theme
-selector returns the **theme instance** for a given Request. A theme selector is a class which implements the
-`Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface`.
+Basically a theme selector doesn't differ much from a theme resolver. The key difference is that a theme selector returns 
+a **theme instance** for a particular request. We can say a theme selector is a right place to put any higher logic. 
+A theme selector is a class which implements the `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface`.
  
 ```php
 interface ThemeSelectorInterface

@@ -12,6 +12,9 @@ env:
   - SYMFONY_VERSION=2.7.*
   - SYMFONY_VERSION=~2.8@dev
 
+before_install:
+  - composer self-update
+
 install:
   - composer require symfony/symfony:${SYMFONY_VERSION}
 
