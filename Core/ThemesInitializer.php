@@ -120,10 +120,10 @@ final class ThemesInitializer
         }
 
         // Loads the cache
-        $source = require $cacheFile->getPath();
+        $collection = require $cacheFile->getPath();
 
         try {
-            foreach ($source->getThemes() as $theme) {
+            foreach ($collection as $theme) {
                 $this->source->addTheme($theme);
             }
         } catch (\RuntimeException $e) {

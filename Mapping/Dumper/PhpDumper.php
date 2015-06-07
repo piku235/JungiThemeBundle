@@ -48,23 +48,23 @@ class PhpDumper implements DumperInterface
     {
         $themes = '';
         foreach ($registry->getThemeDefinitions() as $themeName => $theme) {
-            $themes .= sprintf('$source->addTheme(%s);', $this->dumpTheme($themeName, $theme))."\n";
+            $themes .= sprintf('$collection->add(%s);', $this->dumpTheme($themeName, $theme))."\n";
         }
 
         return <<< EOFILE
 <?php
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeSource;
+use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Core\Theme;
 use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Information\Author;
 
-\$source = new ThemeSource();
+\$collection = new ThemeCollection();
 $themes
 
-return \$source;
+return \$collection;
 EOFILE;
     }
 
