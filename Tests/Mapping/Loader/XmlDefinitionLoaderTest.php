@@ -14,11 +14,11 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlDefinitionLoader;
 
 /**
- * XmlFileLoader Test Case.
+ * XmlDefinitionLoader Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class XmlFileLoaderTest extends DefinitionLoaderTest
+class XmlDefinitionLoaderTest extends DefinitionLoaderTest
 {
     /**
      * @var XmlDefinitionLoader

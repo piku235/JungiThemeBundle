@@ -21,7 +21,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * ParameterValueWalker Test Case
+ * ParameterValueWalker Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -47,9 +47,9 @@ class ParameterValueWalkerTest extends TestCase
             'foo_1' => 'nice',
             'foo_2' => array(
                 'test' => 1,
-                'second' => array(5.4)
+                'second' => array(5.4),
             ),
-            'foo_theme' => 'footheme'
+            'foo_theme' => 'footheme',
         ));
 
         $info = ThemeInfoEssence::createBuilder()
@@ -61,8 +61,8 @@ class ParameterValueWalkerTest extends TestCase
         $theme->addTag(new Tag('bar', array(
             '%foo_1%',
             array(
-                array('inner' => '%foo_2%')
-            )
+                array('inner' => '%foo_2%'),
+            ),
         )));
         $theme->setInformation(ThemeInfoImporter::import($info));
         $container->registerThemeDefinition('foo', $theme);
@@ -79,12 +79,13 @@ class ParameterValueWalkerTest extends TestCase
             array(
                 array('inner' => array(
                     'test' => 1,
-                    'second' => array(5.4)
-                ))
-            )
+                    'second' => array(5.4),
+                )),
+            ),
         ));
 
-        $this->assertEquals($expectedTag, reset($theme->getTags()));
+        $tags = $theme->getTags();
+        $this->assertEquals($expectedTag, $tags[0]);
         $this->assertEquals(ThemeInfoImporter::import($expectedInfo), $theme->getInformation());
     }
 

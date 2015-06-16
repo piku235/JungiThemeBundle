@@ -15,11 +15,11 @@ use Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlDefinitionLoader;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake as FakeTag;
 
 /**
- * YamlFileLoader Test Case.
+ * YamlDefinitionLoader Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class YamlFileLoaderTest extends DefinitionLoaderTest
+class YamlDefinitionLoaderTest extends DefinitionLoaderTest
 {
     /**
      * @var YamlDefinitionLoader
