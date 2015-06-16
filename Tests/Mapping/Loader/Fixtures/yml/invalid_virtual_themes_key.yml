@@ -1,0 +1,4 @@
+themes:
+    foo_1:
+        is_virtual: true
+        themes: foo

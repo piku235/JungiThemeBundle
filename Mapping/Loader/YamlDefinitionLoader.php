@@ -76,6 +76,9 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
                 ));
             }
 
+            // Walk over parameters
+            array_walk_recursive($content['parameters'], array($this, 'replaceValue'));
+
             /** @var \Jungi\Bundle\ThemeBundle\Mapping\ContainerInterface $container */
             $container = $context->getRegistry();
             $container->setParameters($content['parameters']);
@@ -272,15 +275,9 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
 
     /**
      * {@inheritdoc}
-     *
-     * @throws \InvalidArgumentException If the given file is not readable
      */
     protected function doLoad($path)
     {
-        if (!is_readable($path)) {
-            throw new \InvalidArgumentException(sprintf('The given file "%s" is not readable.', $path));
-        }
-
         $content = $this->parser->parse(file_get_contents($path));
         if (null === $content) { // If the file is empty
             return;

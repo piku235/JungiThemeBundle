@@ -15,7 +15,6 @@ use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
-use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfo;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
 
@@ -103,7 +102,7 @@ EOVTHEME;
         return <<< EOSTHEME
 new Theme(
     '$name',
-    \$locator->locate('{$definition->getPath()}'),
+    '{$definition->getPath()}',
 {$this->dumpThemeInfo($definition)},
 {$this->dumpTags($definition)}
 )
@@ -118,19 +117,19 @@ EOSTHEME;
 
         $methods = array();
         if ($information->hasProperty('name')) {
-            $methods[] = sprintf('->setName(\'%s\')', $information->getProperty('name'));
+            $methods[] = sprintf('->setName(%s)', $this->dumpValue($information->getProperty('name')));
         }
         if ($information->hasProperty('description')) {
-            $methods[] = sprintf('->setDescription(\'%s\')', $information->getProperty('description'));
+            $methods[] = sprintf('->setDescription(%s)', $this->dumpValue($information->getProperty('description')));
         }
         if ($information->hasProperty('authors')) {
             foreach ($information->getProperty('authors') as $author) {
                 $args = array(
-                    "'{$author['name']}'",
-                    "'{$author['email']}'",
+                    $this->dumpValue($author['name']),
+                    $this->dumpValue($author['email']),
                 );
                 if (isset($author['homepage'])) {
-                    $args[] = "'{$author['homepage']}'";
+                    $args[] = $this->dumpValue($author['homepage']);
                 }
 
                 $methods[] = sprintf('->addAuthor(new Author(%s))', implode(', ', $args));
@@ -139,6 +138,7 @@ EOSTHEME;
 
         $methods[] = '->getThemeInfo()';
         $methods = $this->prependTab(implode("\n", $methods), 2);
+
         return <<< EOINFO
     ThemeInfoEssence::createBuilder()
 $methods
@@ -180,15 +180,24 @@ EOTAGS;
         return $result;
     }
 
-    private function prependTab($content, $num, $ignoreFirstLine = false)
+    private function prependTab($content, $num, $startLine = 0, $endLine = null)
     {
         $parts = explode("\n", $content);
-        $i = 0;
-        if ($ignoreFirstLine) {
-            $i = 1;
+        if (null === $endLine) {
+            $endLine = count($parts);
+        } elseif ($endLine < 0) {
+            $endLine = count($parts) + $endLine;
         }
 
-        for (; $i < count($parts); $i++) {
+        if ($endLine > count($parts)) {
+            throw new \OutOfBoundsException(sprintf(
+                'The end line "%d" is greater than available total lines "%d".',
+                $endLine,
+                count($parts)
+            ));
+        }
+
+        for ($i = $startLine; $i < $endLine; $i++) {
             $parts[$i] = str_repeat('    ', $num).$parts[$i];
         }
 

@@ -32,10 +32,12 @@ class VirtualThemeDefinition extends ThemeDefinition
      * Constructor.
      *
      * @param Reference[] $themeRefs A theme references (optional)
-     * @param array $tags      Tag definitions (optional)
+     * @param array       $tags      Tag definitions (optional)
+     * @param ThemeInfo   $info      A theme info (optional)
      */
-    public function __construct(array $themeRefs = array(), array $tags = array())
+    public function __construct(array $themeRefs = array(), array $tags = array(), ThemeInfo $info = null)
     {
+        $this->info = $info;
         $this->themes = array();
         $this->references = array();
 
@@ -69,6 +71,14 @@ class VirtualThemeDefinition extends ThemeDefinition
     public function getThemeReferences()
     {
         return $this->references;
+    }
+
+    /**
+     * Clears the theme references contained in the definition
+     */
+    public function clearThemeReferences()
+    {
+        $this->references = array();
     }
 
     /**

@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 /**
- * Reference
+ * Reference.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -29,13 +29,13 @@ class Reference
     private $alias;
 
     /**
-     * Construct
+     * Construct.
      *
      * A theme alias is used for shorter theme name, so in further steps
      * it replaces a theme name
      *
      * @param string $themeName A theme name
-     * @param string $alias A theme alias (optional)
+     * @param string $alias     A theme alias (optional)
      */
     public function __construct($themeName, $alias = null)
     {
@@ -44,7 +44,7 @@ class Reference
     }
 
     /**
-     * Returns the referenced theme name
+     * Returns the referenced theme name.
      *
      * @return string
      */
@@ -54,7 +54,7 @@ class Reference
     }
 
     /**
-     * Sets a referenced theme name
+     * Sets a referenced theme name.
      *
      * @param string $name
      *
@@ -68,7 +68,7 @@ class Reference
     }
 
     /**
-     * Returns the alias under which theme will be accessible
+     * Returns the alias under which theme will be accessible.
      *
      * @return null|string
      */
@@ -78,7 +78,7 @@ class Reference
     }
 
     /**
-     * Sets an alias
+     * Sets an alias.
      *
      * @param null|string $alias
      *

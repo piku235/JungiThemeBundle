@@ -4,7 +4,6 @@
     <testsuites>
         <testsuite name="JungiThemeBundle Test Suite">
             <directory suffix="Test.php">./Tests</directory>
-            <exclude>./Tests/Mapping</exclude> <!-- temporary -->
         </testsuite>
     </testsuites>
     <php>

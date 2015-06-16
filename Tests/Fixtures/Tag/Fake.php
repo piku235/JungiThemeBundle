@@ -14,11 +14,11 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
 /**
- * FakeTag.
+ * Fake tag.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class FakeTag implements TagInterface
+class Fake implements TagInterface
 {
     /**
      * @var string

@@ -1,53 +1,59 @@
 parameters:
-    foo_1.mobile.systems: [ iOS, AndroidOS ]
-    foo_1.mobile.device: "const@jungi.mobile_devices::MOBILE"
+    foo_1.constant: const@jungi.fake::SPECIAL
     secondary_author.email: foo@gmail.com
-    license: MIT
     leading_author:
         name: piku235
         email: piku235@gmail.com
         homepage: www.foo.com
+    path: "@JungiFooBundle/Resources/theme"
+    android: AndroidOS
 
 themes:
     foo_1:
-        path: "@JungiFooBundle/Resources/theme"
+        path: "%path%"
         tags:
+            jungi.mobile_devices: [ [ iOS, "%android%" ] ]
+            jungi.tablet_devices: ~
             jungi.desktop_devices: ~
-            jungi.mobile_devices: [ "%foo_1.mobile.systems%", "%foo_1.mobile.device%" ]
-            jungi.own: test
+            jungi.fake: "%foo_1.constant%"
         info:
             name: A fancy theme
             authors:
                 - "%leading_author%"
-                - { name: piku234, email: "%secondary_author.email%", homepage: www.boo.com }
-            version: 1.0.0
-            license: "%license%"
+                - { name: piku234, email: "%secondary_author.email%" }
             description: <i>foo desc</i>
 
     foo_2:
-        path: "@JungiFooBundle/Resources/theme"
+        path: "%path%"
         tags:
-            jungi.own: "const@Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag::SPECIAL"
-        info:
-            name: A fancy theme
-            authors: [ "%leading_author%" ]
-            version: 1.0.0
-            license: "%license%"
-            description: <i>foo desc</i>
+            jungi.mobile_devices: ~
+            jungi.tablet_devices: ~
 
     foo_3:
-        path: "@JungiFooBundle/Resources/theme"
+        path: "%path%"
         tags:
-            jungi.own: "const@CONST_TEST"
-        info:
-            name: A fancy theme
-            authors: [ "%leading_author%" ]
-            version: 1.0.0
-            license: "%license%"
-            description: <i>foo desc</i>
+            jungi.desktop_devices: ~
+            jungi.fake: "const@CONST_TEST"
 
     foo_4:
-        path: "@JungiFooBundle/Resources/theme"
+        path: "%path%"
+
+    foo_5:
+        is_virtual: true
+        themes:
+            - { theme: foo_2, as: mobile }
+            - { theme: foo_3 }
+        tags:
+            jungi.desktop_devices: ~
+            jungi.mobile_devices: ~
+            jungi.tablet_devices: ~
+            jungi.fake: ~
         info:
             name: A fancy theme
-            version: 1.0.0
+            authors:
+                - { name: piku234, email: "%secondary_author.email%" }
+            description: <i>foo desc</i>
+
+    foo_6:
+        is_virtual: true
+        themes: [ foo_4 ]

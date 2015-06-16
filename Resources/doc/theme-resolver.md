@@ -77,7 +77,7 @@ class UserThemeResolver implements ThemeResolverInterface
     {
         $token = $this->tokenStorage->getToken();
         if (!$this->authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-            return null;
+            return;
         } 
         
         /** @var UserWithTheme $user */

@@ -102,9 +102,6 @@ final class ThemesInitializer
      */
     public function initialize()
     {
-        // The locator is also used in a dumped php file
-        $locator = $this->locator;
-
         // Cache
         $cacheFile = new ConfigCache($this->cacheDir.'/jungi_themes.php', $this->debug);
         if (!$cacheFile->isFresh()) {
@@ -113,6 +110,7 @@ final class ThemesInitializer
                 $loader->load($path);
             }
 
+            $locator = $this->locator;
             $files = array_map(function ($path) use ($locator) {
                 return new FileResource($locator->locate($path[0]));
             }, $this->paths);

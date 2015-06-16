@@ -1,0 +1,5 @@
+themes:
+    foo_1:
+        is_virtual: true
+        themes:
+            - { wrong: foo, as: bar }

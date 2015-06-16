@@ -26,12 +26,14 @@ class StandardThemeDefinition extends ThemeDefinition
     /**
      * Constructor.
      *
-     * @param string $path A path (optional)
-     * @param Tag[]  $tags Tag definitions (optional)
+     * @param string    $path A path (optional)
+     * @param Tag[]     $tags Tag definitions (optional)
+     * @param ThemeInfo $info A theme info (optional)
      */
-    public function __construct($path = null, array $tags = array())
+    public function __construct($path = null, array $tags = array(), ThemeInfo $info = null)
     {
         $this->path = $path;
+        $this->info = $info;
         foreach ($tags as $tag) {
             $this->addTag($tag);
         }

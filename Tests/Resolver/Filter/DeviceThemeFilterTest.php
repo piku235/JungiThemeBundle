@@ -13,7 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Resolver\Filter;
 
 use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
 use Jungi\Bundle\ThemeBundle\Resolver\Filter\DeviceThemeFilter;
-use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag;
+use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Jungi\Bundle\ThemeBundle\Tag;
@@ -112,7 +112,7 @@ class DeviceThemeFilterTest extends TestCase
             ->expects($this->any())
             ->method('getTags')
             ->will($this->returnValue(new TagCollection(array(
-                new FakeTag('foo'),
+                new Fake('foo'),
             ))));
 
         // Prepare and fire the method

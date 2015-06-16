@@ -1,7 +1,7 @@
 <?php
 
 use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag;
+use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake;
 use Jungi\Bundle\ThemeBundle\Tag;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Information\Author;
@@ -23,6 +23,6 @@ $registry->addTheme(new Theme(
     new TagCollection(array(
         new Tag\DesktopDevices(),
         $tagFactory->create('jungi.mobile_devices', array(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE)),
-        new FakeTag('test'),
+        new Fake('test'),
     ))
 ));

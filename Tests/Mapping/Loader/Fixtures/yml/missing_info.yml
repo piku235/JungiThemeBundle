@@ -1,7 +1,0 @@
-themes:
-    foo_1:
-        path: "@JungiFooBundle/Resources/theme"
-        tags:
-            jungi.desktop_devices: ~
-            jungi.mobile_devices: [ [ iOS, AndroidOS ], "const@jungi.mobile_devices::MOBILE" ]
-            jungi.own: test

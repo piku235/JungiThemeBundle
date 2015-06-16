@@ -1,0 +1,5 @@
+parameters: foo
+
+themes:
+    foo:
+        path: bar

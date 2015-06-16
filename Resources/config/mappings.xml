@@ -18,7 +18,10 @@
             <argument type="service" id="jungi_theme.tag.class_registry" />
         </service>
         <service id="jungi_theme.mapping.definition_registry" class="%jungi_theme.mapping.definition_registry.class%" public="false" />
-        <service id="jungi_theme.mapping.processor" class="%jungi_theme.mapping.processor.class%" public="false" />
+        <service id="jungi_theme.mapping.processor" class="%jungi_theme.mapping.processor.class%" public="false">
+            <argument type="service" id="jungi_theme.tag.class_registry" />
+            <argument type="service" id="file_locator" />
+        </service>
 
         <service id="jungi_theme.mapping.loader.definition" abstract="true">
             <argument type="service" id="jungi_theme.mapping.processor" />

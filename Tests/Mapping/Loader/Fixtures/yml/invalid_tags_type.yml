@@ -1,0 +1,4 @@
+themes:
+    foo_1:
+        path: "@JungiFooBundle/Resources/theme"
+        tags: scalar

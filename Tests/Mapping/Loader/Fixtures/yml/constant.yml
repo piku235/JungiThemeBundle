@@ -1,0 +1,6 @@
+themes:
+    foo_1:
+        path: "@JungiFooBundle/Resources/theme"
+        tags:
+            jungi.mobile_devices: "something_with_const@foo_word"
+            jungi.fake: "const@jungi.fake::SPECIAL"

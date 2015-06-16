@@ -11,16 +11,14 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Mapping\Loader\LoaderHelper;
 use Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlDefinitionLoader;
-use Symfony\Component\HttpKernel\Config\FileLocator;
 
 /**
  * XmlFileLoader Test Case.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class XmlFileLoaderTest extends AutomatedFileLoaderTest
+class XmlFileLoaderTest extends DefinitionLoaderTest
 {
     /**
      * @var XmlDefinitionLoader
@@ -35,40 +33,39 @@ class XmlFileLoaderTest extends AutomatedFileLoaderTest
         parent::setUp();
 
         $this->loader = new XmlDefinitionLoader(
+            $this->processor,
             $this->registry,
-            new FileLocator($this->kernel, __DIR__.'/Fixtures/xml'),
-            $this->tagFactory,
-            new LoaderHelper($this->tagRegistry)
+            $this->createFileLocator(__DIR__.'/Fixtures/xml')
         );
     }
 
-    /**
-     * @expectedException \DomainException
-     */
-    public function testLoad()
+    public function testSupports()
     {
-        $this->loader->load('../yml/full.yml');
+        $this->assertTrue($this->loader->supports('foo.xml'));
+        $this->assertTrue($this->loader->supports('foo.another', 'xml'));
+        $this->assertFalse($this->loader->supports('foo.yml'));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testInvalid()
+    public function testInvalidFile()
     {
-        $this->loadFile('invalid');
+        try {
+            $this->loadFile('invalid');
+
+            $this->fail('RuntimeException with the should be thrown.');
+        } catch (\RuntimeException $e) {
+            $this->assertInstanceOf('\InvalidArgumentException', $e->getPrevious());
+        }
     }
 
-    /**
-     * Invalid theme mappings.
-     *
-     * @return array
-     */
-    public function getInvalidThemeMappings()
+    public function testOnMissingFile()
     {
-        $result = parent::getInvalidThemeMappings();
-        $result[] = array('invalid_info_missing_key');
+        try {
+            $this->loadFile('missing');
 
-        return $result;
+            $this->fail('InvalidArgumentException should be thrown.');
+        } catch (\InvalidArgumentException $e) {
+            $this->assertStringStartsWith('The file "missing.xml" does not exist', $e->getMessage());
+        }
     }
 
     /**

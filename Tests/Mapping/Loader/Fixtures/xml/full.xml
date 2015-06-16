@@ -4,29 +4,29 @@
                xsi:schemaLocation="http://piku235.github.io/JungiThemeBundle/schema/theme-mapping https://raw.githubusercontent.com/piku235/JungiThemeBundle/master/Mapping/Loader/schema/theme-1.0.xsd">
 
     <parameters>
-        <parameter key="foo_1.mobile.systems" type="collection">
-            <parameter>iOS</parameter>
-            <parameter>AndroidOS</parameter>
-        </parameter>
-        <parameter key="foo_1.mobile.device" type="constant">jungi.mobile_devices::MOBILE</parameter>
+        <parameter key="foo_1.constant" type="constant">jungi.fake::SPECIAL</parameter>
         <parameter key="leading_author" type="collection">
             <parameter key="name">piku235</parameter>
             <parameter key="email">piku235@gmail.com</parameter>
             <parameter key="homepage">www.foo.com</parameter>
         </parameter>
-        <parameter key="license" type="string">MIT</parameter>
         <parameter key="secondary_author.email">foo@gmail.com</parameter>
+        <parameter key="path">@JungiFooBundle/Resources/theme</parameter>
+        <parameter key="android" type="string">AndroidOS</parameter>
     </parameters>
 
     <themes>
-        <theme name="foo_1" path="@JungiFooBundle/Resources/theme">
+        <theme name="foo_1" path="%path%">
             <tags>
                 <tag name="jungi.mobile_devices">
-                    <argument>%foo_1.mobile.systems%</argument>
-                    <argument>%foo_1.mobile.device%</argument>
+                    <argument type="collection">
+                        <argument>iOS</argument>
+                        <argument>%android%</argument>
+                    </argument>
                 </tag>
+                <tag name="jungi.tablet_devices" />
                 <tag name="jungi.desktop_devices" />
-                <tag name="jungi.own">test</tag>
+                <tag name="jungi.fake">%foo_1.constant%</tag>
             </tags>
             <info>
                 <property key="authors" type="collection">
@@ -34,56 +34,59 @@
                     <property type="collection">
                         <property key="name">piku234</property>
                         <property key="email">%secondary_author.email%</property>
-                        <property key="homepage">www.boo.com</property>
                     </property>
                 </property>
                 <property key="description"><![CDATA[<i>foo desc</i>]]></property>
-                <property key="version">1.0.0</property>
                 <property key="name">A fancy theme</property>
-                <property key="license">%license%</property>
             </info>
         </theme>
 
-        <theme name="foo_2" path="@JungiFooBundle/Resources/theme">
+        <theme name="foo_2" path="%path%">
             <tags>
-                <tag name="jungi.own">
-                    <argument type="constant">Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\FakeTag::SPECIAL</argument>
-                </tag>
+                <tag name="jungi.mobile_devices" />
+                <tag name="jungi.tablet_devices" />
             </tags>
-            <info>
-                <property key="authors" type="collection">
-                    <property>%leading_author%</property>
-                </property>
-                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
-                <property key="version">1.0.0</property>
-                <property key="name">A fancy theme</property>
-                <property key="license">%license%</property>
-            </info>
         </theme>
 
-        <theme name="foo_3" path="@JungiFooBundle/Resources/theme">
+        <theme name="foo_3" path="%path%">
             <tags>
-                <tag name="jungi.own">
+                <tag name="jungi.desktop_devices" />
+                <tag name="jungi.fake">
                     <argument type="constant">CONST_TEST</argument>
                 </tag>
             </tags>
-            <info>
-                <property key="authors" type="collection">
-                    <property>%leading_author%</property>
-                </property>
-                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
-                <property key="version">1.0.0</property>
-                <property key="name">A fancy theme</property>
-                <property key="license">%license%</property>
-            </info>
         </theme>
 
-        <theme name="foo_4" path="@JungiFooBundle/Resources/theme">
+        <theme name="foo_4" path="%path%" />
+
+        <virtual-theme name="foo_5">
+            <themes>
+                <ref theme="foo_2" as="mobile" />
+                <ref theme="foo_3" />
+            </themes>
+            <tags>
+                <tag name="jungi.desktop_devices" />
+                <tag name="jungi.mobile_devices" />
+                <tag name="jungi.tablet_devices" />
+                <tag name="jungi.fake" />
+            </tags>
             <info>
-                <property key="version">1.0.0</property>
+                <property key="authors" type="collection">
+                    <property type="collection">
+                        <property key="name">piku234</property>
+                        <property key="email">%secondary_author.email%</property>
+                    </property>
+                </property>
+                <property key="description"><![CDATA[<i>foo desc</i>]]></property>
                 <property key="name">A fancy theme</property>
             </info>
-        </theme>
+        </virtual-theme>
+
+        <virtual-theme name="foo_6">
+            <themes>
+                <ref theme="foo_4" />
+            </themes>
+        </virtual-theme>
     </themes>
 
 </theme-mapping>
