@@ -5,12 +5,11 @@ parameters:
         name: piku235
         email: piku235@gmail.com
         homepage: www.foo.com
-    path: "@JungiFooBundle/Resources/theme"
     android: AndroidOS
 
 themes:
     foo_1:
-        path: "%path%"
+        path: "@JungiFooBundle/Resources/theme"
         tags:
             jungi.mobile_devices: [ [ iOS, "%android%" ] ]
             jungi.tablet_devices: ~
@@ -24,19 +23,18 @@ themes:
             description: <i>foo desc</i>
 
     foo_2:
-        path: "%path%"
+        path: "@JungiFooBundle/Resources/theme"
         tags:
             jungi.mobile_devices: ~
             jungi.tablet_devices: ~
 
     foo_3:
-        path: "%path%"
+        path: "@JungiFooBundle/Resources/theme"
         tags:
             jungi.desktop_devices: ~
-            jungi.fake: "const@CONST_TEST"
 
     foo_4:
-        path: "%path%"
+        path: "@JungiFooBundle/Resources/theme"
 
     foo_5:
         is_virtual: true

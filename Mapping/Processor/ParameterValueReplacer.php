@@ -15,11 +15,11 @@ use Jungi\Bundle\ThemeBundle\Mapping\ContainerInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
- * ParameterValueWalker processes parameters contained in a theme definition registry.
+ * ParameterValueReplacer processes parameters contained in a theme definition registry.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ParameterValueWalker extends ValueWalker
+class ParameterValueReplacer extends ValueReplacer
 {
     /**
      * {@inheritdoc}
@@ -41,11 +41,11 @@ class ParameterValueWalker extends ValueWalker
      *
      * @return mixed
      *
-     * @throws \RuntimeException When the given parameter does not exist
+     * @throws \InvalidArgumentException When the given parameter does not exist
      */
     protected function resolveValue($value, ThemeDefinitionRegistryInterface $registry)
     {
-        /** @var ContainerInterface $registry */
+        /* @var ContainerInterface $registry */
 
         if (!is_string($value) || !preg_match('/^%([^\s%]+)%$/', $value, $matches)) {
             return $value;
@@ -53,7 +53,7 @@ class ParameterValueWalker extends ValueWalker
 
         $paramName = $matches[1];
         if (!$registry->hasParameter($paramName)) {
-            throw new \RuntimeException(sprintf('The parameter "%s" can not be found.', $paramName));
+            throw new \InvalidArgumentException(sprintf('The parameter "%s" can not be found.', $paramName));
         }
 
         return $registry->getParameter($paramName);

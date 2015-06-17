@@ -11,12 +11,11 @@
             <parameter key="homepage">www.foo.com</parameter>
         </parameter>
         <parameter key="secondary_author.email">foo@gmail.com</parameter>
-        <parameter key="path">@JungiFooBundle/Resources/theme</parameter>
         <parameter key="android" type="string">AndroidOS</parameter>
     </parameters>
 
     <themes>
-        <theme name="foo_1" path="%path%">
+        <theme name="foo_1" path="@JungiFooBundle/Resources/theme">
             <tags>
                 <tag name="jungi.mobile_devices">
                     <argument type="collection">
@@ -41,23 +40,20 @@
             </info>
         </theme>
 
-        <theme name="foo_2" path="%path%">
+        <theme name="foo_2" path="@JungiFooBundle/Resources/theme">
             <tags>
                 <tag name="jungi.mobile_devices" />
                 <tag name="jungi.tablet_devices" />
             </tags>
         </theme>
 
-        <theme name="foo_3" path="%path%">
+        <theme name="foo_3" path="@JungiFooBundle/Resources/theme">
             <tags>
                 <tag name="jungi.desktop_devices" />
-                <tag name="jungi.fake">
-                    <argument type="constant">CONST_TEST</argument>
-                </tag>
             </tags>
         </theme>
 
-        <theme name="foo_4" path="%path%" />
+        <theme name="foo_4" path="@JungiFooBundle/Resources/theme" />
 
         <virtual-theme name="foo_5">
             <themes>

@@ -41,7 +41,6 @@ $registry->registerThemeDefinition('foo_3', new StandardThemeDefinition(
     '@JungiFooBundle/Resources/theme',
     array(
         new Tag('jungi.desktop_devices'),
-        new Tag('jungi.fake', array(CONST_TEST)),
     )
 ));
 

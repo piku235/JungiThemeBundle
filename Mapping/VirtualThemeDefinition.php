@@ -58,7 +58,7 @@ class VirtualThemeDefinition extends ThemeDefinition
      */
     public function addThemeReference(Reference $reference)
     {
-        $this->references[] = $reference;
+        $this->references[$reference->getThemeName()] = $reference;
 
         return $this;
     }
@@ -74,7 +74,7 @@ class VirtualThemeDefinition extends ThemeDefinition
     }
 
     /**
-     * Clears the theme references contained in the definition
+     * Clears the theme references contained in the definition.
      */
     public function clearThemeReferences()
     {
@@ -86,10 +86,24 @@ class VirtualThemeDefinition extends ThemeDefinition
      *
      * @param string          $name       A theme name
      * @param ThemeDefinition $definition A theme definition
+     *
+     * @return VirtualThemeDefinition
      */
     public function addTheme($name, ThemeDefinition $definition)
     {
         $this->themes[$name] = $definition;
+
+        return $this;
+    }
+
+    /**
+     * Removes a given theme.
+     *
+     * @param string $name A theme name
+     */
+    public function removeTheme($name)
+    {
+        unset($this->themes[$name]);
     }
 
     /**

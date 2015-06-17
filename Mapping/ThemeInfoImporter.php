@@ -38,7 +38,7 @@ class ThemeInfoImporter
             foreach ($info->getAuthors() as $author) {
                 $properties = array(
                     'name' => $author->getName(),
-                    'email' => $author->getEmail()
+                    'email' => $author->getEmail(),
                 );
                 if (null !== $author->getHomepage()) {
                     $properties['homepage'] = $author->getHomepage();

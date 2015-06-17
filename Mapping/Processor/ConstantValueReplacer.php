@@ -16,11 +16,11 @@ use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
 
 /**
- * ConstantValueWalker processes constant values.
+ * ConstantValueReplacer processes constant values.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ConstantValueWalker extends ValueWalker
+class ConstantValueReplacer extends ValueReplacer
 {
     /**
      * @var TagClassRegistryInterface
@@ -45,7 +45,7 @@ class ConstantValueWalker extends ValueWalker
      *
      * @return mixed
      *
-     * @throws \RuntimeException When the given parameter does not exist
+     * @throws \InvalidArgumentException When a constant does not exist
      */
     protected function resolveValue($value, ThemeDefinitionRegistryInterface $registry)
     {

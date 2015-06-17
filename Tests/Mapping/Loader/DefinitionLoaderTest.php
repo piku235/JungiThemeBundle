@@ -21,6 +21,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistry;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake as FakeTag;
+use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
 /**
@@ -28,7 +29,7 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-abstract class DefinitionLoaderTest extends \PHPUnit_Framework_TestCase
+abstract class DefinitionLoaderTest extends TestCase
 {
     /**
      * @var ThemeDefinitionRegistry
@@ -50,18 +51,8 @@ abstract class DefinitionLoaderTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $tagClassRegistry = new TagClassRegistry(array(
-            'jungi.mobile_devices' => 'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'jungi.tablet_devices' => 'Jungi\Bundle\ThemeBundle\Tag\TabletDevices',
-            'jungi.desktop_devices' => 'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
-            'jungi.fake' => 'Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake',
-        ));
         $this->registry = new ThemeDefinitionRegistry();
-        $this->processor = new Processor($tagClassRegistry, $this->createFileLocator(__DIR__));
-
-        if (!defined('CONST_TEST')) {
-            define('CONST_TEST', 'testing');
-        }
+        $this->processor = new Processor($this->createTagClassRegistry(), $this->createFileLocator(__DIR__));
     }
 
     public function testFull()
@@ -92,7 +83,7 @@ abstract class DefinitionLoaderTest extends \PHPUnit_Framework_TestCase
                 new Tag('jungi.tablet_devices'),
                 new Tag('jungi.desktop_devices'),
                 new Tag('jungi.fake', array(FakeTag::SPECIAL)),
-            ), $info1)
+            ), $info1),
         );
         $themes['foo_5'] = new VirtualThemeDefinition();
         $themes['foo_5']->setInformation($info3);
@@ -104,11 +95,10 @@ abstract class DefinitionLoaderTest extends \PHPUnit_Framework_TestCase
         ));
         $themes['foo_5']->addTheme('mobile', new StandardThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme', array(
             new Tag('jungi.mobile_devices'),
-            new Tag('jungi.tablet_devices')
+            new Tag('jungi.tablet_devices'),
         )));
         $themes['foo_5']->addTheme('foo_3', new StandardThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme', array(
             new Tag('jungi.desktop_devices'),
-            new Tag('jungi.fake', array(CONST_TEST)),
         )));
 
         $themes['foo_6'] = new VirtualThemeDefinition();

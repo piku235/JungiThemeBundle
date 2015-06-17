@@ -11,7 +11,6 @@
 
 namespace Jungi\Bundle\ThemeBundle;
 
-use Jungi\Bundle\ThemeBundle\DependencyInjection\Compiler\TagProviderPass;
 use Jungi\Bundle\ThemeBundle\DependencyInjection\Compiler\ThemeFilterPass;
 use Jungi\Bundle\ThemeBundle\DependencyInjection\Compiler\CacheWarmerPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -32,7 +31,6 @@ class JungiThemeBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new CacheWarmerPass());
-        $container->addCompilerPass(new TagProviderPass());
         $container->addCompilerPass(new ThemeFilterPass());
     }
 

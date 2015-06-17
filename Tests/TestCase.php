@@ -11,6 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests;
 
+use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistry;
+use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -65,7 +67,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates the theme mock with a given name.
+     * Creates a theme mock with a given name.
      *
      * @param string $name A theme name
      * @param string $path A theme resource dir (optional)
@@ -88,7 +90,22 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns the Mock of Symfony\Component\Config\FileLocator.
+     * Creates a simple tag class registry.
+     *
+     * @return TagClassRegistryInterface
+     */
+    protected function createTagClassRegistry()
+    {
+        return new TagClassRegistry(array(
+            'jungi.mobile_devices' => 'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
+            'jungi.tablet_devices' => 'Jungi\Bundle\ThemeBundle\Tag\TabletDevices',
+            'jungi.desktop_devices' => 'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
+            'jungi.fake' => 'Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake',
+        ));
+    }
+
+    /**
+     * Returns the mock of the Symfony\Component\Config\FileLocator.
      *
      * @return \Symfony\Component\Config\FileLocator
      */

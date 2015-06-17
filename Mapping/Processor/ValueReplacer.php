@@ -11,15 +11,14 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
- * ValueWalker.
+ * ValueReplacer.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-abstract class ValueWalker implements WorkerInterface
+abstract class ValueReplacer implements WorkerInterface
 {
     /**
      * {@inheritdoc}
@@ -27,10 +26,6 @@ abstract class ValueWalker implements WorkerInterface
     public function process(ThemeDefinitionRegistryInterface $registry)
     {
         foreach ($registry->getThemeDefinitions() as $theme) {
-            if ($theme instanceof StandardThemeDefinition) {
-                $theme->setPath($this->resolveValue($theme->getPath(), $registry));
-            }
-
             // Tags
             foreach ($theme->getTags() as $tag) {
                 $tag->setArguments($this->resolveValueRecursive($tag->getArguments(), $registry));
