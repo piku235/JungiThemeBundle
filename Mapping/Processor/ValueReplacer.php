@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
@@ -18,23 +19,21 @@ use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-abstract class ValueReplacer implements WorkerInterface
+abstract class ValueReplacer extends AbstractThemeWorker
 {
     /**
      * {@inheritdoc}
      */
-    public function process(ThemeDefinitionRegistryInterface $registry)
+    public function processTheme($name, ThemeDefinition $definition, ThemeDefinitionRegistryInterface $registry)
     {
-        foreach ($registry->getThemeDefinitions() as $theme) {
-            // Tags
-            foreach ($theme->getTags() as $tag) {
-                $tag->setArguments($this->resolveValueRecursive($tag->getArguments(), $registry));
-            }
+        // Tags
+        foreach ($definition->getTags() as $tag) {
+            $tag->setArguments($this->resolveValueRecursive($tag->getArguments(), $registry));
+        }
 
-            // ThemeInfo
-            if (null !== $info = $theme->getInformation()) {
-                $info->setProperties($this->resolveValueRecursive($info->getProperties(), $registry));
-            }
+        // ThemeInfo
+        if (null !== $info = $definition->getInformation()) {
+            $info->setProperties($this->resolveValueRecursive($info->getProperties(), $registry));
         }
     }
 

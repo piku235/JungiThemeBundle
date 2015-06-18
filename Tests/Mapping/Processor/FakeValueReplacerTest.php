@@ -17,6 +17,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
+use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Mapping\Processor\FakeValueReplacer;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
@@ -65,6 +66,12 @@ class FakeValueReplacerTest extends TestCase
         $theme->setInformation($info);
         $registry->registerThemeDefinition('foo', $theme);
 
+        $theme = new VirtualThemeDefinition();
+        $theme->addTag(clone $tag);
+        $theme->setInformation(clone $info);
+        $theme->addTheme('monday', new StandardThemeDefinition(__DIR__, array(clone $tag), clone $info));
+        $registry->registerThemeDefinition('bar_virtual', $theme);
+
         // The final point
         $expectedInfo = ThemeInfoEssence::createBuilder()
             ->setName('replaced')
@@ -87,7 +94,10 @@ class FakeValueReplacerTest extends TestCase
         $this->replacer->process($registry);
 
         // Assert
-        $this->assertEquals($expectedInfo, $info);
-        $this->assertEquals($expectedTag, $tag);
+        foreach ($registry->getThemeDefinitions() as $theme) {
+            $tags = $theme->getTags();
+            $this->assertEquals($expectedTag, $tags[0]);
+            $this->assertEquals($expectedInfo, $theme->getInformation());
+        }
     }
 }

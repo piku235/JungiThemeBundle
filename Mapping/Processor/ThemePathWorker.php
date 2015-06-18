@@ -12,6 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 
@@ -20,7 +21,7 @@ use Symfony\Component\Config\FileLocatorInterface;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemePathWorker implements WorkerInterface
+class ThemePathWorker extends AbstractThemeWorker
 {
     /**
      * @var FileLocatorInterface
@@ -40,12 +41,10 @@ class ThemePathWorker implements WorkerInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ThemeDefinitionRegistryInterface $registry)
+    protected function processTheme($name, ThemeDefinition $definition, ThemeDefinitionRegistryInterface $registry)
     {
-        foreach ($registry->getThemeDefinitions() as $theme) {
-            if ($theme instanceof StandardThemeDefinition) {
-                $theme->setPath($this->locator->locate($theme->getPath()));
-            }
+        if ($definition instanceof StandardThemeDefinition) {
+            $definition->setPath($this->locator->locate($definition->getPath()));
         }
     }
 }

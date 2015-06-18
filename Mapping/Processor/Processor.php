@@ -36,7 +36,6 @@ final class Processor implements ProcessorInterface
     public function __construct(TagClassRegistryInterface $tagClassRegistry, FileLocatorInterface $locator)
     {
         $this->workers = array(
-            new NestedThemesWorker(),
             new ParameterValueReplacer(),
             new ConstantValueReplacer($tagClassRegistry),
             new ThemePathWorker($locator),
