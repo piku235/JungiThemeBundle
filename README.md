@@ -25,8 +25,8 @@ Third Party Packages
 
 * [MobileDetect](https://github.com/serbanghita/Mobile-Detect) - used for detecting mobile devices (incl. tablets)
 
-Demostration
-------------
+Demonstration
+-------------
 
 You can play with the bundle by entering [this website](http://jungitheme.gsroka.com/) or by installing the [sandbox](https://github.com/piku235/JungiThemeBundleSandbox) version.
 
