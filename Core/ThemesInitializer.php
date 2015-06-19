@@ -105,7 +105,8 @@ final class ThemesInitializer
         // Cache
         $cacheFile = new ConfigCache($this->cacheDir.'/jungi_themes.php', $this->debug);
         if (!$cacheFile->isFresh()) {
-            foreach ($this->paths as list($path, $type)) {
+            foreach ($this->paths as $child) {
+                list($path, $type) = $child;
                 $loader = $this->resolveLoader($path, $type);
                 $loader->load($path);
             }
