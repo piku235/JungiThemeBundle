@@ -16,7 +16,7 @@ namespace Jungi\Bundle\ThemeBundle\Exception;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ThemeNotFoundException extends \RuntimeException
+class ThemeNotFoundException extends \InvalidArgumentException
 {
     /**
      * @var string

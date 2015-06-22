@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Core;
 
+use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
@@ -56,7 +57,11 @@ class ThemeSource implements ThemeSourceInterface
      */
     public function getTheme($name)
     {
-        return $this->themes->get($name);
+        if (null !== $theme = $this->themes->get($name)) {
+            return $theme;
+        }
+
+        throw new ThemeNotFoundException($name);
     }
 
     /**

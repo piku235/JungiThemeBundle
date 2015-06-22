@@ -97,6 +97,24 @@ class VirtualThemeDefinition extends ThemeDefinition
     }
 
     /**
+     * Returns the given theme
+     *
+     * @param string $name A theme name
+     *
+     * @return ThemeDefinition
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function getTheme($name)
+    {
+        if (!isset($this->themes[$name])) {
+            throw new \InvalidArgumentException(sprintf('The theme "%s" can not be found.'));
+        }
+
+        return $this->themes[$name];
+    }
+
+    /**
      * Removes a given theme.
      *
      * @param string $name A theme name

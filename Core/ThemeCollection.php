@@ -109,15 +109,11 @@ class ThemeCollection implements \IteratorAggregate, \Countable
      *
      * @param string $themeName A theme name
      *
-     * @return ThemeInterface
+     * @return ThemeInterface|null
      */
     public function get($themeName)
     {
-        if (!$this->has($themeName)) {
-            throw new ThemeNotFoundException($themeName);
-        }
-
-        return $this->themes[$themeName];
+        return isset($this->themes[$themeName]) ? $this->themes[$themeName] : null;
     }
 
     /**
@@ -127,10 +123,6 @@ class ThemeCollection implements \IteratorAggregate, \Countable
      */
     public function remove($themeName)
     {
-        if (!$this->has($themeName)) {
-            return;
-        }
-
         unset($this->themes[$themeName]);
     }
 
