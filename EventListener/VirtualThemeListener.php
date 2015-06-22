@@ -43,7 +43,7 @@ class VirtualThemeListener implements EventSubscriberInterface
     }
 
     /**
-     *
+     * @param ResolvedThemeEvent $event
      */
     public function onResolvedTheme(ResolvedThemeEvent $event)
     {
@@ -55,6 +55,9 @@ class VirtualThemeListener implements EventSubscriberInterface
         $this->handle($theme, $event->getRequest());
     }
 
+    /**
+     * @param HttpThemeEvent $event
+     */
     public function onChangedTheme(HttpThemeEvent $event)
     {
         $theme = $event->getTheme();
@@ -76,6 +79,10 @@ class VirtualThemeListener implements EventSubscriberInterface
         );
     }
 
+    /**
+     * @param VirtualThemeInterface $theme
+     * @param Request $request
+     */
     private function handle(VirtualThemeInterface $theme, Request $request)
     {
         $theme->setPointedTheme($this->resolver->resolveTheme($theme, $request));
