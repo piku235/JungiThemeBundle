@@ -66,7 +66,9 @@ class ThemeChanger implements ThemeChangerInterface
         } elseif ($theme instanceof ThemeInterface) {
             $themeName = $theme->getName();
         } else {
-            throw new \InvalidArgumentException(sprintf('The theme must be a theme name or a theme instance of the "ThemeInterface".'));
+            throw new \InvalidArgumentException(
+                'The given theme has a wrong type. Expected a theme name or an instance of the ThemeInterface.'
+            );
         }
 
         // Apply

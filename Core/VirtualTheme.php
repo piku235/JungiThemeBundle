@@ -79,20 +79,27 @@ class VirtualTheme implements VirtualThemeInterface
      */
     public function setPointedTheme($theme)
     {
-        if (!is_string($theme) || !$theme instanceof ThemeInterface) {
+        if (is_string($theme)) {
+            $themeName = $theme;
+            $belongs = $this->themes->has($theme);
+        } elseif ($theme instanceof ThemeInterface) {
+            $themeName = $theme->getName();
+            $belongs = $this->themes->contains($theme);
+        } else {
             throw new \InvalidArgumentException(
                 'The given theme has a wrong type. Expected a theme name or an instance of the ThemeInterface.'
             );
         }
 
-        static $exceptionMsg = 'The theme "%s" not belongs to the virtual theme "%s".';
-        if (is_string($theme) && !$this->themes->has($theme)) {
-            throw new ThemeNotFoundException($theme, sprintf($exceptionMsg, $theme, $this->name));
-        } elseif (!$this->themes->contains($theme)) {
-            throw new ThemeNotFoundException($theme->getName(), sprintf($exceptionMsg, $theme->getName(), $this->name));
+        if (!$belongs) {
+            throw new ThemeNotFoundException(sprintf(
+                'The theme "%s" not belongs to the virtual theme "%s".',
+                $themeName,
+                $this->name
+            ));
         }
 
-        $this->pointed = is_object($theme) ? $theme->getName() : $theme;
+        $this->pointed = $themeName;
     }
 
     /**
