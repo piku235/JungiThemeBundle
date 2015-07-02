@@ -159,14 +159,4 @@ class VirtualTheme implements VirtualThemeInterface
     {
         return $this->info;
     }
-
-    /**
-     * The string representation.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
-    }
 }
