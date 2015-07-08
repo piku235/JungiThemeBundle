@@ -4,33 +4,21 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="jungi_theme.source.class">Jungi\Bundle\ThemeBundle\Core\ThemeSource</parameter>
-        <parameter key="jungi_theme.cache_warmer.chain_finder.class">Jungi\Bundle\ThemeBundle\CacheWarmer\ChainTemplateFinder</parameter>
-        <parameter key="jungi_theme.cache_warmer.finder.class">Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinder</parameter>
-        <parameter key="jungi_theme.holder.default.class">Jungi\Bundle\ThemeBundle\Core\ThemeHolder</parameter>
-        <parameter key="jungi_theme.mobile_detect.class">Jungi\Bundle\ThemeBundle\Core\MobileDetect</parameter>
-        <parameter key="jungi_theme.selector.class">Jungi\Bundle\ThemeBundle\Selector\ThemeSelector</parameter>
-        <parameter key="jungi_theme.resolver.virtual.class">Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolver</parameter>
-        <parameter key="jungi_theme.resolver.filter.device.class">Jungi\Bundle\ThemeBundle\Resolver\Filter\DeviceThemeFilter</parameter>
-        <parameter key="jungi_theme.changer.class">Jungi\Bundle\ThemeBundle\Changer\ThemeChanger</parameter>
-    </parameters>
-
     <services>
         <service id="jungi_theme.tag.class_registry" class="Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistry">
             <argument /> <!-- tag classes -->
         </service>
-        <service id="jungi_theme.mobile_detect" class="%jungi_theme.mobile_detect.class%">
+        <service id="jungi_theme.mobile_detect" class="Jungi\Bundle\ThemeBundle\Core\MobileDetect">
             <argument type="service" id="request_stack" />
         </service>
-        <service id="jungi_theme.holder.default" class="%jungi_theme.holder.default.class%" />
-        <service id="jungi_theme.cache_warmer.chain_finder" class="%jungi_theme.cache_warmer.chain_finder.class%" public="false">
+        <service id="jungi_theme.holder.default" class="Jungi\Bundle\ThemeBundle\Core\ThemeHolder" />
+        <service id="jungi_theme.cache_warmer.chain_finder" class="Jungi\Bundle\ThemeBundle\CacheWarmer\ChainTemplateFinder" public="false">
             <argument type="collection">
                 <argument type="service" id="templating.finder" />
                 <argument type="service" id="jungi_theme.cache_warmer.finder" />
             </argument>
         </service>
-        <service id="jungi_theme.cache_warmer.finder" class="%jungi_theme.cache_warmer.finder.class%" public="false">
+        <service id="jungi_theme.cache_warmer.finder" class="Jungi\Bundle\ThemeBundle\CacheWarmer\TemplateFinder" public="false">
             <argument type="service" id="jungi_theme.source" />
             <argument type="service" id="jungi_theme.templating.filename_parser" />
         </service>
@@ -48,19 +36,19 @@
             <argument>%kernel.debug%</argument>
             <argument>%kernel.cache_dir%</argument>
         </service>
-        <service id="jungi_theme.source" class="%jungi_theme.source.class%" />
-        <service id="jungi_theme.resolver.virtual" class="%jungi_theme.resolver.virtual.class%" />
-        <service id="jungi_theme.resolver.filter.device" class="%jungi_theme.resolver.filter.device.class%">
+        <service id="jungi_theme.source" class="Jungi\Bundle\ThemeBundle\Core\ThemeSource" />
+        <service id="jungi_theme.resolver.virtual" class="Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolver" />
+        <service id="jungi_theme.resolver.filter.device" class="Jungi\Bundle\ThemeBundle\Resolver\Filter\DeviceThemeFilter">
             <tag name="jungi_theme.filter" />
             <argument type="service" id="jungi_theme.mobile_detect" />
             <argument type="service" id="jungi_theme.source" />
         </service>
-        <service id="jungi_theme.changer" class="%jungi_theme.changer.class%">
+        <service id="jungi_theme.changer" class="Jungi\Bundle\ThemeBundle\Changer\ThemeChanger">
             <argument type="service" id="jungi_theme.selector" />
             <argument type="service" id="jungi_theme.resolver" />
             <argument type="service" id="event_dispatcher" />
         </service>
-        <service id="jungi_theme.selector" class="%jungi_theme.selector.class%">
+        <service id="jungi_theme.selector" class="Jungi\Bundle\ThemeBundle\Selector\ThemeSelector">
             <argument type="service" id="jungi_theme.source" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="jungi_theme.resolver" />

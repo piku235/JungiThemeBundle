@@ -4,17 +4,12 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="jungi_theme.twig.extension.device.class">Jungi\Bundle\ThemeBundle\Twig\Extension\DeviceExtension</parameter>
-        <parameter key="jungi_theme.helper.device.class">Jungi\Bundle\ThemeBundle\Helper\DeviceHelper</parameter>
-    </parameters>
-
     <services>
-        <service id="jungi_theme.helper.device" class="%jungi_theme.helper.device.class%">
+        <service id="jungi_theme.helper.device" class="Jungi\Bundle\ThemeBundle\Helper\DeviceHelper">
             <tag name="templating.helper" alias="device" />
             <argument type="service" id="jungi_theme.mobile_detect" />
         </service>
-        <service id="jungi_theme.twig.extension.device" class="%jungi_theme.twig.extension.device.class%" public="false">
+        <service id="jungi_theme.twig.extension.device" class="Jungi\Bundle\ThemeBundle\Twig\Extension\DeviceExtension" public="false">
             <tag name="twig.extension" />
             <argument type="service" id="service_container" />
         </service>

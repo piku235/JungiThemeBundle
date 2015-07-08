@@ -4,29 +4,22 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="jungi_theme.listener.holder.class">Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener</parameter>
-        <parameter key="jungi_theme.listener.virtual_theme.class">Jungi\Bundle\ThemeBundle\EventListener\VirtualThemeListener</parameter>
-        <parameter key="jungi_theme.resolver.listener.class">Jungi\Bundle\ThemeBundle\Resolver\EventListener\ThemeResolverListener</parameter>
-        <parameter key="jungi_theme.selector.listener.validation.class">Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener</parameter>
-    </parameters>
-
     <services>
-        <service id="jungi_theme.resolver.listener" class="%jungi_theme.resolver.listener.class%">
+        <service id="jungi_theme.resolver.listener" class="Jungi\Bundle\ThemeBundle\Resolver\EventListener\ThemeResolverListener">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="jungi_theme.resolver" />
         </service>
-        <service id="jungi_theme.listener.holder" class="%jungi_theme.listener.holder.class%">
+        <service id="jungi_theme.listener.holder" class="Jungi\Bundle\ThemeBundle\EventListener\ThemeHolderListener">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="jungi_theme.holder" />
             <argument type="service" id="jungi_theme.selector" />
             <argument>%jungi_theme.listener.holder.ignore_null_theme%</argument>
         </service>
-        <service id="jungi_theme.listener.virtual_theme" class="%jungi_theme.listener.virtual_theme.class%">
+        <service id="jungi_theme.listener.virtual_theme" class="Jungi\Bundle\ThemeBundle\EventListener\VirtualThemeListener">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="jungi_theme.resolver.virtual" />
         </service>
-        <service id="jungi_theme.selector.listener.validation" class="%jungi_theme.selector.listener.validation.class%">
+        <service id="jungi_theme.selector.listener.validation" class="Jungi\Bundle\ThemeBundle\Selector\EventListener\ValidationListener">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="validator" />
             <argument>%jungi_theme.selector.listener.validation.suspects%</argument>
