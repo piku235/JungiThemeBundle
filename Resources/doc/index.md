@@ -13,12 +13,10 @@ Basics
 
 ### Themes overview
 
-What is a theme, how it works and what is related with it you will learn from [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md).
-
-Generally the chapter talks about:
+[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md) to find out what is:
 
 * Standard and virtual theme
-* Themes locations
+* Theme locations
 * Template naming and locations
 * Overriding bundle templates
 
@@ -34,7 +32,7 @@ How to load a theme mapping file, you will find out from [here](https://github.c
 
 ### Theme holder
 
-A theme holder is a class which job is to hold the current theme. To get the current theme you must use the service `jungi_theme.holder`
+A theme holder is a class that holds the current theme instance. To get the current theme you must use the service `jungi_theme.holder`
 and call its method **getTheme** like below.
 
 ```php
@@ -52,7 +50,7 @@ Here you will find out what exactly is a theme tag, which theme tags the bundle 
 
 ### Theme changer
 
-A theme changer as the name says it's used for changing the current theme. [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-changer.md)
+A theme changer is used for changing the current theme. [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-changer.md)
 to see how do that.
 
 Web Design Approaches
@@ -81,21 +79,21 @@ where you can read about them in this great [article](http://www.lukew.com/ff/en
 ### RWD (Responsive Web Design)
 
 The Responsive Web Design is probably the most used web design approach, of course for those who wants display their
-theme on various devices. Creating a responsive theme in the JungiThemeBundle is very easy and fast.
+theme on various devices. Creating this kind of theme is very straightforward and it takes really small amount of time.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md)
 
 Tutorials
 ---------
 
-### Create a theme
+### Creating a theme
 
 The tutorial shows how to create a simple responsive theme (RWD) from the scratch.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/tutorials/creating-theme.md)
 
-Advanced
---------
+Miscellaneous
+-------------
 
 * [Theme resolver](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md)
 * [Theme selector](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-selector.md)
