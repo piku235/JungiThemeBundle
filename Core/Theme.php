@@ -54,7 +54,7 @@ class Theme implements ThemeInterface
     {
         $this->name = $name;
         $this->path = $path;
-        $this->info = $info ?: ThemeInfoEssence::createBuilder()->getThemeInfo();
+        $this->info = $info ?: ThemeInfoEssence::createBuilder()->setName('empty')->getThemeInfo();
         $this->tags = $tags ?: new TagCollection();
     }
 
