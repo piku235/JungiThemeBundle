@@ -11,9 +11,9 @@ To get start using the bundle in your project [go here](https://github.com/piku2
 Basics
 ------
 
-### Themes overview
+### First steps
 
-[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md) to find out what is:
+[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/first-steps.md) to find out what is:
 
 * Standard and virtual theme
 * Theme locations

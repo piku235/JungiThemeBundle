@@ -1,11 +1,11 @@
-Themes overview
-===============
+First steps
+===========
 
 Theme
 -----
 
-Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts which as the result 
-have an influence to the look of a page. A theme representation in the JungiThemeBundle is an object of the 
+Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts, view files which 
+as the result have an influence to the look of a page. A theme representation in the JungiThemeBundle is an object of the 
 `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily manipulate themes and obtain 
 important for us information.
 
@@ -52,9 +52,9 @@ interface ThemeInterface
 VirtualTheme
 ------------
 
-A virtual theme may be a bit confusing, but this is a sort of theme that does not exist, so it has not got any assets and 
-view files. It only combines together similar themes and acts as a representative of these themes. Only one of the subordinate
-themes will be used and which one of them will be decided by virtual theme resolver. 
+A virtual theme may be a bit confusing, but this is a sort of theme that does not really exist, so it has not got any assets 
+and view files. It only combines together similar themes and acts as a representative of these themes. Only one of the 
+subordinate themes will be used and which one of them will be decided by virtual theme resolver. 
 
 The interface of virtual theme is following:
 
@@ -90,7 +90,7 @@ interface VirtualThemeInterface extends ThemeInterface
 ### For what do you need it?
 
 A virtual theme can be used for various things. The easiest example is an adaptive theme (AWD) - it is usually combined 
-of two or more themes where each one of them has a tag that describes them. 
+of two or more themes where each one of them has a tag that determines their purpose. 
 
 Suppose that we have the adaptive theme with two themes where the first one is for mobile devices and the second one is 
 for desktop devices. Thanks to virtual themes we do not need to create two separate themes and do crazy stuff to get this 
@@ -160,8 +160,8 @@ abstract class ThemeInfo
 Due to a large number of properties implementing them in the constructor seems to be a bad idea, because it would only 
 bring a mess in the constructor signature. Also setter methods are not a good idea, because after an object creation there 
 will be still a possibility for changing the object properties and that should not be possible. Finally I came to conclusion 
-to create a simple builder which is strictly associated with the **ThemeInfoEssence** class. The builder provides setter 
-methods with the fluent interface support.
+to create a simple builder which is strictly associated with the class. The builder provides setter methods with the 
+fluent interface support.
 
 Here is the example of creating new instance of the **ThemeInfoEssence**:
 
