@@ -12,11 +12,11 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 /**
- * Container.
+ * ParametricThemeDefinitionRegistry.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class Container implements ContainerInterface
+class ParametricThemeDefinitionRegistry implements ParametricThemeDefinitionRegistryInterface
 {
     /**
      * @var ThemeDefinition[]

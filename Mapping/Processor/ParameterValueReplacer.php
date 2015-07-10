@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
-use Jungi\Bundle\ThemeBundle\Mapping\ContainerInterface;
+use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
@@ -26,7 +26,7 @@ class ParameterValueReplacer extends ValueReplacer
      */
     public function process(ThemeDefinitionRegistryInterface $registry)
     {
-        if (!$registry instanceof ContainerInterface || !$registry->getParameters()) {
+        if (!$registry instanceof ParametricThemeDefinitionRegistryInterface || !$registry->getParameters()) {
             return;
         }
 
@@ -45,7 +45,7 @@ class ParameterValueReplacer extends ValueReplacer
      */
     protected function resolveValue($value, ThemeDefinitionRegistryInterface $registry)
     {
-        /* @var ContainerInterface $registry */
+        /* @var ParametricThemeDefinitionRegistryInterface $registry */
 
         if (!is_string($value) || !preg_match('/^%([^\s%]+)%$/', $value, $matches)) {
             return $value;

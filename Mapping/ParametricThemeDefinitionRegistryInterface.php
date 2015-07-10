@@ -12,11 +12,11 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
 /**
- * ContainerInterface.
+ * ParametricThemeDefinitionRegistryInterface.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-interface ContainerInterface extends ThemeDefinitionRegistryInterface
+interface ParametricThemeDefinitionRegistryInterface extends ThemeDefinitionRegistryInterface
 {
     /**
      * Sets parameters.

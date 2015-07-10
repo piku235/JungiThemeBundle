@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
-use Jungi\Bundle\ThemeBundle\Mapping\Container;
+use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\Processor\ProcessorInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
@@ -79,7 +79,7 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
             // Walk over parameters
             array_walk_recursive($content['parameters'], array($this, 'replaceValue'));
 
-            /** @var \Jungi\Bundle\ThemeBundle\Mapping\ContainerInterface $container */
+            /** @var \Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface $container */
             $container = $context->getRegistry();
             $container->setParameters($content['parameters']);
         }
@@ -284,7 +284,7 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
         }
 
         // Context
-        $context = new LoaderContext($path, new Container());
+        $context = new LoaderContext($path, new ParametricThemeDefinitionRegistry());
 
         // Validate a mapping file
         $this->validate($content, $path);

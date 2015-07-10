@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
-use Jungi\Bundle\ThemeBundle\Mapping\Container;
+use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
@@ -49,7 +49,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
      */
     private function parseParameters(\DOMElement $elm, XmlLoaderContext $context)
     {
-        /** @var \Jungi\Bundle\ThemeBundle\Mapping\ContainerInterface $container */
+        /** @var \Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface $container */
         $container = $context->getRegistry();
         $container->setParameters($this->getElementsAsPhp($elm, 'parameter', $context));
     }
@@ -230,7 +230,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
         // Context
         $xpath = new \DOMXPath($doc);
         $xpath->registerNamespace('mapping', self::NS);
-        $context = new XmlLoaderContext($file, new Container(), $xpath);
+        $context = new XmlLoaderContext($file, new ParametricThemeDefinitionRegistry(), $xpath);
 
         foreach ($context->xpath('*') as $child) {
             switch ($child->localName) {

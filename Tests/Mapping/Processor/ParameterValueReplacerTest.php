@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Processor;
 
 use Jungi\Bundle\ThemeBundle\Information\Author;
-use Jungi\Bundle\ThemeBundle\Mapping\Container;
+use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\Processor\ParameterValueReplacer;
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
@@ -41,7 +41,7 @@ class ParameterValueReplacerTest extends TestCase
     public function testReplacingParameters()
     {
         // Prepare
-        $container = new Container();
+        $container = new ParametricThemeDefinitionRegistry();
         $container->setParameters(array(
             'foo_1' => 'nice',
         ));
@@ -61,7 +61,7 @@ class ParameterValueReplacerTest extends TestCase
     public function testOnSimilarLookingParameter()
     {
         // Prepare
-        $container = new Container();
+        $container = new ParametricThemeDefinitionRegistry();
         $container->setParameters(array(
             'foo_1' => 'nice',
         ));
@@ -79,7 +79,7 @@ class ParameterValueReplacerTest extends TestCase
 
     public function testOnMissingParameter()
     {
-        $container = new Container();
+        $container = new ParametricThemeDefinitionRegistry();
         $container->setParameter('existing', 'wow');
 
         $theme = new StandardThemeDefinition(__DIR__);
