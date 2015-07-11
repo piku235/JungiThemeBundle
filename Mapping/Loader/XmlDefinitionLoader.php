@@ -232,7 +232,11 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
         $xpath->registerNamespace('mapping', self::NS);
         $context = new XmlLoaderContext($file, new ParametricThemeDefinitionRegistry(), $xpath);
 
-        foreach ($context->xpath('*') as $child) {
+        foreach ($doc->documentElement->childNodes as $child) {
+            if (!$child instanceof \DOMElement || $child->namespaceURI !== self::NS) {
+                continue;
+            }
+
             switch ($child->localName) {
                 case 'parameters':
                     $this->parseParameters($child, $context);
