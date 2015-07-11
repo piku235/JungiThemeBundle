@@ -136,12 +136,12 @@ jungi_theme:
 
 **NOTE**
 
-> Remember one thing about setting a fallback theme resolver - it should always return a theme name for the request.
+> Remember one thing about setting a fallback theme resolver - it should always return a theme name for a request.
 
 Final
 -----
 
-So if you completed the installation you can from now on start using the bundle and learn super things which I described
+So if you completed the installation you can from now on start using the bundle and learn super things which are described
 in the documentation :)
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md)
