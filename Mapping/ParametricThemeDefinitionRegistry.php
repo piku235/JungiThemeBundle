@@ -16,80 +16,12 @@ namespace Jungi\Bundle\ThemeBundle\Mapping;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ParametricThemeDefinitionRegistry implements ParametricThemeDefinitionRegistryInterface
+class ParametricThemeDefinitionRegistry extends ThemeDefinitionRegistry implements ParametricThemeDefinitionRegistryInterface
 {
-    /**
-     * @var ThemeDefinition[]
-     */
-    protected $themeDefinitions = array();
-
     /**
      * @var array
      */
     protected $parameters = array();
-
-    /**
-     * Sets a theme definition.
-     *
-     * @param string          $name       A theme name
-     * @param ThemeDefinition $definition A theme definition
-     *
-     * @throws \RuntimeException If there is a theme definition under the same name
-     */
-    public function registerThemeDefinition($name, ThemeDefinition $definition)
-    {
-        if ($this->hasThemeDefinition($name)) {
-            throw new \RuntimeException(sprintf('There is already registered theme definition under the name "%s".', $name));
-        }
-
-        $this->themeDefinitions[$name] = $definition;
-    }
-
-    /**
-     * @param string $name A theme name
-     *
-     * @return bool
-     */
-    public function hasThemeDefinition($name)
-    {
-        return isset($this->themeDefinitions[$name]);
-    }
-
-    /**
-     * Returns the given theme definition.
-     *
-     * @param string $name A theme name
-     *
-     * @return ThemeDefinition|null Null if the theme doesn't exist
-     *
-     * @throws \RuntimeException When the given theme definition does not exist
-     */
-    public function getThemeDefinition($name)
-    {
-        if (!isset($this->themeDefinitions[$name])) {
-            throw new \RuntimeException(sprintf('The theme definition "%s" can not be found.', $name));
-        }
-
-        return $this->themeDefinitions[$name];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeThemeDefinition($name)
-    {
-        unset($this->themeDefinitions[$name]);
-    }
-
-    /**
-     * Returns the all registered theme definitions.
-     *
-     * @return ThemeDefinition[]
-     */
-    public function getThemeDefinitions()
-    {
-        return $this->themeDefinitions;
-    }
 
     /**
      * Sets parameters.

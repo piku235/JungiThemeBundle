@@ -21,7 +21,7 @@ class ThemeDefinitionRegistry implements ThemeDefinitionRegistryInterface
     /**
      * @var ThemeDefinition[]
      */
-    private $definitions = array();
+    protected $definitions = array();
 
     /**
      * {@inheritdoc}
