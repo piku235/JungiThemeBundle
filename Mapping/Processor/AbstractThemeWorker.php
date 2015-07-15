@@ -39,10 +39,10 @@ abstract class AbstractThemeWorker implements WorkerInterface
     }
 
     /**
-     * Processes a given theme definition
+     * Processes a given theme definition.
      *
-     * @param string $name A theme name
-     * @param ThemeDefinition $definition A theme definition
+     * @param string                           $name       A theme name
+     * @param ThemeDefinition                  $definition A theme definition
      * @param ThemeDefinitionRegistryInterface $registry
      */
     abstract protected function processTheme($name, ThemeDefinition $definition, ThemeDefinitionRegistryInterface $registry);

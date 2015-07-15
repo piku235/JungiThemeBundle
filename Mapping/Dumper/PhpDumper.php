@@ -197,7 +197,7 @@ EOTAGS;
             ));
         }
 
-        for ($i = $startLine; $i < $endLine; $i++) {
+        for ($i = $startLine; $i < $endLine; ++$i) {
             $parts[$i] = str_repeat('    ', $num).$parts[$i];
         }
 

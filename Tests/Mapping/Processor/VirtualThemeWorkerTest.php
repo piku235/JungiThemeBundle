@@ -44,7 +44,7 @@ class VirtualThemeWorkerTest extends TestCase
 
         $virtualTheme = new VirtualThemeDefinition(array(
             new Reference('foo_child_mobile', 'mobile'),
-            new Reference('foo_december')
+            new Reference('foo_december'),
         ));
         $registry->registerThemeDefinition('foo', $virtualTheme);
 
@@ -70,7 +70,7 @@ class VirtualThemeWorkerTest extends TestCase
         $virtualTheme = new VirtualThemeDefinition(array(
             new Reference('foo_child_mobile', 'mobile'),
             new Reference('foo_december'),
-            new Reference('foo_december', 'december')
+            new Reference('foo_december', 'december'),
         ));
         $registry->registerThemeDefinition('foo', $virtualTheme);
 
@@ -93,12 +93,12 @@ class VirtualThemeWorkerTest extends TestCase
 
         $virtualTheme = new VirtualThemeDefinition(array(
             new Reference('foo_child_mobile', 'mobile'),
-            new Reference('foo_december')
+            new Reference('foo_december'),
         ));
         $registry->registerThemeDefinition('foo', $virtualTheme);
 
         $virtualTheme = new VirtualThemeDefinition(array(
-            new Reference('foo_december')
+            new Reference('foo_december'),
         ));
         $registry->registerThemeDefinition('bar', $virtualTheme);
 
@@ -124,12 +124,12 @@ class VirtualThemeWorkerTest extends TestCase
 
         $virtualTheme = new VirtualThemeDefinition(array(
             new Reference('foo_child_mobile', 'mobile'),
-            new Reference('foo_december')
+            new Reference('foo_december'),
         ));
         $registry->registerThemeDefinition('foo', $virtualTheme);
 
         $virtualTheme = new VirtualThemeDefinition(array(
-            new Reference('foo')
+            new Reference('foo'),
         ));
         $registry->registerThemeDefinition('bar', $virtualTheme);
 

@@ -22,7 +22,7 @@
             <argument type="service" id="jungi_theme.source" />
             <argument type="service" id="jungi_theme.templating.filename_parser" />
         </service>
-        <service id="jungi_theme.initializer" class="Jungi\Bundle\ThemeBundle\Core\ThemesInitializer">
+        <service id="jungi_theme.source_initializer" class="Jungi\Bundle\ThemeBundle\Core\ThemeSourceInitializer">
             <argument />
             <argument type="collection">
                 <argument type="service" id="jungi_theme.mapping.loader.xml_definition" />

@@ -65,13 +65,7 @@ class JungiThemeExtension extends Extension
         $loader->load('listeners.xml');
 
         // Register theme mapping files
-        $mappingFiles = $this->mappingFiles;
-        foreach ($config['mappings'] as $mapping) {
-            $mappingFiles[] = array($mapping['resource'], $mapping['type']);
-        }
-
-        $factoryDef = $container->getDefinition('jungi_theme.initializer');
-        $factoryDef->replaceArgument(0, $mappingFiles);
+        $this->processThemeMappings($config, $container);
 
         // Register tag classes
         $this->registerTag($config['tags']);
@@ -153,7 +147,18 @@ class JungiThemeExtension extends Extension
         }
     }
 
-    protected function processThemeResolver($id, $for, $config, ContainerBuilder $container)
+    private function processThemeMappings(array $config, ContainerBuilder $container)
+    {
+        $mappingFiles = $this->mappingFiles;
+        foreach ($config['mappings'] as $mapping) {
+            $mappingFiles[] = array($mapping['resource'], $mapping['type']);
+        }
+
+        $def = $container->getDefinition('jungi_theme.source_initializer');
+        $def->replaceArgument(0, $mappingFiles);
+    }
+
+    private function processThemeResolver($id, $for, array $config, ContainerBuilder $container)
     {
         list($type, $resolver) = each($config['resolver'][$for]);
         if ($type != 'id') {

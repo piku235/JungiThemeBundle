@@ -39,6 +39,6 @@ class JungiThemeBundle extends Bundle
      */
     public function boot()
     {
-        $this->container->get('jungi_theme.initializer')->initialize();
+        $this->container->get('jungi_theme.source_initializer')->initialize();
     }
 }

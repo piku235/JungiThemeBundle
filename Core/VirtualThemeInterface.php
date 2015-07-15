@@ -27,7 +27,7 @@ interface VirtualThemeInterface extends ThemeInterface
      * @param string|ThemeInterface $pointed A theme name or a theme instance
      *
      * @throws \InvalidArgumentException If the passed theme has a wrong type
-     * @throws ThemeNotFoundException If the given theme does not belongs to the virtual theme
+     * @throws ThemeNotFoundException    If the given theme does not belongs to the virtual theme
      */
     public function setPointedTheme($pointed);
 

@@ -187,7 +187,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
             if ($child->hasAttribute('key')) {
                 $key = $child->getAttribute('key');
             } else {
-                $i++;
+                ++$i;
             }
 
             $elements[$key] = $this->getElementAsPhp($child, $name, $context);

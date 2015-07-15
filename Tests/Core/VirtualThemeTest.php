@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
 /**
- * VirtualThemeTest
+ * VirtualThemeTest.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

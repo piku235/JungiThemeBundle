@@ -97,7 +97,7 @@ class VirtualThemeDefinition extends ThemeDefinition
     }
 
     /**
-     * Returns the given theme
+     * Returns the given theme.
      *
      * @param string $name A theme name
      *

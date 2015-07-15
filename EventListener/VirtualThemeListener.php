@@ -81,7 +81,7 @@ class VirtualThemeListener implements EventSubscriberInterface
 
     /**
      * @param VirtualThemeInterface $theme
-     * @param Request $request
+     * @param Request               $request
      */
     private function handle(VirtualThemeInterface $theme, Request $request)
     {

@@ -19,13 +19,13 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Resource\FileResource;
 
 /**
- * The initializer job is to load all registered themes.
+ * This initializer loads all registered themes by using the caching feature.
  *
  * @see Jungi\Bundle\ThemeBundle\DependencyInjection\JungiThemeExtension::registerMappingFile
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-final class ThemesInitializer
+final class ThemeSourceInitializer
 {
     /**
      * @var array
@@ -80,11 +80,17 @@ final class ThemesInitializer
      * @param string                           $cacheDir           A cache directory
      *
      * @throws \InvalidArgumentException When cache directory does not exist
+     * @throws \InvalidArgumentException If some of theme mapping loaders is not a definition loader
      */
     public function __construct(array $paths, array $loaders, ThemeDefinitionRegistryInterface $definitionRegistry, ThemeSourceInterface $source, PhpDumper $dumper, FileLocatorInterface $locator, $debug, $cacheDir)
     {
         if (!is_dir($cacheDir)) {
             throw new \InvalidArgumentException(sprintf('The cache directory "%s" does not exist.', $cacheDir));
+        }
+        foreach ($loaders as $loader) {
+            if (!$loader instanceof DefinitionLoaderInterface) {
+                throw new \InvalidArgumentException(sprintf('The only supported are theme definition loaders.'));
+            }
         }
 
         $this->paths = $paths;
@@ -98,7 +104,7 @@ final class ThemesInitializer
     }
 
     /**
-     * Loads themes from previously set theme mapping files to the theme registry.
+     * Builds and loads themes from previously generated cache file
      */
     public function initialize()
     {
