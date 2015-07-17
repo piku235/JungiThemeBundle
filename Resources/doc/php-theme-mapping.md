@@ -1,72 +1,59 @@
 PHP Theme Mapping
 =================
 
-[Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/PhpFileLoader.php)
+[Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/PhpDefinitionLoader.php)
 
-Documents of this theme mapping are handled by the **PhpFileLoader**.
+Documents of this theme mapping are handled by the **PhpDefinitionLoader**. This like any other definition loader does 
+not load themes right away.  
 
-Prerequisites
--------------
+**IMPORTANT**
 
-Before you start I recommend to get familiar with the chapter [Theme Overview](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
-to understand the further things located here.
+There is one thing worthy to mention before you start. Everything in a theme mapping document has a local scope, so you 
+do not have to be afraid that something gets overridden. Themes at the beginning also have a local scope, only when they 
+are being added to a theme source they must have an unique name to prevent name conflicts.
 
 Quick example
 -------------
 
-Here is the simple document which contains a single theme with basic elements:
-
 ```php
 <?php
 // FooBundle/Resources/config/theme.php
-use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Information\Author;
+use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\Tag;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry;
+use Jungi\Bundle\ThemeBundle\Mapping\Reference;
 use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
-use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
+use Jungi\Bundle\ThemeBundle\Information\Author;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 
-$ib = ThemeInfoEssence::createBuilder();
-$ib
-    ->setName('A fancy theme')
-    ->setVersion('1.0.0')
-    ->setDescription('<i>foo desc</i>')
-    ->setLicense('MIT')
-    ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'www.foo.com'));
+$registry = new ThemeDefinitionRegistry();
+$definition = new StandardThemeDefinition();
+$definition
+    ->setPath('@JungiMainThemeBundle/Resources/theme')
+    ->addTag(new Tag('jungi.desktop_devices'));
+$registry->registerThemeDefinition('zoo_first', $definition);
 
-$theme = new Theme(
-    'footheme',
-    $locator->locate('@JungiFooBundle/Resources/theme'),
-    $ib->getThemeInfo(),
-    new TagCollection(array(
-        new Tag\DesktopDevices(),
-        $tagFactory->create('jungi.mobile_devices', array(array('iOS', 'AndroidOS'), Tag\MobileDevices::MOBILE))
-    ))
-);
-$manager->registerTheme($theme);
+$info = ThemeInfoEssence::createBuilder()
+    ->setName('Virtual theme')
+    ->setDescription('Super virtual theme')
+    ->addAuthor(new Author('piku235', 'piku235@gmail.com'))
+    ->getThemeInfo();
+    
+$registry->registerThemeDefinition('zoo_second', new StandardThemeDefinition(
+  '@JungiMainThemeBundle/Resources/theme',
+  array( new Tag('jungi.mobile_devices', array(array('iOS', 'AndroidOS'))) ),
+  ThemeInfoImporter::import($info)
+));
+
+return $registry;
 ```
 
-Getting Started
+Getting started
 ---------------
 
-Each document has access to these variables:
+As you have seen in the quick example there are two ways of creating theme definition. The first is by using the setter 
+methods and the second is by using the constructor arguments.
 
-Variable | Class (default)
--------- | ---------------
-$manager | Jungi\Bundle\ThemeBundle\Core\ThemeRegistry
-$locator | Symfony\Component\HttpKernel\Config\FileLocator
-$tagFactory | Jungi\Bundle\ThemeBundle\Tag\Factory\TagFactory
-
-As you see to add your theme instance you'll use the method `registerTheme` of the `$manager` variable. Thanks to the `$locator` 
-you can use paths to a bundle. The `$tagFactory` allows you to create tags only by passing a tag name and arguments for 
-this tag. The simplest theme implementation which you can use is the `Jungi\Bundle\ThemeBundle\Core\Theme` class which is 
-described in the [Theme Overview](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
-chapter.
-
-Final
------
-
-Now if you have properly created your theme mapping file you can finally load it.
-
-[Go to the final step](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/loading-theme-mapping.md)
+at work ...
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

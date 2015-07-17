@@ -2,7 +2,7 @@ JungiThemeBundle
 ================
 
 The JungiThemeBundle is a themes engine designed for the Symfony2. It provides wide features which allows you to create
-flexible and smart themes which have so-called tags. Thanks to these tags you can e.g. create a theme for desktop and mobile
+flexible and smart themes with so-called tags. Thanks to these tags you can e.g. create a theme for desktop and mobile
 devices (Responsive Web Design) or create two separate themes where each one is designed for another device (Adaptive Web
 Design). Of course the functionality of the bundle not ends here. Read the documentation to know more.
 

@@ -1,43 +1,38 @@
 Loading theme mapping files
 ===========================
 
-After you have completed creating your theme mapping file you can finally load it to a theme source. To achieve this goal
-you have for use the following theme mapping loaders.
+By first you must remember that the JungiThemeBundle does not load theme mapping files automatically, so you have to do 
+it manually. As you know themes resides in a bundle and to make them available in an app you have a possibility of 
+registering theme mapping files via the JungiThemeBundle extension or by application configuration.
 
-Format | Class (default)
------- | ---------------
-xml | Jungi\Bundle\ThemeBundle\Mapping\Loader\XmlDefinitionLoader
-yaml | Jungi\Bundle\ThemeBundle\Mapping\Loader\YamlDefinitionLoader
-php | Jungi\Bundle\ThemeBundle\Mapping\Loader\PhpDefinitionLoader
-
-Loading from a bundle
----------------------
+Load via bundle extension
+-------------------------
 
 First open the file where is located your bundle class e.g. `src/Foo/FooBundle/BooFooBundle.php`. After that define
-the **build** method in the bundle class if you don't have it actually. Thanks to that method we are able to load themes 
-in a comfortable way.
+the **build** method in the bundle class if you do not have it actually. Thanks to that method we are able to load themes 
+in much comfortable way.
 
-### Overview
-
-For loading mapping files was introduced the `registerMappingFile` method of the bundle extension. Method is very simple 
-and its task is to pass registered mapping files to the theme initializer who will load all themes at one place.
+Now you have to use the `registerMappingFile` method of the bundle extension to register your theme mapping file for load. 
+Method is very simple and its task is to pass registered mapping files to a theme source initializer that will load all 
+themes at one place.
 
 ```php
 <?php
-// src/Foo/FooBundle/BooFooBundle.php
-namespace Boo\BooFooBundle;
+// src/Jungi/FooBundle/JungiFooBundle.php
+namespace Jungi/FooBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * BooFooBundle
+ * JungiFooBundle
  */
-class BooFooBundle extends Bundle
+class JungiFooBundle extends Bundle
 {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function boot()
+	public function build(ContainerBuilder $builder)
 	{
 	    /* @var \Jungi\Bundle\ThemeBundle\DependencyInjection\JungiThemeExtension $ext */
 	    $ext = $builder->getExtension('jungi_theme');
@@ -45,6 +40,22 @@ class BooFooBundle extends Bundle
         $ext->registerMappingFile(__DIR__.'/Resources/config/theme.yml'); // default
 	}
 }
+```
+
+Load via configuration
+----------------------
+
+Loading via the configuration is exactly the same as loading via bundle extension, only way of doing it is of course
+different.
+
+```yaml
+# app/config/config.yml
+jungi_theme:
+
+    # list of theme mapping files
+    mappings:
+        - { resource: "@JungiBooBundle", type: xml }
+        # more
 ```
 
 Summary

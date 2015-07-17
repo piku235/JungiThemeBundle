@@ -1,9 +1,8 @@
 Theme tags
 ==========
 
-The goal of the JungiThemeBundle are the mostly theme tags. They takes the information role and can be used for searching and
-grouping themes. They are mandatory for adaptive themes ([Adaptive Web Design](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md))
-and they should be used in each theme but they are not required.
+The goal of the JungiThemeBundle are the mostly theme tags. They can be used for searching and grouping themes. They are 
+mandatory for adaptive themes ([Adaptive Web Design](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md)).
 
 Built-in tags
 -------------
@@ -44,8 +43,8 @@ class under the variable `$operatingSystems`.
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/TabletDevices.php)
 
-The TabletDevices tag is just the same as MobileDevices tag, with this difference that is intended for theme which supports
-tablet devices. It accepts the same arguments as the MobileDevices tag.
+The TabletDevices tag is just the same as the MobileDevices tag, expect that is intended for theme that supports tablet 
+devices. It accepts the same arguments as the MobileDevices tag.
 
 ### DesktopDevices
 
@@ -61,12 +60,11 @@ The **MobileDevices** tag, **TabletDevices** tag and the **DesktopDevices** tag 
 chapter and also they were used in the [AWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md) 
 chapter.
 
-If you're curious how exactly tags works, you can see it by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Resolver/Filter/DeviceThemeFilterTest.php)
+If you are curious how exactly tags works, you can see it by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Resolver/Filter/DeviceThemeFilterTest.php)
 and [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Resolver/VirtualThemeResolverTest.php).
 
 Creating tag
 ------------
-
 
 Each tag is a class which implements the `Jungi\Bundle\ThemeBundle\Tag\TagInterface`:
 
@@ -94,7 +92,7 @@ interface TagInterface
 }
 ```
 
-Tags are pretty straightforward due to the small API. Here is the simplest tag that can be created:
+Tags are pretty straightforward due to the small interface. Here is the simplest tag that can be created:
 
 ```php
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
@@ -113,7 +111,7 @@ class SimpleTag extends TagInterface
 }
 ```
 
-As you see there isn't required to write a lot of code to get a proper working tag. Of course the tag above doesn't do
+As you see there is not required to write a lot of code to get a proper working tag. Of course the tag above does not do
 anything special, but of course you can write more complex tags.
 
 ### Register created tag
@@ -126,15 +124,13 @@ Tag registry
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/Registry/TagRegistryInterface.php)
 
-A tag registry is a place where you can obtain a full qualified class name of tag by passing only a tag name. The main 
+A tag registry is a place where you can obtain a full qualified class name of a tag by passing only a tag name. The main 
 goal of a tag registry is an ability about registering new tags - thanks to that theme mapping loaders are able to not 
 only use the built-in tags, but also to use tags created by you :)
 
-### How to register a new tag?
+There are basically two ways of registering tags. 
 
-There are two ways of doing this. 
-
-#### via JungiThemeExtension
+### Register via JungiThemeExtension
 
 ```php
 <?php
@@ -161,7 +157,7 @@ class JungiFooBundle extends Bundle
 }
 ```
 
-#### via configuration
+### Register via configuration
 
 ```yml
 # app/config/config.yml

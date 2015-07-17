@@ -3,41 +3,63 @@ YAML Theme Mapping
 
 [Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/YamlFileLoader.php)
 
-Documents of this theme mapping are handled by the **YamlFileLoader**. By default the loader uses the `Jungi\Bundle\ThemeBundle\Core\Theme` 
-for creating theme instances.
+Documents of this theme mapping are handled by the **YamlFileLoader**. This like any other definition loader does 
+not load themes right away.  
 
-Prerequisites
--------------
+**IMPORTANT**
 
-Before you start I recommend to get familiar with the chapter [Theme Overview](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
-to understand the further things located here.
+There is one thing worthy to mention before you start. Everything in a theme mapping document has a local scope, so you 
+do not have to be afraid that something gets overridden. Themes at the beginning also have a local scope, only when they 
+are being added to a theme source they must have an unique name to prevent name conflicts.
 
 Quick example
 -------------
 
-Here is the simple document which defines the single theme with basic elements:
-
 ```yml
 # FooBundle/Resources/config/theme.yml
 parameters:
-    footheme.mobile_systems: [ iOS, AndroidOS ]
-    footheme.mobile_device: "const@jungi.mobile_devices::MOBILE"
+    mobile_devices: [ iOS, AndroidOS, WindowsPhoneOS ]
+    authors: 
+        - { name: piku235, email: piku235@gmail.com, homepage: www.foo.com }
 
 themes:
+    bar_adaptive:
+        is_virtual: true
+        themes:
+            - { theme: bar_mobile, as: mobile }
+            - { theme: dekstop }
+        tags:
+            jungi.desktop_devices: ~
+            jungi.mobile_devices: [ "%mobile_devices%" ]
+            jungi.tablet_devices: [ "%mobile_devices%" ]
+        info:
+            name: BarAdaptive
+            authors:
+                - { name: piku235, email: piku235@gmail.com, homepage: www.piku235.pl }
+                - { name: foo, email: foo@gmail.com }
+    
+    bar_mobile:
+        path: "@JungiFooBundle/Resources/theme"
+        tags:
+            jungi.mobile_devices: [ "%mobile_devices%" ]
+            jungi.tablet_devices: [ "%mobile_devices%" ]
+                
+    dekstop:
+        path: "@JungiFooBundle/Resources/theme"
+        tags:
+            jungi.desktop_devices: ~
+                
     footheme:
         path: "@JungiFooBundle/Resources/theme"
         tags:
             jungi.desktop_devices: ~
-            jungi.mobile_devices: [ "%footheme.mobile_systems%", "%footheme.mobile_device%" ]
+            jungi.mobile_devices: [ "%mobile_devices%" ]
+            jungi.tablet_devices: [ "%mobile_devices%" ]
             jungi.environment: admin
         info:
             name: An awesome theme
-            version: 1.0.0
-            license: MIT
             description: <i>foo desc</i>
-            authors:
-                - { name: piku235, email: piku235@gmail.com, homepage: www.foo.com }
-
+            authors: %authors%
 ```
 
 **NOTE**
@@ -47,7 +69,7 @@ themes:
 Getting Started
 ---------------
 
-OK, so let's start explaining from the `parameters`, the `themes` will be discussed after that:
+OK, so let's start explaining from the top - the `parameters` element.
 
 ### Parameters
 
@@ -57,22 +79,21 @@ parameters:
     # other parameters
 ```
 
-Parameters can facilitate many things, especially when you have the definition of multiple themes. They're almost the 
-same as parameters in the symfony services, expect that parameters in a theme mapping file has a local scope, so you 
-don't must be afraid that some variable will be overwritten by other theme mapping file.
+Parameters can facilitate many things, especially when you have multiple theme definitions. They are almost the same as 
+parameters in the symfony services, expect that parameters in a theme mapping file has a local scope.
 
 #### Constants
 
 ```yml
 parameters:
-    footheme.mobile_device: "const@jungi.mobile_devices::MOBILE"
+    footheme.mobile_device: "const@jungi.fake::SPECIAL"
     footheme.mobile_device.global: "const@CONSTANT_BOO"
     footheme.mobile_device.full: "const@Jungi\Bundle\ThemeBundle\FooClass::MOBILE"
 ```
 
 Additionally the support of constants was introduced. Like in the example above to call a constant you must only prepend 
 it with the `const@` string. You can use a shortcut or a full qualified constant name. By the shortcut I mean the notation 
-`tag_name::constant` e.g. `jungi.mobile_devices::MOBILE` where it refers to a constant located in a tag. Naturally you can 
+`tag_name::constant` e.g. `jungi.fake::SPECIAL` where it refers to a constant located in a tag. Naturally you can 
 refer to global constants e.g. **SOME_CONSTANT** and to constants located in classes like in the example above.
 
 #### Usage
@@ -85,13 +106,22 @@ parameter with percent sings "%" e.g. **%footheme.mobile_systems%**, just like i
 ```yml
 # FooBundle/Resources/config/theme.yml
 themes:
+    bartheme:
+        is_virtual: true
+        # theme definition
     footheme:
         # theme definition
-    # other themes
+    # more themes
 ```
 
-Each theme mapping file can contain many theme definitions. The `footheme` in the example is the unique name of the theme.
-A theme definition can only define keys like below:
+Each theme mapping file can contain many theme definitions. The `footheme` in the example is a unique name of the theme.
+As you know we distinguish two types of theme: the virtual theme and the standard theme which are described just below.
+
+#### Standard theme
+
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#theme)
+
+The standard theme definition consists of the following keys:
 
 ```yml
 footheme:
@@ -105,11 +135,30 @@ footheme:
         # information definition
 ```
 
-**NOTE**
+#### Virtual theme
 
-> As shown in the quick example a path can be a bundle resource e.g. `@JungiFooBundle/Resources/theme`.
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#virtualtheme)
+
+The virtual theme definition is very similar to the standard theme definition. The loader recognizes virtual themes by
+specifying the `is_virtual` key with the `true` value. 
+
+```yml
+footheme:
+    is_virtual: true
+    # Required
+    themes: 
+        # a list of referenced themes
+    # Optional
+    tags:
+        # tag list
+    # Required
+    info:
+        # information definition
+```
 
 ### ThemeInfo
+
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#themeinfo)
 
 ```yml
 info:
@@ -117,18 +166,17 @@ info:
     # other properties
 ```
 
-From the **Themes overview** chapter you should know what is the **ThemeInfo**. Each key of the `info` maps appropriate 
-field of the **ThemeInfo**, so keys that you can use are following:
+Each key of the `info` maps appropriate field of the **ThemeInfo**, so keys that you can use are following:
 
 Key | Type | Required
 --- | ---- | --------
 name | string | true
-version | string | false
 description | string | false
-license | string | false
 authors | collection | false
 
-As you see the `authors` is a collection type. To define an author you have to use the following formula:
+#### Defining an author
+
+As you see the `authors` is of the collection type. To define an author you have to use the following formula:
 
 ```yml
 info:
@@ -156,8 +204,7 @@ info:
 
 ### Tags
 
-[Click here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md) to know more about the
-tags.
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md)
 
 ```yml
 tags:
@@ -167,20 +214,12 @@ tags:
 
 The `tags` element is a collection of tags which the theme will support. For use you have the following built-in tags:
 
-Class | Name
------ | ----
-MobileDevices | jungi.mobile_devices
-DesktopDevices | jungi.desktop_devices
-VirtualTheme | jungi.virtual_theme
+[Click here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#built-in-tags) to find 
+out which of built-in tags you can use. 
 
-Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
-allows for dynamically registering tags in a much more convenient way. You can read about that [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
-
-**IMPORTANT**
-
-There is also one thing worthy to say here. If you're creating a standard theme which generally will be used for desktop 
-devices you must remember to define the `jungi.desktop_device` tag. In some cases this tag can be very useful when viewing 
-information about a theme.
+Of course you can attach your own tags and use them as it was shown in the quick example. Generally tag names are taken 
+from a tag registry that allows for dynamically registering tags in a much more convenient way. You can read about that 
+[here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
 
 #### Arguments
 

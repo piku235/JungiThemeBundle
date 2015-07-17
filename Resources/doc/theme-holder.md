@@ -36,11 +36,11 @@ in the interface. Of course you can change it by setting your own theme holder s
 
 ### Configuration
 
-To set your own theme holder you must only set the `id` to the appropriate symfony service.
+To set your own theme holder you must only set the `id` to an appropriate symfony service.
 
-The `ignore_null_theme` has only meaning when a theme selector will not match any theme for the request. By default
-a theme selector will throw the exception `Jungi\Bundle\ThemeBundle\Exception\NullThemeException` in this sort of 
-situation. If you wanna ignore that you must set the `ignore_null_theme` to true.
+The `ignore_null_theme` option has only meaning when a theme selector will not match any theme for the request. By default
+a theme selector will throw the exception `Jungi\Bundle\ThemeBundle\Exception\NullThemeException` in this situation. If 
+you wanna ignore that behaviour you must set the `ignore_null_theme` to true.
 
 ```yaml
 # app/config/config.yml

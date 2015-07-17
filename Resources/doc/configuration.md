@@ -3,7 +3,6 @@ Configuration
 
 ```yaml
 # app/config/config.yml
-# Default configuration for "JungiThemeBundle"
 jungi_theme:
 
     # theme source configuration

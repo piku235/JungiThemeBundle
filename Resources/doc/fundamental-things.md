@@ -1,5 +1,8 @@
-First steps
-===========
+Fundamental things
+==================
+
+This chapter speaks about the most key things of the bundle, so it is highly recommended to read this chapter, but do not 
+worry it is not too long. 
 
 Theme
 -----
@@ -15,7 +18,7 @@ interface ThemeInterface
     /**
      * Returns the unique theme name
      *
-     * A theme name should be as simple as possible so e.g. "footheme", "bar-theme".
+     * A theme name should be as simple as possible e.g. "footheme", "bar-theme".
      *
      * @return string
      */
@@ -46,7 +49,7 @@ interface ThemeInterface
 
 **INFO**
 
-> To create a new theme you will have to use one of the available theme mappings: xml, yaml or php. Go [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings)
+> To create a new theme you will have to use one of the available theme mappings: xml, yaml or php. [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings)
 > to find out how do that.
 
 VirtualTheme
@@ -100,6 +103,19 @@ appropriate time.
 The power of virtual themes not ends on AWD. They can be used for everything like e.g. we have four themes where each one 
 is designed for different season and so on - ideas can be infinite.
 
+### How about tags?
+
+When you decide to make a virtual theme an obvious thing is that subordinate themes will have some tags that describes 
+them. But wait, what about a virtual theme? Itself it does not have any tags, although the subordinate themes have them. 
+As you might guess virtual themes should do their best to imitate real themes, so leaving a virtual theme without any tags 
+is not right. I was thinking about to write a component that will include tags from subordinate themes to a virtual theme, 
+but there could be a problem with merging tags which are the same. It turned out that the best solution and as well as 
+a good rule is to manage virtual theme tags by yourself, at least at this moment. This means that you have to decide which 
+tags of subordinate themes you want to include and how to merge them in situations when e.g. you have two exactly the same 
+tags with different arguments where each one is included in another theme.
+
+In the chapters speaking about theme mapping loaders you will find out how the discussed situation looks in a practical.
+
 ThemeInfo
 ---------
 
@@ -107,7 +123,7 @@ ThemeInfo
 
 In some cases you would like to get some information about a theme in order to show these information to a user. 
 Information can be easily stored in an object. In the JungiThemeBundle such an object must come from a class that inherits 
-the `Jungi\Bundle\ThemeBundle\Information\ThemeInfo` abstract class. This abstract class is used as the interface.
+the `Jungi\Bundle\ThemeBundle\Information\ThemeInfo` abstract class which acts as the interface.
 
 ```php
 abstract class ThemeInfo
@@ -158,8 +174,8 @@ abstract class ThemeInfo
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Information/ThemeInfoEssence.php)
 
 Due to a large number of properties implementing them in the constructor seems to be a bad idea, because it would only 
-bring a mess in the constructor signature. Also setter methods are not a good idea, because after an object creation there 
-will be still a possibility for changing the object properties and that should not be possible. Finally I came to conclusion 
+bring a mess in its signature. Also setter methods are not a good idea, because after an object creation there will be 
+still a possibility for changing the object properties and that should not be possible. Finally I came to conclusion 
 to create a simple builder which is strictly associated with the class. The builder provides setter methods with the 
 fluent interface support.
 
@@ -172,101 +188,11 @@ use Jungi\Bundle\ThemeBundle\Information\Author;
 $ib = ThemeInfoEssence::createBuilder();
 $ib
     ->setName('A simple theme')
-    ->setVersion('1.0.0')
     ->setDescription('a simple theme with the beautiful design')
-    ->setLicense('GPL')
     ->addAuthor(new Author('piku235', 'piku235@gmail.com', 'foo.com'));
 
 // Builds the new ThemeInfoEssence instance
 $info = $ib->getThemeInfo();
 ```
-
-Themes locations
-----------------
-
-Generally themes are staying in a bundle. There is no limit saying how many themes you can have in a single bundle. You
-must only decide when these themes should be together and when they should be separated into single bundles.
-
-Consider the situation when you have three themes, where only two of them are related in some way and the third one is
-whole different (different logic or maybe different graphics). For example you can create the first bundle **FooBundle** 
-for these two related themes and create the second bundle **BooBundle** for the third theme.
-
-The directory structure could looks like below:
-
-```
-FooBundle/
-    Resources/
-        theme/
-            first_related/
-            second_related/
-
-BooBundle
-    Resources/
-        # third theme
-        theme/
-```
-
-Template naming and locations
------------------------------
-
-The template naming is just the same as the symfony template naming conventions, so you still have the syntax `bundle:controller:template`
-for templates. The only difference are locations of templates.
-
-Suppose that we want to render e.g `FooBundle:Default:index.html.twig`:
-
-1. The template name will be searched in the current theme resources and if the given template name exists then the found
-template resource will be used.
-2. If the given template name can not be found in the current theme resources then the default search process (just like
-the symfony does) will be performed, so finally a template resource from the **FooBundle** will be used.
-
-### Template syntax
-
-Name | Path
----- | ----
-FooBundle:Default:index.html.twig | /path/to/theme/FooBundle/Default/index.html.twig
-FooBundle::layout.html.twig | /path/to/theme/FooBundle/layout.html.twig
-::master.html.php | /path/to/theme/master.html.php
-
-Overriding bundle templates
----------------------------
-
-You can override every bundle template that you wish in your theme. Suppose that the theme **exclusive** of the **FooThemeBundle**
-is the current theme for the request, and the **Default** controller with the **index** action from the **BooBundle**
-will be performed.
-
-The BooBundle resources:
-
-```
-BooBundle/
-    Resources/
-        Default/
-            index.html.twig
-        layout.html.twig
-```
-
-And the simple content of the `index.html.twig`:
-
-```php
-{% extends 'BooBundle::layout.html.twig' %}
-
-{% block content %}
-<p>Lorem ipsum.</p>
-{% endblock %}
-```
-
-The FooThemeBundle resources:
-
-```
-FooThemeBundle/
-    Resources/
-        # exclusive theme
-        theme/
-            BooBundle/
-                layout.html.twig
-```
-
-In this example the theme **exclusive** has overwritten the template `layout.html.twig` of the **BooBundle**. When the
-template `index.html.twig` is rendered the template `layout.html.twig` of the theme **exclusive** is included instead
-of the template `layout.html.twig` from the **BooBundle**.
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

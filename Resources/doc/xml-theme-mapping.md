@@ -1,16 +1,16 @@
 XML Theme Mapping
 =================
 
-[Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/XmlFileLoader.php)
+[Show the loader](https://github.com/piku235/JungiThemeBundle/tree/master/Mapping/Loader/XmlDefinitionLoader.php)
 
-Documents of this theme mapping are handled by the **XmlFileLoader**. By default the loader uses the `Jungi\Bundle\ThemeBundle\Core\Theme` 
-for creating theme instances.
+XML documents are handled by the **XmlDefinitionLoader**. This like any other definition loader does not load themes 
+right away.  
 
-Prerequisites
--------------
+**IMPORTANT**
 
-Before you start I recommend to get familiar with the chapter [Themes Overview](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-overview.md)
-to understand the further things located here.
+There is one thing worthy to mention before you start. Everything in a theme mapping document has a local scope, so you 
+do not have to be afraid that something gets overridden. Themes at the beginning also have a local scope, only when they 
+are being added to a theme source they must have an unique name to prevent name conflicts.
 
 Structure
 ---------
@@ -29,8 +29,6 @@ The definition of document looks like following:
 
 Quick example
 -------------
-
-Here is the simple document which defines the single theme with basic elements:
 
 ```xml
 <!-- FooBundle/Resources/config/theme.xml -->
@@ -55,21 +53,48 @@ Here is the simple document which defines the single theme with basic elements:
     </parameters>
 
     <themes>
+        <virtual-theme name="foo_adaptive">
+            <themes>
+                <ref theme="foo_adaptive_mobile" as="mobile" />
+                <ref theme="boo" />
+            </themes>
+            <tags>
+                <tag name="jungi.desktop_devices" />
+                <tag name="jungi.mobile_devices">%mobile_devices%</tag>
+                <tag name="jungi.tablet_devices">%mobile_devices%</tag>
+            </tags>
+            <info>
+                <property key="name">FooAdaptive</property>
+                <property key="authors" type="collection">
+                    <property type="collection">
+                        <property key="name">piku235</property>
+                        <property key="email">piku235@gmail.com</property>
+                    </property>
+                </property>
+            </info>
+        </virtual-theme>
+        <theme name="foo_adaptive_mobile" path="@JungiMainThemeBundle/Resources/theme">
+            <tags>
+                <tag name="jungi.mobile_devices">%mobile_devices%</tag>
+                <tag name="jungi.tablet_devices">%mobile_devices%</tag>
+            </tags>
+        </theme>
+        <theme name="boo" path="@JungiMainThemeBundle/Resources/theme">
+            <tags>
+                <tag name="jungi.desktop_devices" />
+            </tags>
+        </theme>
         <theme name="foo" path="@JungiFooBundle/Resources/theme">
             <tags>
                 <tag name="jungi.environment">admin</tag>
                 <tag name="jungi.desktop_devices" />
-                <tag name="jungi.mobile_devices">
-                    <argument type="collection">%mobile_devices%</argument>
-                    <argument type="constant">jungi.mobile_devices::MOBILE</argument>
-                </tag>
+                <tag name="jungi.mobile_devices">%mobile_devices%</tag>
+                <tag name="jungi.tablet_devices">%mobile_devices%</tag>
             </tags>
             <info>
                 <property key="authors">%authors%</property>
-                <property key="name">Foo theme</property>
-                <property key="version">1.0.0</property>
+                <property key="name">Foo Theme</property>
                 <property key="description">description</property>
-                <property key="license">MIT</property>
             </info>
         </theme>
     </themes>
@@ -84,7 +109,7 @@ Here is the simple document which defines the single theme with basic elements:
 Getting Started
 ---------------
 
-So let's start explaining from the `<parameters />` element, the `<themes />` element will be discussed after that.
+So let's start explaining from the top - the `<parameters />` element.
 
 ### Parameters
 
@@ -99,12 +124,11 @@ So let's start explaining from the `<parameters />` element, the `<themes />` el
 </theme-mapping>
 ```
 
-Parameters can facilitate many things, especially when you have the definition of multiple themes. They're almost the 
-same as parameters in the symfony services, expect that parameters in a theme mapping file has a local scope, so you 
-don't must be afraid that some variable will be overwritten by other theme mapping file.
+Parameters can facilitate many things, especially when you have multiple theme definitions. They are almost the same as 
+parameters in the symfony services, expect that parameters in a theme mapping file has a local scope.
 
-The parameter is specified by the `<parameter />` element which is a direct child of the `<parameters />` element. 
-The `<parameter />` element has the following attributes:
+The parameter as you can guess is specified by the `<parameter />` element which is a direct child of the `<parameters />` 
+element. The `<parameter />` element defines the following attributes:
 
 Attribute | Description | Required
 --------- | ----------- | --------
@@ -113,7 +137,7 @@ type | A type of the element | false
 
 **NOTE**
 
-> If you'll not define the **type** attribute for a parameter, the XmlFileLoader will try evaluate the value of this parameter
+> If you will not define the **type** attribute for a parameter, the loader will try evaluate the value of this parameter
 > to a php value, so e.g. true will be evaluated as the boolean type and not as string containing the "true". You can 
 > always cancel this behaviour by defining this attribute with the **string** value.
 
@@ -128,36 +152,44 @@ collection | An array representation
 #### Constant
 
 ```xml
-<parameter type="constant">jungi.mobile_devices::MOBILE</parameter>
+<parameter type="constant">jungi.fake::SPECIAL</parameter>
 <parameter type="constant">CONSTANT_BOO</parameter>
 <parameter type="constant">Jungi\Bundle\ThemeBundle\Tag\BooTag::TYPE_ZOO</parameter>
 ```
 
 As mentioned in the types table the **constant** type of argument accepts a shortcut or a full qualified constant name. 
-By the shortcut I mean the notation `tag_name::constant` e.g. `jungi.mobile_devices::MOBILE` where it refers to a constant 
-located in a tag. Naturally you can refer to global constants e.g. **SOME_CONSTANT** and to constants located in classes
-like in the example above.
+The shortcut has the notation `tag_name::constant` e.g. `jungi.fake::SPECIAL` where it refers to a constant 
+located in a tag. Naturally you can refer to global constants as well e.g. **SOME_CONSTANT** and to constants located in 
+classes like in the example above.
 
 #### Usage
 
-Parameters can be only used in properties of the info and in arguments of tag. To use a parameter as a value you must 
-surround the parameter with percent sings "%" e.g. **%footheme.mobile_systems%**, just like in the symfony xml services.
+Parameters can be only used in properties of theme info and in arguments of tag. To use a parameter as a value you must 
+surround the parameter with percent sings e.g. **%footheme.mobile_systems%**, just like in the symfony xml services.
 
 ### Themes
 
 ```xml
 <theme-mapping>
     <themes>
+        <virtual-theme name="" />
         <theme name="" path="">
             <!-- definition -->
         </theme>
-        <!-- other themes -->
+        <!-- more themes -->
     </themes>
 </theme-mapping>
 ```
 
-Each of theme mapping file can contain the definition of one or multiple themes. The `<themes />` element is a place where 
-you defines your themes by specifying directly the `<theme />` element. The `<theme />` element has the following attributes:
+Each of theme mapping file can contain a definition of one or multiple themes. The `<themes />` element is a place where 
+you can define your themes. As you know we distinguish two types of theme: the virtual theme that is specified by the 
+`<vritual-theme />` element and the standard theme that is specified by the `<theme />` element.
+
+#### Standard theme
+
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#theme)
+
+The `<theme />` element represents the standard theme and has the following attributes:
 
 Attribute | Description | Required
 --------- | ----------- | --------
@@ -183,24 +215,63 @@ Inside the `<theme />` element can be only defined:
 </theme>
 ```
 
+#### Virtual theme
+
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#virtualtheme)
+
+In the contrary to the `<theme />` element, the `<virtual-theme />` element has only one following attribute:
+
+Attribute | Description | Required
+--------- | ----------- | --------
+name | An unique name of virtual theme | true
+
+The `<virtual-theme />` element can also have tags and information. 
+
+```xml
+<virtual-theme name="">
+    <!-- themes are required -->
+    <themes>
+        <!-- list of referenced themes -->
+    </themes>
+    <!-- tags are optional -->
+    <tags>
+        <!-- tag list -->
+    </tags>
+    <!-- info is required -->
+    <info>
+        <!-- list of properties -->
+    </info>
+</virtual-theme>
+```
+
+As you have noticed the `<virtual-theme />` element defines `<themes />` element where inside this element you can place 
+subordinate themes for a virtual theme.
+
+```xml
+<virtual-theme name="">
+    <themes>
+        <ref theme="foo_mobile" as="mobile" />
+        <!-- more references -->
+    </themes>
+    <!-- other -->
+</virtual-theme>
+```
+
 ### ThemeInfo
+
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#themeinfo)
 
 ```xml
 <info>
     <property key="one_of_keys">
         <!-- value depending on the property type -->
     </property>
-    <!-- other properties -->
+    <!-- more properties -->
 </info>
 ```
 
-From the **Themes overview** chapter you should know what is the **ThemeInfo**. The `<property />` element specifies 
-the properties of the **ThemeInfo**. It has the same structure as the `<parameter />` element, so you have the same attributes 
-as there.
-
-**NOTE**
-
-> The **key** attribute of the `<property />` element is required if is directly defined in the `<info />` element.
+The `<property />` element specifies the properties of the **ThemeInfo**. It has the same structure as the `<parameter />` 
+element, so you have the same attributes as there.
 
 The available keys:
 
@@ -212,7 +283,9 @@ description | string | false
 license | string | false
 authors | collection | false
 
-As you've seen in the quick example to define an author you'll use the following formula:
+#### Define an author
+
+As you have seen in the quick example to define an author you will use the following formula:
 
 ```xml
 <info>
@@ -222,7 +295,7 @@ As you've seen in the quick example to define an author you'll use the following
             <parameter key="email">foo@bar.com</parameter>
             <parameter key="homepage">www.bar.com</parameter>
         </property>
-        <!-- other authors -->
+        <!-- more authors -->
     </property>
 </info>
 ```
@@ -248,8 +321,7 @@ Here is just a small snippet of how to use a defined parameter in every `<proper
 
 ### Tags
 
-[Click here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md) to know more about the
-tags.
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md)
 
 ```xml
 <tags>
@@ -260,25 +332,18 @@ tags.
 </tags>
 ```
 
-The `<tags />` element has only children `<tag />` which have one required attribute **name**. This attribute takes as
-the value a unique tag name which identifies a tag. 
+The `<tags />` element may only consist of `<tag />` elements. The `<tag />` element has only one attribute:
 
-For use you have the following built-in tags:
+Attribute | Description | Required
+--------- | ----------- | --------
+name | The attribute takes as the value a unique tag name which identifies a tag. | true
 
-Class | Name
------ | ----
-MobileDevices | jungi.mobile_devices
-DesktopDevices | jungi.desktop_devices
-VirtualTheme | jungi.virtual_theme
+[Click here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#built-in-tags) to find 
+out which of built-in tags you can use. 
 
-Of course you can attach your own tags and use them like above. Generally tag names are taken from a tag registry which
-allows for dynamically registering tags in a much more convenient way. You can read about that [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
-
-**IMPORTANT**
-
-There is also one thing worthy to say here. If you're creating a standard theme which generally will be used for desktop 
-devices you must remember to define the `jungi.desktop_device` tag. In some cases this tag can be very useful when viewing 
-information about a theme.
+Of course you can attach your own tags and use them as it was shown in the quick example. Generally tag names are taken 
+from a tag registry that allows for dynamically registering tags in a much more convenient way. You can read about that 
+[here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
 
 #### Arguments
 

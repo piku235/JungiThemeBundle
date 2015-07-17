@@ -11,14 +11,18 @@ To get start using the bundle in your project [go here](https://github.com/piku2
 Basics
 ------
 
-### First steps
+### Fundamental things
 
-[Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/first-steps.md) to find out what is:
+You will learn here about standard and virtual themes, and other key things of the bundle.
 
-* Standard and virtual theme
-* Theme locations
-* Template naming and locations
-* Overriding bundle templates
+[Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/fundamental-things.md)
+
+### Themes and templates
+
+If you are also interested about where themes are located, how to override a bundle template by theme then you must read 
+this chapter as well.
+
+[Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-and-templates.md)
 
 ### Theme mappings
 
