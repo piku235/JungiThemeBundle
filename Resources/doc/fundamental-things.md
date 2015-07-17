@@ -95,9 +95,9 @@ interface VirtualThemeInterface extends ThemeInterface
 A virtual theme can be used for various things. The easiest example is an adaptive theme (AWD) - it is usually combined 
 of two or more themes where each one of them has a tag that determines their purpose. 
 
-Suppose that we have the adaptive theme with two themes where the first one is for mobile devices and the second one is 
-for desktop devices. Thanks to virtual themes we do not need to create two separate themes and do crazy stuff to get this 
-working, we just need to create a virtual theme that will hold these two themes together and choose one of them at 
+Suppose that we have an adaptive theme with two sub themes where the first one is for mobile devices and the second one 
+is for desktop devices. Thanks to virtual themes we do not need to create two separate themes and do crazy stuff to get 
+this working, we just need to create a virtual theme that will hold these two themes together and choose one of them at 
 appropriate time. 
 
 The power of virtual themes not ends on AWD. They can be used for everything like e.g. we have four themes where each one 
@@ -112,9 +112,8 @@ is not right. I was thinking about to write a component that will include tags f
 but there could be a problem with merging tags which are the same. It turned out that the best solution and as well as 
 a good rule is to manage virtual theme tags by yourself, at least at this moment. This means that you have to decide which 
 tags of subordinate themes you want to include and how to merge them in situations when e.g. you have two exactly the same 
-tags with different arguments where each one is included in another theme.
-
-In the chapters speaking about theme mapping loaders you will find out how the discussed situation looks in a practical.
+tags with different arguments where each one is located in another theme. In the chapters speaking about theme mapping 
+loaders you will find out how it looks in a practical.
 
 ThemeInfo
 ---------

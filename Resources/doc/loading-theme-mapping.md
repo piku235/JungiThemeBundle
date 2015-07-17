@@ -54,7 +54,7 @@ jungi_theme:
 
     # list of theme mapping files
     mappings:
-        - { resource: "@JungiBooBundle", type: xml }
+        - { resource: "@JungiBooBundle/Resources/config/theme.xml", type: xml }
         # more
 ```
 
