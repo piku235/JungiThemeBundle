@@ -11,6 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 /**
  * ParametricThemeDefinitionRegistry.
  *
@@ -19,66 +22,67 @@ namespace Jungi\Bundle\ThemeBundle\Mapping;
 class ParametricThemeDefinitionRegistry extends ThemeDefinitionRegistry implements ParametricThemeDefinitionRegistryInterface
 {
     /**
-     * @var array
+     * @var ParameterBag
      */
-    protected $parameters = array();
+    protected $parameterBag;
 
     /**
-     * Sets parameters.
+     * Constructor.
      *
-     * @param array $params Parameters
+     * @param ParameterBagInterface $parameterBag A parameter bag (optional)
+     */
+    public function __construct(ParameterBagInterface $parameterBag = null)
+    {
+        $this->parameterBag = $parameterBag ?: new ParameterBag();
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function setParameters(array $params)
     {
-        $this->parameters = $params;
+        $this->parameterBag->add($params);
     }
 
     /**
-     * Sets a parameter.
-     *
-     * @param string $name  A name
-     * @param mixed  $value A value
+     * {@inheritdoc}
      */
     public function setParameter($name, $value)
     {
-        $this->parameters[$name] = $value;
+        $this->parameterBag->set($name, $value);
     }
 
     /**
-     * Checks if a given parameter exists.
-     *
-     * @param string $name A name
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasParameter($name)
     {
-        return array_key_exists($name, $this->parameters);
+        return $this->parameterBag->has($name);
     }
 
     /**
-     * Returns the parameter value.
-     *
-     * @param string $name A name
-     *
-     * @return mixed Null if it doesn't exist
+     * {@inheritdoc}
      */
     public function getParameter($name)
     {
-        if (!$this->hasParameter($name)) {
-            return;
-        }
-
-        return $this->parameters[$name];
+        return $this->parameterBag->get($name);
     }
 
     /**
-     * Returns the all parameters.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getParameters()
     {
-        return $this->parameters;
+        return $this->parameterBag->all();
+    }
+
+    /**
+     * Returns the parameter bag.
+     *
+     * @return ParameterBag
+     */
+    public function getParameterBag()
+    {
+        return $this->parameterBag;
     }
 }

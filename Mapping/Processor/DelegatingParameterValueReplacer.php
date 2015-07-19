@@ -11,25 +11,29 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
+use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
- * ParameterValueReplacer processes parameters contained in a theme definition registry.
+ * The class processes parameters contained in a theme definition registry.
+ *
+ * It delegates resolving a value to a ParameterBag instance.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class ParameterValueReplacer extends ValueReplacer
+class DelegatingParameterValueReplacer extends ValueReplacer
 {
     /**
      * {@inheritdoc}
      */
     public function process(ThemeDefinitionRegistryInterface $registry)
     {
-        if (!$registry instanceof ParametricThemeDefinitionRegistryInterface || !$registry->getParameters()) {
+        if (!$registry instanceof ParametricThemeDefinitionRegistry || !$registry->getParameters()) {
             return;
         }
 
+        $registry->getParameterBag()->resolve();
         parent::process($registry);
     }
 
@@ -45,17 +49,7 @@ class ParameterValueReplacer extends ValueReplacer
      */
     protected function resolveValue($value, ThemeDefinitionRegistryInterface $registry)
     {
-        /* @var ParametricThemeDefinitionRegistryInterface $registry */
-
-        if (!is_string($value) || !preg_match('/^%([^\s%]+)%$/', $value, $matches)) {
-            return $value;
-        }
-
-        $paramName = $matches[1];
-        if (!$registry->hasParameter($paramName)) {
-            throw new \InvalidArgumentException(sprintf('The parameter "%s" can not be found.', $paramName));
-        }
-
-        return $registry->getParameter($paramName);
+        /* @var ParametricThemeDefinitionRegistry $registry */
+        return $registry->getParameterBag()->resolveValue($value);
     }
 }

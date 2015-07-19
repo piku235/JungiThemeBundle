@@ -47,7 +47,9 @@ interface ParametricThemeDefinitionRegistryInterface extends ThemeDefinitionRegi
      *
      * @param string $name A name
      *
-     * @return mixed Null if it doesn't exist
+     * @return mixed
+     *
+     * @throws \InvalidArgumentException When the parameter does not exist
      */
     public function getParameter($name);
 

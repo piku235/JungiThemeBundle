@@ -17,13 +17,15 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * MobileDetect only extends the Mobile_Detect class and fits it for the symfony environment.
  *
- * @author      Current authors: Serban Ghita <serbanghita@gmail.com>, Nick Ilyin <nick.ilyin@gmail.com>
- *              Original author: Victor Stanciu <vic.stanciu@gmail.com>
  * @author      Modifier: Piotr Kugla <piku235@gmail.com>
+ *              Current authors: Serban Ghita <serbanghita@gmail.com>
+ *                               Nick Ilyin <nick.ilyin@gmail.com>
+ *
+ *              Original author: Victor Stanciu <vic.stanciu@gmail.com>
  * @license     Code and contributions have 'MIT License'
  *              More details: https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
  */
-class MobileDetect extends \Mobile_Detect
+final class MobileDetect extends \Mobile_Detect
 {
     /**
      * Constructor.
@@ -32,6 +34,7 @@ class MobileDetect extends \Mobile_Detect
      */
     public function __construct(RequestStack $requestStack = null)
     {
+        // Not used here the parent constructor on purpose
         if (null !== $requestStack && null !== $request = $requestStack->getCurrentRequest()) {
             $this->handleRequest($request);
         }

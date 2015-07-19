@@ -32,11 +32,13 @@ final class Processor implements ProcessorInterface
      *
      * @param TagClassRegistryInterface $tagClassRegistry A tag class registry
      * @param FileLocatorInterface      $locator          A file locator
+     * @param array                     $globalParams     A global parameters (optional)
      */
-    public function __construct(TagClassRegistryInterface $tagClassRegistry, FileLocatorInterface $locator)
+    public function __construct(TagClassRegistryInterface $tagClassRegistry, FileLocatorInterface $locator, array $globalParams = array())
     {
         $this->workers = array(
-            new ParameterValueReplacer(),
+            new GlobalParametersWorker($globalParams),
+            new DelegatingParameterValueReplacer(),
             new ConstantValueReplacer($tagClassRegistry),
             new ThemePathWorker($locator),
             new VirtualThemeWorker(),

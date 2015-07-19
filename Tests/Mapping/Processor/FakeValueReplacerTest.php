@@ -62,6 +62,7 @@ class FakeValueReplacerTest extends TestCase
             ),
         ));
         $theme = new StandardThemeDefinition(__DIR__);
+        $theme->setPath('not_important');
         $theme->addTag($tag);
         $theme->setInformation($info);
         $registry->registerThemeDefinition('foo', $theme);
@@ -73,6 +74,7 @@ class FakeValueReplacerTest extends TestCase
         $registry->registerThemeDefinition('bar_virtual', $theme);
 
         // The final point
+        $expectedPath = 'replaced';
         $expectedInfo = ThemeInfoEssence::createBuilder()
             ->setName('replaced')
             ->setDescription('replaced')
@@ -96,6 +98,10 @@ class FakeValueReplacerTest extends TestCase
         // Assert
         foreach ($registry->getThemeDefinitions() as $theme) {
             $tags = $theme->getTags();
+            if ($theme instanceof StandardThemeDefinition) {
+                $this->assertEquals($expectedPath, $theme->getPath());
+            }
+
             $this->assertEquals($expectedTag, $tags[0]);
             $this->assertEquals($expectedInfo, $theme->getInformation());
         }

@@ -104,7 +104,7 @@ final class ThemeSourceInitializer
     }
 
     /**
-     * Builds and loads themes from previously generated cache file
+     * Builds and loads themes from previously generated cache file.
      */
     public function initialize()
     {

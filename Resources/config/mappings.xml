@@ -12,6 +12,9 @@
         <service id="jungi_theme.mapping.processor" class="Jungi\Bundle\ThemeBundle\Mapping\Processor\Processor" public="false">
             <argument type="service" id="jungi_theme.tag.class_registry" />
             <argument type="service" id="file_locator" />
+            <argument type="collection">
+                <argument key="kernel.root_dir">%kernel.root_dir%</argument>
+            </argument>
         </service>
 
         <service id="jungi_theme.mapping.loader.definition" abstract="true">

@@ -8,7 +8,7 @@
         <service id="jungi_theme.tag.class_registry" class="Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistry">
             <argument /> <!-- tag classes -->
         </service>
-        <service id="jungi_theme.mobile_detect" class="Jungi\Bundle\ThemeBundle\Core\MobileDetect">
+        <service id="jungi_theme.mobile_detect" class="Jungi\Bundle\ThemeBundle\Core\MobileDetect" public="false">
             <argument type="service" id="request_stack" />
         </service>
         <service id="jungi_theme.holder.default" class="Jungi\Bundle\ThemeBundle\Core\ThemeHolder" />
