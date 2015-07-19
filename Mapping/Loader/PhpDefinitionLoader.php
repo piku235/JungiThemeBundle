@@ -11,6 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 
+use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
@@ -39,12 +40,14 @@ class PhpDefinitionLoader extends AbstractDefinitionLoader
 
         // Vars available for mapping file
         $loader = $this;
+        $registry = new ParametricThemeDefinitionRegistry();
 
         // Require
-        $registry = require $path;
+        require $path;
+
         if (!$registry instanceof ThemeDefinitionRegistryInterface) {
             throw new \UnexpectedValueException(sprintf(
-                'Expected to receive a ThemeDefinitionRegistryInterface instance from the file "%s".',
+                'Expected the \$registry to be of a ThemeDefinitionRegistryInterface instance in the file "%s".',
                 $path
             ));
         }

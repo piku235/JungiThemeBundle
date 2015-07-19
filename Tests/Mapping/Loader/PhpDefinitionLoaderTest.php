@@ -49,9 +49,9 @@ class PhpDefinitionLoaderTest extends DefinitionLoaderTest
     /**
      * @expectedException \UnexpectedValueException
      */
-    public function testInvalidReturn()
+    public function testInvalidRegistry()
     {
-        $this->loadFile('invalid_return');
+        $this->loadFile('invalid_registry');
     }
 
     /**

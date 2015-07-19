@@ -3,14 +3,11 @@
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
-use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
 use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake as FakeTag;
-
-$registry = new ThemeDefinitionRegistry();
 
 $info = ThemeInfoEssence::createBuilder()
     ->setName('A fancy theme')
@@ -68,5 +65,3 @@ $registry->registerThemeDefinition('foo_5', new VirtualThemeDefinition(
     ),
     ThemeInfoImporter::import($info)
 ));
-
-return $registry;
