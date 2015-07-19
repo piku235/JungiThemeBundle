@@ -1,14 +1,11 @@
-Fundamental things
-==================
-
-This chapter speaks about the most key things of the bundle, so it is highly recommended to read this chapter, but do not 
-worry it is not too long. 
+Fundamental elements
+====================
 
 Theme
 -----
 
 Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts, view files which 
-as the result have an influence to the look of a page. A theme representation in the JungiThemeBundle is an object of the 
+as the result have an influence to the look of a page. A theme in the JungiThemeBundle is an object of the 
 `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily manipulate themes and obtain 
 important for us information.
 
@@ -47,10 +44,8 @@ interface ThemeInterface
 }
 ```
 
-**INFO**
-
-> To create a new theme you will have to use one of the available theme mappings: xml, yaml or php. [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings)
-> to find out how do that.
+To create a new theme you will not use a pure object, but one of the available theme mappings: xml, yaml or php. [Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings)
+to find out how do that. Also if you want to know where themes are stored [go here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/themes-and-templates.md#themes-locations).
 
 VirtualTheme
 ------------
@@ -112,8 +107,7 @@ is not right. I was thinking about to write a component that will include tags f
 but there could be a problem with merging tags which are the same. It turned out that the best solution and as well as 
 a good rule is to manage virtual theme tags by yourself, at least at this moment. This means that you have to decide which 
 tags of subordinate themes you want to include and how to merge them in situations when e.g. you have two exactly the same 
-tags with different arguments where each one is located in another theme. In the chapters speaking about theme mapping 
-loaders you will find out how it looks in a practical.
+tags with different arguments where each one is located in another theme. 
 
 ThemeInfo
 ---------

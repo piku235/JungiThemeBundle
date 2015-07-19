@@ -98,8 +98,8 @@ refer to global constants e.g. **SOME_CONSTANT** and to constants located in cla
 
 #### Usage
 
-Parameters can be only used in the info and in arguments of tag. To use a parameter as a value you must surround the 
-parameter with percent sings "%" e.g. **%footheme.mobile_systems%**, just like in the symfony yaml services.
+Parameters can be only used in a theme info and in arguments of a tag. To use a parameter as a value you must surround the 
+parameter with percent sings e.g. **%footheme.mobile_systems%**, just like in the symfony yaml services.
 
 ### Themes
 
@@ -115,7 +115,7 @@ themes:
 ```
 
 Each theme mapping file can contain many theme definitions. The `footheme` in the example is a unique name of the theme.
-As you know we distinguish two types of theme: the virtual theme and the standard theme which are described just below.
+As you know we distinguish two types of theme: a virtual theme and a standard theme which are described just below.
 
 #### Standard theme
 

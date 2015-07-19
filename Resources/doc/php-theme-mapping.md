@@ -20,13 +20,11 @@ Quick example
 // FooBundle/Resources/config/theme.php
 use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
-use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
 use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Information\Author;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 
-$registry = new ThemeDefinitionRegistry();
 $definition = new StandardThemeDefinition();
 $definition
     ->setPath('@JungiMainThemeBundle/Resources/theme')
@@ -44,8 +42,6 @@ $registry->registerThemeDefinition('zoo_second', new StandardThemeDefinition(
   array( new Tag('jungi.mobile_devices', array(array('iOS', 'AndroidOS'))) ),
   ThemeInfoImporter::import($info)
 ));
-
-return $registry;
 ```
 
 Getting started

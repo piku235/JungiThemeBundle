@@ -164,7 +164,7 @@ classes like in the example above.
 
 #### Usage
 
-Parameters can be only used in properties of theme info and in arguments of tag. To use a parameter as a value you must 
+Parameters can be only used in properties of theme info and in arguments of a tag. To use a parameter as a value you must 
 surround the parameter with percent sings e.g. **%footheme.mobile_systems%**, just like in the symfony xml services.
 
 ### Themes
@@ -172,7 +172,9 @@ surround the parameter with percent sings e.g. **%footheme.mobile_systems%**, ju
 ```xml
 <theme-mapping>
     <themes>
-        <virtual-theme name="" />
+        <virtual-theme name="">
+            <!-- definition -->
+        </virtual-theme>
         <theme name="" path="">
             <!-- definition -->
         </theme>
@@ -182,8 +184,8 @@ surround the parameter with percent sings e.g. **%footheme.mobile_systems%**, ju
 ```
 
 Each of theme mapping file can contain a definition of one or multiple themes. The `<themes />` element is a place where 
-you can define your themes. As you know we distinguish two types of theme: the virtual theme that is specified by the 
-`<vritual-theme />` element and the standard theme that is specified by the `<theme />` element.
+you can define your themes. As you know we distinguish two types of theme: a virtual theme that is specified by the 
+`<vritual-theme />` element and a standard theme that is specified by the `<theme />` element.
 
 #### Standard theme
 
@@ -283,7 +285,7 @@ description | string | false
 license | string | false
 authors | collection | false
 
-#### Define an author
+#### Defining an author
 
 As you have seen in the quick example to define an author you will use the following formula:
 

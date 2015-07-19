@@ -4,10 +4,20 @@ Themes and templates
 Themes locations
 ----------------
 
-Generally themes are staying in a bundle. There is no limit saying how many themes you can have in a single bundle. You
+You have two possible theme locations for choose: in a bundle or in a project root.
+
+### Bundle
+
+Generally themes are living in a bundle. There is no limit saying how many themes you can have in a single bundle. You 
 must only decide when these themes should be together and when they should be separated into single bundles.
 
-Consider the situation when you have three themes, where only two of them are related in some way and the third one is
+Most of cases themes will be very simple, limited to have only some web assets and view files, so you may think "Is 
+a bundle really a good place for themes?". Think about more advanced themes like e.g. themes that have some kind of web 
+configurator with user interface, themes that connects with a vendor via a specific web service to do something cool and 
+so on. As you see a bundle is a perfect place due to its portability, the straightforward structure and enormous 
+possibilities.
+
+Consider a situation when you have three themes, where only two of them are related in some way and the third one is
 whole different (different logic or maybe different graphics). For example you can create the first bundle **FooBundle** 
 for these two related themes and create the second bundle **BooBundle** for the third theme.
 
@@ -16,14 +26,28 @@ The directory structure could looks like below:
 ```
 FooBundle/
     Resources/
-        theme/
-            first_related/
-            second_related/
+        themes/
+            desktop/
+            mobile/
 
 BooBundle
     Resources/
         # third theme
         theme/
+```
+
+### Project root
+
+You may also want to put your themes only for a particular project. Nothing easier!
+
+A simple directory structure:
+
+```
+app/
+    Resources/
+        themes/
+            desktop/
+            mobile/
 ```
 
 Template naming and locations

@@ -11,16 +11,15 @@ To get start using the bundle in your project [go here](https://github.com/piku2
 Basics
 ------
 
-### Fundamental things
+### Fundamental elements
 
-You will learn here about standard and virtual themes, and other key things of the bundle.
+Here you will get familiar with basic elements of the bundle like e.g. standard and virtual theme.
 
-[Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/fundamental-things.md)
+[Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/fundamental-elements.md)
 
 ### Themes and templates
 
-If you are also interested about where themes are located, how to override a bundle template by theme then you must read 
-this chapter as well.
+Theme locations, how to override a bundle template by theme and even more you will find out from reading this chapter. 
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/themes-and-templates.md)
 
@@ -57,6 +56,15 @@ Here you will find out what exactly is a theme tag, which theme tags the bundle 
 A theme changer is used for changing the current theme. [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-changer.md)
 to see how do that.
 
+Tutorials
+---------
+
+### Creating a theme
+
+The tutorial shows how to create a simple responsive theme (RWD) from the scratch.
+
+[Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/tutorials/creating-theme.md)
+
 Web Design Approaches
 ---------------------
 
@@ -86,15 +94,6 @@ The Responsive Web Design is probably the most used web design approach, of cour
 theme on various devices. Creating this kind of theme is very straightforward and it takes really small amount of time.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md)
-
-Tutorials
----------
-
-### Creating a theme
-
-The tutorial shows how to create a simple responsive theme (RWD) from the scratch.
-
-[Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/tutorials/creating-theme.md)
 
 Miscellaneous
 -------------
