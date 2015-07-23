@@ -340,6 +340,8 @@ Attribute | Description | Required
 --------- | ----------- | --------
 name | The attribute takes as the value a unique tag name which identifies a tag. | true
 
+#### Built-in tags
+
 [Click here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#built-in-tags) to find 
 out which of built-in tags you can use. 
 

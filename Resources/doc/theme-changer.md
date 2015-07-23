@@ -2,7 +2,7 @@ Theme changer
 =============
 
 As you can easily guess a theme changer allows you to change a current theme. It has been created to ease and to centralize
-change of a current theme. Otherwise you would use a theme resolver to change the current theme.
+change of a current theme. Otherwise you would use directly a theme resolver to change the current theme.
 
 ```php
 interface ThemeChangerInterface
@@ -23,7 +23,7 @@ It is available under the `jungi_theme.changer` service.
 Example
 -------
 
-This example shows a frequent situation when you are going to change the current theme by form.
+This example shows a frequent situation when you are going to change the current theme by using a form.
 
 ```php
 $form = $this->createForm(new ThemeType());
@@ -34,3 +34,5 @@ if ($form->isValid()) {
     $this->get('jungi_theme.changer')->change($data['theme'], $request);
 }
 ```
+
+[Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

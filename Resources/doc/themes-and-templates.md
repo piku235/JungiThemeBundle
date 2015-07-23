@@ -11,7 +11,7 @@ You have two possible theme locations for choose: in a bundle or in a project ro
 Generally themes are living in a bundle. There is no limit saying how many themes you can have in a single bundle. You 
 must only decide when these themes should be together and when they should be separated into single bundles.
 
-Most of cases themes will be very simple, limited to have only some web assets and view files, so you may think "Is 
+Most of cases themes will be very simple, limited to have only some web assets and templates, so you may think "Is 
 a bundle really a good place for themes?". Think about more advanced themes like e.g. themes that have some kind of web 
 configurator with user interface, themes that connects with a vendor via a specific web service to do something cool and 
 so on. As you see a bundle is a perfect place due to its portability, the straightforward structure and enormous 
@@ -49,6 +49,12 @@ app/
             desktop/
             mobile/
 ```
+
+**IMPORTANT**
+
+> You must remember that things do not ends on placing your theme(s) in a project root or in a bundle. Putting your themes 
+> with templates is not enough for the JungiThemeBundle to notice these new added themes. To make a theme(s) visible in the
+> bundle you will have to use one of the avaiable theme mappings which are described [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings). 
 
 Template naming and locations
 -----------------------------

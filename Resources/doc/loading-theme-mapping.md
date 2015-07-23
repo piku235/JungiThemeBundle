@@ -3,12 +3,12 @@ Loading theme mapping files
 
 By first you must remember that the JungiThemeBundle does not load theme mapping files automatically, so you have to do 
 it manually. As you know themes resides in a bundle and to make them available in an app you have a possibility of 
-registering theme mapping files via the JungiThemeBundle extension or by application configuration.
+registering theme mapping files by the JungiThemeBundle extension or by application configuration.
 
 Load via bundle extension
 -------------------------
 
-First open the file where is located your bundle class e.g. `src/Foo/FooBundle/BooFooBundle.php`. After that define
+First open a file where is located your bundle class e.g. `src/Foo/FooBundle/BooFooBundle.php`. After that define
 the **build** method in the bundle class if you do not have it actually. Thanks to that method we are able to load themes 
 in much comfortable way.
 

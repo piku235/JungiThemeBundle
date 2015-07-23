@@ -214,6 +214,8 @@ tags:
 
 The `tags` element is a collection of tags which the theme will support. For use you have the following built-in tags:
 
+#### Built-in tags
+
 [Click here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#built-in-tags) to find 
 out which of built-in tags you can use. 
 

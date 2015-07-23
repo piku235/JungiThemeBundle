@@ -1,7 +1,7 @@
 Responsive Web Design (RWD)
 ===========================
 
-To create a responsive theme you have only to choose the appropriate theme mapping and define inside it a theme with these
+To create a responsive theme you have only to choose an appropriate theme mapping and define inside it a theme with these
 following tags:
 
 * [MobileDevices](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#mobiledevices)
@@ -13,7 +13,9 @@ desktop devices. Additionally you can use this advantage for seeking and obtaini
 
 **INFO**
 
-> Even a theme without any tags can be selected for a dispatched request if there wasn't any previous theme match.
+> Even a responsive theme without these tags can be selected. These tags for a responsive theme has not got any special 
+> meaning, so they are only used here to give us more detailed information about a theme which could be helpful while 
+> presenting a theme to a user. 
 
 Example
 -------

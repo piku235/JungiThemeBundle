@@ -61,7 +61,7 @@ Tutorials
 
 ### Creating a theme
 
-The tutorial shows how to create a simple responsive theme (RWD) from the scratch.
+The tutorial shows how to create a simple responsive theme (RWD) from scratch.
 
 [Go here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/tutorials/creating-theme.md)
 

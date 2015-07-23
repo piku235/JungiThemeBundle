@@ -1,14 +1,15 @@
 Creating a theme
 ================
 
-The goal of this tutorial is to show you how from the scratch create a simple theme and how to use it. Let's assume that 
-we're gonna to create a responsive theme (RWD) which will be used on every page of our website.
+The goal of this tutorial is to show you how from scratch create a simple theme and how to use it. Let's assume that 
+we are gonna to create a responsive theme (RWD) which will be used on every page of our website.
 
 ### Step 1: Create a bundle for the theme
 
-The first thing that we have to do is to create a "container" in which our theme will be placed. And the most suitable
-"container" is nothing else but a bundle, so we must create it. Suppose that the created bundle will be called 
-**JungiHeroThemeBundle** or whatever you want. The following directory structure of the bundle is enough for our theme:
+The first thing that we have to do is to create a "container" in which our theme will be placed. For this tutorial 
+I selected a bundle as container, although you can also select a project root as container, it only depends on your needs. 
+Suppose that the created bundle will be called **JungiHeroThemeBundle** or whatever you want. The following directory 
+structure of the bundle is enough for our theme:
 
 ```
 src/
@@ -35,18 +36,17 @@ src/
 ```
 
 As you see the theme has got own template `layout.html.twig` and also overrides some templates in the **SonataAdminBundle**
-and the **SonataUserBundle**. Thanks to that you don't have to change sonata templates in the configuration, the theme
+and the **SonataUserBundle**. Thanks to that you do not have to change sonata templates in the configuration, the theme
 itself will take care of these overridden templates. I just placed here the bundles created by the **Sonata Project** 
-only as an example to show you that you can override each bundle that you use in a project. I will don't show here how 
-each theme template looks inside, because that's unnecessary.
+only as an example to show you that you can override each bundle template.
 
 As the final thing in this step we only must activate the created bundle in the `app/AppKernel.php`. 
 
 ### Step 2: Decide which theme mapping to use
 
 After we have our theme we must define it so that the JungiThemeBundle could recognize it. To define a theme you have for 
-use three various theme mappings: xml, yaml and php. For this tutorial I chose the xml theme mapping. The file of this 
-theme mapping for this theme can looks like below:
+use three various theme mappings: xml, yaml and php. For this tutorial I chose the xml theme mapping. The theme mapping 
+file for this theme can look like below:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -67,13 +67,12 @@ theme mapping for this theme can looks like below:
 </theme-mapping>
 ```
 
-We can save this theme mapping file into `Resources/config` as `theme.xml`.
+We can save this theme mapping file into the `Resources/config` directory as `theme.xml`.
 
 ### Step 3: Loading the created theme mapping file
 
-Now that the JungiThemeBundle could notice our theme we must load the created theme mapping file. We can achieve that by
-using a theme mapping loader which will load all themes contained in a theme mapping file to a theme manager. We can do 
-that in the method `build` of bundle. 
+Now that the JungiThemeBundle could notice our theme we must load the created theme mapping file. We can accomplish that 
+by using a theme mapping loader which will load all themes contained in a theme mapping file to the theme source.
 
 Finally the bundle class should looks like below:
 
@@ -102,7 +101,7 @@ class JungiHeroThemeBundle extends Bundle
 }
 ```
 
-And that's almost the end. After this step the theme should be available in a theme registry.
+And that is almost the end. After this step the theme should be available in the theme source.
 
 ### Step 4: Set the theme for a theme resolver
 
@@ -116,7 +115,7 @@ jungi_theme:
             in_memory: jungi_hero
 ```
 
-That's all. From now on the theme should be visible on every page. Thanks for your attention and have a nice further fun 
+That is all. From now on the theme should be visible on every page. Thanks for your attention and have a nice further fun 
 with the bundle :)
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

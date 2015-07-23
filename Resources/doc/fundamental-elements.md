@@ -4,7 +4,7 @@ Fundamental elements
 Theme
 -----
 
-Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts, view files which 
+Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts and templates which 
 as the result have an influence to the look of a page. A theme in the JungiThemeBundle is an object of the 
 `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily manipulate themes and obtain 
 important for us information.

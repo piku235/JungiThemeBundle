@@ -11,9 +11,9 @@ Explanation
 -----------
 
 The AWD in the bundle is based on the following tags: **MobileDevices**, **TabletDevices** and **DesktopDevices**. Each of 
-these separate themes should has a tag which describes this theme e.g. the first theme with the **DesktopDevices** tag 
-and the second theme with the **MobileDevices** tag. These separate themes will be not working yet, because at this shape
-they are still not visible for the bundle. To make this working we need a virtual theme, which binds these themes
+these separate themes should has a tag which describes this theme e.g. the first theme will have the **DesktopDevices** tag 
+and the second theme will have the **MobileDevices** tag. These separate themes will be not working yet, because at this 
+shape they are still not visible for the bundle. To get this working we need a virtual theme, which binds these themes
 together, thereby they behaves as a single theme. We can use such a virtual theme in a normal way as we have been doing
 it with standard themes.
 
@@ -128,6 +128,6 @@ return $collection;
 Summary
 -------
 
-As a final step we must set up the virtual theme name `foo` to the theme resolver.
+As a final step we must set up the virtual theme name **foo** to the theme resolver.
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)
