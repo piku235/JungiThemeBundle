@@ -45,6 +45,9 @@ I know that introduction can be insufficient, so I will demonstrate creating a r
                 <tag name="jungi.tablet_devices">%mobile_systems%</tag>
                 <tag name="jungi.desktop_devices" />
             </tags>
+            <info>
+                <property key="name">Simple RWD Theme</property>
+            </info>
         </theme>
     </themes>
     
@@ -66,6 +69,8 @@ themes:
             jungi.desktop_devices: ~
             jungi.mobile_devices: %mobile_systems%
             jungi.tablet_devices: %mobile_systems%
+        info:
+            name: Simple RWD Theme
 
 ```
 
@@ -75,23 +80,25 @@ themes:
 <?php
 // FooBundle/Resources/config/theme.php
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
-use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
+use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\Tag;
+use Jungi\Bundle\ThemeBundle\Mapping\Reference;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 
-$collection = new ThemeCollection();
-$collection->add(new Theme(
-    'foo',
-    $locator->locate('@JungiFooBundle/Resources/theme'),
-    new TagCollection(array(
-        new Tag\DesktopDevices(),
-        new Tag\MobileDevices(array('iOS', 'AndroidOS')),
-        new Tag\TabletDevices(array('iOS', 'AndroidOS'))
-    ))
-));
-
-return $collection;
+$info = ThemeInfoEssence::createBuilder()
+    ->setName('Simple RWD Theme')
+    ->getThemeInfo();
+$mobileDevices = array('iOS', 'AndroidOS');    
+$definition = new StandardThemeDefinition();
+$definition
+    ->setPath('@JungiFooBundle/Resources/theme')
+    ->setInformation(ThemeInfoImporter::import($info))
+    ->addTag(new Tag('jungi.desktop_devices'))
+    ->addTag(new Tag('jungi.mobile_devices', array($mobileDevices)))
+    ->addTag(new Tag('jungi.tablet_devices', array($mobileDevices)));
+    
+$registry->registerThemeDefinition('foo', $definition);
 ```
 
 Summary

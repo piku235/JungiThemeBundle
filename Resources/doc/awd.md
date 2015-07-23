@@ -10,10 +10,10 @@ tablet devices.
 Explanation
 -----------
 
-The AWD in the bundle is based on the following tags: **MobileDevices**, **TabletDevices** and **DesktopDevices**. Each of 
-these separate themes should has a tag which describes this theme e.g. the first theme will have the **DesktopDevices** tag 
-and the second theme will have the **MobileDevices** tag. These separate themes will be not working yet, because at this 
-shape they are still not visible for the bundle. To get this working we need a virtual theme, which binds these themes
+The AWD in the bundle is based on the following tags: **MobileDevices**, **TabletDevices** and **DesktopDevices**. Each 
+of these separate themes should has a tag which describes this theme e.g. the first theme will have the **DesktopDevices** 
+tag and the second theme will have the **MobileDevices** tag. These separate themes will be not working yet, because at 
+this shape they are still not visible for the bundle. To get this working we need a virtual theme, which binds these themes
 together, thereby they behaves as a single theme. We can use such a virtual theme in a normal way as we have been doing
 it with standard themes.
 
@@ -43,6 +43,9 @@ designed for mobile devices (incl. tablet devices).
                 <tag name="jungi.mobile_devices" />
                 <tag name="jungi.tablet_devices" />
             </tags>
+            <info>
+                <property key="name">Virtual AWD Theme</property>
+            </info>
         </virtual-theme>
         <theme name="foo_desktop" path="@JungiFooBundle/Resources/theme/desktop">
             <tags>
@@ -72,6 +75,8 @@ themes:
             jungi.desktop_devices: ~
             jungi.mobile_devices: ~
             jungi.tablet_devices: ~
+        info:
+            name: Virtual AWD Theme
     foo_desktop:
         path: "@JungiFooBundle/Resources/theme/desktop"
         tags:
@@ -90,39 +95,30 @@ themes:
 <?php
 // FooBundle/Resources/config/theme.php
 
-use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
-use Jungi\Bundle\ThemeBundle\Tag;
-use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
+use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\Tag;
+use Jungi\Bundle\ThemeBundle\Mapping\Reference;
+use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 
-$desktop = new Theme(
-    'foo_desktop',
-    $locator->locate('@JungiFooBundle/Resources/theme/desktop'),
-    new TagCollection(array(
-        new Tag\DesktopDevices(),
-    ))
-));
-$mobile = new Theme(
-    'foo_mobile',
-    $locator->locate('@JungiFooBundle/Resources/theme/mobile'),
-    new TagCollection(array(
-        new Tag\MobileDevices(),
-        new Tag\TabletDevices()
-    ))
+$virtualTheme = new VirtualThemeDefinition();
+$virtualTheme->addTheme('foo_desktop', new StandardThemeDefinition(
+    '@JungiFooBundle/Resources/theme/desktop',
+    array( new Tag('jungi.desktop_devices') )
 ));
 
-$collection = new ThemeCollection();
-$collection->add(new VirtualTheme(
-    'foo',
-    array($desktop, $mobile),
-    new TagCollection(array(
-        new Tag\DesktopDevices(),
-        new Tag\MobileDevices(),
-        new Tag\TabletDevices()
-    ))
-));
+$definition = new StandardThemeDefinition('@JungiFooBundle/Resources/theme/mobile');
+$definition->addTag(new Tag('jungi.mobile_devices'));
+$definition->addTag(new Tag('jungi.tablet_devices'));
+$virtualTheme->addTheme('foo_mobile', $definition);
 
-return $collection;
+$info = ThemeInfoEssence::createBuilder()
+    ->setName('Virtual RWD Theme')
+    ->getThemeInfo();
+$virtualTheme->setInformation(ThemeInfoImporter::import($info));   
+
+$registry->registerThemeDefinition('foo', $virtualTheme);
 ```
 
 Summary
