@@ -207,7 +207,7 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
             $definition->setProperty($property, $value);
         }
 
-        $themeDef->setInformation($definition);
+        $themeDef->setInfo($definition);
     }
 
     /**

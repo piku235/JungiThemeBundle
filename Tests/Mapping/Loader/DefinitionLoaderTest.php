@@ -86,7 +86,7 @@ abstract class DefinitionLoaderTest extends TestCase
             ), $info1),
         );
         $themes['foo_5'] = new VirtualThemeDefinition();
-        $themes['foo_5']->setInformation($info3);
+        $themes['foo_5']->setInfo($info3);
         $themes['foo_5']->setTags(array(
             new Tag('jungi.desktop_devices'),
             new Tag('jungi.mobile_devices'),

@@ -22,7 +22,7 @@ $definition
     ->addTag(new Tag('jungi.tablet_devices'))
     ->addTag(new Tag('jungi.desktop_devices'))
     ->addTag(new Tag('jungi.fake', array(FakeTag::SPECIAL)))
-    ->setInformation(ThemeInfoImporter::import($info))
+    ->setInfo(ThemeInfoImporter::import($info))
 ;
 $registry->registerThemeDefinition('foo_1', $definition);
 

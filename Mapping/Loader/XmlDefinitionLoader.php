@@ -139,7 +139,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
             );
         }
 
-        $theme->setInformation($definition);
+        $theme->setInfo($definition);
     }
 
     /**

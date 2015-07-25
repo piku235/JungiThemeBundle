@@ -38,7 +38,7 @@ abstract class ValueReplacer extends AbstractThemeWorker
         }
 
         // ThemeInfo
-        if (null !== $info = $definition->getInformation()) {
+        if (null !== $info = $definition->getInfo()) {
             $info->setProperties($this->resolveValueRecursive($info->getProperties(), $registry));
         }
     }

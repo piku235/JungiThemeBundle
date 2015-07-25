@@ -47,20 +47,13 @@ class PhpDumper implements DumperInterface
     {
         $themes = '';
         foreach ($registry->getThemeDefinitions() as $themeName => $theme) {
-            $themes .= sprintf('$collection->add(%s);', $this->dumpTheme($themeName, $theme))."\n";
+            $themes .= sprintf('$collection->add(%s);', $this->dumpTheme($themeName, $theme)).PHP_EOL;
         }
 
         return <<< EOFILE
 <?php
 
-use Jungi\Bundle\ThemeBundle\Core\ThemeCollection;
-use Jungi\Bundle\ThemeBundle\Core\Theme;
-use Jungi\Bundle\ThemeBundle\Core\VirtualTheme;
-use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
-use Jungi\Bundle\ThemeBundle\Information\Author;
-
-\$collection = new ThemeCollection();
+\$collection = new \Jungi\Bundle\ThemeBundle\Core\ThemeCollection();
 $themes
 
 return \$collection;
@@ -85,10 +78,10 @@ EOFILE;
             $themes[] = $this->dumpTheme($childName, $childDefinition);
         }
 
-        $themes = $this->prependTab(sprintf("array(\n%s\n)", $this->prependTab(implode(', ', $themes), 1)), 1);
+        $themes = $this->prependTab(sprintf('array(%s)', PHP_EOL.$this->prependTab(implode(', ', $themes), 1)).PHP_EOL, 1);
 
         return <<< EOVTHEME
-new VirtualTheme(
+new \Jungi\Bundle\ThemeBundle\Core\VirtualTheme(
     '$name',
 $themes,
 {$this->dumpThemeInfo($definition)},
@@ -100,7 +93,7 @@ EOVTHEME;
     private function dumpStandardTheme($name, StandardThemeDefinition $definition)
     {
         return <<< EOSTHEME
-new Theme(
+new \Jungi\Bundle\ThemeBundle\Core\Theme(
     '$name',
     '{$definition->getPath()}',
 {$this->dumpThemeInfo($definition)},
@@ -109,9 +102,44 @@ new Theme(
 EOSTHEME;
     }
 
-    private function dumpThemeInfo(ThemeDefinition $definition)
+    private function dumpTags(ThemeDefinition $definition)
     {
-        if (null === $information = $definition->getInformation()) {
+        $tags = array();
+        foreach ($definition->getTags() as $tag) {
+            $tags[] = $this->dumpTag($tag).',';
+        }
+
+        $tags = implode("\n", $tags);
+
+        return <<< EOTAGS
+    new \Jungi\Bundle\ThemeBundle\Tag\TagCollection(array(
+$tags
+    ))
+EOTAGS;
+    }
+
+    private function dumpTag(Tag $definition)
+    {
+        $class = $this->tagClassRegistry->getTagClass($definition->getName());
+        $args = $definition->getArguments();
+        foreach ($args as &$arg) {
+            $arg = $this->dumpValue($arg);
+        }
+
+        return $this->prependTab(sprintf('new %s(%s)', $class, implode(', ', $args)), 2);
+    }
+
+    protected function dumpValue($value)
+    {
+        $result = var_export($value, true);
+        $result = preg_replace('/ {2}/', '    ', $result);
+
+        return $result;
+    }
+
+    protected function dumpThemeInfo(ThemeDefinition $definition)
+    {
+        if (null === $information = $definition->getInfo()) {
             return $this->prependTab('null', 1);
         }
 
@@ -132,55 +160,20 @@ EOSTHEME;
                     $args[] = $this->dumpValue($author['homepage']);
                 }
 
-                $methods[] = sprintf('->addAuthor(new Author(%s))', implode(', ', $args));
+                $methods[] = sprintf('->addAuthor(new \Jungi\Bundle\ThemeBundle\Information\Author(%s))', implode(', ', $args));
             }
         }
 
         $methods[] = '->getThemeInfo()';
-        $methods = $this->prependTab(implode("\n", $methods), 2);
+        $methods = $this->prependTab(implode(PHP_EOL, $methods), 2);
 
         return <<< EOINFO
-    ThemeInfoEssence::createBuilder()
+    \Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence::createBuilder()
 $methods
 EOINFO;
     }
 
-    private function dumpTags(ThemeDefinition $definition)
-    {
-        $tags = array();
-        foreach ($definition->getTags() as $tag) {
-            $tags[] = $this->dumpTag($tag).',';
-        }
-
-        $tags = implode("\n", $tags);
-
-        return <<< EOTAGS
-    new TagCollection(array(
-$tags
-    ))
-EOTAGS;
-    }
-
-    private function dumpTag(Tag $definition)
-    {
-        $class = $this->tagClassRegistry->getTagClass($definition->getName());
-        $args = $definition->getArguments();
-        foreach ($args as &$arg) {
-            $arg = $this->dumpValue($arg);
-        }
-
-        return $this->prependTab(sprintf('new %s(%s)', $class, implode(', ', $args)), 2);
-    }
-
-    private function dumpValue($value)
-    {
-        $result = var_export($value, true);
-        $result = preg_replace('/ {2}/', '    ', $result);
-
-        return $result;
-    }
-
-    private function prependTab($content, $num, $startLine = 0, $endLine = null)
+    protected function prependTab($content, $count, $startLine = 0, $endLine = null)
     {
         $parts = explode("\n", $content);
         if (null === $endLine) {
@@ -198,9 +191,9 @@ EOTAGS;
         }
 
         for ($i = $startLine; $i < $endLine; ++$i) {
-            $parts[$i] = str_repeat('    ', $num).$parts[$i];
+            $parts[$i] = str_repeat('    ', $count).$parts[$i];
         }
 
-        return implode("\n", $parts);
+        return implode(PHP_EOL, $parts);
     }
 }

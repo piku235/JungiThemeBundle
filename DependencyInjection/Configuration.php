@@ -103,7 +103,7 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('jungi_theme.holder.default')
                 ->end()
                 ->booleanNode('ignore_null_theme')
-                    ->info('whether to ignore a situation when the theme selector will not match any theme for the request.')
+                    ->info('whether to ignore a situation when the theme selector will do not match any theme for the request.')
                     ->defaultTrue()
                 ->end()
             ->end();

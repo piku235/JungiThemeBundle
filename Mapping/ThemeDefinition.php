@@ -68,7 +68,7 @@ abstract class ThemeDefinition
      *
      * @return ThemeDefinition
      */
-    public function setInformation(ThemeInfo $definition)
+    public function setInfo(ThemeInfo $definition)
     {
         $this->info = $definition;
 
@@ -78,7 +78,7 @@ abstract class ThemeDefinition
     /**
      * @return ThemeInfo
      */
-    public function getInformation()
+    public function getInfo()
     {
         return $this->info;
     }

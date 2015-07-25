@@ -64,12 +64,12 @@ class FakeValueReplacerTest extends TestCase
         $theme = new StandardThemeDefinition(__DIR__);
         $theme->setPath('not_important');
         $theme->addTag($tag);
-        $theme->setInformation($info);
+        $theme->setInfo($info);
         $registry->registerThemeDefinition('foo', $theme);
 
         $theme = new VirtualThemeDefinition();
         $theme->addTag(clone $tag);
-        $theme->setInformation(clone $info);
+        $theme->setInfo(clone $info);
         $theme->addTheme('monday', new StandardThemeDefinition(__DIR__, array(clone $tag), clone $info));
         $registry->registerThemeDefinition('bar_virtual', $theme);
 
@@ -103,7 +103,7 @@ class FakeValueReplacerTest extends TestCase
             }
 
             $this->assertEquals($expectedTag, $tags[0]);
-            $this->assertEquals($expectedInfo, $theme->getInformation());
+            $this->assertEquals($expectedInfo, $theme->getInfo());
         }
     }
 }
