@@ -4,10 +4,13 @@ Fundamental elements
 Theme
 -----
 
-Typically a theme as we know is a collection of some resources like images, stylesheets, javascripts and templates which 
-as the result have an influence to the look of a page. A theme in the JungiThemeBundle is an object of the 
-`Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this interface we can easily manipulate themes and obtain 
-important for us information.
+Let's start with defining a theme:
+
+> A theme is a collection of templates and some other resources like images, stylesheets, javascripts that have an 
+> influence to the look of a page.
+
+Every theme in the JungiThemeBundle is an object of the `Jungi\Bundle\ThemeBundle\Core\ThemeInterface`. Thanks to this 
+interface we can easily manipulate themes and obtain important for us information.
 
 ```php
 interface ThemeInterface
@@ -47,8 +50,7 @@ interface ThemeInterface
 To create a new theme you will not use a pure object, but one of the available theme mappings: xml, yaml or php. [Click here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings)
 to find out how do that. Also if you want to know where themes are stored [go here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/themes-and-templates.md#themes-locations).
 
-VirtualTheme
-------------
+### VirtualTheme
 
 A virtual theme may be a bit confusing, but this is a sort of theme that does not really exist, so it has not got any assets 
 and view files. It only combines together similar themes and acts as a representative of these themes. Only one of the 
@@ -85,7 +87,7 @@ interface VirtualThemeInterface extends ThemeInterface
 }
 ```
 
-### For what do you need it?
+#### For what do you need it?
 
 A virtual theme can be used for various things. The easiest example is an adaptive theme (AWD) - it is usually combined 
 of two or more themes where each one of them has a tag that determines their purpose. 
@@ -98,7 +100,7 @@ appropriate time.
 The power of virtual themes not ends on AWD. They can be used for everything like e.g. we have four themes where each one 
 is designed for different season and so on - ideas can be infinite.
 
-### How about tags?
+#### How about tags?
 
 When you decide to make a virtual theme an obvious thing is that subordinate themes will have some tags that describes 
 them. But wait, what about a virtual theme? Itself it does not have any tags, although the subordinate themes have them. 

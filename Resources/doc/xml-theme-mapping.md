@@ -8,9 +8,9 @@ right away.
 
 **IMPORTANT**
 
-There is one thing worthy to mention before you start. Everything in a theme mapping document has a local scope, so you 
-do not have to be afraid that something gets overridden. Themes at the beginning also have a local scope, only when they 
-are being added to a theme source they must have an unique name to prevent name conflicts.
+> There is one thing worthy to mention before you start. Everything in a theme mapping document has a local scope, so you 
+> do not have to be afraid that something gets overridden. Themes at the beginning also have a local scope, only when they 
+> are being added to a theme source they must have an unique name to prevent name conflicts.
 
 Structure
 ---------
@@ -124,7 +124,7 @@ So let's start explaining from the top - the `<parameters />` element.
 </theme-mapping>
 ```
 
-Parameters can facilitate many things, especially when you have multiple theme definitions. They are almost the same as 
+Parameters can facilitate many things, especially when you have multiple theme definitions. They are exactly the same as 
 parameters in the symfony services, expect that parameters in a theme mapping file has a local scope.
 
 The parameter as you can guess is specified by the `<parameter />` element which is a direct child of the `<parameters />` 
@@ -148,6 +148,14 @@ Type | Description
 string | A string type
 constant | A constant value, a shortcut or a full qualified constant name
 collection | An array representation
+
+#### Global parameters
+
+To facilitate some things were introduced following global parameters:
+
+Name | Description
+---- | -----------
+kernel.root_dir | the parameter imported from the symfony service container, it returns a path of the root directory project.
 
 #### Constant
 

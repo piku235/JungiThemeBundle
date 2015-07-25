@@ -116,7 +116,7 @@ $virtualTheme->addTheme('foo_mobile', $definition);
 $info = ThemeInfoEssence::createBuilder()
     ->setName('Virtual RWD Theme')
     ->getThemeInfo();
-$virtualTheme->setInformation(ThemeInfoImporter::import($info));   
+$virtualTheme->setInfo(ThemeInfoImporter::import($info));   
 
 $registry->registerThemeDefinition('foo', $virtualTheme);
 ```

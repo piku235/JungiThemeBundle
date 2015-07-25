@@ -93,7 +93,7 @@ $mobileDevices = array('iOS', 'AndroidOS');
 $definition = new StandardThemeDefinition();
 $definition
     ->setPath('@JungiFooBundle/Resources/theme')
-    ->setInformation(ThemeInfoImporter::import($info))
+    ->setInfo(ThemeInfoImporter::import($info))
     ->addTag(new Tag('jungi.desktop_devices'))
     ->addTag(new Tag('jungi.mobile_devices', array($mobileDevices)))
     ->addTag(new Tag('jungi.tablet_devices', array($mobileDevices)));

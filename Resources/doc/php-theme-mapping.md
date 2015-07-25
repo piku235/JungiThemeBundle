@@ -8,9 +8,9 @@ not load themes right away.
 
 **IMPORTANT**
 
-There is one thing worthy to mention before you start. Everything in a theme mapping document has a local scope, so you 
-do not have to be afraid that something gets overridden. Themes at the beginning also have a local scope, only when they 
-are being added to a theme source they must have an unique name to prevent name conflicts.
+> There is one thing worthy to mention before you start. Everything in a theme mapping document has a local scope, so you 
+> do not have to be afraid that something gets overridden. Themes at the beginning also have a local scope, only when they 
+> are being added to a theme source they must have an unique name to prevent name conflicts.
 
 Quick example
 -------------
@@ -38,9 +38,9 @@ $info = ThemeInfoEssence::createBuilder()
     ->getThemeInfo();
     
 $registry->registerThemeDefinition('zoo_second', new StandardThemeDefinition(
-  '@JungiMainThemeBundle/Resources/theme',
-  array( new Tag('jungi.mobile_devices', array(array('iOS', 'AndroidOS'))) ),
-  ThemeInfoImporter::import($info)
+    '@JungiMainThemeBundle/Resources/theme',
+    array( new Tag('jungi.mobile_devices', array(array('iOS', 'AndroidOS'))) ),
+    ThemeInfoImporter::import($info)
 ));
 ```
 
