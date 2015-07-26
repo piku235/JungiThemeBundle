@@ -104,12 +104,11 @@ is designed for different season and so on - ideas can be infinite.
 
 When you decide to make a virtual theme an obvious thing is that subordinate themes will have some tags that describes 
 them. But wait, what about a virtual theme? Itself it does not have any tags, although the subordinate themes have them. 
-As you might guess virtual themes should do their best to imitate real themes, so leaving a virtual theme without any tags 
-is not right. I was thinking about to write a component that will include tags from subordinate themes to a virtual theme, 
-but there could be a problem with merging tags which are the same. It turned out that the best solution and as well as 
-a good rule is to manage virtual theme tags by yourself, at least at this moment. This means that you have to decide which 
-tags of subordinate themes you want to include and how to merge them in situations when e.g. you have two exactly the same 
-tags with different arguments where each one is located in another theme. 
+As this is a virtual theme it should as best to imitate a real theme, so leaving a virtual theme without any tags is not 
+right. I was thinking about to write a component that will include tags from subordinate themes to a virtual theme, but 
+there could be a problem with merging tags that are the same. It turned out that the best solution and as well as a good 
+rule is to manage virtual theme tags by yourself, at least at this moment. This means that you have to decide which tags 
+of subordinate themes you want to include and how to merge tags of the same type.
 
 ThemeInfo
 ---------

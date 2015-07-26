@@ -149,14 +149,6 @@ string | A string type
 constant | A constant value, a shortcut or a full qualified constant name
 collection | An array representation
 
-#### Global parameters
-
-To facilitate some things were introduced following global parameters:
-
-Name | Description
----- | -----------
-kernel.root_dir | the parameter imported from the symfony service container, it returns a path of the root directory project.
-
 #### Constant
 
 ```xml
@@ -169,6 +161,14 @@ As mentioned in the types table the **constant** type of argument accepts a shor
 The shortcut has the notation `tag_name::constant` e.g. `jungi.fake::SPECIAL` where it refers to a constant 
 located in a tag. Naturally you can refer to global constants as well e.g. **SOME_CONSTANT** and to constants located in 
 classes like in the example above.
+
+#### Global parameters
+
+To facilitate some things were introduced following global parameters:
+
+Name | Description
+---- | -----------
+kernel.root_dir | parameter imported from the symfony service container, it returns a path of the root directory project.
 
 #### Usage
 
@@ -197,7 +197,7 @@ you can define your themes. As you know we distinguish two types of theme: a vir
 
 #### Standard theme
 
-[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#theme)
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-elements.md#theme)
 
 The `<theme />` element represents the standard theme and has the following attributes:
 
@@ -227,7 +227,7 @@ Inside the `<theme />` element can be only defined:
 
 #### Virtual theme
 
-[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#virtualtheme)
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-elements.md#virtualtheme)
 
 In the contrary to the `<theme />` element, the `<virtual-theme />` element has only one following attribute:
 
@@ -267,9 +267,18 @@ subordinate themes for a virtual theme.
 </virtual-theme>
 ```
 
+**NOTE**
+
+You must be cautious when referencing to themes, so please read these notes below:
+
+* Each referenced theme is automatically moved to the corresponding virtual theme, so a referenced theme will be not 
+accessible via the theme source,
+* A theme that is going to be referenced may be referenced only once, so you cannot reference to the same theme twice,
+* You cannot reference to another virtual theme.
+
 ### ThemeInfo
 
-[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#themeinfo)
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-elements.md#themeinfo)
 
 ```xml
 <info>
@@ -288,9 +297,7 @@ The available keys:
 Key | Type | Required
 --- | ---- | --------
 name | string | true
-version | string | false
 description | string | false
-license | string | false
 authors | collection | false
 
 #### Defining an author

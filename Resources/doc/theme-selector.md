@@ -1,10 +1,10 @@
 Theme selector
 ==============
 
-Basically a theme selector doesn't differ much from a theme resolver. The key difference is that a theme selector returns 
-a **theme instance** for a particular request. We can say a theme selector is a right place to put any higher logic. 
+Basically a theme selector does not differ too much from a theme resolver. The key difference is that a theme selector returns 
+a **theme instance** for a particular request. We can say a theme selector is an appropriate place to put any complex logic. 
 
-A theme selector is a class which implements the `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface`.
+A theme selector implements the `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface`.
  
 ```php
 interface ThemeSelectorInterface
@@ -28,9 +28,9 @@ Default implementation
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Selector/ThemeSelector.php)
 
 The default theme selector is the class `Jungi\Bundle\ThemeBundle\Selector\ThemeSelector`. It has a support of primary and 
-fallback theme resolver where the fallback theme resolver can be unset. If a fallback theme resolver was set then it'll 
-be only used when the primary theme resolver will don't match any theme for the request. Also this theme selector supports 
-events, where you can find them in the class `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents` ([click here](https://github.com/piku235/JungiThemeBundle/blob/master/Selector/ThemeSelectorEvents.php)).
+fallback theme resolver where the fallback theme resolver can be unset. If the fallback theme resolver was set then it will 
+be only used when the primary theme resolver will does not match any theme for the request. Also this theme selector supports 
+events, which you can find them in the class `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents` ([click here](https://github.com/piku235/JungiThemeBundle/blob/master/Selector/ThemeSelectorEvents.php)).
 
 ### Primary and fallback theme resolver
 
@@ -44,8 +44,8 @@ steps.
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Selector/EventListener/ValidationListener.php)
 
 This listener is used to validate the resolved theme. The validation is no so very important here, but in some circumstances 
-can be very helpful like e.g. when we're using the **CookieThemeResolver**. We know that a cookie value can be easily 
-changed by user causing that the user could use any theme without our knowledge. Additionally the listener allows you to 
+can be very helpful like e.g. when we are using the **CookieThemeResolver**. We know that a cookie value can be easily 
+changed by user causing that a user could use any theme without our knowledge. Additionally the listener allows you to 
 perform the validation only for chosen theme resolvers like e.g. this **CookieThemeResolver** (scroll to the configuration
 to see how).
 

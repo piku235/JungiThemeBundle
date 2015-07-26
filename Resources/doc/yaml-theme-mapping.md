@@ -82,14 +82,6 @@ parameters:
 Parameters can facilitate many things, especially when you have multiple theme definitions. They are exactly the same as 
 parameters in the symfony services, expect that parameters in a theme mapping file has a local scope.
 
-#### Global parameters
-
-To facilitate some things were introduced following global parameters:
-
-Name | Description
----- | -----------
-kernel.root_dir | the parameter imported from the symfony service container, it returns a path of the root directory project.
-
 #### Constants
 
 ```yml
@@ -103,6 +95,14 @@ Additionally the support of constants was introduced. Like in the example above 
 it with the `const@` string. You can use a shortcut or a full qualified constant name. By the shortcut I mean the notation 
 `tag_name::constant` e.g. `jungi.fake::SPECIAL` where it refers to a constant located in a tag. Naturally you can 
 refer to global constants e.g. **SOME_CONSTANT** and to constants located in classes like in the example above.
+
+#### Global parameters
+
+To facilitate some things were introduced following global parameters:
+
+Name | Description
+---- | -----------
+kernel.root_dir | parameter imported from the symfony service container, it returns a path of the root directory project.
 
 #### Usage
 
@@ -127,7 +127,7 @@ As you know we distinguish two types of theme: a virtual theme and a standard th
 
 #### Standard theme
 
-[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#theme)
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-elements.md#theme)
 
 The standard theme definition consists of the following keys:
 
@@ -145,9 +145,9 @@ footheme:
 
 #### Virtual theme
 
-[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#virtualtheme)
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-elements.md#virtualtheme)
 
-The virtual theme definition is very similar to the standard theme definition. The loader recognizes virtual themes by
+A virtual theme definition is very similar to a standard theme definition. The loader recognizes virtual themes by
 specifying the `is_virtual` key with the `true` value. 
 
 ```yml
@@ -164,9 +164,38 @@ footheme:
         # information definition
 ```
 
+To include themes to a virtual theme you will use a similar formula:
+
+```yml
+footheme:
+    is_virtual: true
+    themes: 
+        - { theme: footheme_mobile, as: mobile }
+        # more subordinate themes
+    # other keys
+```
+
+Or the shorthand version:
+
+```yml
+footheme:
+    is_virtual: true
+    themes: [ footheme_mobile ] # a collection of theme names
+    # other keys
+```
+
+**NOTE**
+
+You must be cautious when referencing to themes, so please read these notes below:
+
+* Each referenced theme is automatically moved to the corresponding virtual theme, so a referenced theme will be not 
+accessible via the theme source,
+* A theme that is going to be referenced may be referenced only once, so you cannot reference to the same theme twice,
+* You cannot reference to another virtual theme.
+
 ### ThemeInfo
 
-[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-things.md#themeinfo)
+[Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/fundamental-elements.md#themeinfo)
 
 ```yml
 info:
