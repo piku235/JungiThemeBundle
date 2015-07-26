@@ -41,6 +41,7 @@ final class Processor implements ProcessorInterface
             new DelegatingParameterValueReplacer(),
             new ConstantValueReplacer($tagClassRegistry),
             new ThemePathWorker($locator),
+            new ThemeInfoValidationWorker(),
             new VirtualThemeWorker(),
         );
     }
