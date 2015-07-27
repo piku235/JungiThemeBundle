@@ -267,14 +267,12 @@ subordinate themes for a virtual theme.
 </virtual-theme>
 ```
 
-**NOTE**
-
 You must be cautious when referencing to themes, so please read these notes below:
 
 * Each referenced theme is automatically moved to the corresponding virtual theme, so a referenced theme will be not 
 accessible via the theme source,
 * A theme that is going to be referenced may be referenced only once, so you cannot reference to the same theme twice,
-* You cannot reference to another virtual theme.
+* You cannot reference to another virtual theme,
 
 ### ThemeInfo
 

@@ -164,7 +164,7 @@ footheme:
         # information definition
 ```
 
-To include themes to a virtual theme you will use a similar formula:
+To include themes to a virtual theme you will use a following formula:
 
 ```yml
 footheme:
@@ -184,14 +184,12 @@ footheme:
     # other keys
 ```
 
-**NOTE**
-
 You must be cautious when referencing to themes, so please read these notes below:
 
 * Each referenced theme is automatically moved to the corresponding virtual theme, so a referenced theme will be not 
 accessible via the theme source,
 * A theme that is going to be referenced may be referenced only once, so you cannot reference to the same theme twice,
-* You cannot reference to another virtual theme.
+* You cannot reference to another virtual theme,
 
 ### ThemeInfo
 
@@ -259,16 +257,6 @@ out which of built-in tags you can use.
 Of course you can attach your own tags and use them as it was shown in the quick example. Generally tag names are taken 
 from a tag registry that allows for dynamically registering tags in a much more convenient way. You can read about that 
 [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
-
-#### Arguments
-
-Arguments are significant when you want pass some data to a tag. Here's an example of passing arguments to the `jungi.mobile_devices`
-tag.
-
-```yml
-tags:
-    jungi.mobile_devices: [ [ AndroidOS, WindowsPhoneOS ], "const@jungi.mobile_devices::MOBILE" ]
-```
 
 #### Parameters usage
 
