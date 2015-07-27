@@ -1,12 +1,27 @@
 <?php
 
-/*
- * This file is part of the JungiThemeBundle package.
+/**
+ * Mobile Detect Library
+ * =====================
  *
- * (c) Piotr Kugla <piku235@gmail.com>
+ * Motto: "Every business should have a mobile detection script to detect mobile readers"
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * Mobile_Detect is a lightweight PHP class for detecting mobile devices (including tablets).
+ * It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.
+ *
+ * @author      Current authors: Serban Ghita <serbanghita@gmail.com>
+ *                               Nick Ilyin <nick.ilyin@gmail.com>
+ *
+ *              Original author: Victor Stanciu <vic.stanciu@gmail.com>
+ *
+ * @license     Code and contributions have 'MIT License'
+ *              More details: https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
+ *
+ * @link        Homepage:     http://mobiledetect.net
+ *              GitHub Repo:  https://github.com/serbanghita/Mobile-Detect
+ *              Google Code:  http://code.google.com/p/php-mobile-detect/
+ *              README:       https://github.com/serbanghita/Mobile-Detect/blob/master/README.md
+ *              HOWTO:        https://github.com/serbanghita/Mobile-Detect/wiki/Code-examples
  */
 
 namespace Jungi\Bundle\ThemeBundle\Core;
@@ -15,15 +30,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * MobileDetect only extends the Mobile_Detect class and fits it for the symfony environment.
+ * This class only extends the Mobile_Detect class and fits it for the symfony environment.
  *
- * @author      Modifier: Piotr Kugla <piku235@gmail.com>
- *              Current authors: Serban Ghita <serbanghita@gmail.com>
- *                               Nick Ilyin <nick.ilyin@gmail.com>
- *
- *              Original author: Victor Stanciu <vic.stanciu@gmail.com>
- * @license     Code and contributions have 'MIT License'
- *              More details: https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
+ * @author Piotr Kugla <piku235@gmail.com>
  */
 final class MobileDetect extends \Mobile_Detect
 {
