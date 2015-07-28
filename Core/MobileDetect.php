@@ -1,27 +1,12 @@
 <?php
 
-/**
- * Mobile Detect Library
- * =====================
+/*
+ * This file is part of the JungiThemeBundle package.
  *
- * Motto: "Every business should have a mobile detection script to detect mobile readers"
+ * (c) Piotr Kugla <piku235@gmail.com>
  *
- * Mobile_Detect is a lightweight PHP class for detecting mobile devices (including tablets).
- * It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.
- *
- * @author      Current authors: Serban Ghita <serbanghita@gmail.com>
- *                               Nick Ilyin <nick.ilyin@gmail.com>
- *
- *              Original author: Victor Stanciu <vic.stanciu@gmail.com>
- *
- * @license     Code and contributions have 'MIT License'
- *              More details: https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
- *
- * @link        Homepage:     http://mobiledetect.net
- *              GitHub Repo:  https://github.com/serbanghita/Mobile-Detect
- *              Google Code:  http://code.google.com/p/php-mobile-detect/
- *              README:       https://github.com/serbanghita/Mobile-Detect/blob/master/README.md
- *              HOWTO:        https://github.com/serbanghita/Mobile-Detect/wiki/Code-examples
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Jungi\Bundle\ThemeBundle\Core;
@@ -53,20 +38,22 @@ final class MobileDetect extends \Mobile_Detect
      * Useless for the symfony.
      *
      * @deprecated
+     * @see MobileDetect::handleRequest
      */
     public function setHttpHeaders($httpHeaders = null)
     {
-        throw new \BadMethodCallException('Rather use a "handleRequest" method with a Request instance.');
+        throw new \BadMethodCallException('Please use instead the "handleRequest" method.');
     }
 
     /**
      * Useless for the symfony.
      *
      * @deprecated
+     * @see MobileDetect::handleRequest
      */
     public function setUserAgent($userAgent = null)
     {
-        throw new \BadMethodCallException('Rather use a "handleRequest" method with a Request instance.');
+        throw new \BadMethodCallException('Please use instead the "handleRequest" method.');
     }
 
     /**
