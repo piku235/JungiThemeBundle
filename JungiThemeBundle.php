@@ -32,6 +32,16 @@ class JungiThemeBundle extends Bundle
 
         $container->addCompilerPass(new CacheWarmerPass());
         $container->addCompilerPass(new ThemeFilterPass());
+
+        /** @var DependencyInjection\JungiThemeExtension $ext */
+        $ext = $this->getContainerExtension();
+
+        // Default tags
+        $ext->registerTag(array(
+            'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
+            'Jungi\Bundle\ThemeBundle\Tag\TabletDevices',
+            'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
+        ));
     }
 
     /**

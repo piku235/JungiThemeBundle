@@ -40,11 +40,7 @@ class JungiThemeExtension extends Extension
     public function __construct()
     {
         $this->mappingFiles = array();
-        $this->registerTag(array(
-            'Jungi\Bundle\ThemeBundle\Tag\MobileDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\TabletDevices',
-            'Jungi\Bundle\ThemeBundle\Tag\DesktopDevices',
-        ));
+        $this->tagClasses = array();
     }
 
     /**
