@@ -14,6 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -157,6 +158,7 @@ class JungiThemeExtension extends Extension
     private function processThemeResolver($id, $for, array $config, ContainerBuilder $container)
     {
         list($type, $resolver) = each($config['resolver'][$for]);
+
         if ($type != 'id') {
             switch ($type) {
                 case 'in_memory':
@@ -179,5 +181,12 @@ class JungiThemeExtension extends Extension
         } else {
             $container->setAlias($id, $resolver);
         }
+
+        // Set the listener for the given theme resolver
+        $listenerId = 'jungi_theme.resolver.listener.'.$for;
+        $definition = new Definition('Jungi\\Bundle\\ThemeBundle\\Resolver\\EventListener\\ThemeResolverListener');
+        $definition->addArgument(new Reference($id));
+        $definition->addTag('kernel.event_subscriber');
+        $container->setDefinition($listenerId, $definition);
     }
 }
