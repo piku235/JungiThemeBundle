@@ -257,7 +257,7 @@ class ThemeSelectorTest extends TestCase
     private function setUpFallbackResolver($themeName)
     {
         $ref = new \ReflectionObject($this->selector);
-        $property = $ref->getProperty('fallback');
+        $property = $ref->getProperty('fallbackResolver');
         $property->setAccessible(true);
         $property->setValue($this->selector, new InMemoryThemeResolver($themeName));
     }
