@@ -49,7 +49,7 @@ class DelegatingParameterValueReplacer extends ValueReplacer
      */
     protected function resolveValue($value, ThemeDefinitionRegistryInterface $registry)
     {
-        /* @var ParametricThemeDefinitionRegistry $registry */
+        /** @var ParametricThemeDefinitionRegistry $registry */
         return $registry->getParameterBag()->resolveValue($value);
     }
 }

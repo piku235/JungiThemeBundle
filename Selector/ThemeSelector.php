@@ -21,7 +21,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * ThemeSelector basically uses a theme resolver to get the appropriate theme for the request.
+ * ThemeSelector basically uses a theme resolver to get an appropriate theme for a request.
+ *
+ * It uses two theme resolvers where the first one is primary (required) and the second one
+ * is fallback (optional).
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -35,12 +38,12 @@ class ThemeSelector implements ThemeSelectorInterface
     /**
      * @var ThemeResolverInterface
      */
-    private $fallback;
+    private $fallbackResolver;
 
     /**
      * @var ThemeResolverInterface
      */
-    private $resolver;
+    private $primaryResolver;
 
     /**
      * @var ThemeSourceInterface
@@ -52,19 +55,19 @@ class ThemeSelector implements ThemeSelectorInterface
      *
      * @param ThemeSourceInterface     $source     A theme source
      * @param EventDispatcherInterface $dispatcher An event dispatcher
-     * @param ThemeResolverInterface   $resolver   A theme resolver
+     * @param ThemeResolverInterface   $primary    A primary theme resolver
      * @param ThemeResolverInterface   $fallback   A fallback theme resolver (optional)
      */
-    public function __construct(ThemeSourceInterface $source, EventDispatcherInterface $dispatcher, ThemeResolverInterface $resolver, ThemeResolverInterface $fallback = null)
+    public function __construct(ThemeSourceInterface $source, EventDispatcherInterface $dispatcher, ThemeResolverInterface $primary, ThemeResolverInterface $fallback = null)
     {
         $this->dispatcher = $dispatcher;
         $this->source = $source;
-        $this->resolver = $resolver;
-        $this->fallback = $fallback;
+        $this->primaryResolver = $primary;
+        $this->fallbackResolver = $fallback;
     }
 
     /**
-     * Selects an appropriate theme fora given Request.
+     * Selects an appropriate theme for the given request.
      *
      * If everything will go well a theme obtained from the primary theme resolver
      * will be returned otherwise a theme from the fallback theme resolver will be
@@ -79,29 +82,29 @@ class ThemeSelector implements ThemeSelectorInterface
     public function select(Request $request)
     {
         try {
-            $theme = $this->getTheme($this->resolver->resolveThemeName($request), $request);
+            $theme = $this->getTheme($this->primaryResolver->resolveThemeName($request), $request);
 
             // Dispatch the event
             $event = new DetailedResolvedThemeEvent(
                 DetailedResolvedThemeEvent::PRIMARY_RESOLVER,
                 $theme,
-                $this->resolver,
+                $this->primaryResolver,
                 $request
             );
             $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED, $event);
         } catch (\Exception $e) {
             // Use a fallback theme?
-            if (null === $this->fallback) {
+            if (null === $this->fallbackResolver) {
                 throw $e;
             }
 
-            $theme = $this->getTheme($this->fallback->resolveThemeName($request), $request);
+            $theme = $this->getTheme($this->fallbackResolver->resolveThemeName($request), $request);
 
             // Dispatch the event
             $event = new DetailedResolvedThemeEvent(
                 DetailedResolvedThemeEvent::FALLBACK_RESOLVER,
                 $theme,
-                $this->fallback,
+                $this->fallbackResolver,
                 $request
             );
             $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED, $event);
@@ -116,7 +119,7 @@ class ThemeSelector implements ThemeSelectorInterface
     }
 
     /**
-     * Returns the theme instance for a given theme name.
+     * Returns the theme instance for the given theme name.
      *
      * @param string  $themeName A theme name
      * @param Request $request   A Request instance

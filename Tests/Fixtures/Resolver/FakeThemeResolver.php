@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 class FakeThemeResolver extends InMemoryThemeResolver implements ResponseWriterInterface
 {
     /**
-     * Writes the theme changes from a given request to a given response.
+     * Writes the theme changes from the given request to the given response.
      *
      * @param Request  $request  A request instance
      * @param Response $response A response instance

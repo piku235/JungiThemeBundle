@@ -115,7 +115,7 @@ class VirtualThemeDefinition extends ThemeDefinition
     }
 
     /**
-     * Removes a given theme.
+     * Removes the given theme.
      *
      * @param string $name A theme name
      */

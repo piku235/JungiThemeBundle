@@ -81,7 +81,7 @@ class TagCollection implements \IteratorAggregate
      *
      * @return TagInterface
      *
-     * @throws \RuntimeException When there is no tag with a given tag name
+     * @throws \RuntimeException When there is no tag with the given tag name
      */
     public function get($name)
     {
@@ -93,9 +93,9 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Checks if a given tag name exists.
+     * Checks if the given tag name exists.
      *
-     * Be careful, because this method ONLY looks for a given tag name
+     * Be careful, because this method ONLY looks for the given tag name
      * and it does not check if the tag is EQUAL to a found tag
      *
      * @param string $name A tag name
@@ -147,7 +147,7 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Checks if a given tag or collection of tags exists and if they are EQUAL to the found tags.
+     * Checks if the given tag or collection of tags exists and if they are EQUAL to the found tags.
      *
      * @param TagInterface $tag A tag
      *
@@ -212,7 +212,7 @@ class TagCollection implements \IteratorAggregate
     }
 
     /**
-     * Removes a given tag from the collection.
+     * Removes the given tag from the collection.
      *
      * @param string $name A tag name
      */

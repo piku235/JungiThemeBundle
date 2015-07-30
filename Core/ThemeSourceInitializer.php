@@ -137,7 +137,7 @@ final class ThemeSourceInitializer
     }
 
     /**
-     * Resolved a theme mapping loader for a given resource.
+     * Resolved a theme mapping loader for the given resource.
      *
      * @param string $path A path
      * @param string $type A type of theme mapping file

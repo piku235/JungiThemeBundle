@@ -34,7 +34,7 @@ class TagClassRegistry implements TagClassRegistryInterface
     }
 
     /**
-     * Checks if a given tag name has the registered class.
+     * Checks if the given tag name has the registered class.
      *
      * @param string $name A tag name
      *
@@ -46,13 +46,13 @@ class TagClassRegistry implements TagClassRegistryInterface
     }
 
     /**
-     * Gets the class of a given tag name.
+     * Gets the class of the given tag name.
      *
      * @param string $name A tag name
      *
      * @return string
      *
-     * @throws \InvalidArgumentException When a given tag name does not exists
+     * @throws \InvalidArgumentException When the given tag name does not exists
      */
     public function getTagClass($name)
     {

@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * The jungi theme bundle.
+ * The JungiThemeBundle.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

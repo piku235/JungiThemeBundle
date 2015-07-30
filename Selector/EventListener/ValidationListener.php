@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * ValidationListener.
+ * ValidationListener is used for validating themes set by theme selectors.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

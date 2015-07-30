@@ -16,6 +16,6 @@ namespace Jungi\Bundle\ThemeBundle\Selector\Exception;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-class NullThemeException extends \LogicException
+class NullThemeException extends \RuntimeException
 {
 }

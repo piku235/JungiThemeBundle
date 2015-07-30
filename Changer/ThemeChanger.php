@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * ThemeChanger is a simple implementation of the ThemeChangerInterface.
+ * ThemeChanger is a standard implementation of the ThemeChangerInterface.
  *
  * It uses a ThemeResolverInterface instance for changing the current theme.
  *

@@ -48,7 +48,7 @@ class TemplateLocator extends BaseTemplateLocator
     }
 
     /**
-     * Returns a full path for a given template file.
+     * Returns a full path for the given template file.
      *
      * @param TemplateReferenceInterface $template    A template
      * @param string                     $currentPath Unused

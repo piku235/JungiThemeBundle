@@ -182,7 +182,7 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
     }
 
     /**
-     * Parses a theme info from a given DOM element.
+     * Parses a theme info from the given DOM element.
      *
      * @param string          $themeName     A theme name
      * @param array           $specification A specification
@@ -243,7 +243,7 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
     }
 
     /**
-     * Replaces a given argument by its proper php value.
+     * Replaces the given argument by its proper php value.
      *
      * @param string &$argument An argument
      */

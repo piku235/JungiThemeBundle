@@ -19,7 +19,7 @@ namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
 interface TagClassRegistryInterface
 {
     /**
-     * Checks if a given tag name has the registered class.
+     * Checks if the given tag name has the registered class.
      *
      * @param string $name A tag name
      *
@@ -28,7 +28,7 @@ interface TagClassRegistryInterface
     public function hasTagClass($name);
 
     /**
-     * Gets the full qualified class name of a given tag name.
+     * Gets the full qualified class name of the given tag name.
      *
      * @param string $name A tag name
      *

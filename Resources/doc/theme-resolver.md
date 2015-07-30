@@ -12,7 +12,7 @@ All theme resolvers must implement the `Jungi\Bundle\ThemeBundle\Resolver\ThemeR
 interface ThemeResolverInterface
 {
     /**
-     * Returns the appropriate theme name for a given request
+     * Returns the appropriate theme name for the given request
      *
      * @param Request $request A request instance
      *
@@ -21,7 +21,7 @@ interface ThemeResolverInterface
     public function resolveThemeName(Request $request);
 
     /**
-     * Sets the theme for a given request
+     * Sets the theme for the given request
      *
      * @param string  $themeName The theme name
      * @param Request $request   A request instance
@@ -96,7 +96,7 @@ class UserThemeResolver implements ThemeResolverInterface
             throw new LogicException('You cannot change the theme when the user is not authenticated.');
         }
         
-        /* @var UserWithTheme $user */
+        /** @var UserWithTheme $user */
         $user = $token->getUser();
         $user->setThemeName($themeName);
     }

@@ -18,7 +18,7 @@ use Jungi\Bundle\ThemeBundle\Core\MobileDetect;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * The main goal of this filter is the best theme match for a device that sent the request.
+ * The goal of this filter is the best theme match for a device that sent the request.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -68,7 +68,7 @@ class DeviceThemeFilter implements ThemeFilterInterface
             Tag\TabletDevices::getName(),
         );
         foreach ($themes as $theme) {
-            /* @var ThemeInterface $theme */
+            /** @var ThemeInterface $theme */
             $tags = $theme->getTags();
             if ($tags->hasSet($supported, Tag\TagCollection::COND_OR) && !$tags->contains($tag)) {
                 $themes->remove($theme->getName());

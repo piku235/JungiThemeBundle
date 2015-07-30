@@ -21,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference as BaseTemplateR
 /**
  * TemplateNameParser basically wraps a TemplateReferenceInterface instance with the TemplateReference
  * using the current theme. If the current theme is not available then the parent parse method will be
- * used.
+ * used instead.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

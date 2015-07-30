@@ -80,7 +80,7 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Checks if a given theme exists.
+     * Checks if the given theme exists.
      *
      * @param string $themeName A theme name
      *
@@ -92,7 +92,7 @@ class ThemeCollection implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Checks if a given theme instance exists in the collection.
+     * Checks if the given theme instance exists in the collection.
      *
      * @param ThemeInterface $theme A theme
      *

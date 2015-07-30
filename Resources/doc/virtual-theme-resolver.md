@@ -7,7 +7,7 @@ A theme matcher implements the `Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeRe
 interface VirtualThemeResolverInterface
 {
     /**
-     * Resolved an appropriate theme for a given virtual theme
+     * Resolved an appropriate theme for the given virtual theme
      *
      * @param VirtualThemeInterface $theme   A virtual theme
      * @param Request               $request A Request instance
@@ -27,7 +27,7 @@ Each theme filter must implement the `Jungi\Bundle\ThemeBundle\Matcher\Filter\Th
 interface ThemeFilterInterface
 {
     /**
-     * Filters a given theme collection by removing these themes that are not suitable'
+     * Filters the given theme collection by removing these themes that are not suitable'
      *
      * @param ThemeCollection $themes  A theme collection
      * @param Request         $request A Request instance

@@ -56,7 +56,7 @@ class TemplateLocatorTest extends TestCase
     }
 
     /**
-     * Tests when a given theme is not exist.
+     * Tests when the given theme is not exist.
      *
      * @expectedException \RuntimeException
      */

@@ -15,14 +15,14 @@ use Jungi\Bundle\ThemeBundle\Selector\Exception\NullThemeException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * ThemeSelectorInterface determines which theme will be used for a given Request.
+ * ThemeSelectorInterface determines which theme will be used for the given Request.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface ThemeSelectorInterface
 {
     /**
-     * Selects an appropriate theme for a given Request.
+     * Selects an appropriate theme for the given Request.
      *
      * @param Request $request A Request instance
      *

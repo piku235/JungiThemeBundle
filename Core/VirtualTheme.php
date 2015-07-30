@@ -17,7 +17,7 @@ use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
- * VirtualTheme is a representation of themes which are aggregated with this virtual theme.
+ * VirtualTheme is a representation of themes that are aggregated with this virtual theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

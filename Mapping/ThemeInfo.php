@@ -45,7 +45,7 @@ class ThemeInfo
     }
 
     /**
-     * Checks if a given property exists.
+     * Checks if the given property exists.
      *
      * @param string $name A name
      *

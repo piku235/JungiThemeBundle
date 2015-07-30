@@ -19,14 +19,14 @@ namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 interface DefinitionLoaderInterface
 {
     /**
-     * Loads theme definitions from a given resource.
+     * Loads theme definitions from the given resource.
      *
      * @param string $resource A resource
      */
     public function load($resource);
 
     /**
-     * Checks if a given resource is supported.
+     * Checks if the given resource is supported.
      *
      * @param string $resource A resource
      * @param string $type     A resource type (optional)

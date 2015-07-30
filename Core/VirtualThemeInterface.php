@@ -14,7 +14,7 @@ namespace Jungi\Bundle\ThemeBundle\Core;
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 
 /**
- * A virtual theme is basically a container of standard themes where only one
+ * Virtual theme is basically a container of standard themes where only one
  * of them will be used by virtual theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>

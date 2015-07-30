@@ -21,7 +21,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 interface ProcessorInterface
 {
     /**
-     * Processes a given theme definition registry.
+     * Processes the given theme definition registry.
      *
      * @param ThemeDefinitionRegistryInterface $registry A registry
      */

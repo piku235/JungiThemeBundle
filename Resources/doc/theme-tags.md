@@ -72,7 +72,7 @@ Each tag is a class which implements the `Jungi\Bundle\ThemeBundle\Tag\TagInterf
 interface TagInterface
 {
     /**
-     * Checks if a given tag is equal
+     * Checks if the given tag is equal
      *
      * @param TagInterface $tag A tag
      *

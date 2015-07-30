@@ -23,7 +23,7 @@ namespace Jungi\Bundle\ThemeBundle\Tag;
 interface TagInterface
 {
     /**
-     * Checks if a given tag is equal.
+     * Checks if the given tag is equal.
      *
      * @param TagInterface $tag A tag
      *

@@ -21,7 +21,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 interface DumperInterface
 {
     /**
-     * Dumps a given theme definition registry.
+     * Dumps the given theme definition registry.
      *
      * @param ThemeDefinitionRegistryInterface $registry
      *

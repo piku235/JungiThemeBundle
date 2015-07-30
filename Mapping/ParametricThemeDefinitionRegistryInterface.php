@@ -34,7 +34,7 @@ interface ParametricThemeDefinitionRegistryInterface extends ThemeDefinitionRegi
     public function setParameter($name, $value);
 
     /**
-     * Checks if a given parameter exists.
+     * Checks if the given parameter exists.
      *
      * @param string $name A name
      *

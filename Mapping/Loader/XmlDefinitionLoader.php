@@ -105,7 +105,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
         $this->parseInfo($elm, $definition, $context);
         $this->parseTags($elm, $definition, $context);
         foreach ($context->xpath('mapping:themes/mapping:ref', $elm) as $ref) {
-            /* @var \DOMElement $ref */
+            /** @var \DOMElement $ref */
 
             $definition->addThemeReference(new Reference(
                 $ref->getAttribute('theme'),
@@ -117,7 +117,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
     }
 
     /**
-     * Parses a theme info from a given DOM element.
+     * Parses a theme info from the given DOM element.
      *
      * @param \DOMElement      $elm     A DOM element
      * @param ThemeDefinition  $theme   A theme definition
@@ -132,7 +132,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
 
         $definition = new ThemeInfo();
         foreach ($properties as $property) {
-            /* @var \DOMElement $property */
+            /** @var \DOMElement $property */
             $definition->setProperty(
                 $property->getAttribute('key'),
                 $this->getElementAsPhp($property, 'property', $context)
@@ -143,7 +143,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
     }
 
     /**
-     * Parses a theme tags from a given DOM element.
+     * Parses a theme tags from the given DOM element.
      *
      * @param \DOMElement      $elm     A DOM element
      * @param ThemeDefinition  $theme   A theme definition
@@ -152,7 +152,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
     private function parseTags(\DOMElement $elm, ThemeDefinition $theme, XmlLoaderContext $context)
     {
         foreach ($context->xpath('mapping:tags/mapping:tag', $elm) as $tag) {
-            /* @var \DOMElement $tag */
+            /** @var \DOMElement $tag */
 
             $definition = new Tag($tag->getAttribute('name'));
             $arguments = $this->getElementsAsPhp($tag, 'argument', $context);

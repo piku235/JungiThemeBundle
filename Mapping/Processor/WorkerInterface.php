@@ -21,7 +21,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 interface WorkerInterface
 {
     /**
-     * Executes specific tasks on a given theme definition registry.
+     * Executes specific tasks on the given theme definition registry.
      *
      * @param ThemeDefinitionRegistryInterface $registry A registry
      */

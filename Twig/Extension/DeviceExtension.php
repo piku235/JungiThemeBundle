@@ -80,7 +80,7 @@ class DeviceExtension extends \Twig_Extension
     }
 
     /**
-     * Checks if the request has been sent by a given device.
+     * Checks if the request has been sent by the given device.
      *
      * @param string $device A device
      *

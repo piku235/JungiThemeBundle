@@ -67,7 +67,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates a theme mock with a given name.
+     * Creates a theme mock with the given name.
      *
      * @param string $name A theme name
      * @param string $path A theme resource dir (optional)

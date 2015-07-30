@@ -15,10 +15,10 @@ use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
 /**
- * This interface allow to register themes that are used by the bundle.
+ * This interface allows to register themes that are used by the bundle.
  *
  * The theme source is a central place where all themes in the system
- * are collected.
+ * are gathered.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -32,7 +32,7 @@ interface ThemeSourceInterface
     public function addTheme(ThemeInterface $theme);
 
     /**
-     * Checks if a given theme exists.
+     * Checks if the given theme exists.
      *
      * @param string $name A theme name
      *

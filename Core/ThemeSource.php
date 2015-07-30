@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**
- * ThemeSource is a simple implementation of the ThemeSourceInterface.
+ * ThemeSource is a standard implementation of the ThemeSourceInterface.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

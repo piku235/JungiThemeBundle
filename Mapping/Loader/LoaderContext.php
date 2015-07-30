@@ -63,7 +63,7 @@ class LoaderContext
     }
 
     /*
-     * Resolves the real value of a given parameter.
+     * Resolves the real value of the given parameter.
      *
      * @param string $paramName A parameter name
      *

@@ -57,7 +57,7 @@ final class MobileDetect extends \Mobile_Detect
     }
 
     /**
-     * Handles a given Request.
+     * Handles the given Request.
      *
      * @param Request $request A request
      */
