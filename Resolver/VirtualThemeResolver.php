@@ -17,7 +17,8 @@ use Jungi\Bundle\ThemeBundle\Resolver\Filter\ThemeFilterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * This class uses theme filters for resolving an appropriate theme.
+ * This class uses theme filters for resolving an appropriate theme for the given
+ * virtual theme.
  *
  * Theme filters task is to reject from a collection non matching themes until there will
  * be only one theme.

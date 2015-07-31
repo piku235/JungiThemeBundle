@@ -11,7 +11,7 @@ A theme selector implements the `Jungi\Bundle\ThemeBundle\Selector\ThemeSelector
 interface ThemeSelectorInterface
 {
     /**
-     * Selects an appropriate theme for the given Request
+     * Selects the current theme for the given Request.
      *
      * @param Request $request A Request instance
      *

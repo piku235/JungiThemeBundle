@@ -21,10 +21,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * ThemeSelector basically uses a theme resolver to get an appropriate theme for a request.
+ * ThemeSelector is a standard implementation of the ThemeSelectorInterface.
  *
- * It uses two theme resolvers where the first one is primary (required) and the second one
- * is fallback (optional).
+ * It uses two theme resolvers for determining the current theme:
+ *  primary theme resolver (required),
+ *  fallback theme resolver (optional)
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -67,11 +68,11 @@ class ThemeSelector implements ThemeSelectorInterface
     }
 
     /**
-     * Selects an appropriate theme for the given request.
+     * Selects the current theme for the given Request.
      *
      * If everything will go well a theme obtained from the primary theme resolver
      * will be returned otherwise a theme from the fallback theme resolver will be
-     * returned
+     * returned.
      *
      * @param Request $request A request instance
      *
