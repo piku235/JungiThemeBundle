@@ -68,7 +68,7 @@ class DeviceThemeFilter implements ThemeFilterInterface
             Tag\TabletDevices::getName(),
         );
         foreach ($themes as $theme) {
-            /** @var ThemeInterface $theme */
+            /* @var ThemeInterface $theme */
             $tags = $theme->getTags();
             if ($tags->hasSet($supported, Tag\TagCollection::COND_OR) && !$tags->contains($tag)) {
                 $themes->remove($theme->getName());

@@ -1,8 +1,9 @@
 Theme selector
 ==============
 
-Basically a theme selector does not differ too much from a theme resolver. The key difference is that a theme selector returns 
-a **theme instance** for a particular request. We can say a theme selector is an appropriate place to put any complex logic. 
+Basically a theme selector does not differ too much from a theme resolver. The key difference is that a theme selector 
+operates and returns a **ThemeInterface** instance for a particular request. We can say a theme selector is an appropriate 
+place to put any complex logic.
 
 A theme selector implements the `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorInterface`.
  
@@ -62,7 +63,7 @@ jungi_theme:
             suspects: # list of theme resolver classes
 ```
 
-An example of setting the **CookieThemeResolver** as suspect for the **ValidationListener**:
+An example of setting the **CookieThemeResolver** as a suspect for the **ValidationListener**:
 
 ```yaml
 # app/config/config.yml

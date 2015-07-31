@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
- * ThemeInfoValidationWorker
+ * ThemeInfoValidationWorker.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

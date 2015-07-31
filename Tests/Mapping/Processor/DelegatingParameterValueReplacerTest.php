@@ -44,7 +44,7 @@ class DelegatingParameterValueReplacerTest extends TestCase
         $container = new ParametricThemeDefinitionRegistry();
         $container->setParameters(array(
             'foo_1' => 'nice',
-            'path' => __DIR__
+            'path' => __DIR__,
         ));
 
         $tag = new Tag('bar', array('%foo_1%'));
@@ -56,7 +56,7 @@ class DelegatingParameterValueReplacerTest extends TestCase
 
         // Assert
         $expectedTag = new Tag('bar', array('nice'));
-        $expectedPath = __DIR__ . '/Resources/theme';
+        $expectedPath = __DIR__.'/Resources/theme';
 
         $this->assertEquals($expectedTag, $tag);
         $this->assertEquals($expectedPath, $theme->getPath());

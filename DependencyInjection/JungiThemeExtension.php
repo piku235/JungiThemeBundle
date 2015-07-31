@@ -45,7 +45,7 @@ class JungiThemeExtension extends Extension
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {

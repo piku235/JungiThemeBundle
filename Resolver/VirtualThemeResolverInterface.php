@@ -16,7 +16,7 @@ use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Interface for resolving an appropriate theme for the given virtual theme and request.
+ * Interface for resolving an appropriate theme for the given virtual theme and the request.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

@@ -12,7 +12,6 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
 use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
-use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
@@ -49,7 +48,7 @@ class DelegatingParameterValueReplacer extends ValueReplacer
      */
     protected function resolveValue($value, ThemeDefinitionRegistryInterface $registry)
     {
-        /** @var ParametricThemeDefinitionRegistry $registry */
+        /* @var ParametricThemeDefinitionRegistry $registry */
         return $registry->getParameterBag()->resolveValue($value);
     }
 }
