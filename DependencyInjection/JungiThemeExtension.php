@@ -181,12 +181,5 @@ class JungiThemeExtension extends Extension
         } else {
             $container->setAlias($id, $resolver);
         }
-
-        // Set the listener for the given theme resolver
-        $listenerId = 'jungi_theme.resolver.listener.'.$for;
-        $definition = new Definition('Jungi\\Bundle\\ThemeBundle\\Resolver\\EventListener\\ThemeResolverListener');
-        $definition->addArgument(new Reference($id));
-        $definition->addTag('kernel.event_subscriber');
-        $container->setDefinition($listenerId, $definition);
     }
 }
