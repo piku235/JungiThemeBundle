@@ -21,6 +21,10 @@ use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
 /**
  * PhpDumper.
  *
+ * To dump a theme definition registry using this theme dumper
+ * you must at first process a theme definition registry using
+ * a theme processor.
+ *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class PhpDumper implements DumperInterface
@@ -55,11 +59,18 @@ class PhpDumper implements DumperInterface
 
 \$collection = new \Jungi\Bundle\ThemeBundle\Core\ThemeCollection();
 $themes
-
 return \$collection;
 EOFILE;
     }
 
+    /**
+     * Dumps a theme definition
+     *
+     * @param string $name A theme name
+     * @param ThemeDefinition $definition A theme definition
+     *
+     * @return string|null
+     */
     private function dumpTheme($name, ThemeDefinition $definition)
     {
         if ($definition instanceof VirtualThemeDefinition) {
@@ -67,57 +78,98 @@ EOFILE;
         } elseif ($definition instanceof StandardThemeDefinition) {
             return $this->dumpStandardTheme($name, $definition);
         }
-
-        return;
     }
 
+    /**
+     * Dumps a virtual theme definition
+     *
+     * @param string $name A theme name
+     * @param VirtualThemeDefinition $definition A theme definition
+     *
+     * @return string
+     */
     private function dumpVirtualTheme($name, VirtualThemeDefinition $definition)
     {
-        $themes = array();
-        foreach ($definition->getThemes() as $childName => $childDefinition) {
-            $themes[] = $this->dumpTheme($childName, $childDefinition);
+        // Basics
+        $info = $this->prependTab($this->dumpThemeInfo($definition));
+        $tags = $this->prependTab($this->dumpTags($definition));
+
+        // Themes
+        $arrBody = '';
+        if ($definition->getThemes()) {
+            $themes = array();
+            foreach ($definition->getThemes() as $childName => $childDefinition) {
+                $themes[] = $this->dumpTheme($childName, $childDefinition);
+            }
+
+            $arrBody = PHP_EOL.$this->prependTab(implode(', ', $themes)).PHP_EOL;
         }
+        $themes = $this->prependTab(sprintf("array(%s)", $arrBody));
 
-        $themes = $this->prependTab(sprintf('array(%s)', PHP_EOL.$this->prependTab(implode(', ', $themes), 1)).PHP_EOL, 1);
-
+        // Outcome
         return <<< EOVTHEME
 new \Jungi\Bundle\ThemeBundle\Core\VirtualTheme(
     '$name',
 $themes,
-{$this->dumpThemeInfo($definition)},
-{$this->dumpTags($definition)}
+$info,
+$tags
 )
 EOVTHEME;
     }
 
+    /**
+     * Dumps a standard theme definition
+     *
+     * @param string $name A theme name
+     * @param StandardThemeDefinition $definition A theme name
+     *
+     * @return string
+     */
     private function dumpStandardTheme($name, StandardThemeDefinition $definition)
     {
+        $info = $this->prependTab($this->dumpThemeInfo($definition));
+        $tags = $this->prependTab($this->dumpTags($definition));
+
         return <<< EOSTHEME
 new \Jungi\Bundle\ThemeBundle\Core\Theme(
     '$name',
     '{$definition->getPath()}',
-{$this->dumpThemeInfo($definition)},
-{$this->dumpTags($definition)}
+$info,
+$tags
 )
 EOSTHEME;
     }
 
+    /**
+     * Dumps tags of the given theme definition
+     *
+     * @param ThemeDefinition $definition A theme definition
+     *
+     * @return string
+     */
     private function dumpTags(ThemeDefinition $definition)
     {
-        $tags = array();
-        foreach ($definition->getTags() as $tag) {
-            $tags[] = $this->dumpTag($tag).',';
+        $body = '';
+        if ($definition->getTags()) {
+            $tags = array();
+            foreach ($definition->getTags() as $tag) {
+                $tags[] = $this->dumpTag($tag);
+            }
+
+            $body = PHP_EOL.$this->prependTab(implode(','.PHP_EOL, $tags)).PHP_EOL;
+            $body = sprintf('array(%s)', $body);
         }
 
-        $tags = implode("\n", $tags);
-
-        return <<< EOTAGS
-    new \Jungi\Bundle\ThemeBundle\Tag\TagCollection(array(
-$tags
-    ))
-EOTAGS;
+        return sprintf('new \Jungi\Bundle\ThemeBundle\Tag\TagCollection(%s)', $body);
     }
 
+    /**
+     * Dumps a theme tag
+     *
+     * @param Tag $definition A theme tag
+     *
+     * @return string
+     */
     private function dumpTag(Tag $definition)
     {
         $class = $this->tagClassRegistry->getTagClass($definition->getName());
@@ -126,21 +178,49 @@ EOTAGS;
             $arg = $this->dumpValue($arg);
         }
 
-        return $this->prependTab(sprintf('new %s(%s)', $class, implode(', ', $args)), 2);
+        return sprintf('new %s(%s)', $class, implode(', ', $args));
     }
 
+    /**
+     * Dumps php values
+     *
+     * @param mixed $value A php value
+     *
+     * @return string
+     */
     protected function dumpValue($value)
     {
-        $result = var_export($value, true);
-        $result = preg_replace('/ {2}/', '    ', $result);
+        if (is_array($value)) {
+            $result = '';
+            if ($value) {
+                $arrValues = array();
+                foreach ($value as $childKey => $childValue) {
+                    $arrValues[] = sprintf('%s => %s', $this->dumpValue($childKey), $this->dumpValue($childValue));
+                }
+
+                $result = PHP_EOL.$this->prependTab(implode(','.PHP_EOL, $arrValues)).PHP_EOL;
+            }
+
+            $result = sprintf('array(%s)', $result);
+        } else {
+            $result = var_export($value, true);
+            $result = preg_replace('/ {2}/', '    ', $result);
+        }
 
         return $result;
     }
 
+    /**
+     * Dumps a theme info of the given theme definition
+     *
+     * @param ThemeDefinition $definition A theme definition
+     *
+     * @return string
+     */
     protected function dumpThemeInfo(ThemeDefinition $definition)
     {
         if (null === $information = $definition->getInfo()) {
-            return $this->prependTab('null', 1);
+            return 'null';
         }
 
         $methods = array();
@@ -152,6 +232,7 @@ EOTAGS;
         }
         if ($information->hasProperty('authors')) {
             foreach ($information->getProperty('authors') as $author) {
+                // Name and email are required and that's why they should exist
                 $args = array(
                     $this->dumpValue($author['name']),
                     $this->dumpValue($author['email']),
@@ -165,17 +246,27 @@ EOTAGS;
         }
 
         $methods[] = '->getThemeInfo()';
-        $methods = $this->prependTab(implode(PHP_EOL, $methods), 2);
+        $methods = $this->prependTab(implode(PHP_EOL, $methods));
 
         return <<< EOINFO
-    \Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence::createBuilder()
+\Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence::createBuilder()
 $methods
 EOINFO;
     }
 
-    protected function prependTab($content, $count, $startLine = 0, $endLine = null)
+    /**
+     * Prepends tab spaces to the given content
+     *
+     * @param string $content A content
+     * @param int $count A count of tabs (optional)
+     * @param int $startLine A start line from which apply tabs (optional)
+     * @param int|null $endLine An end line from which apply tabs (optional)
+     *
+     * @return string
+     */
+    protected function prependTab($content, $count = 1, $startLine = 0, $endLine = null)
     {
-        $parts = explode("\n", $content);
+        $parts = explode(PHP_EOL, $content);
         if (null === $endLine) {
             $endLine = count($parts);
         } elseif ($endLine < 0) {
