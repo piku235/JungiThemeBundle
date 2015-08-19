@@ -15,13 +15,6 @@ $collection->add(new \Jungi\Bundle\ThemeBundle\Core\Theme(
         new Jungi\Bundle\ThemeBundle\Tag\DesktopDevices(),
         new Jungi\Bundle\ThemeBundle\Tag\MobileDevices(array(
             0 => 'AndroidOS'
-        ), 'foo', 2, array(
-            'multi' => array(
-                3 => 'foo',
-                4 => array(
-                    0 => 1
-                )
-            )
         ))
     ))
 ));
@@ -49,8 +42,6 @@ $collection->add(new \Jungi\Bundle\ThemeBundle\Core\VirtualTheme(
     ),
     \Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence::createBuilder()
         ->setName('Virtual theme')
-        ->setDescription('Super virtual theme')
-        ->addAuthor(new \Jungi\Bundle\ThemeBundle\Information\Author('piku235', 'piku235@gmail.com', 'homepage'))
         ->getThemeInfo(),
     new \Jungi\Bundle\ThemeBundle\Tag\TagCollection(array(
         new Jungi\Bundle\ThemeBundle\Tag\DesktopDevices()
