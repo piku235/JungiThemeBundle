@@ -62,7 +62,7 @@ class VirtualTheme implements VirtualThemeInterface
     {
         $this->name = $name;
         $this->pointed = null;
-        $this->info = $info ?: ThemeInfoEssence::createBuilder()->getThemeInfo();
+        $this->info = $info ?: ThemeInfoEssence::createBuilder()->setName('empty')->getThemeInfo();
         $this->tags = $tags ?: new TagCollection();
 
         foreach ($themes as $theme) {

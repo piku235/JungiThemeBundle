@@ -106,6 +106,10 @@ class ThemeInfoEssenceBuilder
      */
     public function getThemeInfo()
     {
+        if (!$this->name) {
+            throw new \RuntimeException(sprintf('You cannot leave the name property empty.'));
+        }
+
         return new ThemeInfoEssence($this);
     }
 }

@@ -24,6 +24,16 @@ class ThemeInfo
     private $properties = array();
 
     /**
+     * Constructor
+     *
+     * @param array $properties Properties (optional)
+     */
+    public function __construct(array $properties = array())
+    {
+        $this->properties = $properties;
+    }
+
+    /**
      * Sets properties.
      *
      * @param array $properties Properties

@@ -69,7 +69,9 @@ EOFILE;
      * @param string $name A theme name
      * @param ThemeDefinition $definition A theme definition
      *
-     * @return string|null
+     * @return string
+     *
+     * @throws \InvalidArgumentException If the given definition is not supported
      */
     private function dumpTheme($name, ThemeDefinition $definition)
     {
@@ -78,6 +80,8 @@ EOFILE;
         } elseif ($definition instanceof StandardThemeDefinition) {
             return $this->dumpStandardTheme($name, $definition);
         }
+
+        throw new \InvalidArgumentException(sprintf('The theme definition under the name "%s" is not supported.', $name));
     }
 
     /**
