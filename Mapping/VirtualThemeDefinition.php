@@ -37,16 +37,29 @@ class VirtualThemeDefinition extends ThemeDefinition
      */
     public function __construct(array $themeRefs = array(), array $tags = array(), ThemeInfo $info = null)
     {
-        $this->info = $info;
+        parent::__construct(null, $tags, $info);
+
         $this->themes = array();
         $this->references = array();
-
         foreach ($themeRefs as $reference) {
             $this->addThemeReference($reference);
         }
-        foreach ($tags as $tag) {
-            $this->addTag($tag);
-        }
+    }
+
+    /**
+     * Not used.
+     */
+    public function setPath()
+    {
+        throw new \LogicException('You cannot set path of a virtual theme.');
+    }
+
+    /**
+     * Not used.
+     */
+    public function getPath()
+    {
+        throw new \LogicException('You cannot get path of a virtual theme.');
     }
 
     /**

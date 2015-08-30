@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * Classes which implements this interface are used only for holding the current theme instance.
+ * Classes which implements this interface are used only for holding the current theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

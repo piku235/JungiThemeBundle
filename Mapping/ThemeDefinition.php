@@ -16,7 +16,7 @@ namespace Jungi\Bundle\ThemeBundle\Mapping;
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
-abstract class ThemeDefinition
+class ThemeDefinition
 {
     /**
      * @var Tag[]
@@ -27,6 +27,51 @@ abstract class ThemeDefinition
      * @var ThemeInfo
      */
     protected $info;
+
+    /**
+     * @var string
+     */
+    protected $path;
+
+    /**
+     * Constructor.
+     *
+     * @param string    $path A path (optional)
+     * @param Tag[]     $tags Tag definitions (optional)
+     * @param ThemeInfo $info A theme info (optional)
+     */
+    public function __construct($path = null, array $tags = array(), ThemeInfo $info = null)
+    {
+        $this->path = $path;
+        $this->info = $info;
+        foreach ($tags as $tag) {
+            $this->addTag($tag);
+        }
+    }
+
+    /**
+     * Sets a path to theme resources.
+     *
+     * @param $path
+     *
+     * @return ThemeDefinition
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Returns the path to theme resources.
+     *
+     * @return null|string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
 
     /**
      * @param array $tags
@@ -44,6 +89,8 @@ abstract class ThemeDefinition
     }
 
     /**
+     * Adds a tag definition.
+     *
      * @param Tag $definition
      *
      * @return ThemeDefinition
@@ -56,6 +103,8 @@ abstract class ThemeDefinition
     }
 
     /**
+     * Returns the tag definitions.
+     *
      * @return Tag[]
      */
     public function getTags()
@@ -64,6 +113,8 @@ abstract class ThemeDefinition
     }
 
     /**
+     * Sets a theme info definition.
+     *
      * @param ThemeInfo $definition
      *
      * @return ThemeDefinition
@@ -76,6 +127,8 @@ abstract class ThemeDefinition
     }
 
     /**
+     * Returns the theme info definition.
+     *
      * @return ThemeInfo
      */
     public function getInfo()

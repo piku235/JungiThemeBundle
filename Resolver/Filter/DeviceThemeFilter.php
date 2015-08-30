@@ -48,7 +48,7 @@ class DeviceThemeFilter implements ThemeFilterInterface
         $this->mobileDetect->handleRequest($request);
 
         // Get the tag for match
-        if ($this->mobileDetect->isMobile()) { // Is a mobile or a tablet device?
+        if ($this->mobileDetect->isMobile()) { // Is it a mobile or a tablet device?
             if ($this->mobileDetect->isTablet()) {
                 $tag = new Tag\TabletDevices(
                     $this->mobileDetect->detectOS()
@@ -69,6 +69,7 @@ class DeviceThemeFilter implements ThemeFilterInterface
         );
         foreach ($themes as $theme) {
             /* @var ThemeInterface $theme */
+
             $tags = $theme->getTags();
             if ($tags->hasSet($supported, Tag\TagCollection::COND_OR) && !$tags->contains($tag)) {
                 $themes->remove($theme->getName());

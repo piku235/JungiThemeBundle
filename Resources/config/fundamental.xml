@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="jungi_theme.tag.class_registry" class="Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistry">
+        <service id="jungi_theme.tag.class_registry" class="Jungi\Bundle\ThemeBundle\Tag\TagClassRegistry">
             <argument /> <!-- tag classes -->
         </service>
         <service id="jungi_theme.mobile_detect" class="Jungi\Bundle\ThemeBundle\Core\MobileDetect" public="false">

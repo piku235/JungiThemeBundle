@@ -1,9 +1,9 @@
 <?php
 
-namespace Jungi\Bundle\ThemeBundle\Information;
+namespace Jungi\Bundle\ThemeBundle\Core\Information;
 
 /**
- * ThemeInfoEssenceBuilder is a builder which helps with creating the ThemeInfoEssence instance.
+ * ThemeInfoEssenceBuilder is a builder which helps with creating objects of the ThemeInfoEssence.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

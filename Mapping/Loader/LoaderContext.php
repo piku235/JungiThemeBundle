@@ -61,22 +61,4 @@ class LoaderContext
     {
         return $this->resource;
     }
-
-    /*
-     * Resolves the real value of the given parameter.
-     *
-     * @param string $paramName A parameter name
-     *
-     * @return mixed
-     *
-     * @throws \RuntimeException When the given parameter does not exist
-     *
-    public function resolveParameter($paramName)
-    {
-        if (!$this->hasParameter($paramName)) {
-            throw new \RuntimeException(sprintf('The parameter "%s" can not be found.', $paramName));
-        }
-
-        return $this->getParameter($paramName);
-    }*/
 }

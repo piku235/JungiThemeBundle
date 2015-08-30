@@ -15,9 +15,8 @@ use Jungi\Bundle\ThemeBundle\Mapping\Constant;
 use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\Processor\ProcessorInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
-use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfo;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
@@ -25,7 +24,7 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Yaml\Parser as YamlParser;
 
 /**
- * YamlFileLoader is responsible for creating theme instances from a yaml mapping file.
+ * YamlDefinitionLoader is responsible for creating theme instances from yaml mapping files.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -173,7 +172,7 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
             ));
         }
 
-        $def = new StandardThemeDefinition();
+        $def = new ThemeDefinition();
         $def->setPath($specification['path']);
         $this->parseInfo($themeName, $specification, $def, $context);
         $this->parseTags($themeName, $specification, $def, $context);

@@ -11,10 +11,10 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Processor;
 
-use Jungi\Bundle\ThemeBundle\Information\Author;
+use Jungi\Bundle\ThemeBundle\Core\Information\Author;
 use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\Processor\DelegatingParameterValueReplacer;
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 
@@ -48,7 +48,7 @@ class DelegatingParameterValueReplacerTest extends TestCase
         ));
 
         $tag = new Tag('bar', array('%foo_1%'));
-        $theme = new StandardThemeDefinition('%path%/Resources/theme', array($tag));
+        $theme = new ThemeDefinition('%path%/Resources/theme', array($tag));
         $container->registerThemeDefinition('foo', $theme);
 
         // Process

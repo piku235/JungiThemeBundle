@@ -31,6 +31,13 @@ class ThemeInfoValidationWorker extends AbstractThemeWorker
             return;
         }
 
+        if (!$info->hasProperty('name')) {
+            throw new \InvalidArgumentException(sprintf(
+                'A theme name can not be blank, encountered in the theme "%s".',
+                $name
+            ));
+        }
+
         $authors = $info->getProperty('authors');
         if (!is_array($authors)) {
             throw new \InvalidArgumentException(sprintf(

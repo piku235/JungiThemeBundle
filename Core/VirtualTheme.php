@@ -12,8 +12,8 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 use Jungi\Bundle\ThemeBundle\Exception\ThemeNotFoundException;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfo;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfo;
+use Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 
 /**

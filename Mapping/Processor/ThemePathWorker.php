@@ -11,9 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Symfony\Component\Config\FileLocatorInterface;
 
 /**
@@ -43,7 +43,7 @@ class ThemePathWorker extends AbstractThemeWorker
      */
     protected function processTheme($name, ThemeDefinition $definition, ThemeDefinitionRegistryInterface $registry)
     {
-        if ($definition instanceof StandardThemeDefinition) {
+        if (!$definition instanceof VirtualThemeDefinition) {
             $definition->setPath($this->locator->locate($definition->getPath()));
         }
     }

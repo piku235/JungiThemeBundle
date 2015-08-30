@@ -19,7 +19,7 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Resource\FileResource;
 
 /**
- * This initializer loads all registered themes by using the caching feature.
+ * This initializer loads all registered themes using a dumped file of a theme registry.
  *
  * @see Jungi\Bundle\ThemeBundle\DependencyInjection\JungiThemeExtension::registerMappingFile
  *

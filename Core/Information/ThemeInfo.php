@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Information;
+namespace Jungi\Bundle\ThemeBundle\Core\Information;
 
 /**
  * The ThemeInfo is a kind of the interface which is used to describe a theme.

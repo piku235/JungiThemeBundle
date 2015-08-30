@@ -11,9 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 
 /**
  * ValueReplacer.
@@ -28,7 +28,7 @@ abstract class ValueReplacer extends AbstractThemeWorker
     public function processTheme($name, ThemeDefinition $definition, ThemeDefinitionRegistryInterface $registry)
     {
         // Path
-        if ($definition instanceof StandardThemeDefinition) {
+        if (!$definition instanceof VirtualThemeDefinition) {
             $definition->setPath($this->resolveValue($definition->getPath(), $registry));
         }
 

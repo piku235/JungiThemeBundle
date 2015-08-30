@@ -11,8 +11,8 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests;
 
-use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistry;
-use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Tag\TagClassRegistry;
+use Jungi\Bundle\ThemeBundle\Tag\TagClassRegistryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

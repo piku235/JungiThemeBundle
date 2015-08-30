@@ -11,9 +11,9 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Processor;
 
-use Jungi\Bundle\ThemeBundle\Information\Author;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Core\Information\Author;
+use Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
@@ -61,7 +61,7 @@ class FakeValueReplacerTest extends TestCase
                 ),
             ),
         ));
-        $theme = new StandardThemeDefinition(__DIR__);
+        $theme = new ThemeDefinition(__DIR__);
         $theme->setPath('not_important');
         $theme->addTag($tag);
         $theme->setInfo($info);
@@ -70,7 +70,7 @@ class FakeValueReplacerTest extends TestCase
         $theme = new VirtualThemeDefinition();
         $theme->addTag(clone $tag);
         $theme->setInfo(clone $info);
-        $theme->addTheme('monday', new StandardThemeDefinition(__DIR__, array(clone $tag), clone $info));
+        $theme->addTheme('monday', new ThemeDefinition(__DIR__, array(clone $tag), clone $info));
         $registry->registerThemeDefinition('bar_virtual', $theme);
 
         // The final point
@@ -98,7 +98,7 @@ class FakeValueReplacerTest extends TestCase
         // Assert
         foreach ($registry->getThemeDefinitions() as $theme) {
             $tags = $theme->getTags();
-            if ($theme instanceof StandardThemeDefinition) {
+            if (!$theme instanceof VirtualThemeDefinition) {
                 $this->assertEquals($expectedPath, $theme->getPath());
             }
 

@@ -13,7 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Processor;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
 use Jungi\Bundle\ThemeBundle\Mapping\Processor\ConstantValueReplacer;
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
@@ -59,7 +59,7 @@ class ConstantValueReplacerTest extends TestCase
             new Constant('Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake::SPECIAL'),
             new Constant('CONST_TEST'),
         ));
-        $registry->registerThemeDefinition('foo', new StandardThemeDefinition(__DIR__, array($tag)));
+        $registry->registerThemeDefinition('foo', new ThemeDefinition(__DIR__, array($tag)));
 
         // Process
         $this->replacer->process($registry);
@@ -82,7 +82,7 @@ class ConstantValueReplacerTest extends TestCase
         $tag = new Tag('bar', array(
             new Constant('__MISSING_CONST'),
         ));
-        $registry->registerThemeDefinition('foo', new StandardThemeDefinition(__DIR__, array($tag)));
+        $registry->registerThemeDefinition('foo', new ThemeDefinition(__DIR__, array($tag)));
 
         // Assert
         try {

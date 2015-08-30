@@ -15,7 +15,7 @@ use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 
 /**
- * PhpFileLoader is responsible for creating theme instances from a php mapping file.
+ * PhpDefinitionLoader is responsible for creating theme instances from php mapping files.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

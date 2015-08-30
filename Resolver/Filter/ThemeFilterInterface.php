@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 interface ThemeFilterInterface
 {
     /**
-     * Filters the given theme collection by removing these themes that are not suitable'.
+     * Filters the given theme collection by removing these themes that are not suitable.
      *
      * @param ThemeCollection $themes  A theme collection
      * @param Request         $request A Request instance

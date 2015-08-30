@@ -40,7 +40,7 @@ $collection->add(new \Jungi\Bundle\ThemeBundle\Core\VirtualTheme(
             ))
         )
     ),
-    \Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence::createBuilder()
+    \Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence::createBuilder()
         ->setName('Virtual theme')
         ->getThemeInfo(),
     new \Jungi\Bundle\ThemeBundle\Tag\TagCollection(array(

@@ -11,12 +11,11 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping\Dumper;
 
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
-use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
-use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Tag\TagClassRegistryInterface;
 
 /**
  * PhpDumper.
@@ -64,30 +63,26 @@ EOFILE;
     }
 
     /**
-     * Dumps a theme definition
+     * Dumps a theme definition.
      *
-     * @param string $name A theme name
+     * @param string          $name       A theme name
      * @param ThemeDefinition $definition A theme definition
      *
      * @return string
-     *
-     * @throws \InvalidArgumentException If the given definition is not supported
      */
     private function dumpTheme($name, ThemeDefinition $definition)
     {
         if ($definition instanceof VirtualThemeDefinition) {
             return $this->dumpVirtualTheme($name, $definition);
-        } elseif ($definition instanceof StandardThemeDefinition) {
+        } else {
             return $this->dumpStandardTheme($name, $definition);
         }
-
-        throw new \InvalidArgumentException(sprintf('The theme definition under the name "%s" is not supported.', $name));
     }
 
     /**
-     * Dumps a virtual theme definition
+     * Dumps a virtual theme definition.
      *
-     * @param string $name A theme name
+     * @param string                 $name       A theme name
      * @param VirtualThemeDefinition $definition A theme definition
      *
      * @return string
@@ -108,7 +103,7 @@ EOFILE;
 
             $arrBody = PHP_EOL.$this->prependTab(implode(', ', $themes)).PHP_EOL;
         }
-        $themes = $this->prependTab(sprintf("array(%s)", $arrBody));
+        $themes = $this->prependTab(sprintf('array(%s)', $arrBody));
 
         // Outcome
         return <<< EOVTHEME
@@ -122,14 +117,14 @@ EOVTHEME;
     }
 
     /**
-     * Dumps a standard theme definition
+     * Dumps a standard theme definition.
      *
-     * @param string $name A theme name
-     * @param StandardThemeDefinition $definition A theme name
+     * @param string          $name       A theme name
+     * @param ThemeDefinition $definition A theme name
      *
      * @return string
      */
-    private function dumpStandardTheme($name, StandardThemeDefinition $definition)
+    private function dumpStandardTheme($name, ThemeDefinition $definition)
     {
         $info = $this->prependTab($this->dumpThemeInfo($definition));
         $tags = $this->prependTab($this->dumpTags($definition));
@@ -145,7 +140,7 @@ EOSTHEME;
     }
 
     /**
-     * Dumps tags of the given theme definition
+     * Dumps tags of the given theme definition.
      *
      * @param ThemeDefinition $definition A theme definition
      *
@@ -168,7 +163,7 @@ EOSTHEME;
     }
 
     /**
-     * Dumps a theme tag
+     * Dumps a theme tag.
      *
      * @param Tag $definition A theme tag
      *
@@ -186,7 +181,7 @@ EOSTHEME;
     }
 
     /**
-     * Dumps php values
+     * Dumps php values.
      *
      * @param mixed $value A php value
      *
@@ -215,7 +210,7 @@ EOSTHEME;
     }
 
     /**
-     * Dumps a theme info of the given theme definition
+     * Dumps a theme info of the given theme definition.
      *
      * @param ThemeDefinition $definition A theme definition
      *
@@ -245,7 +240,7 @@ EOSTHEME;
                     $args[] = $this->dumpValue($author['homepage']);
                 }
 
-                $methods[] = sprintf('->addAuthor(new \Jungi\Bundle\ThemeBundle\Information\Author(%s))', implode(', ', $args));
+                $methods[] = sprintf('->addAuthor(new \Jungi\Bundle\ThemeBundle\Core\Information\Author(%s))', implode(', ', $args));
             }
         }
 
@@ -253,18 +248,18 @@ EOSTHEME;
         $methods = $this->prependTab(implode(PHP_EOL, $methods));
 
         return <<< EOINFO
-\Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence::createBuilder()
+\Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence::createBuilder()
 $methods
 EOINFO;
     }
 
     /**
-     * Prepends tab spaces to the given content
+     * Prepends tab spaces to the given content.
      *
-     * @param string $content A content
-     * @param int $count A count of tabs (optional)
-     * @param int $startLine A start line from which apply tabs (optional)
-     * @param int|null $endLine An end line from which apply tabs (optional)
+     * @param string   $content   A content
+     * @param int      $count     A count of tabs (optional)
+     * @param int      $startLine A start line from which apply tabs (optional)
+     * @param int|null $endLine   An end line from which apply tabs (optional)
      *
      * @return string
      */

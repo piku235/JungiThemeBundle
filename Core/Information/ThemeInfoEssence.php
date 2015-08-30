@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Information;
+namespace Jungi\Bundle\ThemeBundle\Core\Information;
 
 /**
- * The class is a simple implementation of the ThemeInfo and was built on the basis of
+ * This class is a simple implementation of the ThemeInfo and was built on the basis of
  * the Essence design pattern.
  *
  * To set properties of the class you must use the ThemeInfoEssenceBuilder

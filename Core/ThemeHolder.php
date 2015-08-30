@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Core;
 
 /**
- * ThemeHolder is a default theme holder.
+ * ThemeHolder is a default implementation of the ThemeHolderInterface.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */

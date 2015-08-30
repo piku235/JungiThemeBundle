@@ -12,7 +12,7 @@
 namespace Jungi\Bundle\ThemeBundle\Mapping\Processor;
 
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistryInterface;
-use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistryInterface;
+use Jungi\Bundle\ThemeBundle\Tag\TagClassRegistryInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 
 /**

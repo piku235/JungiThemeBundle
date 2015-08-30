@@ -13,7 +13,7 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Processor;
 
 use Jungi\Bundle\ThemeBundle\Mapping\Processor\VirtualThemeWorker;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
@@ -48,10 +48,10 @@ class VirtualThemeWorkerTest extends TestCase
         ));
         $registry->registerThemeDefinition('foo', $virtualTheme);
 
-        $firstChild = new StandardThemeDefinition(__DIR__);
+        $firstChild = new ThemeDefinition(__DIR__);
         $registry->registerThemeDefinition('foo_child_mobile', $firstChild);
 
-        $secondChild = new StandardThemeDefinition(__DIR__);
+        $secondChild = new ThemeDefinition(__DIR__);
         $registry->registerThemeDefinition('foo_december', $secondChild);
 
         // Process
@@ -74,10 +74,10 @@ class VirtualThemeWorkerTest extends TestCase
         ));
         $registry->registerThemeDefinition('foo', $virtualTheme);
 
-        $firstChild = new StandardThemeDefinition(__DIR__);
+        $firstChild = new ThemeDefinition(__DIR__);
         $registry->registerThemeDefinition('foo_child_mobile', $firstChild);
 
-        $secondChild = new StandardThemeDefinition(__DIR__);
+        $secondChild = new ThemeDefinition(__DIR__);
         $registry->registerThemeDefinition('foo_december', $secondChild);
 
         // Process
@@ -102,10 +102,10 @@ class VirtualThemeWorkerTest extends TestCase
         ));
         $registry->registerThemeDefinition('bar', $virtualTheme);
 
-        $firstChild = new StandardThemeDefinition(__DIR__);
+        $firstChild = new ThemeDefinition(__DIR__);
         $registry->registerThemeDefinition('foo_child_mobile', $firstChild);
 
-        $secondChild = new StandardThemeDefinition(__DIR__);
+        $secondChild = new ThemeDefinition(__DIR__);
         $registry->registerThemeDefinition('foo_december', $secondChild);
 
         try {
@@ -133,10 +133,10 @@ class VirtualThemeWorkerTest extends TestCase
         ));
         $registry->registerThemeDefinition('bar', $virtualTheme);
 
-        $firstChild = new StandardThemeDefinition(__DIR__);
+        $firstChild = new ThemeDefinition(__DIR__);
         $registry->registerThemeDefinition('foo_child_mobile', $firstChild);
 
-        $secondChild = new StandardThemeDefinition(__DIR__);
+        $secondChild = new ThemeDefinition(__DIR__);
         $registry->registerThemeDefinition('foo_december', $secondChild);
 
         try {

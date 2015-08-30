@@ -44,7 +44,7 @@ interface ThemeInterface
     /**
      * Returns the information about the theme.
      *
-     * @return \Jungi\Bundle\ThemeBundle\Information\ThemeInfo
+     * @return \Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfo
      */
     public function getInformation();
 }

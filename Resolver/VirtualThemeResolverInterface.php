@@ -16,14 +16,17 @@ use Jungi\Bundle\ThemeBundle\Core\VirtualThemeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Interface for resolving an appropriate theme for the given virtual theme and the request.
+ * Interface for resolving a suitable theme from sub themes of the given
+ * virtual theme.
+ *
+ * It is used to determine the pointed theme of a virtual theme.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 interface VirtualThemeResolverInterface
 {
     /**
-     * Resolves an appropriate theme for the given virtual theme.
+     * Resolves a suitable theme for the given virtual theme.
      *
      * @param VirtualThemeInterface $theme   A virtual theme
      * @param Request               $request A Request instance

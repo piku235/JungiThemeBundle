@@ -11,15 +11,15 @@
 
 namespace Jungi\Bundle\ThemeBundle\Tests\Mapping\Loader;
 
-use Jungi\Bundle\ThemeBundle\Information\Author;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Core\Information\Author;
+use Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Mapping\Processor\Processor;
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
-use Jungi\Bundle\ThemeBundle\Tag\Registry\TagClassRegistry;
+use Jungi\Bundle\ThemeBundle\Tag\TagClassRegistry;
 use Jungi\Bundle\ThemeBundle\Tests\Fixtures\Tag\Fake as FakeTag;
 use Jungi\Bundle\ThemeBundle\Tests\TestCase;
 use Symfony\Component\HttpKernel\Config\FileLocator;
@@ -78,7 +78,7 @@ abstract class DefinitionLoaderTest extends TestCase
         $info3 = ThemeInfoImporter::import($ibuilder->getThemeInfo());
 
         $themes = array(
-            'foo_1' => new StandardThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme', array(
+            'foo_1' => new ThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme', array(
                 new Tag('jungi.mobile_devices', array(array('iOS', 'AndroidOS'))),
                 new Tag('jungi.tablet_devices'),
                 new Tag('jungi.desktop_devices'),
@@ -93,16 +93,16 @@ abstract class DefinitionLoaderTest extends TestCase
             new Tag('jungi.tablet_devices'),
             new Tag('jungi.fake'),
         ));
-        $themes['foo_5']->addTheme('mobile', new StandardThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme', array(
+        $themes['foo_5']->addTheme('mobile', new ThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme', array(
             new Tag('jungi.mobile_devices'),
             new Tag('jungi.tablet_devices'),
         )));
-        $themes['foo_5']->addTheme('foo_3', new StandardThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme', array(
+        $themes['foo_5']->addTheme('foo_3', new ThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme', array(
             new Tag('jungi.desktop_devices'),
         )));
 
         $themes['foo_6'] = new VirtualThemeDefinition();
-        $themes['foo_6']->addTheme('foo_4', new StandardThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme'));
+        $themes['foo_6']->addTheme('foo_4', new ThemeDefinition(__DIR__.'/Fixtures/FakeBundle/Resources/theme'));
 
         foreach ($themes as $name => $theme) {
             $this->assertEquals($theme, $this->registry->getThemeDefinition($name));

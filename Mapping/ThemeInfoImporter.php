@@ -11,7 +11,7 @@
 
 namespace Jungi\Bundle\ThemeBundle\Mapping;
 
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfo as BaseThemeInfo;
+use Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfo as BaseThemeInfo;
 
 /**
  * ThemeInfoImporter.

@@ -14,15 +14,14 @@ namespace Jungi\Bundle\ThemeBundle\Mapping\Loader;
 use Jungi\Bundle\ThemeBundle\Mapping\Constant;
 use Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistry;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
-use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfo;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Symfony\Component\Config\Util\XmlUtils;
 
 /**
- * XmlDefinitionLoader is responsible for loading theme definitions from a xml mapping file.
+ * XmlDefinitionLoader is responsible for loading theme definitions from xml mapping files.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -83,7 +82,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
      */
     private function parseStandardTheme(\DOMElement $elm, XmlLoaderContext $context)
     {
-        $definition = new StandardThemeDefinition();
+        $definition = new ThemeDefinition();
         $definition->setPath($elm->getAttribute('path'));
         $this->parseInfo($elm, $definition, $context);
         $this->parseTags($elm, $definition, $context);

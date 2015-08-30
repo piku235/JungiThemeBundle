@@ -15,10 +15,10 @@ use Jungi\Bundle\ThemeBundle\Tag\TagCollection;
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
 
 /**
- * This interface allows to register themes that are used by the bundle.
+ * This interface is used to manage all themes.
  *
- * The theme source is a central place where all themes in the system
- * are gathered.
+ * A theme source is a central place where all used themes are gathered. You can
+ * add new themes, get a particular theme or get all available themes.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -61,7 +61,7 @@ interface ThemeSourceInterface
     /**
      * Returns the theme which has given tags.
      *
-     * @param TagInterface|TagInterface[] $tags      A one tag or tags
+     * @param TagInterface|TagInterface[] $tags      A single tag or tags
      * @param string                      $condition A condition (optional)
      *
      * @return ThemeInterface|null Null if the theme can not be found
@@ -71,7 +71,7 @@ interface ThemeSourceInterface
     /**
      * Returns all themes which has given tags.
      *
-     * @param TagInterface|TagInterface[] $tags      A one tag or tags
+     * @param TagInterface|TagInterface[] $tags      A single tag or tags
      * @param string                      $condition A condition (optional)
      *
      * @return ThemeInterface[]

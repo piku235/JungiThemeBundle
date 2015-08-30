@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
+namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
  * Classes with this interface are responsible for managing tag classes.
@@ -18,6 +18,14 @@ namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
  */
 interface TagClassRegistryInterface
 {
+    /**
+     * Registers the given tag.
+     *
+     * @param string $name  A tag name
+     * @param string $class A fully qualified class name
+     */
+    public function registerTagClass($name, $class);
+
     /**
      * Checks if the given tag name has the registered class.
      *

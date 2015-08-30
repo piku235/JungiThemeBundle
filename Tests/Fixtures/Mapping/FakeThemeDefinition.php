@@ -14,11 +14,10 @@ namespace Jungi\Bundle\ThemeBundle\Tests\Fixtures\Mapping;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 
 /**
- * FakeThemeDefinition
+ * FakeThemeDefinition.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
 class FakeThemeDefinition extends ThemeDefinition
 {
-
 }

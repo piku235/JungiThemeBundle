@@ -24,7 +24,7 @@ class ThemeInfo
     private $properties = array();
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $properties Properties (optional)
      */

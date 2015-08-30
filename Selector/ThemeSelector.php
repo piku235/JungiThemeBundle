@@ -94,7 +94,7 @@ class ThemeSelector implements ThemeSelectorInterface
             );
             $this->dispatcher->dispatch(ThemeSelectorEvents::RESOLVED, $event);
         } catch (\Exception $e) {
-            // Use a fallback theme?
+            // Something bad happened, use a fallback theme?
             if (null === $this->fallbackResolver) {
                 throw $e;
             }

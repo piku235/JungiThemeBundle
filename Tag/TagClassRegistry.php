@@ -9,10 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Jungi\Bundle\ThemeBundle\Tag\Registry;
+namespace Jungi\Bundle\ThemeBundle\Tag;
 
 /**
  * TagClassRegistry is a simple implementation of the TagClassRegistryInterface.
+ *
+ * We can say that this tag registry is a little dumb, because it does not verifies
+ * if a registered tag name is appropriate with the name of a tag class.
  *
  * @author Piotr Kugla <piku235@gmail.com>
  */
@@ -26,19 +29,25 @@ class TagClassRegistry implements TagClassRegistryInterface
     /**
      * Constructor.
      *
-     * @param array $classes Tag classes
+     * @param array $classes Tag classes (optional)
      */
-    public function __construct(array $classes)
+    public function __construct(array $classes = array())
     {
-        $this->classes = $classes;
+        foreach ($classes as $tagName => $class) {
+            $this->registerTagClass($tagName, $class);
+        }
     }
 
     /**
-     * Checks if the given tag name has the registered class.
-     *
-     * @param string $name A tag name
-     *
-     * @return bool
+     * {@inheritdoc}
+     */
+    public function registerTagClass($name, $class)
+    {
+        $this->classes[$name] = $class;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function hasTagClass($name)
     {
@@ -46,13 +55,7 @@ class TagClassRegistry implements TagClassRegistryInterface
     }
 
     /**
-     * Gets the class of the given tag name.
-     *
-     * @param string $name A tag name
-     *
-     * @return string
-     *
-     * @throws \InvalidArgumentException When the given tag name does not exists
+     * {@inheritdoc}
      */
     public function getTagClass($name)
     {
@@ -66,9 +69,7 @@ class TagClassRegistry implements TagClassRegistryInterface
     }
 
     /**
-     * Returns all registered tag classes.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getTagClasses()
     {

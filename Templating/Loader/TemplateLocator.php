@@ -78,13 +78,13 @@ class TemplateLocator extends BaseTemplateLocator
             $theme = $this->source->getTheme($template->get('theme'));
             if ($template instanceof VirtualTemplateReference) {
                 if (!$theme instanceof VirtualThemeInterface) {
-                    throw new \RuntimeException(sprintf('Bad reference'));
+                    throw new \RuntimeException('Bad theme reference');
                 }
 
                 $childTheme = $theme->getThemes()->get($template->get('pointed_theme'));
                 $themePath = $childTheme->getPath();
             } elseif ($theme instanceof VirtualThemeInterface && null === $theme->getPointedTheme()) {
-                throw new \RuntimeException(sprintf('Virtual theme is not pointing to any theme.'));
+                throw new \RuntimeException(sprintf('Virtual theme "%s" is not pointing to any theme.', $theme->getName()));
             } else {
                 $themePath = $theme->getPath();
             }
