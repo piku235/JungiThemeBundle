@@ -49,7 +49,7 @@ class VirtualThemeDefinition extends ThemeDefinition
     /**
      * Not used.
      */
-    public function setPath()
+    public function setPath($path)
     {
         throw new \LogicException('You cannot set path of a virtual theme.');
     }
