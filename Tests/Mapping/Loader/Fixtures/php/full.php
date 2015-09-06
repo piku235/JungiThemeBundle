@@ -43,25 +43,21 @@ $registry->registerThemeDefinition('foo_3', new ThemeDefinition(
 
 $registry->registerThemeDefinition('foo_4', new ThemeDefinition('@JungiFooBundle/Resources/theme'));
 
-$registry->registerThemeDefinition('foo_6', new VirtualThemeDefinition(array(
-    new Reference('foo_4'),
-)));
+$definition = new VirtualThemeDefinition();
+$definition->addThemeReference(new Reference('foo_4'));
+$registry->registerThemeDefinition('foo_6', $definition);
 
 $info = ThemeInfoEssence::createBuilder()
     ->setName('A fancy theme')
     ->setDescription('<i>foo desc</i>')
     ->addAuthor(new Author('piku234', 'foo@gmail.com'))
     ->getThemeInfo();
-$registry->registerThemeDefinition('foo_5', new VirtualThemeDefinition(
-    array(
-        new Reference('foo_2', 'mobile'),
-        new Reference('foo_3'),
-    ),
-    array(
-        new Tag('jungi.desktop_devices'),
-        new Tag('jungi.mobile_devices'),
-        new Tag('jungi.tablet_devices'),
-        new Tag('jungi.fake'),
-    ),
-    ThemeInfoImporter::import($info)
-));
+$definition = new VirtualThemeDefinition(array(
+    new Tag('jungi.desktop_devices'),
+    new Tag('jungi.mobile_devices'),
+    new Tag('jungi.tablet_devices'),
+    new Tag('jungi.fake'),
+), ThemeInfoImporter::import($info));
+$definition->addThemeReference(new Reference('foo_2', 'mobile'));
+$definition->addThemeReference(new Reference('foo_3'));
+$registry->registerThemeDefinition('foo_5', $definition);

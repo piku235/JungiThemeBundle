@@ -31,19 +31,15 @@ class VirtualThemeDefinition extends ThemeDefinition
     /**
      * Constructor.
      *
-     * @param Reference[] $themeRefs A theme references (optional)
      * @param array       $tags      Tag definitions (optional)
      * @param ThemeInfo   $info      A theme info (optional)
      */
-    public function __construct(array $themeRefs = array(), array $tags = array(), ThemeInfo $info = null)
+    public function __construct(array $tags = array(), ThemeInfo $info = null)
     {
         parent::__construct(null, $tags, $info);
 
         $this->themes = array();
         $this->references = array();
-        foreach ($themeRefs as $reference) {
-            $this->addThemeReference($reference);
-        }
     }
 
     /**
