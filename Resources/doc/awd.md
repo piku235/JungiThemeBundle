@@ -95,20 +95,20 @@ themes:
 <?php
 // FooBundle/Resources/config/theme.php
 
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 
 $virtualTheme = new VirtualThemeDefinition();
-$virtualTheme->addTheme('foo_desktop', new StandardThemeDefinition(
+$virtualTheme->addTheme('foo_desktop', new ThemeDefinition(
     '@JungiFooBundle/Resources/theme/desktop',
     array( new Tag('jungi.desktop_devices') )
 ));
 
-$definition = new StandardThemeDefinition('@JungiFooBundle/Resources/theme/mobile');
+$definition = new ThemeDefinition('@JungiFooBundle/Resources/theme/mobile');
 $definition->addTag(new Tag('jungi.mobile_devices'));
 $definition->addTag(new Tag('jungi.tablet_devices'));
 $virtualTheme->addTheme('foo_mobile', $definition);

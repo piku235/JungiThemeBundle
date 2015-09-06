@@ -1,13 +1,14 @@
 Virtual theme resolver
 ======================
 
-A theme matcher implements the `Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolverInterface`.
+A virtual theme resolver is used to determine the pointed theme of a virtual theme. It is described by the 
+`Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolverInterface`.
 
 ```php
 interface VirtualThemeResolverInterface
 {
     /**
-     * Resolved an appropriate theme for the given virtual theme
+     * Resolves a suitable theme for the given virtual theme.
      *
      * @param VirtualThemeInterface $theme   A virtual theme
      * @param Request               $request A Request instance
@@ -18,16 +19,22 @@ interface VirtualThemeResolverInterface
 }
 ```
 
+A default implementation is the `Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolver` which uses filters to resolve
+the best matching theme for a virtual theme.
+
 Filters
 -------
 
-Each theme filter must implement the `Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeFilterInterface`.
+A job of filters is to reduce a given theme collection as much as possible. Filters will be used as long as in a theme 
+collection will stay only one theme.
+
+All theme filters implements the `Jungi\Bundle\ThemeBundle\Matcher\Filter\ThemeFilterInterface`.
 
 ```php
 interface ThemeFilterInterface
 {
     /**
-     * Filters the given theme collection by removing these themes that are not suitable'
+     * Filters the given theme collection by removing these themes that are not suitable
      *
      * @param ThemeCollection $themes  A theme collection
      * @param Request         $request A Request instance
@@ -42,9 +49,8 @@ interface ThemeFilterInterface
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Resolver/Filter/DeviceThemeFilter.php)
 
-The filter is mandatory for working adaptive themes (AWD) properly. The filter will only work for themes which has the 
-**MobileDevices** tag or the **DesktopDevices** tag. If such a theme will not meet the requirements of the filter, 
-the theme will be removed from the collection and thereby, the collection of themes will be reduced.
+This filter is mandatory for working adaptive themes (AWD) properly. The filter will only work for themes that has at 
+least one of these tags: **MobileDevices**, **TabletDevices** or **DesktopDevices**.
 
 Configuration
 -------------

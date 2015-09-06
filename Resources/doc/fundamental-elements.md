@@ -1,6 +1,8 @@
 Fundamental elements
 ====================
 
+This chapter focuses on essential things that you should understand and it is also an introduce to the JungiThemeBundle.
+
 Theme
 -----
 
@@ -41,7 +43,7 @@ interface ThemeInterface
     /**
      * Returns the information about the theme
      *
-     * @return \Jungi\Bundle\ThemeBundle\Information\ThemeInfo
+     * @return \Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfo
      */
     public function getInfo();
 }
@@ -113,11 +115,11 @@ of subordinate themes you want to include and how to merge tags of the same type
 ThemeInfo
 ---------
 
-[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Information/ThemeInfo.php)
+[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Core/Information/ThemeInfo.php)
 
 In some cases you would like to get some information about a theme in order to show these information to a user. 
-Information can be easily stored in an object. In the JungiThemeBundle such an object must come from a class that inherits 
-the `Jungi\Bundle\ThemeBundle\Information\ThemeInfo` abstract class which acts as the interface.
+The best way to hold information in a single place is obviously an object. In the JungiThemeBundle such an object 
+must come from the `Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfo` abstract class which acts as the interface.
 
 ```php
 abstract class ThemeInfo
@@ -165,7 +167,7 @@ abstract class ThemeInfo
 
 ### ThemeInfoEssence
 
-[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Information/ThemeInfoEssence.php)
+[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Core/Information/ThemeInfoEssence.php)
 
 Due to a large number of properties implementing them in the constructor seems to be a bad idea, because it would only 
 bring a mess in its signature. Also setter methods are not a good idea, because after an object creation there will be 

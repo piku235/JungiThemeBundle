@@ -52,14 +52,14 @@ app/
 
 **IMPORTANT**
 
-> You must remember that things do not ends on placing your theme(s) in a project root or in a bundle. Putting your themes 
-> with templates is not enough for the JungiThemeBundle to notice these new added themes. To make a theme(s) visible in the
-> bundle you will have to use one of the avaiable theme mappings which are described [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings). 
+> You must remember that things putting your themes with templates is not enough for the JungiThemeBundle to notice these 
+> new added themes. To make a theme(s) visible in the bundle you will have to use one of the avaiable theme mappings which 
+> are described [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings). 
 
 Template naming and locations
 -----------------------------
 
-The template naming is just the same as the symfony template naming conventions, so you still have the syntax `bundle:controller:template`
+The template naming is just the same as the symfony template naming conventions, so there is still the syntax `bundle:controller:template`
 for templates. The only difference are locations of templates.
 
 Suppose that we want to render e.g `FooBundle:Default:index.html.twig`:
@@ -81,8 +81,7 @@ Overriding bundle templates
 ---------------------------
 
 You can override every bundle template that you wish in your theme. Suppose that the theme **exclusive** of the **FooThemeBundle**
-is the current theme for the request, and the **Default** controller with the **index** action from the **BooBundle**
-will be performed.
+is the current theme, and the `Default/index.html.twig` from the **BooBundle** will be rendered.
 
 The BooBundle resources:
 

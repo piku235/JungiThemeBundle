@@ -80,17 +80,17 @@ themes:
 <?php
 // FooBundle/Resources/config/theme.php
 
-use Jungi\Bundle\ThemeBundle\Mapping\StandardThemeDefinition;
+use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
 use Jungi\Bundle\ThemeBundle\Mapping\Tag;
 use Jungi\Bundle\ThemeBundle\Mapping\Reference;
-use Jungi\Bundle\ThemeBundle\Information\ThemeInfoEssence;
+use Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence;
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
 
 $info = ThemeInfoEssence::createBuilder()
     ->setName('Simple RWD Theme')
     ->getThemeInfo();
 $mobileDevices = array('iOS', 'AndroidOS');    
-$definition = new StandardThemeDefinition();
+$definition = new ThemeDefinition();
 $definition
     ->setPath('@JungiFooBundle/Resources/theme')
     ->setInfo(ThemeInfoImporter::import($info))
