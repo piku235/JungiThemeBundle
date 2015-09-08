@@ -78,7 +78,7 @@ class YamlDefinitionLoader extends AbstractDefinitionLoader
             // Walk over parameters
             array_walk_recursive($content['parameters'], array($this, 'replaceValue'));
 
-            /** @var \Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface $container */
+            /* @var \Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface $container */
             $container = $context->getRegistry();
             $container->setParameters($content['parameters']);
         }

@@ -33,7 +33,7 @@ class JungiThemeBundle extends Bundle
         $container->addCompilerPass(new CacheWarmerPass());
         $container->addCompilerPass(new ThemeFilterPass());
 
-        /** @var DependencyInjection\JungiThemeExtension $ext */
+        /* @var DependencyInjection\JungiThemeExtension $ext */
         $ext = $this->getContainerExtension();
 
         // Default tags

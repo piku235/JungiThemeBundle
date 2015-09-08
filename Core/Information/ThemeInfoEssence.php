@@ -12,8 +12,8 @@
 namespace Jungi\Bundle\ThemeBundle\Core\Information;
 
 /**
- * This class is a simple implementation of the ThemeInfo and was built on the basis of
- * the Essence design pattern.
+ * This class is a simple implementation of the ThemeInfo and was built
+ * on top of the Essence design pattern.
  *
  * To set properties of the class you must use the ThemeInfoEssenceBuilder
  *

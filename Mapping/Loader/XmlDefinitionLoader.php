@@ -48,7 +48,7 @@ class XmlDefinitionLoader extends AbstractDefinitionLoader
      */
     private function parseParameters(\DOMElement $elm, XmlLoaderContext $context)
     {
-        /** @var \Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface $container */
+        /* @var \Jungi\Bundle\ThemeBundle\Mapping\ParametricThemeDefinitionRegistryInterface $container */
         $container = $context->getRegistry();
         $container->setParameters($this->getElementsAsPhp($elm, 'parameter', $context));
     }

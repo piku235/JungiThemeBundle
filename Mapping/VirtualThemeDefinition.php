@@ -31,8 +31,8 @@ class VirtualThemeDefinition extends ThemeDefinition
     /**
      * Constructor.
      *
-     * @param array       $tags      Tag definitions (optional)
-     * @param ThemeInfo   $info      A theme info (optional)
+     * @param array     $tags Tag definitions (optional)
+     * @param ThemeInfo $info A theme info (optional)
      */
     public function __construct(array $tags = array(), ThemeInfo $info = null)
     {
