@@ -69,7 +69,7 @@ themes:
 Getting Started
 ---------------
 
-OK, so let's start explaining from the top - the `parameters` element.
+OK, so let's start explaining from the top.
 
 ### Parameters
 

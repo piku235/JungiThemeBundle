@@ -79,7 +79,7 @@ class UserThemeResolver implements ThemeResolverInterface
             return;
         }
         
-        /** @var UserWithTheme $user */
+        /* @var UserWithTheme $user */
         $user = $token->getUser();
         if ($themeName = $user->getThemeName()) {
             return $themeName;
@@ -95,7 +95,7 @@ class UserThemeResolver implements ThemeResolverInterface
             throw new LogicException('You cannot set the current theme when the user is not authenticated.');
         }
         
-        /** @var UserWithTheme $user */
+        /* @var UserWithTheme $user */
         $user = $token->getUser();
         $user->setThemeName($themeName);
     }

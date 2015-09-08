@@ -13,7 +13,7 @@ Add the JungiThemeBundle in your composer.json:
 ```js
 {
     "require": {
-        "jungi/theme-bundle": "~1.0@dev"
+        "jungi/theme-bundle": "~1.0"
     }
 }
 ```
@@ -21,7 +21,7 @@ Add the JungiThemeBundle in your composer.json:
 Or run the following command in your project:
 
 ```bash
-$ php composer.phar require jungi/theme-bundle "~1.0@dev"
+$ php composer.phar require jungi/theme-bundle "~1.0"
 ```
 
 ### Step 2: Enable the bundle
@@ -123,7 +123,7 @@ jungi_theme:
 
 #### Setup fallback theme resolver (optional)
 
-A fallback theme resolver is very helpful when a primary theme resolver will not match any theme for the request. To setup
+A fallback theme resolver is very helpful when a primary theme resolver will not match any theme for a request. To setup
 the fallback theme resolver you must follow the same steps as for the primary theme resolver.
 
 ```yml

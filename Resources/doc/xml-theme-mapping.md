@@ -109,7 +109,7 @@ Quick example
 Getting Started
 ---------------
 
-So let's start explaining from the top - the `<parameters />` element.
+So let's start explaining from the top.
 
 ### Parameters
 

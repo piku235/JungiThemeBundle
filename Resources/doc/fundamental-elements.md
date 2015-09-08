@@ -1,7 +1,9 @@
 Fundamental elements
 ====================
 
-This chapter focuses on essential things that you should understand and it is also an introduce to the JungiThemeBundle.
+Hi stranger, I suppose this is the first chapter you are reading (not counting the installation chapter) and I hope
+that it is not also the last one. This chapter focuses on essential things that are very important to understand further 
+things in the documentation.
 
 Theme
 -----
@@ -54,9 +56,9 @@ to find out how do that. Also if you want to know where themes are stored [go he
 
 ### VirtualTheme
 
-A virtual theme may be a bit confusing, but this is a sort of theme that does not really exist, so it has not got any assets 
-and view files. It only combines together similar themes and acts as a representative of these themes. Only one of the 
-subordinate themes will be used and which one of them will be decided by virtual theme resolver. 
+A virtual theme may be a bit confusing, because this is a sort of theme that does not really exist, so it has not got any 
+assets and template files. It only combines together similar themes and acts as a representative of these themes. Only 
+one of the sub themes will be used and which one of them will be decided by virtual theme resolver. 
 
 The interface of virtual theme is following:
 
@@ -95,17 +97,17 @@ A virtual theme can be used for various things. The easiest example is an adapti
 of two or more themes where each one of them has a tag that determines their purpose. 
 
 Suppose that we have an adaptive theme with two sub themes where the first one is for mobile devices and the second one 
-is for desktop devices. Thanks to virtual themes we do not need to create two separate themes and do crazy stuff to get 
-this working, we just need to create a virtual theme that will hold these two themes together and choose one of them at 
-appropriate time. 
+is for desktop devices. Thanks to virtual themes we do not need to create two separate themes under different names and 
+also do crazy stuffs to get this working, we just need to create a virtual theme that will hold these two themes together 
+and choose one of them at appropriate time. 
 
 The power of virtual themes not ends on AWD. They can be used for everything like e.g. we have four themes where each one 
-is designed for different season and so on - ideas can be infinite.
+is designed for different season of the year and so on - ideas can be infinite.
 
 #### How about tags?
 
 When you decide to make a virtual theme an obvious thing is that subordinate themes will have some tags that describes 
-them. But wait, what about a virtual theme? Itself it does not have any tags, although the subordinate themes have them. 
+them. But wait, what about a virtual theme? Itself it does not have any tags, though the subordinate themes have them. 
 As this is a virtual theme it should as best to imitate a real theme, so leaving a virtual theme without any tags is not 
 right. I was thinking about to write a component that will include tags from subordinate themes to a virtual theme, but 
 there could be a problem with merging tags that are the same. It turned out that the best solution and as well as a good 
@@ -190,5 +192,7 @@ $ib
 // Builds the new ThemeInfoEssence instance
 $info = $ib->getThemeInfo();
 ```
+
+You can use the **ThemeInfoEssence** in a [php theme mapping file](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/php-theme-mapping.md).
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

@@ -63,26 +63,28 @@ $registry | holds the ParametricThemeDefinitionRegistry instance
 
 Parameters have a local scope, so basically they have no use in php theme mappings, because you could simply replace them
 by a php variable. Parameters are starting to have meaning when it comes to using global parameters, so we will focus 
-here on how to use parameters. Using parameters is pretty straightforward, you only have to surround a parameter with 
-percent sings e.g. **%footheme.mobile_systems%**, just like in the symfony services.
+on how to use them. Using parameters is pretty straightforward, you only have to surround a parameter with percent sings 
+e.g. **%footheme.mobile_systems%**, just like in the symfony services.
 
 #### Global parameters
 
-As you see the list below is very short at this moment, but as time goes on new global parameters can come.
+As you see the list below is very short at the moment, but as time goes on new global parameters can join.
 
 Name | Description
 ---- | -----------
 kernel.root_dir | parameter imported from the symfony service container, it returns a path of the root directory project.
 
 ### Themes
-
-As you know we distinguish two types of theme: **standard** and **virtual**. 
+ 
+As you should already know there are two types of theme: **standard** and **virtual**. How to create them using mapping
+you will learn below.
 
 #### Standard theme
 
 [Show the definition class](https://github.com/piku235/JungiThemeBundle/blob/master/Mapping/ThemeDefinition.php)
 
-A standard theme is represented by the **ThemeDefinition** class. 
+A standard theme is represented by the **ThemeDefinition** class, which is the base class for theme definitions. The
+following example shows two different ways of creating a standard theme definition.
 
 ```php
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeDefinition;
@@ -102,8 +104,9 @@ $bar->setInfo(new ThemeInfo());
 
 [Show the definition class](https://github.com/piku235/JungiThemeBundle/blob/master/Mapping/VirtualThemeDefinition.php)
 
-A virtual theme is represented by the **VirtualThemeDefinition** class and is almost the same as the **ThemeDefinition**,
-expect you can not obviously set a path of a virtual theme.
+A virtual theme is represented by the **VirtualThemeDefinition** class, which is a child class of the **ThemeDefinition**,
+so all methods are still the same. Only the **setPath** and **getPath** method are obviously disabled, because a virtual
+theme can not have a path.
 
 ```php
 use Jungi\Bundle\ThemeBundle\Mapping\VirtualThemeDefinition;

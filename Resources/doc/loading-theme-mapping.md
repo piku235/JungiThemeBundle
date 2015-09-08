@@ -34,7 +34,7 @@ class JungiFooBundle extends Bundle
 	 */
 	public function build(ContainerBuilder $builder)
 	{
-	    /** @var \Jungi\Bundle\ThemeBundle\DependencyInjection\JungiThemeExtension $ext */
+	    /* @var \Jungi\Bundle\ThemeBundle\DependencyInjection\JungiThemeExtension $ext */
 	    $ext = $builder->getExtension('jungi_theme');
         $ext->registerMappingFile(__DIR__.'/Resources/config/theme.xml', 'xml'); // with the specified loader
         $ext->registerMappingFile(__DIR__.'/Resources/config/theme.yml'); // default
