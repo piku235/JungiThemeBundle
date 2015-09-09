@@ -15,7 +15,7 @@ jungi_theme:
     holder:
 
         # symfony service id
-        id:                   jungi_theme.holder.default
+        id:                   ~
 
         # whether to ignore a situation when the theme selector will do not match any theme for the request.
         ignore_null_theme:    true

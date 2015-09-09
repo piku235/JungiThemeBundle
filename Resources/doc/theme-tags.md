@@ -1,8 +1,34 @@
 Theme tags
 ==========
 
-The goal of the JungiThemeBundle are the mostly theme tags. They can be used for searching and grouping themes. They are 
-mandatory for adaptive themes ([Adaptive Web Design](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md)).
+The goal of the JungiThemeBundle are the mostly theme tags. They can be used for various things like searching and 
+grouping themes. They are mainly used in adaptive themes ([Adaptive Web Design](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md)).
+
+Each theme tag is a class that implements the `Jungi\Bundle\ThemeBundle\Tag\TagInterface`.
+
+```php
+interface TagInterface
+{
+    /**
+     * Checks if the given tag is equal.
+     *
+     * @param TagInterface $tag A tag
+     *
+     * @return bool
+     */
+    public function isEqual(TagInterface $tag);
+
+    /**
+     * Gets the tag name.
+     *
+     * The returned name should be in the following notation: "vendor.tag_type" e.g. "jungi.mobile_devices".
+     * This notation prevents from replacing tags by different vendors
+     *
+     * @return string
+     */
+    public static function getName();
+}
+```
 
 Built-in tags
 -------------
@@ -43,22 +69,23 @@ class under the variable `$operatingSystems`.
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/TabletDevices.php)
 
-The TabletDevices tag is just the same as the MobileDevices tag, expect that is intended for theme that supports tablet 
-devices. It accepts the same arguments as the MobileDevices tag.
+The **TabletDevices** tag is just the same as the **MobileDevices** tag, expect that is intended for themes that supports 
+tablet devices. It accepts the same arguments as the **MobileDevices** tag.
 
 ### DesktopDevices
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/DesktopDevices.php)
 
-The DesktopDevices is a very basic tag and it implements only basic methods contained in the interface. Each theme designed
-for desktop devices (the most likely scenario) should have this tag.
+The **DesktopDevices** tag is one of the smallest tags, because it implements only basic methods contained in the interface. 
+Each theme designed for desktop devices (the most likely scenario) should have this tag.
 
 Usage
 -----
 
-The **MobileDevices** tag, **TabletDevices** tag and the **DesktopDevices** tag were used in the [RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md) 
-chapter and also they were used in the [AWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md) 
-chapter.
+All the above tags are used in responsive themes ([RWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/rwd.md))
+and in adaptive themes ([AWD](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/awd.md)). Of course
+tags are not limited only to doing that kind of things, you can create your own tag which will be designed for other 
+purposes.
 
 If you are curious how exactly tags works, you can see it by looking into unit tests [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Resolver/Filter/DeviceThemeFilterTest.php)
 and [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Resolver/VirtualThemeResolverTest.php).
@@ -66,33 +93,7 @@ and [here](https://github.com/piku235/JungiThemeBundle/blob/master/Tests/Resolve
 Creating tag
 ------------
 
-Each tag is a class which implements the `Jungi\Bundle\ThemeBundle\Tag\TagInterface`:
-
-```php
-interface TagInterface
-{
-    /**
-     * Checks if the given tag is equal
-     *
-     * @param TagInterface $tag A tag
-     *
-     * @return bool
-     */
-    public function isEqual(TagInterface $tag);
-
-    /**
-     * Gets the tag name
-     *
-     * The returned name should be in the following notation: "vendor.tag_type" e.g. "jungi.mobile_devices".
-     * This notation prevents from replacing tags by different vendors
-     *
-     * @return string
-     */
-    public static function getName();
-}
-```
-
-Tags are pretty straightforward due to the small interface. Here is the simplest tag that can be created:
+Tags are pretty straightforward due to the small and compact interface. Here is the simplest tag that could be created:
 
 ```php
 use Jungi\Bundle\ThemeBundle\Tag\TagInterface;
@@ -112,21 +113,21 @@ class SimpleTag extends TagInterface
 ```
 
 As you see there is not required to write a lot of code to get a proper working tag. Of course the tag above does not do
-anything special, but of course you can write more complex tags.
+anything special, but if you want you can write more complex tags.
 
 ### Register created tag
 
-After you created a tag you will need to register it in order to use it e.g. in a theme mapping. To do this follow 
-the instructions located in the **Tag Registry** section.
+After you created a tag you will need to register it in order to use it in a particular theme mapping. To do this follow 
+steps located in the section below.
 
 Tag registry
 ------------
 
 [Show the interface](https://github.com/piku235/JungiThemeBundle/tree/master/Tag/Registry/TagRegistryInterface.php)
 
-A tag registry is a place where you can obtain a full qualified class name of a tag by passing only a tag name. The main 
-goal of a tag registry is an ability about registering new tags - thanks to that theme mapping loaders are able to not 
-only use the built-in tags, but also to use tags created by you :)
+A tag registry is a place where you can obtain a fully qualified class name of a tag by passing only its name. The solely 
+purpose of a tag registry is an ability of registering new tags - thanks to that in theme mapping files you are able to 
+not only use the built-in tags, but also to use tags created by you. :)
 
 There are basically two ways of registering tags. 
 

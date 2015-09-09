@@ -57,8 +57,8 @@ to find out how do that. Also if you want to know where themes are stored [go he
 ### VirtualTheme
 
 A virtual theme may be a bit confusing, because this is a sort of theme that does not really exist, so it has not got any 
-assets and template files. It only combines together similar themes and acts as a representative of these themes. Only 
-one of the sub themes will be used and which one of them will be decided by virtual theme resolver. 
+assets and templates. It only combines together similar themes and acts as a representative of these themes. Only one of 
+the sub themes will be used and which one of them will be decided by virtual theme resolver. 
 
 The interface of virtual theme is following:
 

@@ -1,24 +1,26 @@
 Themes and templates
 ====================
 
+This chapter thoroughly explains how template files from themes are selected and where themes are located, so read this
+chapter carefully.
+
 Themes locations
 ----------------
 
-You have two possible theme locations for choose: in a bundle or in a project root.
+You have two possible theme locations for choose: bundle or project root.
 
 ### Bundle
 
 Generally themes are living in a bundle. There is no limit saying how many themes you can have in a single bundle. You 
-must only decide when these themes should be together and when they should be separated into single bundles.
+must only decide when these themes should be together and when they should be divided into single bundles.
 
 Most of cases themes will be very simple, limited to have only some web assets and templates, so you may think "Is 
-a bundle really a good place for themes?". Think about more advanced themes like e.g. themes that have some kind of web 
+a bundle really a good place for themes?". Think about more advanced themes like i.e. themes that have some kind of web 
 configurator with user interface, themes that connects with a vendor via a specific web service to do something cool and 
-so on. As you see a bundle is a perfect place due to its portability, the straightforward structure and enormous 
-possibilities.
+so on. As you see bundle is a perfect place due to its portability, the straightforward structure and enormous possibilities.
 
-Consider a situation when you have three themes, where only two of them are related in some way and the third one is
-whole different (different logic or maybe different graphics). For example you can create the first bundle **FooBundle** 
+Let's consider a situation when you have three themes, where only two of them are related in some way and the third one 
+is whole different (different logic or maybe different graphics). For example you can create the first bundle **FooBundle** 
 for these two related themes and create the second bundle **BooBundle** for the third theme.
 
 The directory structure could looks like below:
@@ -52,20 +54,20 @@ app/
 
 **IMPORTANT**
 
-> You must remember that things putting your themes with templates is not enough for the JungiThemeBundle to notice these 
-> new added themes. To make a theme(s) visible in the bundle you will have to use one of the avaiable theme mappings which 
-> are described [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings). 
+> You must remember that putting your themes with templates is not enough for the JungiThemeBundle to notice these 
+> new added themes. To make a theme(s) visible you will have to use one of the available theme mappings which are
+> described [here](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md#theme-mappings). 
 
 Template naming and locations
 -----------------------------
 
-The template naming is just the same as the symfony template naming conventions, so there is still the syntax `bundle:controller:template`
-for templates. The only difference are locations of templates.
+The template naming is just the same as the symfony template naming conventions, so there is still the same syntax 
+`bundle:controller:template` for templates. The only difference are locations of templates.
 
 Suppose that we want to render e.g `FooBundle:Default:index.html.twig`:
 
-1. The template name will be searched in the current theme resources and if the given template name exists then the found
-template resource will be used.
+1. The template name will be searched in the current theme resources and if the corresponding template file exists then 
+this file will be used.
 2. If the given template name can not be found in the current theme resources then the default search process (just like
 the symfony does) will be performed, so finally a template resource from the **FooBundle** will be used.
 
@@ -81,7 +83,7 @@ Overriding bundle templates
 ---------------------------
 
 You can override every bundle template that you wish in your theme. Suppose that the theme **exclusive** of the **FooThemeBundle**
-is the current theme, and the `Default/index.html.twig` from the **BooBundle** will be rendered.
+is the current theme, and the `Default/index.html.twig` template from the **BooBundle** will be rendered.
 
 The BooBundle resources:
 
@@ -114,7 +116,7 @@ FooThemeBundle/
                 layout.html.twig
 ```
 
-In this example the theme **exclusive** has overwritten the template `layout.html.twig` of the **BooBundle**. When the
+In this example the theme **exclusive** has overridden the template `layout.html.twig` of the **BooBundle**. When the
 template `index.html.twig` is rendered the template `layout.html.twig` of the theme **exclusive** is included instead
 of the template `layout.html.twig` from the **BooBundle**.
 

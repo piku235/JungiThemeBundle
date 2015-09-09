@@ -1,10 +1,10 @@
 Theme holder
 ============
 
-As you know a theme holder is used to hold the current theme instance. By default the current theme is resolved by theme 
-selector. To access a theme holder you have to use the service `jungi_theme.holder`.
+A theme holder is a place where the current theme instance is kept. By default the current theme is resolved by theme 
+selector. The theme holder is accessible via the service `jungi_theme.holder`. 
 
-Basically a theme holder is a class which implements the `Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface`. With this
+A theme holder implements the `Jungi\Bundle\ThemeBundle\Core\ThemeHolderInterface`. 
 
 ```php
 interface ThemeHolderInterface

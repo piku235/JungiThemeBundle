@@ -1,10 +1,10 @@
 Theme resolver
 ==============
 
-After you create a theme, a normal thing is that you wanna use it. To achieve that goal you will need a help of theme 
-resolver. It decides about the current theme that should be used for a particular request and also allows for altering 
-the current theme. A theme resolver is only a start point of resolving the theme, because a last word to say has a theme 
-selector. We can say that a theme resolver is the heart and a theme selector is the brain of resolving the current theme.
+After you create a theme, a normal thing is that you wanna use it. To achieve that you will need a help of theme resolver. 
+It decides about the current theme that should be used for a particular request and also allows for altering the current 
+theme. A theme resolver is only a start point of resolving the theme, because a last word to say has a theme selector. 
+We can say that a theme resolver is the heart and a theme selector is the brain of resolving the current theme.
 
 Theme resolvers implements the `Jungi\Bundle\ThemeBundle\Resolver\ThemeResolverInterface`. 
 
@@ -102,10 +102,9 @@ class UserThemeResolver implements ThemeResolverInterface
 }
 ```
 
-Now when we have created the theme resolver, a normal thing is we want to use it in our project. We must create a service
-for this theme resolver and activate it in the configuration. Assume that the service is called `jungi_theme.resolver.user`.
-Like mentioned in the installation steps to setup a theme resolver as a service we must to define the configuration like 
-below:
+Now we must create a service for this theme resolver and activate it in the configuration. Let's assume that the service 
+will be called `jungi_theme.resolver.user`. Like mentioned in the installation steps to setup a theme resolver as a service 
+we must to define the configuration like below:
 
 ```yml
 # app/config/config.yml

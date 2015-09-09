@@ -17,13 +17,12 @@ interface ThemeChangerInterface
 }
 ```
 
-A theme changer is a very simple due to its small interface, so there will not be (fortunately) too much to read. 
-It is available via the `jungi_theme.changer` service.
+A theme changer is available via the `jungi_theme.changer` service.
 
 Example
 -------
 
-The below example shows a frequent situation when you want to change the current theme by using a form.
+The example below shows a frequent situation when you want to change the current theme by using a form.
 
 ```php
 $themeChanger = $this->get('jungi_theme.changer');

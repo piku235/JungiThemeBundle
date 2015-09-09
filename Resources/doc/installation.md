@@ -42,12 +42,12 @@ public function registerBundles()
 
 ### Step 3: Configuration
 
-Finally you have to choose a theme resolver that the JungiThemeBundle will use. The bundle comes with the default set
-of theme resolvers. You can use one of these theme resolvers or use your own theme resolver by setting symfony service.
+Finally you have to choose a theme resolver that the JungiThemeBundle will use. The bundle comes with a default set
+of theme resolvers. You can use one of these theme resolvers or use your own by setting symfony service.
 
 The bundle contains the following theme resolvers:
 
-Type | Class
+Key | Class
 ---- | -----
 cookie | CookieThemeResolver
 in_memory | InMemoryThemeResolver
@@ -75,7 +75,7 @@ jungi_theme:
 
 ##### InMemoryThemeResolver
 
-The InMemoryThemeResolver is a very simple theme resolver which holds the theme name in the class variable. It accepts two
+The InMemoryThemeResolver is the simplest theme resolver which holds the theme name in the class variable. It accepts two
 arguments where the first one takes a theme name and the second one decides whether the stored theme name can be changed
 or not. The second argument was only introduced for tests benefits. This theme resolver can be used as the default theme
 resolver.
@@ -85,12 +85,12 @@ resolver.
 jungi_theme:
     resolver:
         primary:
-            in_memory: foo_theme # a theme name
+            in_memory: # a theme name
 ```
 
 ##### SessionThemeResolver
 
-The SessionThemeResolver uses the session mechanism for holding the theme name. It doesn't take any arguments.
+The SessionThemeResolver uses the session mechanism for holding the theme name. It does not take any arguments.
 
 ```yaml
 # app/config/config.yml
@@ -141,7 +141,7 @@ jungi_theme:
 Final
 -----
 
-So if you completed the installation you can from now on start using the bundle and learn super things which are described
-in the documentation :)
+If you successfully completed the installation you can finally start using the bundle and learn super things that are 
+described in the documentation. :)
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md)

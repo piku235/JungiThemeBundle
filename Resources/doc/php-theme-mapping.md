@@ -141,10 +141,10 @@ $registry->registerThemeDefinition('footheme', $definition);
 
 [Show the definition class](https://github.com/piku235/JungiThemeBundle/blob/master/Mapping/ThemeInfo.php)
 
-A theme info definition can be hard in using, because of its interface. The interface has been designed to be general
-as much as possible. This approach give us a lot of benefits, if you wanted e.g. create your own theme info that 
-could have extra fields you would not have to make changes in theme mapping loaders at all. An only disadvantage of this 
-approach will start to be visible when comes to using a theme info definition directly. 
+A theme info definition can be hard in using, because of its interface. The interface was designed to be general as much 
+as possible to gain a flexibility. This approach give us a lot of benefits, if you wanted e.g. create your own theme info 
+that could have extra fields you would not have to make changes in theme mapping loaders at all. An only disadvantage of 
+this approach will start to be visible when comes to using a theme info definition directly. 
 
 ```php
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfo;
@@ -160,15 +160,15 @@ $definition->setProperty('authors', array(
 
 As you can see in the example above the code readability is quite poor and you must be also cautious when defining 
 bigger properties like e.g. **authors**. To ease creating theme info definitions there were provided the **ThemeInfoImporter** 
-which is mentioned just below.
+which is mentioned below.
 
 #### ThemeInfoImporter
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Mapping/ThemeInfoImporter.php)
 
-The sole purpose of this class is ability of importing objects of the `Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfo`. 
-In a connection with the **ThemeInfoImporter** you can use e.g. `Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence` 
-class to build a theme info definition.
+The sole purpose of this class is ability of importing objects of `Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfo` 
+to corresponding them objects of theme info definition. To build a theme info definition using this importer you can 
+use i.e. the `Jungi\Bundle\ThemeBundle\Core\Information\ThemeInfoEssence` class.
 
 ```php
 use Jungi\Bundle\ThemeBundle\Mapping\ThemeInfoImporter;
@@ -184,7 +184,7 @@ $info = ThemeInfoEssence::createBuilder()
 $definition = ThemeInfoImporter::import($info);
 ```
 
-Now is much better, we have got much more readable code and easier in use. The **ThemeInfoImporter** is doing everything 
-for us, it simply converts a **ThemeInfoEssence** instance to a **ThemeInfo** definition instance.
+Now is much better, we have gained much more readable code which is easier to use. Whether you will use this importer
+or just theme info definition depends only on you.
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

@@ -109,6 +109,13 @@ kernel.root_dir | parameter imported from the symfony service container, it retu
 Parameters can be only used in a theme info and in arguments of a tag. To use a parameter as a value you must surround the 
 parameter with percent sings e.g. **%footheme.mobile_systems%**, just like in the symfony yaml services.
 
+Example:
+
+```yml
+tags:
+    foo.bar_tag: "%parameter_key%"
+```
+
 ### Themes
 
 ```yml
@@ -228,15 +235,6 @@ name | string | true
 email | string | true
 homepage | string | false
 
-#### Parameters usage
-
-Here is just a small snippet of how to use a defined parameter.
-
-```yml
-info:
-    license: "%parameter_key%"
-```
-
 ### Tags
 
 [Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md)
@@ -257,15 +255,6 @@ out which of built-in tags you can use.
 Of course you can attach your own tags and use them as it was shown in the quick example. Generally tag names are taken 
 from a tag registry that allows for dynamically registering tags in a much more convenient way. You can read about that 
 [here](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tag-registry).
-
-#### Parameters usage
-
-Sometimes arguments can be very long and thus, very hard to read, so in order to facilitate you can use parameters.
-
-```yml
-tags:
-    foo.bar_tag: "%parameter_key%"
-```
 
 Final
 -----

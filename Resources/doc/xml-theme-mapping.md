@@ -175,6 +175,16 @@ kernel.root_dir | parameter imported from the symfony service container, it retu
 Parameters can be only used in properties of theme info and in arguments of a tag. To use a parameter as a value you must 
 surround the parameter with percent sings e.g. **%footheme.mobile_systems%**, just like in the symfony xml services.
 
+Example:
+
+```xml
+<tags>
+    <tag name="vendor.tag_name">
+        <argument>%parameter_key%</argument>
+    </tag>
+</tags>  
+```
+
 ### Themes
 
 ```xml
@@ -324,16 +334,6 @@ name | string | true
 email | string | true
 homepage | string | false
 
-#### Parameters usage
-
-Here is just a small snippet of how to use a defined parameter in every `<property />` element.
-
-```xml
-<info>
-    <property key="license">%parameter_key%</property>
-</info>
-```
-
 ### Tags
 
 [Get info](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md)
@@ -377,18 +377,6 @@ from a tag registry that allows for dynamically registering tags in a much more 
 
 To pass data to a tag you'll use the `<argument />` element which has the same structure as the `<parameter />` element,
 so you must follow the same things as for the `<parameter />` element to create an `<argument />` element.
-
-#### Parameters usage
-
-Here is just a small snippet of how to use a defined parameter in the `<argument />` element.
-
-```xml
-<tags>
-    <tag name="vendor.tag_name">
-        <argument>%parameter_key%</argument>
-    </tag>
-</tags>  
-```
 
 Final
 -----

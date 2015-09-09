@@ -7,9 +7,9 @@ we are gonna to create a responsive theme (RWD) which will be used on every page
 ### Step 1: Create a bundle for the theme
 
 The first thing that we have to do is to create a "container" in which our theme will be placed. For this tutorial 
-I selected a bundle as container, although you can also select a project root as container, it only depends on your needs. 
-Suppose that the created bundle will be called **JungiHeroThemeBundle** or whatever you want. The following directory 
-structure of the bundle is enough for our theme:
+I chose a bundle as container, although you can also select a project root as container. Suppose that the created 
+bundle will be called **JungiHeroThemeBundle** or whatever you want. The following directory structure of the bundle is 
+enough for our theme:
 
 ```
 src/
@@ -37,16 +37,18 @@ src/
 
 As you see the theme has got own template `layout.html.twig` and also overrides some templates in the **SonataAdminBundle**
 and the **SonataUserBundle**. Thanks to that you do not have to change sonata templates in the configuration, the theme
-itself will take care of these overridden templates. I just placed here the bundles created by the **Sonata Project** 
-only as an example to show you that you can override each bundle template.
+itself will take care of these overridden templates. I placed here the bundles created by the **Sonata Project** only to 
+show you that you can override each bundle template.
 
 As the final thing in this step we only must activate the created bundle in the `app/AppKernel.php`. 
 
 ### Step 2: Decide which theme mapping to use
 
-After we have our theme we must define it so that the JungiThemeBundle could recognize it. To define a theme you have for 
-use three various theme mappings: xml, yaml and php. For this tutorial I chose the xml theme mapping. The theme mapping 
-file for this theme can look like below:
+After we have our theme directory created we have to define a theme, so that the JungiThemeBundle will know that this
+theme directory is not a some random directory. To define a theme you will use one of these three various theme mappings: 
+xml, yaml and php. For this tutorial I chose the xml theme mapping. 
+
+The theme mapping file for this theme can look like below:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -67,12 +69,13 @@ file for this theme can look like below:
 </theme-mapping>
 ```
 
-We can save this theme mapping file into the `Resources/config` directory as `theme.xml`.
+We can save this theme mapping file into the `Resources/config` directory as the `theme.xml`.
 
 ### Step 3: Loading the created theme mapping file
 
-Now that the JungiThemeBundle could notice our theme we must load the created theme mapping file. We can accomplish that 
-by using a theme mapping loader which will load all themes contained in a theme mapping file to the theme source.
+Now we must notify the JungiThemeBundle about our theme, so that it will be available in the theme source. To do this we 
+can load the created theme mapping file using the JungiThemeBundle extension. This will be performed from the created 
+bundle.
 
 Finally the bundle class should looks like below:
 
@@ -105,7 +108,7 @@ And that is almost the end. After this step the theme should be available in the
 
 ### Step 4: Set the theme for a theme resolver
 
-To set our theme to be visible on every page we can use the `InMemoryThemeResolver`. We only have to set the theme name.
+To set our theme to be visible on every page we can use the *InMemoryThemeResolver**. 
 
 ```yaml
 # app/config/config.yml
@@ -116,6 +119,6 @@ jungi_theme:
 ```
 
 That is all. From now on the theme should be visible on every page. Thanks for your attention and have a nice further fun 
-with the bundle :)
+with the bundle. :)
 
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

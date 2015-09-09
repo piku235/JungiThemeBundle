@@ -29,8 +29,8 @@ Default implementation
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Selector/ThemeSelector.php)
 
 The default theme selector is the class `Jungi\Bundle\ThemeBundle\Selector\ThemeSelector`. It has a support of primary and 
-fallback theme resolver where the fallback theme resolver can be unset. If the fallback theme resolver was set then it will 
-be only used when the primary theme resolver will does not match any theme for the request. Also this theme selector supports 
+fallback theme resolver where the fallback theme resolver can be unset. If the fallback theme resolver was set it will 
+be only used when the primary theme resolver will do not match any theme for the request. Also this theme selector supports 
 events, which you can find them in the class `Jungi\Bundle\ThemeBundle\Selector\ThemeSelectorEvents` ([click here](https://github.com/piku235/JungiThemeBundle/blob/master/Selector/ThemeSelectorEvents.php)).
 
 ### Primary and fallback theme resolver
