@@ -11,7 +11,7 @@
         <service id="jungi_theme.mobile_detect" class="Jungi\Bundle\ThemeBundle\Core\MobileDetect" public="false">
             <argument type="service" id="request_stack" />
         </service>
-        <service id="jungi_theme.holder.default" class="Jungi\Bundle\ThemeBundle\Core\ThemeHolder" />
+        <service id="jungi_theme.holder" class="Jungi\Bundle\ThemeBundle\Core\ThemeHolder" />
         <service id="jungi_theme.cache_warmer.chain_finder" class="Jungi\Bundle\ThemeBundle\CacheWarmer\ChainTemplateFinder" public="false">
             <argument type="collection">
                 <argument type="service" id="templating.finder" />

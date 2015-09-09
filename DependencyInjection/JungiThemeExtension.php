@@ -85,7 +85,9 @@ class JungiThemeExtension extends Extension
         }
 
         // Theme holder conf
-        $container->setAlias('jungi_theme.holder', $config['holder']['id']);
+        if (isset($config['holder']['id'])) {
+            $container->setAlias('jungi_theme.holder', $config['holder']['id']);
+        }
 
         // Theme selector service
         if (isset($config['selector']['id'])) {
