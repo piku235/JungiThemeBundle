@@ -8,7 +8,7 @@ following tags:
 * [TabletDevices](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#tabletdevices)
 * [DesktopDevices](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/theme-tags.md#desktopdevices)
 
-And that's all, thanks to these tags the JungiThemeBundle will notice that the theme will be used for mobile, tablet and 
+And that is all, thanks to these tags the JungiThemeBundle will notice that a theme will be used for mobile, tablet and 
 desktop devices. Additionally you can use this advantage for seeking and obtaining an information about a theme.
 
 **INFO**

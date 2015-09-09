@@ -1,13 +1,13 @@
 Themes and templates
 ====================
 
-This chapter thoroughly explains how template files from themes are selected and where themes are located, so read this
-chapter carefully.
+This chapter thoroughly explains how template files from themes are selected and where themes are located. The concluded
+here information will be very helpful while reading next chapters in the documentation.
 
 Themes locations
 ----------------
 
-You have two possible theme locations for choose: bundle or project root.
+You have two possible theme locations for choose: **bundle** or **project root**.
 
 ### Bundle
 

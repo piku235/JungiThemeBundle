@@ -3,8 +3,6 @@ Virtual theme resolver
 
 A virtual theme resolver is used to determine the pointed theme of a virtual theme. 
 
-It implements the `Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolverInterface`.
-
 ```php
 interface VirtualThemeResolverInterface
 {

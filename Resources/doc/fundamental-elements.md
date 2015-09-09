@@ -193,6 +193,4 @@ $ib
 $info = $ib->getThemeInfo();
 ```
 
-You can use the **ThemeInfoEssence** in a [php theme mapping file](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/php-theme-mapping.md).
-
 [Back to the documentation](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/index.md)

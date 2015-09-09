@@ -7,7 +7,7 @@ we are gonna to create a responsive theme (RWD) which will be used on every page
 ### Step 1: Create a bundle for the theme
 
 The first thing that we have to do is to create a "container" in which our theme will be placed. For this tutorial 
-I chose a bundle as container, although you can also select a project root as container. Suppose that the created 
+I chose a bundle as container, although you can also choose a project root as container. Suppose that the created 
 bundle will be called **JungiHeroThemeBundle** or whatever you want. The following directory structure of the bundle is 
 enough for our theme:
 
@@ -46,7 +46,7 @@ As the final thing in this step we only must activate the created bundle in the 
 
 After we have our theme directory created we have to define a theme, so that the JungiThemeBundle will know that this
 theme directory is not a some random directory. To define a theme you will use one of these three various theme mappings: 
-xml, yaml and php. For this tutorial I chose the xml theme mapping. 
+**xml**, **yaml** and **php**. For this tutorial I chose the xml theme mapping. 
 
 The theme mapping file for this theme can look like below:
 
@@ -74,8 +74,7 @@ We can save this theme mapping file into the `Resources/config` directory as the
 ### Step 3: Loading the created theme mapping file
 
 Now we must notify the JungiThemeBundle about our theme, so that it will be available in the theme source. To do this we 
-can load the created theme mapping file using the JungiThemeBundle extension. This will be performed from the created 
-bundle.
+can load the created theme mapping file using the JungiThemeBundle extension. This will be performed from our bundle.
 
 Finally the bundle class should looks like below:
 
