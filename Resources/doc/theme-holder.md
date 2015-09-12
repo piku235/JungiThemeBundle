@@ -27,14 +27,11 @@ interface ThemeHolderInterface
 }
 ```
 
-### Default implementation
+The `Jungi\Bundle\ThemeBundle\Core\ThemeHolder` is the default theme holder which implements only basic methods contained
+in the interface. Of course you can change this theme holder by setting your own theme holder service in the configuration.
 
-[Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Core/ThemeHolder.php)
-
-The `Jungi\Bundle\ThemeBundle\Core\ThemeHolder` is the default theme holder which has only basic methods contained
-in the interface. Of course you can change it by setting your own theme holder service in the configuration.
-
-### Configuration
+Configuration
+-------------
 
 To set your own theme holder you must only set the `id` to an appropriate symfony service.
 

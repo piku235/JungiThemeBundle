@@ -36,15 +36,15 @@ src/
 ```
 
 As you see the theme has got own template `layout.html.twig` and also overrides some templates in the **SonataAdminBundle**
-and the **SonataUserBundle**. Thanks to that you do not have to change sonata templates in the configuration, the theme
-itself will take care of these overridden templates. I placed here the bundles created by the **Sonata Project** only to 
-show you that you can override each bundle template.
+and the **SonataUserBundle**. Overriding bundle templates by themes is quite simple, it works exactly the same as 
+overriding bundle templates by your project resources. I placed here the bundles created by the **Sonata Project** only 
+to show you that you can override each bundle template that you want.
 
 As the final thing in this step we only must activate the created bundle in the `app/AppKernel.php`. 
 
 ### Step 2: Decide which theme mapping to use
 
-After we have our theme directory created we have to define a theme, so that the JungiThemeBundle will know that this
+After we have our theme directory created we have to define our theme, so that the JungiThemeBundle will know that this
 theme directory is not a some random directory. To define a theme you will use one of these three various theme mappings: 
 **xml**, **yaml** and **php**. For this tutorial I chose the xml theme mapping. 
 
@@ -107,7 +107,7 @@ And that is almost the end. After this step the theme should be available in the
 
 ### Step 4: Set the theme for a theme resolver
 
-To set our theme to be visible on every page we can use the *InMemoryThemeResolver**. 
+To set our theme to be visible on every page we can use the **InMemoryThemeResolver**. 
 
 ```yaml
 # app/config/config.yml

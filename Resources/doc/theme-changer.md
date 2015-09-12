@@ -4,6 +4,8 @@ Theme changer
 A theme changer was created to ease and to centralize process of changing the current theme. Otherwise you would use 
 directly a theme resolver to change the current theme.
 
+A theme changer implements the `Jungi\Bundle\ThemeBundle\Changer\ThemeChangerInterface`.
+
 ```php
 interface ThemeChangerInterface
 {
@@ -17,7 +19,8 @@ interface ThemeChangerInterface
 }
 ```
 
-A theme changer is available via the `jungi_theme.changer` service.
+The `Jungi\Bundle\ThemeBundle\Changer\ThemeChanger` is the default theme changer which implements only basic methods
+contained in the interface. You can access a theme changer via the `jungi_theme.changer` service. 
 
 Example
 -------

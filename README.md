@@ -35,7 +35,7 @@ Documentation
 
 All documentation files are located in the `Resources/doc` directory.
 
-[Read the master documentation](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md)
+[Read the documentation](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/index.md)
 
 Installation
 ------------

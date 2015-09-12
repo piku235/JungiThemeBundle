@@ -100,4 +100,5 @@ Miscellaneous
 
 * [Theme resolver](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-resolver.md)
 * [Theme selector](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/theme-selector.md)
+* [Virtual theme resolver](https://github.com/piku235/JungiThemeBundle/blob/master/Resources/doc/virtual-theme-resolver.md)
 * [Configuration reference](https://github.com/piku235/JungiThemeBundle/tree/master/Resources/doc/configuration.md)

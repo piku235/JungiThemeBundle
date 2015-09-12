@@ -1,7 +1,10 @@
 Virtual theme resolver
 ======================
 
-A virtual theme resolver is used to determine the pointed theme of a virtual theme. 
+A virtual theme resolver is not a typical theme resolver, so do not get confused by its name. It is used only to determine 
+the pointed theme of a virtual theme. 
+
+A virtual theme resolver implements the `Jungi\Bundle\ThemeBundle\Resolver\VirtualThemeResolverInterface`.
 
 ```php
 interface VirtualThemeResolverInterface
@@ -48,7 +51,7 @@ interface ThemeFilterInterface
 
 [Show the class](https://github.com/piku235/JungiThemeBundle/blob/master/Resolver/Filter/DeviceThemeFilter.php)
 
-This filter is mandatory for working adaptive themes (AWD) properly. The filter will only work for themes that has at 
+This filter is mandatory for working adaptive themes (AWD) properly. The filter will only work for themes that have at 
 least one of these tags: **MobileDevices**, **TabletDevices** or **DesktopDevices**.
 
 Configuration

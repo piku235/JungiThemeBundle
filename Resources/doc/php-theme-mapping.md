@@ -76,8 +76,7 @@ kernel.root_dir | parameter imported from the symfony service container, it retu
 
 ### Themes
  
-As you should already know there are two types of theme: **standard** and **virtual**. How to create them using mapping
-you will learn below.
+As you should already know there are two types of theme: **standard** and **virtual**. 
 
 #### Standard theme
 

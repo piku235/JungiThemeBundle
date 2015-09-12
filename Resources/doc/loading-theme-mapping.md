@@ -19,7 +19,7 @@ all themes at one place.
 ```php
 <?php
 // src/Jungi/FooBundle/JungiFooBundle.php
-namespace Jungi/FooBundle;
+namespace Jungi\FooBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
