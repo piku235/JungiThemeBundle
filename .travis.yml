@@ -27,6 +27,15 @@ notifications:
     - piku235@gmail.com
 
 matrix:
+  exlude:
+    - php: 5.3
+      env: SYMFONY_VERSION=3.0.*
+    - php: 5.4
+      env: SYMFONY_VERSION=3.0.*
+    - php: 5.3
+      env: SYMFONY_VERSION=^3.1@dev
+    - php: 5.4
+      env: SYMFONY_VERSION=^3.1@dev
   allow_failures:
     - php: hhvm
     - env: SYMFONY_VERSION=^3.1@dev
